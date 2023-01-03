@@ -24,7 +24,7 @@
     "dataset_params": {
         "hf_tokenizer_name": "bert-base-uncased",
         "hf_tokenizer_path": "/scratch/c.scmag3/conceptEmbeddingModel/for_seq_classification_bert_base_uncased/tokenizer",
-        "max_len": 80
+        "max_len": 200
     },
     "model_params": {
         "hf_checkpoint_name": "bert-base-uncased",
