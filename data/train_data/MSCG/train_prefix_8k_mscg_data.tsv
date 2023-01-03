@@ -1,0 +1,8186 @@
+age	demographic
+age	personal
+age	prognostic
+age	clinical
+age	sociodemographic
+age	biological
+age	social
+age	intrinsic
+age	environmental
+age	socio economic
+age	clinicopathological
+age	physiological
+age	socioeconomic
+age	influential
+age	external
+age	socio-demographic
+age	contextual
+age	demographic and clinical
+age	non genetic
+age	nongenetic
+age	physical
+age	patient-related
+age	continuous
+age	independent
+age	numerical
+age	extraneous
+age	categorical
+age	basic
+age	observable
+age	non personally identifiable
+age	non-personally identifiable
+age	traditional
+age	potential
+age	nonmodifiable
+age	epidemiological
+age	demographic and
+size	organizational
+size	physical
+size	technical
+size	morphological
+size	physicochemical
+size	rich
+size	free
+revenue	financial
+revenue	free
+california	large
+california	western
+california	populous
+california	big
+gender	demographic
+gender	social
+gender	personal
+gender	sociodemographic
+gender	clinical
+gender	biological
+gender	socioeconomic
+gender	prognostic
+gender	socio economic
+gender	clinicopathological
+gender	contextual
+gender	environmental
+gender	structural
+gender	categorical
+gender	independent
+gender	observable
+gender	basic
+gender	traditional
+gender	demographic and clinical
+gender	visible
+gender	potential
+gender	demographic and
+temperature	environmental
+temperature	abiotic
+temperature	climatic
+temperature	external
+temperature	physical
+temperature	meteorological
+temperature	extrinsic
+temperature	ecological
+temperature	natural
+temperature	physicochemical
+temperature	biotic and abiotic
+temperature	operational
+temperature	analytical
+temperature	atmospheric
+temperature	physiological
+temperature	critical
+temperature	thermodynamic
+temperature	unstable
+temperature	cultural
+temperature	local
+temperature	optimal
+temperature	biotic and
+temperature	detailed
+copper	heavy
+copper	non ferrous
+copper	soft
+copper	industrial
+copper	non-ferrous
+copper	nonferrous
+copper	common
+copper	essential
+copper	valuable
+copper	noble
+copper	suitable
+copper	precious
+copper	electrically conductive
+copper	natural
+copper	thermally conductive
+copper	residual
+copper	electrically
+copper	thermally
+copper	healthy
+copper	good
+copper	ordinary
+copper	good electrical
+name	personal
+name	personally identifiable
+name	basic
+name	demographic
+name	sensitive
+name	private
+name	basic personal
+name	identifiable
+name	detailed
+name	personally
+new york	large
+new york	populous
+new york	liberal
+new york	big
+new york	global
+new york	american
+new york	northern
+new york	expensive
+new york	great
+new york	urban
+facebook	popular
+facebook	social
+facebook	big
+facebook	large
+facebook	online social
+facebook	popular social
+facebook	
+plastic	suitable
+plastic	recyclable
+plastic	rigid
+plastic	synthetic
+plastic	modern
+plastic	flexible
+plastic	non conductive
+plastic	common
+plastic	organic
+plastic	non porous
+plastic	soft
+plastic	hard
+plastic	durable
+plastic	combustible
+plastic	nonmetallic
+plastic	non-metallic
+plastic	solid
+plastic	flammable
+plastic	conventional
+plastic	non magnetic
+plastic	non hazardous
+cds	removable
+cds	physical
+cds	optical
+texas	large
+texas	southern
+texas	populous
+florida	southern
+florida	large
+google	large
+google	big
+google	global
+google	successful
+google	multinational
+google	innovative
+google	private
+google	american
+google	popular
+google	traditional
+google	commercial
+google	high
+metal	suitable
+metal	rigid
+metal	electrically conductive
+metal	hard
+metal	recyclable
+metal	non porous
+metal	traditional
+metal	solid
+metal	natural
+metal	durable
+metal	conventional
+metal	flexible
+metal	common
+metal	thermally conductive
+metal	industrial
+metal	electrically
+metal	thermally
+glass	recyclable
+glass	natural
+glass	amorphous
+glass	non porous
+glass	traditional
+glass	hard
+glass	modern
+glass	suitable
+glass	solid
+glass	rigid
+glass	noncombustible
+glass	common
+glass	non precious
+glass	small
+glass	personal
+glass	non-porous
+glass	smooth flat
+glass	hard or sharp
+glass	sharp
+glass	synthetic
+glass	hard or
+headache	physical
+headache	systemic
+headache	somatic
+headache	neurological
+headache	common
+headache	constitutional
+headache	clinical
+headache	psychosomatic
+headache	unpleasant
+headache	persistent physical
+headache	mild systemic
+headache	serious
+headache	temporary
+headache	medical
+headache	purely subjective
+twitter	popular
+twitter	social
+twitter	popular social
+twitter	online social
+diabetes	medical
+diabetes	pathological
+diabetes	chronic medical
+diabetes	common
+diabetes	systemic
+diabetes	serious
+diabetes	serious medical
+diabetes	physical
+diabetes	clinical
+diabetes	pathophysiological
+diabetes	common medical
+diabetes	pre-existing medical
+diabetes	traditional
+diabetes	conventional
+diabetes	modifiable
+aluminum	heavy
+aluminum	non ferrous
+aluminum	soft
+aluminum	nonferrous
+aluminum	suitable
+aluminum	non-ferrous
+aluminum	common
+aluminum	active
+aluminum	rigid
+aluminum	recyclable
+aluminum	modern
+aluminum	non magnetic
+aluminum	electrically conductive
+aluminum	durable
+aluminum	nonmagnetic
+aluminum	synthetic
+aluminum	electrically
+aluminum	good
+stress	psychological
+stress	environmental
+stress	external
+stress	emotional
+stress	negative
+stress	strong
+stress	physical
+stress	common
+stress	mechanical
+basketball	traditional
+basketball	competitive
+basketball	popular
+basketball	intramural
+basketball	active
+basketball	professional
+basketball	athletic
+basketball	recreational
+basketball	physical
+nausea	physical
+nausea	systemic
+nausea	common
+nausea	constitutional
+nausea	clinical
+nausea	unpleasant
+nausea	abdominal
+nausea	mild gastrointestinal
+nausea	somatic
+nausea	severe
+nausea	serious
+nausea	undesirable
+nausea	unwanted
+nausea	upper
+nausea	mild adverse
+lead	heavy
+lead	soft
+lead	non ferrous
+lead	volatile
+lead	hazardous
+lead	environmental
+apple	fresh
+apple	seasonal
+apple	hard
+apple	large
+apple	big
+apple	successful
+apple	innovative
+apple	global
+apple	healthy
+apple	international
+education	demographic
+education	socioeconomic
+education	social
+education	socio economic
+education	sociodemographic
+education	personal
+education	environmental
+education	contextual
+education	basic
+education	essential
+education	basic social
+education	independent
+education	professional
+education	observable
+education	potential
+football	traditional
+football	competitive
+football	popular
+football	professional
+football	high
+football	athletic
+fatigue	constitutional
+fatigue	physical
+fatigue	systemic
+fatigue	common
+fatigue	somatic
+fatigue	clinical
+fatigue	unpleasant
+fatigue	non-specific
+fatigue	physiological
+fatigue	undesirable
+microsoft	large
+microsoft	big
+microsoft	global
+microsoft	multinational
+microsoft	international
+microsoft	american
+microsoft	high
+address	personal
+address	personally identifiable
+address	basic
+address	private
+address	sensitive
+address	demographic
+address	detailed
+address	basic personal
+address	publicly available
+earthquake	natural
+earthquake	large scale natural
+earthquake	catastrophic
+earthquake	geological
+earthquake	external
+earthquake	seismic
+earthquake	extreme natural
+cost	economic
+cost	external
+cost	practical
+cost	competitively sensitive
+ph	physicochemical
+ph	physical
+ph	environmental
+ph	operational
+ph	analytical
+ph	physiochemical
+ph	critical
+ph	unstable
+ph	physiological
+ph	effective
+ph	abiotic
+ph	external
+ph	optimal
+ph	cultural
+ph	physical and
+smoking	environmental
+smoking	external
+smoking	behavioral
+smoking	modifiable
+smoking	behavioural
+smoking	exogenous
+smoking	social
+smoking	clinical
+smoking	traditional
+smoking	conventional
+smoking	common
+smoking	classical
+smoking	potential
+smoking	classic
+smoking	unhealthy
+smoking	personal
+smoking	poor
+smoking	risky
+smoking	addictive
+smoking	high
+flood	natural
+flood	environmental
+flood	catastrophic
+flood	extreme climatic
+flood	unexpected
+flood	external
+flood	extreme natural
+flood	extreme hydrological
+flood	extrinsic
+flood	severe
+ibm	large
+ibm	big
+ibm	multinational
+ibm	global
+ibm	international
+ibm	american
+ibm	large international
+ibm	successful
+salt	common
+salt	industrial
+salt	environmental
+fruit	healthy
+fruit	fresh
+fruit	natural
+fruit	nutritious
+fruit	fiber-rich
+fruit	plant-based
+fruit	perishable
+fruit	unprocessed
+fruit	naturally sweet
+fruit	fibrous
+fruit	nutrient-dense
+fruit	basic
+fruit	high fibrous
+fruit	agricultural
+fruit	complex
+fruit	high
+fruit	dietary
+wedding	private
+wedding	large
+wedding	social
+wedding	formal
+wedding	big
+wedding	personal
+wedding	festive
+wedding	happy
+wedding	religious
+infection	serious
+infection	severe
+infection	surgical
+infection	potential
+infection	environmental
+infection	external
+infection	medical
+infection	pathological
+infection	systemic or internal
+shop	local
+location	environmental
+location	external
+location	basic
+location	personal
+location	contextual
+location	detailed
+location	demographic
+location	rich
+location	practical
+diet	environmental
+diet	external
+diet	behavioral
+diet	genetic and environmental
+diet	modifiable
+diet	extrinsic
+diet	genetic and
+diet	common
+diet	potential
+iron	heavy
+iron	common
+iron	ferrous
+iron	ferromagnetic
+iron	essential
+iron	nonnoble
+iron	valuable
+iron	healthy
+iron	magnetic
+iron	soft magnetic
+iron	natural
+iron	soft
+iron	small
+iron	electrical
+anger	negative
+anger	strong
+anger	basic
+anger	difficult
+anger	strong negative
+anger	powerful
+anger	emotional
+anger	psychological
+anger	facial
+carrot	fresh
+carrot	hard
+carrot	non-starchy
+carrot	healthy
+fever	systemic
+fever	constitutional
+fever	clinical
+fever	common
+fever	severe
+fever	mild systemic
+tennis	good
+tennis	competitive
+tennis	popular
+tennis	active
+tennis	traditional
+tennis	recreational
+tennis	athletic
+tennis	physical
+strawberry	fresh
+strawberry	small
+strawberry	soft
+strawberry	red
+strawberry	seasonal
+strawberry	traditional
+dog	domestic
+dog	small
+dog	large
+dog	common
+fishing	recreational
+fishing	traditional
+fishing	adventurous
+fishing	economic
+fishing	local
+soccer	popular
+soccer	traditional
+soccer	intramural
+soccer	competitive
+soccer	active
+soccer	athletic
+vegetable	healthy
+vegetable	fresh
+vegetable	natural
+vegetable	fiber-rich
+vegetable	nutritious
+vegetable	plant-based
+vegetable	unprocessed
+vegetable	perishable
+vegetable	basic
+vegetable	fibrous
+vegetable	nutrient-dense
+vegetable	agricultural
+vegetable	complex
+vegetable	high
+whole wheat bread	whole
+weather	external
+weather	environmental
+weather	uncontrollable
+weather	abiotic
+weather	physical
+weather	unforeseen
+nickel	heavy
+nickel	non ferrous
+nickel	ferromagnetic
+nickel	magnetic
+steel	traditional
+steel	structural
+steel	rigid
+steel	recyclable
+steel	conventional
+steel	common
+steel	modern
+steel	suitable
+steel	hard
+steel	ferromagnetic
+steel	industrial
+steel	basic
+steel	strong
+steel	magnetic
+steel	ferrous
+steel	ferrous non ferrous
+steel	nonnoble
+steel	heavy
+steel	ancillary
+pain	physical
+pain	clinical
+pain	common
+pain	abdominal
+pain	somatic
+pain	non economic
+pain	local
+swimming	recreational
+swimming	physical
+swimming	low-impact
+swimming	athletic
+swimming	regular
+swimming	traditional
+ethanol	aliphatic
+ethanol	organic
+ethanol	protic
+ethanol	alcoholic
+ethanol	renewable
+date	basic
+date	detailed
+date	personal
+date	variable
+firefox	modern
+firefox	popular
+cadmium	hazardous
+cadmium	heavy
+mercury	heavy
+mercury	volatile
+mercury	environmental
+mercury	hazardous
+zinc	heavy
+zinc	essential
+zinc	non ferrous
+zinc	soft
+zinc	active
+zinc	volatile
+zinc	healthy
+zinc	dietary
+mean	basic
+mean	statistical
+calcium	essential
+calcium	beneficial
+calcium	healthy
+calcium	physiologically essential
+calcium	dietary
+calcium	nutritional
+calcium	physiologically
+illinois	large
+china	asian
+china	large
+china	international
+china	transitional
+china	authoritarian
+china	regional
+china	economic
+china	great
+china	eastern
+china	high
+china	densely
+weight	clinical
+weight	biological
+weight	continuous
+weight	demographic
+weight	personal
+weight	basic
+weight	physical
+weight	measurable
+methanol	aliphatic
+methanol	organic
+methanol	protic
+methanol	alcoholic
+gold	precious
+gold	noble
+gold	heavy
+gold	valuable
+gold	soft
+gold	non precious
+gold	natural
+gold	hard
+gold	real
+hurricane	natural
+hurricane	catastrophic
+hurricane	extreme climatic
+hurricane	natural environmental
+hurricane	severe
+chicago	large
+chicago	big
+chicago	northern
+chicago	american
+chicago	urban
+silver	precious
+silver	noble
+silver	heavy
+silver	valuable
+silver	soft
+silver	non ferrous
+silver	non precious
+silver	ordinary
+silver	good
+silver	natural
+house	small
+stainless steel	suitable
+stainless steel	durable
+stainless steel	modern
+stainless steel	rigid
+stainless steel	biocompatible
+stainless steel	suitable biocompatible
+stainless steel	hard
+stainless steel	non ferrous
+stainless steel	ferrous non ferrous
+stainless steel	ferrous
+arizona	western
+genetic	biological
+paper	combustible
+paper	recyclable
+paper	porous
+paper	organic
+paper	flammable
+paper	common
+paper	natural
+paper	basic
+paper	flexible
+paper	fibrous
+paper	traditional
+paper	ordinary
+paper	consumable
+paper	solid
+paper	non hazardous
+paper	industrial
+coal	solid
+coal	conventional
+coal	traditional
+coal	natural
+coal	nonrenewable
+coal	non-renewable
+coal	carbonaceous
+coal	heavy
+banana	fresh
+banana	tropical
+banana	soft
+banana	seasonal
+banana	sugary
+banana	potassium-rich
+banana	agricultural
+banana	healthy
+climate	environmental
+climate	external
+climate	abiotic
+climate	natural
+climate	ecological
+climate	local
+climate	physical
+climate	geographical
+meat	perishable
+meat	protein-rich
+meat	fresh
+meat	hazardous
+meat	natural
+meat	heavy
+meat	animal-based
+meat	common
+meat	agricultural
+meat	high
+salmon	oily
+salmon	anadromous
+salmon	carnivorous
+salmon	fresh
+salmon	oil-rich
+furniture	large
+furniture	personal
+furniture	combustible
+furniture	heavy
+furniture	tangible
+furniture	durable
+furniture	flammable
+income	socioeconomic
+income	demographic
+income	socio economic
+income	economic
+income	social
+income	sociodemographic
+income	socio-economic
+income	environmental
+income	continuous
+income	detailed
+income	personal
+income	sensitive
+clothing	personal
+clothing	essential
+clothing	basic
+clothing	physical
+clothing	combustible
+clothing	flammable
+germany	western
+germany	northern
+germany	european
+germany	large
+germany	federal
+germany	advanced
+germany	bilateral
+fish	protein-rich
+fish	healthy
+fish	perishable
+fish	fresh
+fish	traditional
+fish	natural
+fish	aquatic
+fish	small
+fish	high
+fish	white
+fish	renewable
+fish	federal
+ethnicity	demographic
+ethnicity	social
+ethnicity	sociodemographic
+ethnicity	cultural
+ethnicity	socioeconomic
+ethnicity	personal
+smartphone	modern
+smartphone	electronic
+smartphone	portable
+smartphone	portable electronic
+smartphone	personal
+smartphone	mobile electronic
+broccoli	cruciferous
+broccoli	green
+broccoli	fresh
+broccoli	non-starchy
+egg	perishable
+egg	protein-rich
+egg	soft
+egg	hazardous
+egg	healthy
+egg	common
+egg	basic
+egg	hot
+egg	high
+baseball	traditional
+baseball	professional
+baseball	popular
+baseball	american
+baseball	athletic
+climate change	global
+climate change	environmental
+climate change	global environmental
+climate change	complex
+climate change	contemporary
+climate change	external
+construction	economic
+construction	industrial
+potato	common
+potato	fresh
+potato	unpeeled
+potato	complex
+potato	agricultural
+washington	western
+washington	large
+washington	big
+bacterium	unicellular
+bacterium	seemingly diverse
+bacterium	small
+bacterium	infectious
+bacterium	single-celled
+bacterium	biological
+bacterium	microbiological
+bacterium	single
+bacterium	prokaryotic
+water	clear
+water	immiscible
+water	ordinary
+water	newtonian
+water	common
+water	incompressible
+water	conventional
+water	basic
+water	essential
+water	municipal
+water	urban
+water	natural
+water	renewable
+water	environmental
+water	protic
+water	aqueous
+water	abiotic
+water	external
+water	small
+water	physiological
+water	physical
+oregon	western
+heart	solid
+heart	complex
+heart	medical
+cherry	fresh
+magnesium	essential
+magnesium	beneficial
+magnesium	valuable
+magnesium	combustible
+magnesium	active
+magnesium	heavy
+magnesium	healthy
+magnesium	physiologically essential
+magnesium	nutritional
+magnesium	dietary
+magnesium	physiologically
+automotive	industrial
+spanish	european
+tomato	fresh
+tomato	horticultural
+tomato	red
+tomato	large
+tomato	solanaceous
+tomato	botanical
+tomato	high
+france	western
+france	southern
+france	european
+france	unitary
+milk	perishable
+milk	healthy
+milk	calcium-rich
+milk	common
+milk	fresh
+milk	natural
+milk	high
+hiking	recreational
+hiking	adventurous
+hiking	physical
+doctor	medical
+doctor	professional
+pharmaceutical	industrial
+india	asian
+india	large
+india	tropical
+india	regional
+india	economic
+india	eastern
+india	british
+india	high
+french	european
+french	modern
+los angeles	large
+los angeles	big
+los angeles	urban
+los angeles	large urban
+corn	agricultural
+corn	annual
+corn	traditional
+corn	common
+corn	commercially important
+colorado	western
+london	large
+london	european
+london	big
+london	global
+london	international
+london	urban
+cat	domestic
+cat	small
+cat	feral
+cat	nocturnal
+cat	common
+ceramic	hard
+ceramic	advanced
+ceramic	traditional
+ceramic	natural
+ceramic	porous
+ceramic	suitable
+wheat	agricultural
+wheat	annual
+wheat	small
+wheat	common
+wheat	young
+wheat	whole
+nitrogen	industrial
+nitrogen	suitable
+nitrogen	inactive
+nitrogen	non reactive
+nitrogen	atmospheric
+nitrogen	essential
+san francisco	large
+san francisco	big
+san francisco	urban
+amazon	large
+amazon	big
+amazon	retail
+antioxidant	conventional
+antioxidant	pharmaceutical
+antioxidant	optional
+antioxidant	natural
+antioxidant	biological
+concrete	hard
+concrete	heavy
+concrete	modern
+concrete	porous
+concrete	cementitious
+concrete	traditional
+concrete	rigid
+concrete	natural
+concrete	structural
+concrete	impervious
+concrete	durable
+concrete	impermeable
+concrete	solid
+concrete	common
+minnesota	northern
+dizziness	physical
+dizziness	neurological
+dizziness	serious
+dizziness	potential
+dizziness	common
+dizziness	undesirable
+dizziness	purely subjective
+carbon dioxide	atmospheric
+carbon dioxide	small
+carbon dioxide	supercritical
+manufacturing	traditional
+manufacturing	economic
+manufacturing	industrial
+orange	fresh
+orange	citrous
+orange	seasonal
+orange	tropical
+orange	essential
+rabbit	small
+rabbit	domestic
+rabbit	feral
+rabbit	mammalian
+kidney	solid
+kidney	complex
+kidney	extrahepatic
+kidney	medical
+virginia	southern
+acetone	organic
+acetone	volatile
+acetone	strong
+acetone	aromatic
+acetone	common
+acetone	aggressive
+acetone	flammable
+horse	large
+horse	domestic
+obesity	environmental
+obesity	modifiable
+obesity	traditional
+obesity	common
+obesity	behavioral
+obesity	potential
+obesity	medical
+obesity	pathological
+obesity	pathophysiological
+obesity	serious
+frequency	urinary
+frequency	descriptive and inferential
+agriculture	economic
+agriculture	traditional
+agriculture	key economic
+agriculture	productive
+agriculture	industrial
+time	basic
+time	detailed
+time	contextual
+time	external
+time	environmental
+time	analytical
+time	limited
+time	practical
+time	popular
+time	physical
+humidity	environmental
+humidity	external
+humidity	climatic
+humidity	meteorological
+humidity	abiotic
+humidity	physical
+humidity	atmospheric
+golf	popular
+golf	recreational
+golf	athletic
+culture	environmental
+culture	social
+culture	contextual
+culture	external
+culture	organizational
+united states	western
+united states	advanced
+united states	large
+united states	federal
+united states	pluralistic
+united states	liberal
+united states	individualistic
+united states	developed economic
+tablet	modern
+tablet	electronic
+tablet	portable
+tablet	personal
+tablet	portable electronic
+tablet	personal electronic
+tablet	solid
+tablet	oral
+tablet	pharmaceutical
+tablet	preferred oral
+tablet	conventional
+jewelry	valuable
+jewelry	small
+jewelry	personal
+jewelry	expensive
+bread	basic
+bread	common
+bread	carbohydrate-rich
+bread	complex
+bread	high
+bread	perishable
+birthday	private
+birthday	annual
+birthday	personal
+phone number	personal
+phone number	basic
+phone number	personally identifiable
+phone number	private
+phone number	sensitive
+lawyer	professional
+mining	extractive
+mining	heavy
+mining	traditional
+mining	industrial
+mining	economic
+book	personal
+book	heavy
+book	small
+book	physical
+book	unwanted
+book	educational
+book	cultural
+book	secondary
+book	traditional
+book	creative
+argon	noble
+argon	industrial
+argon	inactive
+oil	extractive
+oil	heavy
+oil	automotive
+oil	natural
+oil	hazardous
+oil	flammable
+oil	organic
+oil	combustible
+oil	hot
+oil	viscous
+oil	industrial
+oil	nonrenewable
+oil	non-renewable
+oil	aggressive
+oil	traditional
+oil	conventional
+oil	volatile
+oil	consumable
+cheese	nutritious
+cheese	healthy
+cheese	calcium-rich
+cheese	local
+cheese	high
+bird	small
+bird	exotic
+bird	domestic
+bird	large
+bird	natural
+visa	international
+visa	valid
+heart disease	medical
+heart disease	serious medical
+heart disease	serious
+heart disease	chronic medical
+heart disease	common
+heart disease	systemic
+food	essential
+food	perishable
+food	personal
+food	basic
+food	consumable
+food	traditional
+food	variable
+food	natural
+food	industrial
+food	environmental
+food	physical
+food	physiological
+food	regulatory
+food	federal
+food	international
+food	organic
+aerospace	industrial
+stone	natural
+stone	traditional
+stone	local
+stone	durable
+stone	heavy
+stone	hard
+stone	loose
+stone	porous
+health	social
+health	personal
+health	basic
+health	essential
+health	sensitive
+titanium	combustible
+titanium	biocompatible
+titanium	suitable
+titanium	exotic
+titanium	suitable biocompatible
+titanium	expensive
+environment	external
+environment	global
+environment	social
+environment	contemporary
+vitamin e	dietary
+vitamin e	natural
+vitamin e	powerful
+vitamin e	healthy
+vitamin e	active
+internet	modern
+internet	large
+internet	open
+internet	complex
+internet	global
+internet	electronic
+internet	external
+internet	packet-switched
+internet	interactive
+internet	technological
+internet	wide
+security	non functional
+security	basic
+lung	soft
+lung	solid
+cabbage	cruciferous
+cabbage	green
+cabbage	fresh
+virus	infectious
+virus	biological
+virus	environmental
+virus	external
+virus	microbiological
+virus	malicious
+chrome	modern
+chrome	popular
+chrome	heavy
+hypertension	traditional
+hypertension	conventional
+hypertension	modifiable
+hypertension	classical
+hypertension	atherosclerotic
+hypertension	common
+hypertension	classic
+hypertension	medical
+hypertension	pathological
+hypertension	chronic medical
+hypertension	systemic
+hypertension	clinical
+hypertension	serious
+cinnamon	aromatic
+cinnamon	natural
+cinnamon	essential
+pear	fresh
+pear	seasonal
+banking	financial
+banking	administrative
+georgia	southern
+onion	fresh
+onion	aromatic
+onion	agricultural
+refrigerator	large
+refrigerator	electrical
+refrigerator	modern
+arthritis	medical
+arthritis	common
+arthritis	pathological
+arthritis	physical
+barley	small
+barley	young
+spinach	green
+spinach	fresh
+spinach	non-starchy
+anxiety	psychological
+anxiety	emotional
+anxiety	neuropsychiatric
+anxiety	common
+anxiety	affective
+anxiety	secondary
+anxiety	physical
+anxiety	negative
+anxiety	strong
+anxiety	medical
+anxiety	behavioral
+anxiety	paradoxical
+asthma	medical
+asthma	common
+asthma	chronic medical
+asthma	obstructive
+asthma	pulmonary
+asthma	
+bank	traditional
+bank	financial
+bank	private
+bank	traditional financial
+bank	large
+bank	conventional
+bank	local
+bank	institutional
+bank	professional
+bank	commercial
+bank	third
+safety	practical
+safety	basic
+concert	cultural
+concert	live
+concert	large
+concert	social
+healthcare	basic
+healthcare	social
+boston	large
+boston	big
+boston	american
+boston	northern
+boston	urban
+maize	annual
+maize	agricultural
+sheep	domestic
+sheep	large
+sheep	small
+sheep	live
+chromium	heavy
+ibuprofen	oral
+ibuprofen	traditional
+ibuprofen	conventional
+ibuprofen	over-the-counter
+ibuprofen	common
+ibuprofen	non-steroidal
+sport	physical
+sport	recreational
+sport	extra-curricular
+sport	strenuous
+sport	social
+sport	live
+sport	extra
+chocolate	sugary
+chocolate	traditional
+chocolate	classic
+chocolate	small
+email address	personal
+email address	personally identifiable
+email address	private
+email address	basic
+yahoo	popular
+yahoo	large
+yahoo	personal
+yahoo	free
+yoga	physical
+yoga	spiritual
+yoga	eastern
+yoga	holistic
+depression	psychological
+depression	emotional
+depression	personal
+depression	neuropsychiatric
+depression	secondary
+depression	common
+depression	behavioral
+depression	affective
+depression	physical
+depression	medical
+depression	serious
+depression	treatable
+depression	neurological
+depression	negative
+depression	clinical
+intel	large
+intel	high
+cycling	physical
+cycling	recreational
+cycling	low-impact
+school	social
+school	educational
+school	local
+school	large
+school	cultural
+school	critical
+school	essential
+school	basic
+school	commercial
+school	institutional
+school	public or semipublic
+school	sensitive
+school	personal
+school	physical
+pineapple	tropical
+pineapple	fresh
+pineapple	exotic
+deer	large
+deer	local
+deer	big
+peach	fresh
+peach	seasonal
+peach	soft
+volleyball	competitive
+volleyball	western
+volleyball	intramural
+volleyball	recreational
+volleyball	traditional
+volleyball	athletic
+phosphorus	essential
+phosphorus	n-type
+cow	domestic
+cow	large
+rubber	elastic
+rubber	flexible
+rubber	soft
+rubber	suitable
+rubber	synthetic
+rubber	organic
+rubber	natural
+leather	natural
+leather	organic
+leather	soft
+bean	healthy
+bean	fiber-rich
+bean	protein-rich
+bean	green
+bean	leguminous
+bean	large
+bean	high
+world bank	international
+world bank	multilateral
+world bank	global
+world bank	international financial
+world bank	supranational
+world bank	financial
+world bank	multilateral financial
+grape	fresh
+grape	seasonal
+grape	small
+grape	soft
+glove	suitable
+glove	personal
+glove	proper personal
+glove	disposable
+glove	impervious
+potassium	essential
+potassium	valuable
+potassium	healthy
+potassium	physiologically essential
+potassium	combustible
+potassium	physiologically
+vitamin c	dietary
+vitamin c	natural
+vitamin c	healthy
+vitamin c	essential
+vitamin c	water-soluble
+vitamin c	nutritional
+art	creative
+art	recreational
+art	cultural
+art	practical
+art	non academic
+art	expressive
+communication	soft
+communication	transferable
+communication	interpersonal
+communication	social
+communication	essential
+communication	non technical
+communication	valuable
+communication	professional
+communication	basic
+communication	personal
+communication	nontechnical
+nevada	western
+chemical	industrial
+chemical	environmental
+chemical	external
+chemical	hazardous
+christmas	religious
+christmas	festive
+christmas	seasonal
+christmas	busy
+caffeine	active
+hockey	competitive
+hockey	professional
+hockey	traditional
+experience	personal
+experience	demographic
+internet explorer	popular
+internet explorer	modern
+internet explorer	common
+plasticizer	conventional
+plasticizer	optional
+north carolina	southern
+printer	peripheral
+printer	external
+printer	electronic
+printer	unnecessary
+tensile strength	physical and
+tensile strength	mechanical
+tensile strength	physical
+tensile strength	physical and mechanical
+camping	recreational
+pigment	conventional
+pigment	common
+pigment	suitable
+pigment	optional
+textile	traditional
+textile	industrial
+textile	organic
+oxygen	industrial
+oxygen	atmospheric
+oxygen	medical
+oxygen	environmental
+oxygen	electronegative
+oxygen	small
+percentage	descriptive and inferential
+lifestyle	environmental
+lifestyle	external
+cotton	agricultural
+cotton	commercial
+cotton	industrial
+cotton	natural
+cotton	organic
+cotton	soft
+cotton	breathable
+pasta	medical
+pasta	white
+pasta	complex
+pasta	high
+pasta	italian
+rice	agricultural
+rice	annual
+rice	basic
+rice	white
+rice	commercially important
+rice	complex
+meditation	spiritual
+meditation	eastern
+medicine	traditional
+medicine	professional
+medicine	scientific
+medicine	basic
+dell	large
+history	traditional
+history	academic
+goat	domestic
+goat	large
+goat	small
+goat	live
+goat	feral
+alcohol	legal
+alcohol	volatile
+alcohol	addictive
+alcohol	illegal
+alcohol	organic
+alcohol	strong
+alcohol	protic
+alcohol	flammable
+alcohol	common
+alcohol	environmental
+alcohol	dietary
+alcohol	inflammable
+alcohol	social
+alcohol	unhealthy
+alcohol	risky
+alcohol	high
+alcohol	functional
+rheumatoid arthritis	systemic
+rheumatoid arthritis	medical
+rheumatoid arthritis	pathological
+rheumatoid arthritis	arthritic
+horse riding	adventurous
+kayaking	recreational
+sand	abrasive
+sand	natural
+sand	loose
+sand	pervious
+sand	permeable
+sand	unconsolidated
+sand	porous
+sand	solid
+sand	small
+sand	soft
+sand	industrial
+filling	basic
+brown rice	whole
+brown rice	complex
+basil	fresh
+basil	annual
+basil	aromatic
+basil	natural
+basil	essential
+solar	renewable
+solar	sustainable
+solar	green
+canoeing	recreational
+canoeing	adventurous
+physical	adequate medical
+physical	environmental
+physical	traumatic
+quality	environmental
+tornado	natural
+tornado	catastrophic
+tornado	severe
+mango	tropical
+mango	fresh
+mango	exotic
+mango	seasonal
+mango	local
+skiing	recreational
+skiing	physical
+television	traditional
+television	electronic
+television	popular
+television	visual
+television	modern
+television	conventional
+television	valuable
+television	large
+television	electrical
+television	personal
+television	electric
+television	great
+price	economic
+toy	personal
+toy	small
+cell phone	portable
+cell phone	personal
+cell phone	electronic
+cell phone	portable electronic
+cell phone	personal electronic
+cell phone	electrical
+cell phone	mobile electronic
+cell phone	small
+cell phone	valuable
+problem solving	transferable
+problem solving	soft
+problem solving	essential
+restaurant	small
+restaurant	local
+restaurant	ancillary
+restaurant	commercial
+bleeding	serious
+bleeding	severe
+bleeding	surgical
+bleeding	intraoperative
+aspirin	over-the-counter
+aspirin	common
+aspirin	traditional
+aspirin	non-steroidal
+science	academic
+science	scientific
+social security number	sensitive
+social security number	personal
+social security number	personally identifiable
+social security number	sensitive personal
+social security number	private
+social security number	personal financial
+social security number	financial
+google chrome	modern
+google chrome	popular
+benzene	organic
+benzene	aromatic
+benzene	strong
+benzene	volatile
+benzene	non polar
+benzene	nonpolar
+benzene	flammable
+benzene	aliphatic and
+benzene	aliphatic and aromatic
+benzene	monoaromatic
+electricity	basic
+electricity	essential
+electricity	infrastructural
+electricity	modern
+stabilizer	conventional
+stabilizer	optional
+stabilizer	pharmaceutical
+rosemary	fresh
+rosemary	aromatic
+rosemary	natural
+rosemary	essential
+standard deviation	basic
+standard deviation	statistical
+coffee	hot
+coffee	hot or cold
+coffee	agricultural
+coffee	tropical
+coffee	basic
+coffee	commercial
+coffee	difficult
+law	traditional
+law	professional
+law	formal
+law	social
+reading	daily
+reading	quiet
+reading	sedentary
+reading	basic
+reading	academic
+brick	natural
+brick	noncombustible
+brick	traditional
+brick	local
+brick	durable
+brick	solid
+brick	porous
+brick	common
+brick	hard
+brick	unstable
+pension fund	large
+pension fund	institutional
+pension fund	large institutional
+pension fund	professional
+pension fund	long-term
+pension fund	financial
+paint	hazardous
+paint	flammable
+paint	combustible
+paint	common
+seattle	large
+religion	cultural
+religion	social
+religion	socio cultural
+religion	demographic
+religion	controversial
+religion	sensitive
+religion	geopolitical
+religion	personal
+religion	categorical
+religion	sensitive personal
+craft	recreational
+craft	daily
+eczema	common
+eczema	medical
+toluene	organic
+toluene	aromatic
+toluene	non polar
+toluene	nonpolar
+toluene	aprotic
+toluene	common
+toluene	aliphatic and
+toluene	aliphatic and aromatic
+toluene	monoaromatic
+toluene	volatile
+japan	eastern
+japan	asian
+japan	international
+japan	active
+japan	advanced
+japan	large
+japan	east asian
+japan	regional
+inflation	economic
+inflation	macroeconomic
+inflation	external
+nutrition	environmental
+nutrition	external
+brass	traditional
+brass	soft
+brass	non ferrous
+brass	non-ferrous
+air	suitable
+air	common
+air	compressible
+air	environmental
+air	gaseous
+air	natural
+smart phone	electronic
+smart phone	portable
+smart phone	portable electronic
+smart phone	personal
+smart phone	mobile electronic
+tuna	oily
+tuna	large
+tuna	fresh
+filler	conventional
+filler	optional
+samsung	large
+samsung	big
+samsung	multinational
+samsung	popular
+samsung	global
+transportation	basic
+transportation	personal
+dishwasher	large
+dishwasher	electric
+dishwasher	electrical
+dishwasher	domestic
+dishwasher	modern
+brazil	large
+brazil	latin american
+brazil	regional
+louisiana	southern
+game	recreational
+game	physical
+game	interactive
+game	personal
+game	electronic
+accountant	professional
+acupuncture	natural
+acupuncture	holistic
+acupuncture	complementary and alternative
+acupuncture	physical
+acupuncture	therapeutic
+music	creative
+music	cultural
+music	extra-curricular
+music	non academic
+music	large
+music	personal
+music	continuous
+music	electronic
+music	extra
+medical checkup	adequate medical
+coca cola	big
+coca cola	large
+coca cola	multinational
+coca cola	global
+coca cola	soft
+cobalt	heavy
+cobalt	ferromagnetic
+cobalt	magnetic
+cereal	complex
+sony	japanese
+sony	large
+sony	big
+sony	electronic
+sony	popular
+sony	global
+computer	electronic
+computer	valuable
+computer	attractive and portable
+computer	electrical
+computer	personal
+computer	expensive
+computer	modern
+computer	technological
+computer	external
+computer	modern electronic
+computer	sensitive
+computer	sensitive electronic
+computer	advanced
+computer	technical
+computer	tangible
+thyme	fresh
+thyme	aromatic
+thyme	natural
+thyme	essential
+philadelphia	large
+philadelphia	urban
+walking	physical
+walking	low-impact
+walking	daily
+walking	recreational
+walking	regular
+yogurt	soft
+yogurt	probiotic
+yogurt	calcium-rich
+yogurt	healthy
+italy	southern
+italy	western
+italy	european
+chemotherapy	conventional
+chemotherapy	medical
+chemotherapy	traditional
+chemotherapy	systemic
+chemotherapy	therapeutic
+safari	modern
+safari	popular
+pressure	physical
+pressure	meteorological
+pressure	operational
+pressure	environmental
+pressure	external
+pressure	thermodynamic
+arabic	semitic
+arabic	morphologically rich
+surfactant	conventional
+surfactant	optional
+surfactant	common
+surfactant	secondary
+platinum	noble
+platinum	precious
+platinum	heavy
+platinum	non precious
+exercise	environmental
+exercise	external
+exercise	physical
+exercise	daily
+exercise	strenuous
+exercise	non pharmacological
+exercise	healthy
+exercise	physiological
+exercise	supplementary
+mobile phone	electronic
+mobile phone	portable electronic
+mobile phone	portable
+mobile phone	mobile electronic
+mobile phone	personal
+mobile phone	portable electric
+mobile phone	small
+mobile phone	personal electronic
+mobile phone	modern
+mobile phone	valuable
+radio	traditional
+radio	electronic
+radio	local
+radio	modern
+radio	personal
+radio	valuable
+radio	electrical
+radio	small
+radio	automotive electrical
+radio	electric
+radio	great
+radio	automotive
+socioeconomic status	environmental
+socioeconomic status	demographic
+socioeconomic status	social
+socioeconomic status	potential
+nike	large
+nike	global
+nike	international
+nike	popular
+nike	big
+nike	famous
+nike	great
+antibiotic	antimicrobial
+antibiotic	therapeutic
+alabama	southern
+diarrhea	clinical
+diarrhea	intestinal
+diarrhea	serious
+weight loss	constitutional
+weight loss	systemic
+weight loss	clinical
+horseback riding	recreational
+video	rich
+video	continuous
+video	electronic
+video	visual
+video	traditional
+video	large
+video	educational
+video	unstructured
+video	supplementary
+video	audio visual
+video	interactive
+garlic	heavy
+garlic	strong
+methane	atmospheric
+methane	combustible
+methane	flammable
+methane	gaseous
+pool	great
+pool	recreational
+pool	structural
+pool	common
+electronic	valuable
+cauliflower	cruciferous
+cauliflower	fresh
+clay	natural
+clay	heavy
+clay	small
+weakness	neurological
+weakness	constitutional
+weakness	systemic
+weakness	clinical
+table	large
+table	affordable and multifunctional
+table	flat
+table	hard
+table	visual
+table	mathematical
+sofa	large
+sofa	upholstered
+sofa	affordable and multifunctional
+sofa	soft
+energy	cyclical
+energy	economic
+energy	global
+energy	environmental
+energy	natural
+energy	physical
+energy	thermodynamic
+estrogen	antiresorptive
+christianity	monotheistic
+christianity	traditional
+shortness of breath	physical
+lettuce	green
+lettuce	fresh
+tetracycline	oral
+tetracycline	antimicrobial
+interest rate	economic
+interest rate	macroeconomic
+interest rate	external
+interest rate	financial
+islam	monotheistic
+islam	religious
+filing	basic
+filing	administrative
+filing	secretarial
+blueberry	fresh
+blueberry	small
+sadness	negative
+sadness	basic
+sadness	strong
+motivation	psychological
+motivation	personal
+motivation	affective
+hospital	large
+hospital	medical
+hospital	industrial and
+hospital	critical
+hospital	essential
+hospital	commercial
+hospital	institutional
+hospital	clinical
+hospital	industrial and institutional
+hospital	sensitive
+density	physical
+density	physicochemical
+density	thermophysical
+density	mechanical
+density	thermodynamic
+density	physical and mechanical
+density	structural
+density	physical and
+availability	practical
+availability	non functional
+arsenic	heavy
+arsenic	n-type
+brain	soft
+privacy	ethical
+privacy	legal
+hardness	physical and
+hardness	mechanical
+hardness	physical
+hardness	physical and mechanical
+hardness	nanomechanical
+hardness	textural
+lavender	aromatic
+lavender	essential
+lavender	natural
+hydrogen peroxide	strong
+abdominal pain	clinical
+abdominal pain	physical
+truck	large
+truck	heavy
+truck	commercial
+truck	automotive
+cough	pulmonary
+cough	clinical
+cough	common
+spain	southern
+spain	western
+spain	european
+isopropanol	aliphatic
+isopropanol	organic
+alzheimer s disease	neurodegenerative
+alzheimer s disease	pathological
+alzheimer s disease	medical
+alzheimer s disease	neurological
+topography	environmental
+topography	local
+topography	abiotic
+topography	physical
+topography	natural
+chest pain	physical
+chest pain	atypical
+chest pain	serious
+square	basic
+square	regular
+square	geometrical
+sociology	scientific
+sociology	academic
+sociology	social
+snorkeling	adventurous
+snorkeling	recreational
+psoriasis	medical
+psoriasis	dermatological
+psoriasis	common
+electrical	physical
+high blood pressure	medical
+high blood pressure	common
+high blood pressure	traditional
+high blood pressure	serious
+high blood pressure	physical
+economic	external
+economic	environmental
+economic	contextual
+economic	academic
+economic	geopolitical
+economic	social
+mastercard	international
+training	professional
+training	soft
+netherlands	western
+netherlands	northern
+netherlands	european
+honesty	moral
+honesty	traditional
+honesty	stable
+honesty	basic
+honesty	personal
+celery	fresh
+celery	green
+celery	fibrous
+nylon	synthetic
+nylon	thermoplastic
+nylon	suitable
+nylon	porous
+nylon	unironable
+nylon	meltable
+psychology	scientific
+psychology	academic
+psychology	social
+rat	small
+rat	nocturnal
+rat	mammalian
+rat	altricial
+rat	invasive
+elephant	large
+elephant	exotic
+marital status	demographic
+marital status	sociodemographic
+marital status	social
+marital status	socioeconomic
+marital status	categorical
+marital status	personal
+marital status	basic
+gas	basic
+gas	essential
+gas	natural
+gas	flammable
+soil type	environmental
+soil type	abiotic
+apricot	fresh
+soybean	agricultural
+soybean	annual
+soybean	leguminous
+paris	european
+paris	large
+paris	big
+paris	global
+bathroom	common
+bathroom	small
+youtube	popular
+youtube	social
+youtube	popular social
+pen	promotional
+pen	small
+pen	personal
+pen	stationary
+pen	sharp
+pen	hard
+pen	basic
+pen	traditional
+manganese	heavy
+manganese	essential
+australia	international
+australia	federal
+australia	advanced
+australia	multicultural
+australia	british
+social	environmental
+social	external
+social	contextual
+drought	biotic and
+drought	environmental
+drought	adverse environmental
+drought	climatic
+drought	extreme environmental
+drought	abiotic
+drought	natural
+drought	external
+drought	extrinsic
+drought	extreme climatic
+drought	catastrophic
+drought	stochastic
+drought	biotic and abiotic
+drought	abiotic and biotic
+drought	severe
+light	environmental
+light	abiotic
+light	physical
+light	external
+light	electrical
+light	electromagnetic
+light	electric
+detroit	large
+hp	large
+shape	visual
+shape	morphological
+shape	physical
+shape	physicochemical
+shape	basic
+anorexia	constitutional
+anorexia	systemic
+anorexia	clinical
+chicken	white
+chicken	fresh
+chicken	domestic
+chicken	small
+chicken	protein-rich
+chicken	high
+chicken	avian
+insurance	annual
+insurance	ordinary and necessary
+insurance	actual
+insurance	financial
+insurance	professional
+conference	corporate
+conference	large
+helium	noble
+helium	non reactive
+mackerel	oily
+mouse	peripheral
+mouse	external
+mouse	conventional
+mouse	small
+mouse	mammalian
+colorant	conventional
+ginger	natural
+glucose	soluble
+glucose	small
+glucose	large
+glucose	biochemical
+glucose	organic
+glucose	osmotic
+tin	heavy
+tin	soft
+tin	non ferrous
+tea	hot
+tea	hot or cold
+tea	agricultural
+tea	basic
+tea	clear
+united nations	international
+united nations	multilateral
+united nations	global
+polymer	soft
+polymer	organic
+polymer	amorphous
+polymer	viscoelastic
+polymer	synthetic
+polymer	flexible
+newspaper	traditional
+newspaper	local
+newspaper	popular
+newspaper	conventional
+newspaper	secondary
+newspaper	contemporary
+newspaper	personal
+newspaper	authentic
+newspaper	combustible
+newspaper	regular
+vomiting	systemic
+vomiting	physical
+bridge	large
+bridge	civil
+bridge	physical
+bridge	recreational
+cucumber	fresh
+aluminium	non ferrous
+aluminium	heavy
+aluminium	non-ferrous
+aluminium	common
+aluminium	modern
+aluminium	recyclable
+hydrogen	flammable
+hydrogen	combustible
+hydrogen	gaseous
+java	object-oriented
+java	modern
+pregnancy	medical
+sugar	white
+sugar	basic
+sugar	agricultural
+sugar	organic
+sugar	small
+swimming pool	recreational
+swimming pool	popular
+swimming pool	contemporary
+swimming pool	common
+swimming pool	great
+swimming pool	modern
+python	dynamic
+keyboard	conventional
+keyboard	traditional
+keyboard	peripheral
+keyboard	external
+keyboard	large current
+keyboard	compatible
+keyboard	musical
+hunting	recreational
+hunting	traditional
+personality	psychological
+personality	personal
+respect	moral
+respect	traditional
+insulin	therapeutic
+pump	auxiliary
+pump	mechanical
+pump	stationary
+pump	ancillary
+pump	active
+rugby	traditional
+tennessee	southern
+shoe	personal
+shoe	small
+wool	natural
+wool	organic
+guitar	musical
+guitar	acoustic
+guitar	traditional
+opera	modern
+opera	popular
+opera	cultural
+italian	european
+morphine	strong
+morphine	narcotic
+buddhism	eastern
+buddhism	indian
+buddhism	traditional
+buddhism	religious
+buddhism	eastern spiritual
+hewlett packard	large
+maintenance	variable
+maintenance	operational
+ford	large
+ford	automotive
+cooking	daily
+cooking	domestic
+cooking	ordinary
+cooking	practical
+cooking	basic
+cisco	large
+general electric	large
+general electric	multinational
+general electric	american
+prednisone	oral
+prednisone	systemic
+prednisone	cortic
+prednisone	synthetic
+cricket	traditional
+cricket	small
+cricket	live
+hat	personal
+stock	financial
+stock	traditional
+bee	social
+bee	beneficial
+canada	western
+canada	federal
+canada	advanced
+canada	multicultural
+canada	british
+turkey	domestic
+dance	physical
+dance	social
+dance	cultural
+dance	creative
+dance	extra
+motorola	large
+parsley	fresh
+parsley	annual
+lemon	fresh
+lemon	natural
+lemon	essential
+mozilla firefox	modern
+mozilla firefox	popular
+lubricant	conventional
+lubricant	hazardous
+university	educational
+university	large
+university	academic
+university	eligible educational
+university	eligible
+real estate	tangible
+real estate	real
+real estate	physical
+real estate	non financial
+fitness center	recreational
+fitness center	great
+fitness center	contemporary
+laptop	electronic
+laptop	portable
+laptop	portable electronic
+laptop	electrical
+laptop	personal
+laptop	personal electronic
+laptop	valuable
+laptop	expensive
+noise	environmental
+noise	physical
+noise	external
+noise	potential
+clothe	personal
+clothe	combustible
+clothe	basic
+house renovation	small
+bedding	personal
+bedding	combustible
+bedding	flammable
+speed	physical
+diving	recreational
+pillow	soft
+pillow	personal
+towel	personal
+vitamin	essential
+vitamin	active
+vitamin	natural
+vitamin	dietary
+vitamin	nutritional
+vitamin	small
+bolt	mechanical
+bolt	suitable
+bolt	conventional
+bolt	small
+irritability	psychological
+irritability	physical
+irritability	emotional
+credit card due	small
+europe	international
+finance	functional
+finance	corporate
+finance	administrative
+boeing	large
+boeing	american
+new york times	national
+new york times	new
+new york times	national new
+telephone number	personal
+telephone number	personally identifiable
+telephone number	basic
+cattle	domestic
+cattle	large
+pepper	fresh
+credit score card due	small
+home renovation	small
+american express	international
+beijing	large
+beijing	big
+beijing	chinese
+shanghai	large
+shanghai	big
+shanghai	chinese
+clove	essential
+blanket	personal
+blanket	large
+blanket	essential
+blanket	transitional
+blanket	loose
+marketing	functional
+marketing	corporate
+protein	essential
+protein	healthy
+protein	biological
+protein	large
+protein	organic
+protein	complex
+protein	cellular
+protein	dietary
+protein	natural
+protein	functional
+protein	biochemical
+protein	therapeutic
+poly	biodegradable
+poly	synthetic
+poly	organic
+poly	functional
+poly	rapidly bioerodible
+poly	biodegradable synthetic
+poly	aliphatic
+transport	economic
+ip address	personal
+ip address	non personally identifiable
+ip address	statistical
+ip address	anonymous
+chess	classic
+chess	traditional
+parkinson s disease	neurological
+parkinson s disease	medical
+parkinson s disease	neurodegenerative
+parkinson s disease	pathological
+antihistamine	over-the-counter
+sanitary napkin	disposable
+human right	global
+human right	geopolitical
+human right	social
+skin	soft
+skin	peripheral
+skin	epithelial
+skin	biological
+skin	physical
+wal mart	large
+wal mart	big
+wal mart	national
+wal mart	retail
+title	basic
+title	personal
+myspace	social
+myspace	popular
+wall street journal	national
+gymnastic	competitive
+gymnastic	physical
+bear	large
+health care	domestic
+health care	basic
+health care	social
+health care	essential
+health care	basic social
+muscle	soft
+muscle	peripheral
+muscle	biological
+muscle	superficial
+stove	large
+circle	basic
+circle	geometrical
+propanol	organic
+paracetamol	over-the-counter
+piano	musical
+piano	acoustic
+piano	large
+utah	western
+cleaning	basic
+cleaning	daily
+cleaning	domestic
+cleaning	ordinary
+cleaning	regular
+counseling	free
+appliance	large
+appliance	durable
+integrity	traditional
+integrity	personal
+steroid	immunosuppressive
+e mail address	personal
+e mail address	personally identifiable
+target	large
+target	big
+target	national
+target	retail
+target	local
+sucrose	soluble
+sucrose	osmotic
+sweden	northern
+sweden	western
+sweden	european
+geography	social
+scarf	personal
+scarf	loose
+housing	practical
+housing	social
+housing	basic
+housing	environmental
+translation	cellular
+insomnia	physical
+insomnia	medical
+beef	red
+beef	fresh
+beef	high
+pesticide	agricultural
+pesticide	hazardous
+pesticide	synthetic
+pesticide	organic
+pesticide	environmental
+judaism	monotheistic
+natural gas	gaseous
+natural gas	conventional
+natural gas	natural
+tungsten	heavy
+property	long-lived
+property	non financial
+property	tangible
+property	physical
+property	real
+rent	monthly
+rent	common
+rent	regular
+teacher	professional
+guilt	negative
+guilt	self conscious
+guilt	moral
+guilt	complex
+guilt	social
+guilt	psychological
+dancing	physical
+dancing	recreational
+dancing	cultural
+dancing	social
+weather condition	external
+weather condition	environmental
+gardening	physical
+gardening	daily
+language	cultural
+laundry	personal
+montana	western
+oak	deciduous
+oak	native
+washing machine	electrical
+washing machine	domestic
+washing machine	large
+washing machine	modern
+washing machine	essential
+washing machine	electronic
+monkey	large
+monkey	exotic
+cement	heavy
+cement	ancillary
+cement	hard
+cement	porous
+scuba diving	adventurous
+scuba diving	recreational
+attitude	psychological
+attitude	affective
+attitude	personal
+silicon	conventional
+whole grain	healthy
+whole grain	fiber-rich
+whole grain	unprocessed
+whole grain	natural
+whole grain	complex
+technology	external
+technology	cyclical
+toyota	japanese
+toyota	automotive
+toyota	asian european and american
+reliability	non functional
+engineering	technical
+engineering	professional
+engineering	functional
+engineering	soft
+honda	japanese
+oregano	fresh
+oregano	aromatic
+oregano	essential
+tsunami	natural
+tsunami	catastrophic
+atlanta	southern
+atlanta	large
+carbon	interstitial
+party	social
+party	private
+bus	large
+bus	commercial
+bus	heavy
+hinduism	eastern
+hinduism	indian
+hinduism	traditional
+hinduism	dharmic spiritual
+rock	natural
+rock	solid
+rock	heavy
+rock	small
+rock	hard
+rock	large
+rock	musical
+installation	soft
+immigration	social
+sauna	popular
+sauna	recreational
+pneumonia	serious
+pneumonia	pulmonary
+pneumonia	severe
+pneumonia	secondary
+pneumonia	nosocomial
+pneumonia	medical
+competition	biotic
+competition	external
+competition	biological
+competition	environmental
+competition	ecological
+perforation	serious
+perforation	severe
+love	positive
+love	strong
+acne	common
+acne	medical
+occupation	demographic
+occupation	socioeconomic
+occupation	socio economic
+occupation	personal
+occupation	detailed
+invoice	financial
+invoice	commercial
+denmark	northern
+denmark	western
+denmark	european
+mailing address	personal
+papaya	tropical
+papaya	fresh
+papaya	exotic
+repair	technical
+repair	ordinary and necessary
+season	environmental
+idaho	western
+engineer	closely related
+medication	environmental
+medication	external
+medication	conservative
+medication	non surgical
+medication	personal
+medication	essential
+toronto	large
+toronto	large canadian
+toronto	big
+toronto	urban
+politic	controversial
+politic	sensitive
+politic	geopolitical
+politic	external
+squat	basic
+polypropylene	thermoplastic
+polypropylene	synthetic
+polypropylene	olefinic
+polypropylene	meltable
+russia	regional
+russia	eastern
+squash	unpeeled
+automobile	complex
+automobile	industrial
+automobile	durable
+cardboard	recyclable
+cardboard	combustible
+chlorine	strong
+oracle	large
+lion	exotic
+lion	large
+lion	big
+future	financial
+future	derivative
+future	derivative financial
+phosphorylation	post-translational
+router	intermediary
+boxing	high
+option	financial
+option	derivative
+option	derivative financial
+low cost	attractive
+south carolina	southern
+medical	professional
+medical	sensitive
+leadership	soft
+leadership	transferable
+leadership	interpersonal
+leadership	valuable
+leadership	organizational
+leadership	personal
+dna methylation	epigenetic
+tourism	economic
+acrylic	organic
+acrylic	synthetic
+acrylic	traditional
+acrylic	mixed
+fabric	porous
+fabric	flexible
+fabric	organic
+beetle	large
+chloroform	organic
+chloroform	non polar
+chloroform	aprotic
+chloroform	common
+raccoon	small
+siemens	multinational
+siemens	large
+siemens	international
+travel	common
+oat	small
+oat	young
+mitochondria	cellular
+sardine	oily
+sardine	small
+accelerometer	inertial
+dye	conventional
+dye	suitable
+dye	optional
+unemployment	economic
+unemployment	social
+unemployment	socio economic
+unemployment	macroeconomic
+unemployment	socioeconomic
+unemployment	structural
+tetrahydrofuran	organic
+racism	social
+racism	controversial
+magnetic disk	optional
+magnetic disk	removable
+birthday party	private
+birthday party	personal
+illness	exceptional
+illness	unforeseen
+illness	unusual
+illness	unexpected
+illness	traumatic
+illness	physical
+woman	vulnerable
+woman	social
+woman	demographic
+woman	underrepresented
+battery	small
+battery	consumable
+battery	expendable
+battery	suitable
+battery	external
+battery	electronic
+battery	electrical
+battery	hazardous
+battery	electrochemical
+fiberglass	composite
+fiberglass	synthetic
+library	cultural
+library	local
+library	physical
+library	common
+plum	fresh
+teamwork	soft
+teamwork	transferable
+teamwork	valuable
+teamwork	interpersonal
+teamwork	social
+fox	feral
+fox	small
+fox	natural
+shell	large
+shell	natural
+shell	international
+squirrel	small
+car	large
+car	expensive
+car	personal
+car	tangible
+car	durable
+dallas	large
+new mexico	western
+sage	fresh
+sage	aromatic
+quercetin	dietary
+quercetin	natural
+yeast	eukaryotic
+yeast	unicellular
+yeast	seemingly diverse
+yeast	complex
+yeast	single
+lighting	environmental
+berry	fresh
+berry	soft
+wyoming	western
+softball	intramural
+softball	athletic
+ipad	electronic
+ipad	portable
+fructose	natural
+cake	sugary
+chair	large
+snake	venomous
+snake	exotic
+snake	small
+snake	dangerous
+snake	natural
+equipment	tangible
+equipment	physical
+equipment	long-lived
+equipment	non financial
+tamil nadu	southern
+corticosteroid	immunosuppressive
+corticosteroid	topical
+tuberculosis	opportunistic
+massage	personal
+massage	holistic
+massage	physical
+massage	manual
+massage	natural
+global warming	environmental
+global warming	global
+global warming	global environmental
+rock climbing	recreational
+rock climbing	adventurous
+mountain biking	recreational
+superoxide dismutase	endogenous
+superoxide dismutase	antioxidative
+superoxide dismutase	enzymatic
+ultrasound	therapeutic
+ultrasound	diagnostic
+ultrasound	medical
+ultrasound	noninvasive
+ultrasound	physical
+bond	financial
+bond	traditional
+bond	marketable
+silk	natural
+silk	luxurious
+silk	rich
+bat	nocturnal
+bat	small
+password	sensitive
+password	personal
+password	private
+password	sensitive personal
+molybdenum	heavy
+lysine	essential
+lysine	basic
+iphone	portable
+iphone	electronic
+iphone	modern
+kale	cruciferous
+kale	green
+kale	fresh
+cardiovascular disease	medical
+catalase	endogenous
+catalase	antioxidative
+catalase	enzymatic
+track	athletic
+soil	environmental
+soil	abiotic
+soil	physical
+soil	natural
+soil	organic
+soil	renewable
+soil	porous
+soil	solid
+sorghum	traditional
+multiple sclerosis	neurological
+multiple sclerosis	medical
+multiple sclerosis	neurodegenerative
+biking	recreational
+biking	physical
+report	secondary
+raspberry	fresh
+raspberry	small
+raspberry	soft
+raspberry	red
+avocado	tropical
+avocado	natural
+golfing	recreational
+physical activity	environmental
+physical activity	behavioral
+physical activity	external
+physical activity	modifiable
+physical activity	potential
+festival	local
+festival	large
+washer	large
+microwave	small
+microwave	electrical
+microwave	electronic
+mississippi	southern
+mississippi	large
+korean	asian
+nurse	medical
+nurse	professional
+crohn s disease	medical
+crohn s disease	intestinal
+date of birth	personal
+date of birth	demographic
+date of birth	basic
+date of birth	personally identifiable
+date of birth	sensitive
+demographic	external
+grasshopper	large
+switch	electrical
+switch	auxiliary and supplementary
+switch	electronic
+photoshop	graphic
+pollution	environmental
+pollution	external
+pollution	negative
+grain	agricultural
+grain	complex
+grapefruit	citrous
+grapefruit	fresh
+grapefruit	essential
+houston	large
+plant	photosynthetic
+plant	complex
+plant	tangible
+plant	physical
+plant	long-lived
+plant	non financial
+plant	organic
+plant	natural
+polyethylene	thermoplastic
+polyethylene	synthetic
+polyethylene	conventional
+ant	social
+ant	eusocial
+screwdriver	basic
+screwdriver	sharp
+screwdriver	small
+screwdriver	manual
+screwdriver	common
+butylated hydroxyanisole	synthetic
+erythromycin	topical
+erythromycin	oral
+erythromycin	prokinetic
+marriage	social
+surgery	conventional
+surgery	local
+surgery	medical
+surgery	traditional
+surgery	invasive
+surgery	aggressive
+rectangle	basic
+rectangle	geometrical
+miami	large
+pdas	personal
+pdas	portable
+pdas	electronic
+pdas	portable electronic
+height	continuous
+height	personal
+height	basic
+height	demographic
+height	physical
+height	complex
+employment	socioeconomic
+employment	social
+employment	socio economic
+employment	economic
+employment	real
+dairy product	perishable
+drowsiness	undesirable
+asparagus	green
+poultry	perishable
+poultry	protein-rich
+poultry	domestic
+poultry	high
+anthropology	scientific
+anthropology	scholarly
+seminar	corporate
+bing	popular
+human	social
+human	mammalian
+human	closely related
+human	large
+human	complex
+human	eukaryotic
+sustainability	environmental
+sustainability	global
+critical thinking	transferable
+critical thinking	soft
+critical thinking	essential
+macrophage	phagocytic
+macrophage	professional
+linkedin	social
+linkedin	online social
+linkedin	professional
+hormone	biological
+hormone	physiological
+hormone	environmental
+hormone	small
+police	external
+police	local
+police	essential
+police	municipal
+police	basic
+police	formal
+acetaminophen	conventional
+acetaminophen	over-the-counter
+acetaminophen	oral
+moisture	environmental
+moisture	abiotic
+moisture	climatic
+sailing	recreational
+sailing	adventurous
+polyester	synthetic
+polyester	thermoplastic
+polyester	meltable
+magnetic resonance imaging	medical
+magnetic resonance imaging	modern
+magnetic resonance imaging	advanced
+magnetic resonance imaging	conventional
+magnetic resonance imaging	noninvasive
+magnetic resonance imaging	non invasive
+magnetic resonance imaging	diagnostic
+diaper	disposable
+soup	soft
+soup	hot
+vinyl	synthetic
+vinyl	hard
+fertilizer	agricultural
+fertilizer	external
+fertilizer	modern
+fertilizer	hazardous
+starbucks	large
+kerala	southern
+constipation	physical
+constipation	common
+constipation	medical
+tree	natural
+tree	large
+tree	renewable
+tree	environmental
+enthalpy	thermodynamic
+numbness	neurological
+fly	small
+fly	holometabolous
+acetonitrile	organic
+acetonitrile	aprotic
+hematoma	serious
+median	statistical
+hammer	basic
+hammer	manual
+hammer	common
+cookie	sugary
+belgium	western
+belgium	european
+aspartame	artificial
+aspartame	non nutritive
+painting	creative
+painting	visual
+painting	traditional
+painting	artistic
+painting	secondary
+watch	valuable
+watch	personal
+watch	small
+watch	electronic
+watch	wearable
+pollen	airborne
+pollen	environmental
+pollen	common
+cosmetic	personal
+cosmetic	industrial
+population growth	non financial
+population growth	demographic
+population growth	nonfinancial
+population growth	global
+sauerkraut	probiotic
+particle size	physical
+particle size	physicochemical
+blog	social
+blog	online social
+birth certificate	original
+birth certificate	personal
+birth certificate	legal
+valve	mechanical
+valve	auxiliary
+valve	ancillary
+tire	large
+family	social
+family	environmental
+family	external
+family	small
+family	personal
+linux	modern
+linux	popular
+linux	open
+magazine	traditional
+magazine	authentic
+magazine	secondary
+pork	red
+pork	perishable
+marble	natural
+marble	hard
+marble	metamorphic
+marble	small
+composite	advanced
+razor	personal
+viscosity	physical
+viscosity	physicochemical
+viscosity	thermophysical
+viscosity	rheological
+dryer	large
+dryer	electric
+letter	personal
+letter	secondary
+blackjack	popular
+blackjack	classic
+blackjack	traditional
+systemic lupus erythematosus	systemic
+pencil	small
+pencil	promotional
+pencil	stationary
+pencil	traditional
+pencil	basic
+pencil	common
+pencil	sharp
+blood test	diagnostic
+blood test	medical
+hotel	local
+hotel	large
+hotel	commercial
+hotel	commercial and public
+hotel	commercial and
+watermelon	fresh
+watermelon	red
+zucchini	fresh
+resistor	electronic
+resistor	electrical
+sodium	essential
+sodium	physiologically essential
+sodium	combustible
+sodium	active
+roulette	popular
+roulette	classic
+roulette	traditional
+nature	scientific
+weight gain	physical
+dry mouth	common
+film	visual
+film	traditional
+film	popular
+film	audiovisual
+film	creative
+film	cultural
+nokia	global
+nokia	popular
+shampoo	cosmetic
+shampoo	personal
+shampoo	basic
+alzheimer s	neurodegenerative
+alzheimer s	neurological
+contract	legal
+contract	original
+contract	formal
+thailand	asian
+aphid	soft-bodied
+aphid	small
+happiness	positive
+happiness	basic
+trauma	environmental
+trauma	external
+trauma	local
+trauma	pathological
+gravel	permeable
+gravel	loose
+gravel	pervious
+gravel	natural
+gravel	soft
+domestic violence	social
+lupus	medical
+windows	popular
+windows	modern
+glycine	neutral
+passport	legal
+passport	personal
+passport	original
+passport	valuable
+passport	valid
+mumbai	indian
+mumbai	large
+bp	big
+bp	international
+korea	asian
+korea	east asian
+wheat bread	whole
+capacitor	electronic
+capacitor	electrical
+time management	transferable
+time management	soft
+time management	valuable
+bullying	unacceptable
+naproxen	nonselective
+naproxen	non steroidal anti inflammatory oral
+naproxen	over-the-counter
+naproxen	non-steroidal
+leaf	organic
+leaf	large
+leaf	combustible
+leaf	natural
+body mass index	clinical
+body mass index	demographic
+body mass index	potential
+salinity	environmental
+salinity	abiotic
+salinity	physical
+salinity	physicochemical
+ethic	professional
+heat	environmental
+heat	physical
+heat	external
+heat	abiotic
+heat	noxious
+unilever	multinational
+rainfall	environmental
+rainfall	climatic
+rainfall	abiotic
+rainfall	meteorological
+research	financial
+epilepsy	medical
+epilepsy	neurological
+epilepsy	pathological
+goggle	suitable
+goggle	personal
+goggle	proper personal
+diethyl ether	organic
+palladium	noble
+palladium	precious
+pvc	thermoplastic
+adidas	international
+adidas	popular
+adidas	big
+general motors	large
+benzine	strong
+benzine	volatile
+benzine	organic
+spleen	abdominal
+spleen	secondary
+deforestation	environmental
+design	professional
+design	creative
+convenience	practical
+arginine	basic
+money	limited
+money	valuable
+money	personal
+money	extrinsic
+cleveland	large
+butylated hydroxytoluene	synthetic
+netflix	popular
+shopping	daily
+olive oil	natural
+olive oil	healthy
+easter	religious
+easter	seasonal
+brochure	promotional
+brochure	educational
+brochure	supplementary
+british airways	international
+land	tangible
+land	physical
+land	productive
+land	real
+land	natural
+land	inexhaustible
+drill	portable
+tiger	exotic
+tiger	large
+hemorrhage	serious
+denver	large
+confusion	neurological
+confusion	serious
+candy	small
+candy	sugary
+candy	hard
+candy	high
+political	external
+political	environmental
+cash	financial
+cash	valuable
+cash	easy
+camera	valuable
+camera	personal
+camera	electronic
+camera	loose
+camera	attractive and portable
+camera	small
+camera	optical
+camera	portable electronic
+camera	peripheral
+camera	external
+camera	portable
+camera	large current
+legume	high
+description	basic
+bowling	recreational
+bowling	social
+methyl	functional
+heron	domestic
+triangle	basic
+van	large
+van	commercial
+melon	fresh
+melon	tropical
+gps	modern
+gps	electronic
+encyclopedia	secondary
+digital camera	electronic
+digital camera	portable electronic
+digital camera	peripheral
+digital camera	portable
+digital camera	photographic
+white bread	white
+tax	actual
+tax	ordinary and necessary
+tax	ancillary
+tax	monthly and yearly
+tax	economic
+tax	financial
+wolf	large
+wolf	natural
+medicaid	federal
+elderly	vulnerable
+elderly	sensitive
+elderly	susceptible
+manchester	large
+manchester	industrial
+bronze	non ferrous
+hexane	organic
+hexane	non polar
+hexane	nonpolar
+hexane	aliphatic
+hexane	aliphatic and aromatic
+jogging	strenuous
+jogging	physical
+jogging	vigorous
+jogging	regular
+jogging	basic
+wal-mart	large
+wal-mart	big
+wal-mart	retail
+bag	personal
+utility	monthly
+utility	variable
+green bean	green
+green bean	non-starchy
+mineral	essential
+mineral	natural
+mineral	nonrenewable
+mineral	dietary
+mineral	nutritional
+joy	positive
+joy	basic
+rose	fresh
+rose	traditional
+labor	variable
+eggplant	unpeeled
+preservative	conventional
+preservative	pharmaceutical
+preservative	customary
+preservative	optional
+preservative	secondary
+chemistry	scientific
+chemistry	natural
+chemistry	physical
+chemistry	hard
+chemistry	basic
+ice cream	soft
+building	physical
+building	civil
+building	large
+building	tangible
+building	cultural
+building	environmental
+building	real
+building	depreciable
+building	impervious
+surfing	recreational
+credit card number	sensitive
+credit card number	personal
+credit card number	financial
+credit card number	private
+credit card number	sensitive personal
+credit card number	confidential personal
+jewellery	valuable
+jewellery	personal
+jewellery	expensive
+jewellery	small
+memory	physical
+education level	demographic
+education level	socioeconomic
+education level	social
+serial number	basic
+hydrochloric acid	strong
+brussels sprout	cruciferous
+brussels sprout	green
+typing	administrative
+infrastructure	real
+palpitation	physical
+palpitation	potential
+jacuzzi	popular
+jacuzzi	recreational
+jacuzzi	exclusive
+oatmeal	whole
+oatmeal	hot
+protease	hydrolytic
+disney	large
+home address	personal
+home address	private
+email	personal
+email	personally identifiable
+email	electronic
+email	unstructured
+email	sensitive
+email	social
+vancouver	large
+blood pressure	physiological
+blood pressure	clinical
+blood pressure	continuous
+blood pressure	traditional
+blood pressure	bodily
+gasoline	conventional
+gasoline	flammable
+gasoline	automotive
+gasoline	volatile
+gasoline	organic
+gasoline	flammable or combustible
+gasoline	flammable or explosive
+gasoline	hazardous
+gasoline	combustible
+gasoline	flammable or
+x ray	diagnostic
+x ray	common
+x ray	medical
+x ray	ancillary
+x ray	effective
+motorcycle	recreational
+motorcycle	small
+purse	personal
+purse	valuable
+purse	small
+flow rate	operational
+flow rate	chromatographic
+insurance company	large
+insurance company	financial
+insurance company	institutional
+insurance company	professional
+insurance company	large institutional
+insurance company	third
+divorce	traumatic
+divorce	negative
+divorce	legal
+divorce	civil
+time of day	environmental
+trout	oily
+scratch	cosmetic
+war	traumatic
+war	unanticipated
+war	historical
+war	catastrophic
+war	geopolitical
+war	global
+war	external
+war	political
+budget	financial
+schizophrenia	psychotic
+schizophrenia	neuropsychiatric
+schizophrenia	neurological
+schizophrenia	psychological
+schizophrenia	neurodevelopmental
+schizophrenia	severe
+schizophrenia	complex
+schizophrenia	neurological and psychiatric
+schizophrenia	neurological and
+schizophrenia	serious
+scanner	peripheral
+scanner	external
+oleic acid	unsaturated
+tokyo	big
+tokyo	large
+tokyo	asian
+tokyo	global
+cortisol	adrenal
+cortisol	cortic
+ni	heavy
+body weight	physiological
+air conditioning	great
+air conditioning	modern
+air conditioning	environmental
+clothes	personal
+insect	small
+insect	environmental
+insect	biotic
+insect	natural
+olive	natural
+olive	healthy
+amsterdam	european
+amsterdam	large
+tennis court	recreational
+amino acid	essential
+amino acid	organic
+amino acid	small
+amino acid	biological
+amino acid	nutritional
+length	physical
+length	measurable
+carpet	large
+carpet	porous
+carpet	flammable
+carpet	soft
+carpet	common
+activation energy	kinetic
+activation energy	thermodynamic
+hsbc	global
+hsbc	international
+hsbc	large
+ethyl acetate	organic
+attorney	professional
+child	vulnerable
+child	sensitive
+child	susceptible
+child	personal
+class	social
+dairy	common
+gym	great
+gym	common
+alloy wheel	great
+malaria	parasitic
+x ray diffraction	analytical
+fibroblast	somatic
+fibroblast	normal
+lipase	hydrolytic
+vanilla	traditional
+vanilla	classic
+silicone	flexible
+silicone	synthetic
+silicone	secondary
+indonesia	asian
+dendritic cell	professional
+dendritic cell	phagocytic
+knowledge	personal
+knowledge	intangible
+telephone	basic
+telephone	electronic
+telephone	electrical
+telephone	personal
+telephone	modern
+telephone	traditional
+telephone	electric
+telephone	technological
+soda	sugary
+patent	intangible
+terrain	environmental
+brie	soft
+ct	conventional
+ct	advanced
+ct	medical
+ct	modern
+ct	diagnostic
+chamomile	natural
+chamomile	essential
+carbon monoxide	gaseous
+upper	spatial
+upper	spatially relative
+upper	spatially
+excel	electronic
+excel	basic
+economy	external
+computed tomography	medical
+computed tomography	advanced
+computed tomography	noninvasive
+computed tomography	conventional
+computed tomography	modern
+computed tomography	diagnostic
+corporation	legal
+corporation	artificial
+corporation	large
+restylane	injectable
+restylane	facial
+blue	musical
+spermidine	natural
+allergy	medical
+new york city	large
+new york city	big
+new york city	urban
+selenium	essential
+selenium	heavy
+alcohol consumption	environmental
+friend	informal
+butterfly	beneficial
+strength	mechanical
+strength	physical
+running	physical
+acetic acid	volatile
+acetic acid	weak
+acetic acid	organic
+road	cultural
+road	physical
+road	basic
+road	large
+road	infrastructural
+road	impervious
+road	hard
+road	impermeable
+patient age	continuous
+kenya	african
+city	basic
+city	personal
+city	geographic
+city	local
+confidentiality	ethical
+fibromyalgia	medical
+disposable diaper	disposable
+disposable diaper	conventional
+oval	suitable
+sodium chloride	common
+anemia	medical
+default	poor
+default	negative
+default	undesirable
+default	terrible
+default	personal
+default	low
+second life	virtual
+second life	online virtual
+nursing	professional
+nursing	academic
+tobacco	agricultural
+tobacco	legal
+tobacco	environmental
+mcdonald s	large
+text	unstructured
+ascorbic acid	natural
+ascorbic acid	organic
+fracture	serious
+fracture	severe
+fracture	traumatic
+fracture	structural
+soap dish	practical
+cr	heavy
+chloride	common
+chloride	soluble
+dyspnea	clinical
+rye	small
+kitchen	common
+nail	hard or sharp
+nail	sharp
+nail	loose
+nail	mechanical
+nail	small
+nail	hard or
+engine	mechanical
+engine	large
+poster	promotional
+poster	educational
+poster	visual
+wasp	social
+xylene	aliphatic and
+xylene	aromatic
+xylene	organic
+xylene	aliphatic and aromatic
+guinea pig	small
+violin	musical
+violin	traditional
+berlin	european
+berlin	large
+pneumothorax	serious
+pneumothorax	pulmonary
+drama	extra-curricular
+drama	literary
+trust	legal
+trust	separate legal
+trust	separate
+bmw	european
+juvederm	injectable
+juvederm	facial
+dolphin	aquatic
+foam	soft
+foam	porous
+carbamazepine	hepatic
+biodiesel	renewable
+volume	physical
+diphenhydramine	oral
+calculator	electronic
+heavy metal	environmental
+heavy metal	hazardous
+procter gamble	large
+rain	poor
+rain	environmental
+rain	climatic
+rain	atmospheric
+rain	natural
+inflammation	environmental
+inflammation	pathological
+inflammation	pathophysiological
+inflammation	biological
+inflammation	cellular
+inflammation	severe
+economic condition	external
+peanut	common
+cd	heavy
+oyster	fresh
+turnip	cruciferous
+altitude	environmental
+wind speed	meteorological
+wind speed	environmental
+wind speed	climatic
+wind speed	atmospheric
+singing	musical
+tv	traditional
+tv	modern
+tv	electronic
+tv	electrical
+frustration	negative
+plato	great
+plato	historical
+baptism	religious
+physician	medical
+eating	daily
+discrimination	social
+red meat	iron-rich
+depth	environmental
+sausage	hot
+dissolved oxygen	environmental
+dissolved oxygen	physicochemical
+dissolved oxygen	physical
+coyote	natural
+coyote	large
+shelter	basic
+shelter	physical
+supermarket	local
+supermarket	large
+supermarket	retail
+kiwi	fresh
+kiwi	tropical
+image	unstructured
+image	static
+image	electronic
+osteoporosis	medical
+osteoporosis	pathological
+malaysia	asian
+malaysia	tropical
+personal digital assistant	portable
+personal digital assistant	electronic
+personal digital assistant	portable electronic
+personal digital assistant	mobile electronic
+personal digital assistant	electrical
+personal digital assistant	portable electric
+consulting	professional
+duck	aquatic
+rash	clinical
+ether	organic
+ether	aprotic
+ether	functional
+oven	electrical
+tile	noncombustible
+tile	hard
+tile	flat
+biology	scientific
+biology	scholarly
+biology	academic
+biology	natural
+shame	negative
+shame	self conscious
+shame	moral
+glaucoma	medical
+glaucoma	common
+contact information	personal
+contact information	basic
+picture	personal
+picture	visual
+picture	augmentative
+red cross	international
+red cross	charitable
+red cross	humanitarian
+mattress	large
+moth	large
+pfizer	pharmaceutical
+pfizer	large pharmaceutical
+pfizer	large
+sulfuric acid	strong
+maple	deciduous
+population	macroeconomic
+healthcare bill	small
+dioxane	organic
+new orleans	southern
+phone	electronic
+phone	portable
+phone	personal
+billiard	recreational
+billiard	good
+wedding expense	small
+business	professional
+business	legal
+electricity bill	small
+shrimp	fresh
+shrimp	small
+shrimp	live
+wedding ceremony cost	small
+photo	large
+photo	personal
+dichloromethane	organic
+dichloromethane	anhydrous
+ruby	dynamic
+ruby	precious
+sweating	physical
+sweating	autonomic
+wrestling	athletic
+electrical energy bill	small
+electricity expense	small
+malnutrition	environmental
+globalization	external
+physical therapy	ancillary
+physical therapy	conservative
+physical therapy	non surgical
+mutual fund	traditional
+mutual fund	financial
+mutual fund	institutional
+amylase	hydrolytic
+wedding cost	small
+healthcare expense	small
+electron	elementary
+electron	subatomic
+electron	fundamental
+medical bill	small
+medical bill	small monetary
+medical bill	financial
+medical bill	monetary
+medical bill	small financial
+medical bill	unsecured
+terrorism	global
+terrorism	geopolitical
+terrorism	transnational
+supply	economic
+poor diet	behavioral
+poor diet	unhealthy
+diabetes mellitus	traditional
+diabetes mellitus	medical
+diabetes mellitus	pathological
+diabetes mellitus	systemic
+watercolor	traditional
+vitamins a	essential
+blood	biological
+blood	clinical
+blood	bodily
+blood	physical
+blood	organic
+phone expense	small
+ginseng	natural
+ginseng	chinese
+pb	heavy
+alfalfa	agricultural
+alfalfa	leguminous
+wedding ceremony expense	small
+customer	external
+customer	third
+flute	musical
+flute	traditional
+ammonia	basic
+ammonia	industrially important
+ammonia	weak
+ammonia	natural
+ammonia	incompatible
+electrical energy expense	small
+bingo	daily
+telephone expense	small
+phone bill	small
+phone bill	small monetary
+phone bill	small financial
+phone bill	monetary
+phone bill	financial
+plaster	porous
+radish	cruciferous
+dill	fresh
+dill	annual
+safety glass	personal
+safety glass	suitable
+starch	complex
+starch	natural
+starch	organic
+ring	small
+ring	personal
+database	commercial
+database	electronic
+database	secondary
+social support	psychological
+social support	social
+young s modulus	mechanical
+young s modulus	elastic
+young s modulus	physical
+comorbidity	clinical
+performance	non functional
+performance	nonfunctional
+performance	non-functional
+government	external
+government	social
+government	large
+government	
+government	third
+flower	small
+flower	perishable
+flower	traditional
+flower	natural
+water temperature	environmental
+water temperature	abiotic
+water temperature	physical
+night sweat	constitutional
+night sweat	systemic
+propranolol	non selective
+telephone bill	small
+rome	large
+rome	european
+rome	italian
+wound infection	surgical
+rodent	small
+rodent	exotic
+plasticizers	conventional
+loss of appetite	constitutional
+loss of appetite	physical
+methionine	essential
+medical expense	small
+medical expense	small financial
+medical expense	small monetary
+medical expense	monetary
+medical expense	financial
+drum	musical
+drum	traditional
+drum	empty
+drum	large
+javascript	dynamic
+demand	economic
+word	basic
+birmingham	large
+birmingham	southern
+birmingham	industrial
+cane	assistive
+cane	medical
+cane	durable medical
+cane	durable
+cellulose	natural
+cellulose	organic
+cellulose	complex
+cellulose	insoluble
+forest	natural
+forest	renewable
+xerox	large
+flooding	natural
+flooding	catastrophic
+flooding	environmental
+citric acid	organic
+citric acid	weak
+cod	white
+bacon	red
+hard hat	personal
+helmet	personal
+petroleum	natural
+mpeg	popular
+adenovirus	viral
+top	spatial and directional
+top	spatially relative
+top	spatially
+peppermint	essential
+warfarin	oral
+dust	airborne
+dust	small
+dust	large
+dust	environmental
+sweet potato	complex
+norway	northern
+life insurance	financial
+block	real
+influenza	viral
+influenza	infectious
+hebrew	semitic
+hemp	natural
+opossum	small
+coriander	fresh
+motor	electrical
+motor	stationary
+motor	large
+motor	inductive
+motor	electric
+vanadium	heavy
+grass	combustible
+grass	soft
+grass	natural
+grass	organic
+bamboo	natural
+bamboo	local
+bamboo	organic
+shark	cartilaginous
+shark	large
+shark	aquatic
+dementia	medical
+dementia	neurological
+credit union	financial
+credit union	traditional
+acid	ionic and polar
+acid	incompatible
+zip code	demographic
+zip code	personal
+alanine	small
+natural disaster	traumatic
+natural disaster	unanticipated
+natural disaster	unexpected
+natural disaster	unforeseen
+natural disaster	catastrophic
+natural disaster	external
+natural disaster	extraordinary
+san diego	large
+crab	fresh
+cloth	combustible
+cloth	organic
+cloth	ordinary
+cloth	porous or
+vitamin a	natural
+bracelet	small
+bracelet	personal
+eucalyptus	essential
+eucalyptus	exotic
+gear	mechanical
+dispersant	common
+graphite	carbonaceous
+graphite	solid
+dental	great
+seafood	perishable
+carbon fiber	composite
+carbon fiber	exotic
+metronidazole	topical
+substance abuse	social
+substance abuse	risky
+socio economic status	demographic
+document	personal
+document	unstructured
+document	physical
+document	secondary
+straw	organic
+straw	natural
+straw	combustible
+south korea	asian
+infosys	indian
+social class	social
+photography	visual
+glutathione	non enzymatic
+glutathione	endogenous
+greece	southern
+greece	european
+ciprofloxacin	oral
+beer	alcoholic
+beer	undistilled
+lizard	small
+thf	organic
+thf	aprotic
+thf	anhydrous
+bank of america	big
+bank of america	large
+bank of america	commercial
+bank of america	financial
+predation	biotic
+predation	biological
+predation	environmental
+predation	ecological
+dna	heterologous
+dna	biological
+dna	large
+dna	forensic
+dna	physical
+dna	natural
+chill	systemic
+chill	constitutional
+wallet	personal
+wallet	small
+wallet	valuable
+soy	common
+soy	natural
+microsoft word	common
+type 2 diabetes	potential several
+type 2 diabetes	pathological
+type 2 diabetes	medical and
+key	small
+key	personal
+key	sharp
+photograph	personal
+photograph	visual
+photograph	secondary
+imf	international
+imf	international financial
+imf	global
+imf	multilateral
+imf	financial
+wheelchair	durable medical
+wheelchair	medical
+wheelchair	adaptive
+wheelchair	durable
+wheelchair	assistive
+hamster	small
+plywood	combustible
+plywood	common
+exhibition	corporate
+biotechnology	high
+autism	neurodevelopmental
+autism	neurological
+autism	neuropsychiatric
+handbag	personal
+precipitation	climatic
+precipitation	environmental
+precipitation	abiotic
+precipitation	meteorological
+precipitation	conventional
+accessory	small
+medicare	federal
+medicare	social
+tremor	neurological
+tremor	physical
+tremor	potential
+window	architectural
+granite	natural
+granite	igneous
+granite	hard
+bloating	physical
+lg	popular
+lethargy	clinical
+flame retardant	optional
+wall	vertical
+wall	hard
+wall	flat
+wall	environmental
+wall	large
+wall	structural
+wall	architectural
+wall	physical
+wall	solid
+park	open
+park	green
+park	recreational
+park	local
+nigeria	african
+ipod	personal
+ipod	electronic
+ipod	portable
+ipod	personal electronic
+ipod	auxiliary
+ipod	valuable
+ipod	small
+ipod	external
+voltage	electrical
+heart failure	pathological
+heart failure	medical
+heart failure	serious
+heart failure	severe
+medium	social
+medium	secondary
+medium	
+medium	third
+avi	popular
+sorbitol	artificial
+delhi	indian
+toothpaste	personal
+toothbrush	personal
+timber	natural
+timber	traditional
+timber	renewable
+timber	ancillary
+euro	conventional
+jazz	musical
+doxycycline	oral
+mp4	popular
+codeine	weak
+codeine	narcotic
+conductivity	physicochemical
+conductivity	physical
+conductivity	electrical
+cellular phone	portable
+cellular phone	electronic
+cellular phone	portable electronic
+cellular phone	mobile electronic
+cellular phone	personal
+jute	natural
+x-rays	diagnostic
+tyrosine	aromatic
+neuron	excitable
+neuron	postmitotic
+neuron	electrically excitable
+neuron	electrically
+migration	cellular
+migration	demographic
+cable	electronic
+un	international
+un	multilateral
+un	global
+door	large
+door	original
+door	architectural
+door	functional and decorative
+door	auxiliary and supplementary
+door	physical
+au	noble
+generator	electrical
+generator	stationary
+generator	auxiliary
+generator	electric
+silicon nitride	ceramic
+cloud	natural
+flexibility	intrinsic
+flexibility	physical
+flexibility	mechanical
+flexibility	soft
+flexibility	personal
+forklift	heavy
+hot flash	physical
+physic	scientific
+physic	natural
+physic	hard
+physic	physical
+wi fi	modern
+injury	extraordinary
+injury	physical
+olanzapine	atypical
+olanzapine	antipsychotic
+poker	popular
+direction	meteorological
+wiki	social
+sexuality	sensitive
+sexuality	popular
+pastel	traditional
+map	visual
+map	geographic
+map	interactive
+value	cultural
+value	personal
+amnesty international	international
+amnesty international	non-governmental
+urbanization	global
+regulation	external
+regulation	institutional
+air conditioner	electrical
+air conditioner	large
+air conditioner	mechanical
+saliva	bodily
+saliva	biological
+organization	easily transferable
+organization	transferable
+organization	easily
+organization	complex
+e-mail address	personal
+e-mail address	personally identifiable
+reptile	small
+reptile	exotic
+movie	social
+movie	popular
+movie	large
+ambient temperature	environmental
+ambient temperature	meteorological
+bed	large
+bed	soft
+salary	administrative
+salary	operational
+home depot	large
+home depot	retail
+home depot	local
+polystyrene	thermoplastic
+polystyrene	synthetic
+polystyrene	amorphous
+antique	valuable
+chloramphenicol	oral
+chive	fresh
+polyurethane	thermoplastic
+polyurethane	synthetic
+polypyrrole	electrically conductive
+polypyrrole	electrically
+nicotine	addictive
+nitrate	nitrogenous
+nitrate	soluble
+azathioprine	immunosuppressive
+supplier	external
+supplier	third
+portuguese	european
+meeting	corporate
+harvard	prestigious
+toiletry	personal
+toiletry	basic
+neutrophil	phagocytic
+neutrophil	professional
+planning	transferable
+asphalt	hard
+asphalt	impervious
+browser type	technical
+refractive index	optical
+refractive index	physical
+refractive index	physicochemical
+liquid crystal display	flat
+giraffe	exotic
+accounting	professional
+accounting	functional
+accounting	administrative
+cytomegalovirus	viral
+cytomegalovirus	opportunistic
+backpack	personal
+backpack	large
+solubility	physical
+solubility	physicochemical
+solubility	functional
+solubility	physiochemical
+irritable bowel syndrome	medical
+irritable bowel syndrome	common
+social security	social
+social security	federal
+social security	personal
+social security	sensitive
+blackberry	small
+blackberry	fresh
+porosity	physical
+porosity	petrophysical
+porosity	structural
+porosity	microstructural
+elk	large
+elk	big
+unicef	international
+young child	vulnerable
+stability	physicochemical
+bird watching	recreational
+panasonic	japanese
+aristotle	great
+wine	local
+wine	alcoholic
+wine	pourable
+il 10	immunosuppressive
+histidine	basic
+barcelona	european
+barcelona	large
+filter	optical
+filter	consumable
+biscuit	sugary
+jacket	personal
+malaise	constitutional
+malaise	systemic
+almond	natural
+almond	healthy
+tractor	heavy
+tractor	agricultural
+ester	organic
+ester	functional
+wmv	popular
+osteoarthritis	medical
+osteoarthritis	pathological
+crane	heavy
+polycarbonate	thermoplastic
+polycarbonate	suitable
+polycarbonate	clear
+polycarbonate	synthetic
+salvation army	charitable
+nestle	multinational
+nestle	large
+carbon steel	ferrous non ferrous
+emirates	international
+bottle	recyclable
+development	international
+development	biological
+development	physiological
+development	international financial
+fresh fruit	healthy
+finland	northern
+alendronate	oral
+trade	economic
+fair	local
+sandwich	prepared
+leucine	essential
+lithium	combustible
+fuel	variable
+fuel	hazardous
+fuel	flammable
+nitrous oxide	atmospheric
+barclays	european
+collagen	structural
+collagen	fibrous
+collagen	natural
+collagen	biological
+hindi	indian
+cytokine	soluble
+cytokine	small
+bmi	continuous
+bmi	clinical
+bmi	potential
+acetic	weak
+acetic	organic
+outdoor pool	popular
+outdoor pool	recreational
+juice	clear
+juice	sugary
+scissor	sharp
+turkish	agglutinative
+author	basic
+training pant	disposable
+catheter	medical
+hallucination	psychotic
+hallucination	positive
+hallucination	neuropsychiatric
+hallucination	serious
+lobby	common
+educational level	demographic
+educational level	personal
+water skiing	recreational
+wells fargo	large
+wells fargo	big
+benadryl	oral
+benadryl	over-the-counter
+gravity	external
+mp3 player	portable
+mp3 player	electronic
+mp3 player	portable electronic
+mp3 player	auxiliary
+mp3 player	personal
+mp3 player	external
+bank account	financial
+bank account	personal
+bank account	sensitive
+parent	close
+parent	third
+coin	small
+coin	hard or sharp
+level of education	demographic
+radiation	conventional
+radiation	environmental
+radiation	external
+power	essential
+closet	small
+chip	traditional
+e mail	personal
+e mail	electronic
+swordfish	large
+turtle	aquatic
+head start	federal
+risperidone	atypical
+risperidone	antipsychotic
+eye	facial
+eye	physical
+eye	sensitive
+eye	biological
+grief	negative
+halogen	functional
+halogen	hydrolyzable
+face	sensitive
+gray	neutral
+linen	natural
+honey	natural
+honey	local
+market condition	external
+plier	basic
+seed	agricultural
+seed	natural
+seed	organic
+typhoon	natural
+fountain	structural
+alga	photosynthetic
+alga	seemingly diverse
+alga	aquatic
+sunflower	natural
+dust mask	personal
+coloring agent	pharmaceutical
+survey	traditional
+lamb	red
+parkinson s	neurological
+parkinson s	neurodegenerative
+biodiversity	environmental
+geographical location	demographic
+singapore	asian
+huntington s disease	neurodegenerative
+huntington s disease	neurological
+sale	functional
+person	vulnerable and valuable
+person	intangible
+left	spatial or directional
+toaster	small
+toaster	electrical
+bearing	wearable
+bearing	mechanical
+front	spatially relative
+front	spatially
+justice	moral
+justice	ethical
+vehicle	tangible
+vehicle	large
+skunk	small
+focus group	traditional
+carbon black	black
+carbon black	carbonaceous
+vegetation	environmental
+vegetation	natural
+portugal	southern
+portugal	european
+sugarcane	agricultural
+compassion	personal
+compassion	positive
+entertainment	personal
+cold	common
+cold	viral
+cold	environmental
+cold	medical
+cold	physical
+cold	upper
+cold	abiotic
+canola	healthy
+adhesive	suitable
+bathing	daily
+bathing	normal
+kefir	probiotic
+neck	sensitive
+migraine	medical
+migraine	common
+migraine	neurological
+sydney	large
+nutritional status	environmental
+storm	natural
+scanning electron microscopy	analytical
+nutrient	environmental
+cigarette smoking	environmental
+lobster	fresh
+world health organization	international
+fridge	electrical
+fridge	essential
+fridge	large
+pdf	popular
+glycosylation	post-translational
+freezer	large
+freezer	heavy
+freezer	electrical
+creativity	personal
+charcoal	traditional
+charcoal	solid
+formaldehyde	organic
+formaldehyde	volatile
+budgeting	administrative
+landslide	natural
+agitation	neuropsychiatric
+agitation	behavioral
+agitation	paradoxical
+hydroxyl	functional
+moody s	international
+moody s	private independent
+fig	fresh
+ireland	small open
+epoxy resin	organic
+epoxy resin	suitable
+cyclone	natural
+cyclone	natural environmental
+share	financial
+sun exposure	environmental
+sun exposure	external
+wrench	purpose small
+feta	soft
+dexamethasone	synthetic
+dexamethasone	cortic
+leopard	large
+leopard	big
+x rays	diagnostic
+mammal	complex
+doxorubicin	chemotherapeutic
+jealousy	negative
+jealousy	complex
+tensile	mechanical
+tensile	physical
+walker	medical
+walker	durable medical
+walker	adaptive
+walker	assistive
+walker	durable
+rivet	mechanical
+rivet	suitable
+fentanyl	synthetic
+herring	oily
+polyaniline	intrinsically conductive
+polyaniline	electrically conductive
+polyaniline	intrinsically
+polyaniline	electrically
+button	small
+button	graphical
+floor	hard
+floor	large
+floor	environmental
+floor	flat
+compost	organic
+lidocaine	local
+lidocaine	topical
+radiotherapy	conventional
+sunlight	environmental
+sunlight	external
+sunlight	natural
+sunlight	renewable
+water vapor	atmospheric
+fingerprint	physical
+fingerprint	forensic
+metabolism	cellular
+metabolism	physiological
+metabolism	biological
+laser	monochromatic
+laser	optical
+laser	optoelectronic
+laser	active
+epoxy	adhesive
+epoxy	suitable
+whale	large
+whale	aquatic
+guava	tropical
+software	intangible
+termite	social
+credit card	unsecured
+credit card	unsecured financial
+credit card	financial
+credit card	personal
+credit card	sensitive
+credit card	personal financial
+politics	controversial
+cream	topical
+cream	cosmetic
+cream	single
+texture	visual
+texture	physical
+paclitaxel	chemotherapeutic
+pond	natural
+pond	aquatic
+zebra	invasive
+curtain	flammable
+curtain	combustible
+curtain	soft
+pcr	diagnostic
+pcr	sensitive
+parade	local
+deed	legal
+niacin	healthy
+hawk	large
+hawk	natural
+mp3	popular
+solvent	hazardous
+solvent	flammable
+solvent	volatile
+solvent	common
+flexural strength	mechanical
+home	personal
+home	private
+home	industrial and institutional
+home	large
+international monetary fund	international financial
+international monetary fund	international
+dislocation	structural
+dislocation	serious
+coat	personal
+oil change	regular
+oil change	basic
+proton	subatomic
+proton	elementary
+entropy	thermodynamic
+aircraft	complex
+shea butter	natural
+volcanic eruption	natural
+volcanic eruption	geological
+volcanic eruption	catastrophic
+oxidative stress	environmental
+oxidative stress	cellular
+carbohydrate	essential
+carbohydrate	organic
+carbohydrate	biological
+flashlight	personal
+personal computer	electronic
+personal computer	external
+wipro	indian
+flax	natural
+ink	traditional
+ink	mixed
+growth	biological
+growth	cellular
+growth	physiological
+interest	ordinary and necessary
+interest	actual
+interest	demographic
+interest	personal
+interest	positive
+hypothyroidism	medical
+vinegar	weak
+vinegar	natural
+modem	peripheral
+modem	external
+methylene chloride	organic
+hypotension	severe
+respirator	personal
+sepsis	severe
+sepsis	serious
+sepsis	pathological
+sepsis	systemic
+salad	healthy
+tumor size	prognostic
+tumor size	clinical
+tumor size	traditional
+tumor size	clinicopathological
+family member	third
+family member	informal
+chest x ray	diagnostic
+camembert	soft
+glutathione peroxidase	enzymatic
+light emitting diode	optoelectronic
+holiday	busy
+mobile	electronic
+indomethacin	traditional
+wax	volatile
+ionic strength	environmental
+soybean oil	edible
+soil moisture	environmental
+soil moisture	abiotic
+emotion	psychological
+buffalo	domestic
+buffalo	large
+mpg	popular
+food availability	environmental
+philippines	asian
+propane	gaseous
+propane	flammable
+propane	natural
+bench	pedestrian
+skype	popular
+pager	portable
+pager	electronic
+pager	portable electronic
+pager	personal
+account number	sensitive
+account number	personal
+account number	sensitive personal
+account number	private
+herb	natural
+aggression	social
+aggression	neuropsychiatric
+aggression	behavioral
+aggression	behavioural
+triethylamine	organic
+triethylamine	tertiary
+triethylamine	aliphatic
+elevation	environmental
+tcp	reliable
+contact detail	personal
+contact detail	basic
+fiber	essential
+fiber	dietary
+fiber	physical
+fiber	
+homelessness	social
+moisture content	environmental
+moisture content	physicochemical
+moisture content	physical
+breakfast	nice
+flavonoid	natural
+flavonoid	phytochemical
+flavonoid	secondary
+sunglasse	personal
+depreciation	actual
+depreciation	non-cash
+unesco	international
+cilantro	fresh
+cilantro	annual
+herbicide	agricultural
+herbicide	environmental
+trademark	intangible
+relative humidity	environmental
+relative humidity	meteorological
+relative humidity	abiotic
+relative humidity	climatic
+coconut	natural
+coconut	tropical
+physiotherapy	conservative
+birch	deciduous
+finite element method	numerical
+snow	severe
+snow	poor
+snow	environmental
+bottom	spatially relative
+bottom	spatially
+nitric acid	strong
+citric	organic
+apron	personal
+duty	ancillary
+will	legal
+will	original
+calendar	promotional
+vob	popular
+google analytics	analytic
+google analytics	free
+naloxone	narcotic
+asbestos	hazardous
+asbestos	fibrous
+tryptophan	aromatic
+tryptophan	essential
+welding	secondary
+welding	industrial
+welding	suitable
+dvds	physical
+dvds	removable
+dvds	optical
+perfume	optional
+perfume	strong
+aloe vera	natural
+aloe vera	active
+information technology	industrial
+table tennis	good
+print	traditional
+contact time	operational
+birth date	personal
+birth date	demographic
+phenylalanine	aromatic
+phenylalanine	essential
+coconut oil	natural
+coconut oil	tropical
+coconut oil	healthy
+endometriosis	medical
+endometriosis	hormone-sensitive
+outlook	
+grease	aggressive
+grease	viscous
+grease	tough
+belief	cultural
+belief	psychological
+wind power	renewable
+wind power	green
+sleep apnea	medical
+hypoxia	environmental
+hypoxia	pathological
+hypoxia	pathophysiological
+hypoxia	cellular
+advertising	promotional
+advertising	creative
+backhoe	heavy
+website	secondary
+parity	potential
+capsule	oral
+capsule	solid
+capsule	preferred oral
+mask	personal
+polyimide	organic
+clindamycin	topical
+sawdust	combustible
+sawdust	organic
+finnish	agglutinative
+thermal conductivity	physical
+thermal conductivity	thermophysical
+thermal conductivity	thermo physical
+citigroup	large
+citigroup	big
+citigroup	commercial
+citigroup	financial
+goodwill	intangible
+goodwill	non financial
+water heater	large
+forbes	national
+cut	basic
+amyotrophic lateral sclerosis	neurodegenerative
+amyotrophic lateral sclerosis	pathological
+sodium hydroxide	strong
+partnership	legal
+partnership	unincorporated domestic
+partnership	separate legal
+partnership	separate
+velocity	physical
+playground	recreational
+playground	common
+air france	international
+chickadee	small
+cellular telephone	portable
+cellular telephone	electronic
+cellular telephone	portable electronic
+cellular telephone	mobile electronic
+tofu	high
+tofu	so
+cellulase	hydrolytic
+alumina	ceramic
+user name	personal
+user name	sensitive
+soil condition	environmental
+cerebral palsy	neurological
+cerebral palsy	medical
+boxes	unstable
+seal	aquatic
+shower	basic
+diary	personal
+nasa	federal
+carbon nanotube	carbonaceous
+acetylation	post-translational
+acetylation	epigenetic
+bicycle	large
+positron emission tomography	functional
+positron emission tomography	nuclear
+mug	promotional
+leg	large
+contact	personal
+elastic modulus	mechanical
+elastic modulus	physical
+democracy	british
+isopropyl alcohol	organic
+boat	recreational
+boat	large
+boat	unpractical
+geology	environmental
+geology	natural
+geology	scientific
+cyclophosphamide	immunosuppressive
+cyclophosphamide	chemotherapeutic
+chitosan	natural
+investor	external
+thermal stability	physical
+dentist	medical
+back pain	physical
+semiconductor	electronic
+cheddar	hard
+cheddar	natural
+sensor	electronic
+sensor	electrical
+sensor	potential
+animal	eukaryotic
+animal	natural
+lens	optical
+adobe photoshop	graphic
+moss	non vascular
+moss	nonvascular
+moss	small
+florence	italian
+milan	italian
+soap	cosmetic
+soap	personal
+soap	open
+self esteem	psychological
+measle	live
+measle	viral
+measle	infectious
+parking lot	open
+parking lot	common
+parking lot	impervious
+parking lot	ancillary
+thickness	physical
+thickness	structural
+artwork	breakable or
+scalability	non functional
+anti oxidant	optional
+employment status	demographic
+lufthansa	european
+lufthansa	international
+canon	japanese
+heat wave	extreme climatic
+climatic condition	environmental
+linearity	analytical
+mov	popular
+tumor	medical
+tumor	pathological
+tumor	abnormal
+monitor	electronic
+monitor	peripheral
+monitor	external
+income level	demographic
+herpes simplex virus	viral
+soft drink	sugary
+flour	basic
+paper clip	small
+stent	implantable
+stent	medical
+stent	implantable medical
+wetting agent	conventional
+hair loss	common
+toshiba	japanese
+dust mite	airborne
+farming	economic
+testing	medical
+heart rate	physiological
+heart rate	bodily
+grade	prognostic
+recession	economic
+recession	external
+recession	unfavorable general economic
+lake	open
+lake	natural
+lake	physical
+lake	geographic
+lake	aquatic
+skeletal muscle	peripheral
+processor	electronic
+karate	japanese
+karate	traditional
+karate	
+wordpress	popular
+sweet	sugary
+power window	great
+transistor	active
+transistor	electronic
+transistor	electrical
+drawing	technical
+broken bone	serious
+broken bone	physical
+broken bone	severe
+limestone	natural
+limestone	sedimentary
+limestone	soluble
+limestone	industrial
+wetland	natural
+wetland	aquatic
+wetland	environmentally sensitive
+wetland	sensitive
+wetland	critical
+wetland	environmentally
+hedge fund	institutional
+hedge fund	leveraged
+hedge fund	financial
+negotiation	interpersonal
+negotiation	soft
+market	external
+fish oil	dietary
+fish oil	omega-3
+fish oil	essential
+gyroscope	inertial
+usa today	national
+tendon	soft
+tendon	fibrous
+tendon	biological
+tendon	superficial
+paper towel	fibrous
+paper towel	combustible
+paper towel	disposable
+dmf	organic
+dmf	aprotic
+dmf	anhydrous
+project management	professional
+project management	transferable
+production	industrial or commercial
+production	functional
+family size	demographic
+turbidity	physical
+turbidity	environmental
+copyright	legal
+copyright	intangible
+compressive strength	mechanical
+compressive strength	physical
+pride	positive
+pride	self conscious
+pride	complex
+geese	large
+geese	wild aquatic
+nissan	japanese
+high cholesterol	medical
+high cholesterol	traditional
+river	natural
+river	physical
+river	geographic
+river	geographical
+river	open
+river	aquatic
+xml	open
+biomass	renewable
+biomass	non-traditional
+bar	local
+bar	common
+white water rafting	adventurous
+congestive heart failure	medical
+ethylene	unsaturated
+titanium dioxide	white
+proliferation	cellular
+proliferation	biological
+hyperlipidemia	traditional
+nursing home	medical
+nursing home	industrial and
+nursing home	institutional
+folic acid	dietary
+museum	cultural
+enron	corporate
+enron	financial
+yield strength	mechanical
+dyslipidemia	traditional
+dyslipidemia	modifiable
+quiz	interactive
+arial	common
+arial	clear
+nose	facial
+nose	sensitive
+ischemia	pathological
+ischemia	pathophysiological
+glyphosate	systemic
+glyphosate	non selective
+glyphosate	nonselective
+inventory	tangible
+inventory	physical
+inventory	nonmonetary
+inventory	competitively sensitive
+audio	continuous
+audio	rich
+antibody	biological
+antibody	functional
+antibody	large
+seizure	neurological
+seizure	severe
+seizure	serious
+seizure	medical
+suvs	large
+bedroom	small
+bedroom	private
+college	educational
+college	eligible educational
+college	academic
+college	eligible
+loyalty	stable
+loyalty	traditional
+loyalty	moral
+equity	traditional
+equity	risky
+equity	financial
+shipbuilding	heavy
+venice	italian
+occupational therapist	allied
+peroxidase	oxidative
+satin	luxurious
+american cancer society	national
+liquidity	financial
+staple	mechanical
+water quality	environmental
+tea tree	essential
+phenytoin	aromatic
+willow	deciduous
+willow	native
+slate	natural
+slate	traditional
+slate	metamorphic
+bank statement	financial
+moose	large
+silicon carbide	ceramic
+courage	personal
+interferon	biological
+electrical conductivity	physical
+electrical conductivity	electrical
+electrical conductivity	physicochemical
+delusion	psychotic
+delusion	positive
+delusion	neuropsychiatric
+detergent	common
+earring	small
+owl	nocturnal
+living room	common
+beige	neutral
+journal	secondary
+sears	large
+parking	optional
+air temperature	environmental
+air temperature	meteorological
+air temperature	climatic
+ladybug	beneficial
+ladybug	natural
+gymnasium	recreational
+water activity	environmental
+activated carbon	carbonaceous
+activated carbon	porous
+charity	non-profit
+genetic algorithm	heuristic
+genetic algorithm	metaheuristic
+genetic algorithm	stochastic
+genetic algorithm	evolutionary
+genetic algorithm	global
+meningitis	serious
+meningitis	severe
+meningitis	invasive
+compressor	stationary
+compressor	auxiliary
+lean meat	healthy
+lean meat	protein-rich
+lean meat	high
+eagle	large
+taste	aesthetic
+saccharin	artificial
+accuracy	analytical
+ozone	atmospheric
+ozone	secondary
+ozone	environmental
+ozone	gaseous
+ozone	strong
+function	mathematical
+homosexuality	social
+homosexuality	controversial
+projector	audio visual
+rhododendron	invasive
+fence	physical
+architecture	professional
+eye protection	personal
+poland	eastern
+poland	central
+brush	personal
+brush	abrasive
+brush	combustible
+air pollution	environmental
+polyamide	thermoplastic
+polyamide	synthetic
+polyamide	organic
+snack	personal
+pcs	electronic
+mannitol	osmotic
+pseudomonas aeruginosa	opportunistic
+policy	external
+cystic fibrosis	medical
+cystic fibrosis	genetic
+speaker	peripheral
+chronic pain	medical
+mood	psychological
+muffin	prepared
+bench press	basic
+child care	closely related
+indoor pool	popular
+indoor pool	recreational
+older person	vulnerable
+carbon tetrachloride	organic
+radiation therapy	local
+radiation therapy	conventional
+buffer	conventional
+broken glass	sharp
+emphysema	medical
+free wi fi	popular
+precision	analytical
+precision	traditional
+laptop computer	portable
+laptop computer	electronic
+laptop computer	portable electronic
+antelope	large
+hydrogen sulfide	volatile
+company	legal
+montreal	large
+amine	organic
+amine	basic
+amine	functional
+mass	physical
+mass	extensive
+robotic	advanced
+alcohol use	environmental
+tacrolimus	topical
+tacrolimus	immunosuppressive
+fog	environmental
+fog	atmospheric
+pacemaker	implantable medical
+pacemaker	medical
+pacemaker	implantable
+pacemaker	prosthetic and orthotic
+pacemaker	electrical
+fuel cell	renewable
+fuel cell	electric
+fuel cell	electrochemical
+ice	extremely
+ice	hard
+lactic acid	organic
+citibank	international
+citibank	global
+ccj	negative
+ccj	undesirable
+ccj	poor
+ccj	terrible
+ccj	low
+ethane	gaseous
+ethane	natural
+green tea	natural
+green tea	powerful
+tent	temporary
+bangkok	asian
+san antonio	large
+powder	solid
+powder	abrasive
+high temperature	environmental
+high temperature	climatic
+high temperature	abiotic
+postal address	personally identifiable
+postal address	personal
+character	literary
+xrd	analytical
+finch	small
+sewer	municipal
+theater	cultural
+physical inactivity	modifiable
+physical inactivity	behavioral
+artist	creative
+pubmed	electronic
+newsletter	supplementary
+newsletter	fresh
+ion exchange	conventional
+nationality	demographic
+nationality	personal
+drinking	unhealthy
+drinking	risky
+desk	flat
+master card	international
+light intensity	environmental
+server	electronic
+wildfire	natural
+cork	natural
+clozapine	atypical
+clozapine	antipsychotic
+feldspar	industrial
+halibut	white
+madrid	large
+collaboration	soft
+apoptosis	cellular
+apoptosis	biological
+apoptosis	physiological
+insecticide	agricultural
+ketone	organic
+legal	professional
+work	social
+work	daily
+work	normal
+velvet	rich
+velvet	luxurious
+sparrow	small
+thickener	conventional
+mandarin	tonal
+drywall	porous
+drywall	combustible
+drywall	common
+dragonfly	large
+cantaloupe	fresh
+ventilation	environmental
+trypsin	proteolytic
+trypsin	pancreatic
+gelatin	natural
+gelatin	soft
+saxophone	musical
+mold	airborne
+mold	biological
+mold	environmental
+hydrochloric	strong
+moscow	large
+european union	international
+european union	regional
+transformer	electrical
+transformer	magnetic
+transformer	electronic
+valentine's day	popular
+genotype	viral
+veggie	healthy
+front end loader	heavy
+bipolar disorder	serious
+bipolar disorder	severe
+bipolar disorder	affective
+bipolar disorder	psychological
+bipolar disorder	neuropsychiatric
+bipolar disorder	medical
+chart	visual
+oxalic acid	organic
+connector	electronic
+connector	electrical
+euthanasia	moral
+clam	aquatic
+parmesan	hard
+geothermal	renewable
+omega 3	essential
+lease	legal
+amino	functional
+fishery	natural
+fishery	renewable
+fishery	economic
+word processing	basic
+adsorption	physical
+adsorption	conventional
+differentiation	fundamental
+differentiation	cellular
+differentiation	biological
+differentiation	physiological
+heart attack	serious
+heart attack	medical
+heart attack	critical
+article	secondary
+united way	charitable
+watching television	daily
+watching television	sedentary
+cnn	international
+cnn	national
+field	open
+hurricane katrina	natural
+hurricane katrina	catastrophic
+vibration	environmental
+vibration	physical
+sandstone	sedimentary
+sandstone	porous
+sandstone	natural
+carboxyl	functional
+sibling	close
+bead	small
+greenpeace	environmental
+trichloroethylene	organic
+facility	tangible
+3gp	popular
+surprise	basic
+flv	popular
+fibronectin	adhesive
+fashion	creative
+diners club	international
+judo	japanese
+judo	
+petroleum jelly	oil-based
+light bulb	consumable
+light bulb	expendable
+light bulb	great
+deck	hard
+tablet computer	portable
+tablet computer	electronic
+tablet computer	portable electronic
+tablet computer	mobile electronic
+dimethylformamide	organic
+dimethylformamide	aprotic
+threonine	essential
+accident	traumatic
+accident	unexpected
+tutoring	academic
+tank	military
+goldman sachs	global
+goldman sachs	financial
+vole	small
+reflexology	holistic
+molecular weight	physicochemical
+molecular weight	physical
+balcony	architectural
+saturation magnetization	magnetic
+physiotherapist	allied
+jakarta	big
+teeth whitening	cosmetic
+patience	personal
+liver disease	medical
+vietnamese	tonal
+jojoba	natural
+spider	beneficial
+spider	venomous
+spider	natural
+bicycling	physical
+bicycling	recreational
+diclofenac	traditional
+driver s license	valid
+driver s license	personal
+drink	personal
+tape	magnetic
+tape	removable
+jennifer lopez	famous
+carotenoid	dietary
+carotenoid	natural
+mortgage	legal
+mortgage	financial
+mortgage	regular
+pop	musical
+fbi	federal
+cornice	architectural
+cornice	original
+fax	personal
+lactic	organic
+racquetball	competitive
+sensitivity	analytical
+life expectancy	social
+gmail	free
+restlessness	physical
+common cold	viral
+common cold	upper
+office	commercial
+office	commercial and public
+office	large
+office	commercial and
+fao	international
+bruise	physical
+modulus	mechanical
+modulus	physical
+food security	global
+methyl ethyl ketone	organic
+evolution	scientific
+zirconium	combustible
+glucosamine	dietary
+glucosamine	nutritional
+chimpanzee	great
+clock	electronic
+appearance	aesthetic
+nmr	analytical
+nmr	biophysical
+clustering	technical
+munich	european
+bulk density	physical
+astronomy	scientific
+flyer	promotional
+uranium	heavy
+uranium	nuclear
+uranium	natural
+cholesterol	traditional
+cholesterol	biochemical
+human immunodeficiency virus	viral
+uniform	personal
+hypercholesterolemia	traditional
+diode	electronic
+diode	electrical
+diode	external
+diode	active
+dinner	social
+neomycin	topical
+dialogue	narrative
+fan	auxiliary
+fan	mechanical
+fan	electrical
+self efficacy	psychological
+self efficacy	personal
+low self esteem	psychological
+child support	untaxed
+sulfur dioxide	gaseous
+kerosene	organic
+kerosene	flammable
+kerosene	combustible
+neon	noble
+stork	long necked
+merck	pharmaceutical
+potassium hydroxide	strong
+high cost	economic
+wind direction	meteorological
+exchange rate	macroeconomic
+exchange rate	external
+exchange rate	economic
+quetiapine	atypical
+notebook computer	portable
+notebook computer	electronic
+notebook computer	portable electronic
+xylitol	natural
+xylitol	artificial
+overcrowding	environmental
+guangzhou	large
+guangzhou	big
+line	graphic
+line	graphical
+line	geometrical
+ash	deciduous
+analysis	transferable
+growth factor	soluble
+liposuction	surgical
+liposuction	cosmetic
+jpeg	graphic
+jpeg	popular
+jpeg	common
+fireplace	original
+fireplace	architectural
+swap	financial
+swap	derivative
+swap	derivative financial
+freight	ancillary
+dextran	natural
+renal failure	severe
+renal failure	medical
+blindness	serious
+blindness	physical
+lsh	external
+sculpture	visual
+child labor	social
+payroll	administrative
+payroll	financial
+customer name	personally identifiable
+customer name	competitively sensitive
+atherosclerosis	pathological
+interest rate swap	derivative financial
+interest rate swap	derivative
+interest rate swap	financial
+plagiarism	academic
+spring	elastic
+aerobic	physical
+water sport	recreational
+tocopherol	natural
+monocyte	phagocytic
+monocyte	hematopoietic
+ipods	electronic
+ipods	valuable
+disgust	negative
+disgust	basic
+costco	large
+principal component analysis	statistical
+principal component analysis	unsupervised
+airport	large
+boot	personal
+remote sensing	advanced
+remote sensing	modern
+electrocardiogram	diagnostic
+gout	medical
+width	physical
+government agency	large
+best buy	electronic
+brightness	optical
+arrhythmia	serious
+barrel	open
+barrel	unstable
+robbery	serious
+machinery	tangible
+machinery	physical
+white rice	white
+pyridine	organic
+pyridine	tertiary
+permeability	physical
+permeability	petrophysical
+bison	large
+watching tv	sedentary
+clarinet	musical
+emulsifier	common
+emulsifier	optional
+emulsifier	pharmaceutical
+american heart association	national
+hitachi	japanese
+alcoholism	social
+alcoholism	dramatic
+usaid	bilateral
+usaid	international
+standard poor s	independent
+standard poor s	private independent
+answering phone	administrative
+answering phone	secretarial
+radar	active
+drug abuse	social
+gay marriage	social
+worm	small
+worm	live
+worm	natural
+place	geographic
+industrial	cyclical
+informed consent	ethical
+grain size	structural
+grain size	microstructural
+thai	tonal
+thai	asian
+tarragon	fresh
+hepatitis b	viral
+undp	international
+kidney disease	medical
+pregnant woman	vulnerable
+notebook	personal
+notebook	electronic
+notebook	portable
+notebook	portable electronic
+minimum	statistical
+mass spectrometry	analytical
+transmission	mechanical
+transmission	large
+stiffness	mechanical
+stiffness	physical
+melting point	physical
+melting point	physicochemical
+empathy	social
+empathy	interpersonal
+empathy	soft
+empathy	personal
+empathy	strong
+isoleucine	essential
+retrovirus	viral
+grocery store	small
+grocery store	local
+mexico city	large
+cisplatin	chemotherapeutic
+cyclosporine	immunosuppressive
+phenol	aromatic
+phenol	organic
+literacy	basic
+literacy	social
+transmission electron microscopy	analytical
+diameter	physical
+adam smith	classical
+investment	macroeconomic
+investment	financial
+brisk walking	physical
+brisk walking	regular
+electroporation	mechanical
+electroporation	physical
+intellectual property	intangible
+youth	vulnerable
+fur	expensive
+tylenol	over-the-counter
+ruthenium	noble
+microinjection	mechanical
+microinjection	physical
+nutrient availability	environmental
+picnic	social
+alcoholics anonymous	12-step
+audi	european
+phosphoric acid	strong
+team work	transferable
+team work	soft
+breast cancer	solid
+breast cancer	epithelial
+breast cancer	hormone-sensitive
+breast cancer	medical
+sierra club	environmental
+hunger	global
+hunger	basic
+hunger	physiological
+aspect	environmental
+umbrella	personal
+antimony	heavy
+evaporation	physical
+evaporation	natural
+snail	small
+feather	natural
+amide	functional
+copying	basic
+copying	administrative
+optical disk	optional
+optical disk	removable
+rhodium	noble
+rhodium	precious
+novartis	pharmaceutical
+needle	sharp
+needle	diabetic
+enzyme	functional
+enzyme	biological
+data entry	administrative
+marriage certificate	legal
+hcl	strong
+peptide	biological
+peptide	small
+peptide	large
+nuclear magnetic resonance	analytical
+textbook	instructional
+textbook	secondary
+match	dangerous
+methylation	epigenetic
+protective in transit insurance	ancillary
+illustrator	graphic
+african americans	ethnic
+cigarette smoke	environmental
+family income	demographic
+bike	large
+fax number	basic
+fax number	personal
+overall	suitable
+wood chip	organic
+wood chip	lignocellulosic
+grazing	agricultural
+grazing	biotic
+elisa	immunological
+elisa	serological
+collard	cruciferous
+collard	green
+human resource	administrative
+human resource	corporate
+comb	personal
+comb	loose or sharp
+paint thinner	volatile
+paint thinner	organic
+dispersing agent	optional
+commodity	real
+ductility	mechanical
+pottery	traditional
+nucleus	cellular
+environmental protection agency	federal
+environmental protection agency	regulatory
+copenhagen	european
+barium	heavy
+captopril	synthetic
+firewall	essential
+firewall	conventional
+urinary tract infection	common
+urinary tract infection	medical
+disabled	vulnerable
+butane	gaseous
+butane	aliphatic
+butane	natural
+butane	flammable
+ache	physical
+stick	natural
+government policy	external
+bankruptcy	poor
+bankruptcy	negative
+bankruptcy	undesirable
+bankruptcy	terrible
+bankruptcy	financial
+string	basic
+hungary	eastern
+hungary	central
+pseudoephedrine	oral
+popcorn	hard
+popcorn	healthy
+aids	social
+aids	medical
+inductor	external
+inductor	electrical
+inductor	electronic
+inductor	magnetic
+internet access	modern
+couch	large
+sit up	abdominal
+sit up	traditional
+zeolite	porous
+zeolite	microporous
+zeolite	nanoporous
+zeolite	heterogeneous
+nucleic acid	biological
+nucleic acid	large
+monster.com	free
+family reunion	large
+citrate	organic
+human rights watch	international
+state	social
+state	basic
+state	
+formic acid	organic
+formic acid	weak
+dvd player	electronic
+dvd player	external
+dvd player	modern
+melanoma	solid
+graph	visual
+graph	mathematical
+hare	small
+liquid	hazardous
+prednisolone	oral
+prednisolone	cortic
+friction	mechanical
+friction	physical
+morphology	physical
+morphology	physicochemical
+sucralose	artificial
+polyvinyl alcohol	synthetic
+polyvinyl alcohol	water-soluble
+polyvinyl alcohol	organic
+fly ash	supplementary cementitious
+fly ash	cementitious
+fly ash	supplementary
+pamphlet	educational
+deutsche bank	global
+deutsche bank	european
+deutsche bank	large
+sleep	basic
+glass fiber	fibrous
+glass fiber	porous
+balance sheet	financial
+cyclic voltammetry	electrochemical
+cyclic voltammetry	transient electrochemical
+wma	popular
+divx	popular
+warehousing	logistic
+worry	negative
+worry	psychological
+pin	sharp
+pin	small
+bike riding	physical
+docetaxel	chemotherapeutic
+resentment	negative
+wav	popular
+jean	casual
+surface area	physical
+surface area	textural
+surface area	physicochemical
+hallway	common
+nectarine	seasonal
+drug use	risky
+immunohistochemistry	ancillary
+drilling	secondary
+grinder	abrasive
+fracture toughness	mechanical
+diamond	natural
+diamond	precious
+diamond	hard
+freedom of speech	civil and political
+ad	neurodegenerative
+writing	basic
+poplar	deciduous
+cross country	athletic
+rna	biological
+syrup	oral
+low income	socioeconomic
+methotrexate	immunosuppressive
+methotrexate	chemotherapeutic
+methotrexate	systemic
+beech	deciduous
+enalapril	synthetic
+solar cell	optoelectronic
+county	geographic
+county	local
+mortality	clinical
+mortality	demographic
+cardiologist	medical
+guardian	new
+specification	technical
+song	cultural
+hair dryer	electrical
+hair dryer	small
+hair dryer	small electrical
+microprocessor	electronic
+bevacizumab	biological
+physiology	basic
+grass clipping	organic
+grass clipping	green
+lamp	small
+lamp	electrical
+deodorant	personal
+debt	negative
+debt	undesirable
+debt	terrible
+debt	poor
+debt	low
+customer service	soft
+botox	cosmetic
+botox	non surgical
+botox	injectable
+botox	minimally invasive
+greed	negative
+resveratrol	dietary
+resveratrol	natural
+viral infection	environmental
+viral infection	pathological
+pharmacy	ancillary
+ligament	soft
+ligament	fibrous
+thyroid disease	medical
+specific gravity	physical
+dioxin	environmental
+embarrassment	negative
+triton x 100	nonionic
+educational attainment	socioeconomic
+microdermabrasion	cosmetic
+stripe	classic
+bok choy	cruciferous
+banquet	central
+bereavement	exceptional
+eye color	physical
+post office	local
+water bottle	personal
+zambia	southern
+hate	negative
+endoplasmic reticulum	cellular
+cheating	academic
+first	ordinal
+gel	topical
+gel	common topical
+gel	soft
+gel	common
+irrigation	agricultural
+irrigation	cultural
+irrigation	agronomic
+irrigation	intercultural
+medical care	non monetary
+prayer	spiritual
+prayer	religious
+flavor	optional
+thinner	strong
+thinner	organic
+thinner	volatile
+metaphor	literary
+metaphor	poetic
+metaphor	rhetorical
+chronic obstructive pulmonary disease	medical
+diagram	visual
+diagram	external
+solenoid	inductive
+cafe	local
+biopsy	invasive
+biopsy	interventional
+biopsy	diagnostic
+anti inflammatory	biological
+anti inflammatory	pharmacological
+polychlorinated biphenyl	environmental
+times new roman	common
+movie night	social
+leukemia	medical
+leukemia	hematological
+pulmonary embolism	serious
+whole grain bread	whole
+lattice constant	structural
+pet dander	airborne
+ct scan	diagnostic
+excitement	positive
+excitement	strong
+excitement	psychological
+sedentary lifestyle	environmental
+wind	environmental
+wind	renewable
+business card	promotional
+elm	deciduous
+microwave oven	small
+microwave oven	electrical
+microwave oven	electronic
+gypsum	industrial
+fertiliser	agricultural
+e-mail	personal
+crohn's disease	medical
+wind energy	renewable
+wind energy	non-traditional
+manure	organic
+bha	synthetic
+alginate	natural
+gene	biological
+steak	red
+trailer	recreational
+trailer	large
+insulation	porous
+fall	traumatic
+harp	musical
+bobcat	large
+bobcat	heavy
+descartes	historical
+glaxosmithkline	pharmaceutical
+pan	hot
+elastomer	conventional
+heater	electrical
+excavator	heavy
+cafeteria	common
+huawei	chinese
+sprint	large
+solar energy	renewable
+solar energy	non-traditional
+custom	cultural
+stage	prognostic
+stage	clinical
+iron ore	natural
+barn	agricultural
+number	basic
+sanitation	basic
+sanitation	essential
+sheet	large
+sheet	personal
+sheet	loose
+crop rotation	cultural
+crop rotation	agricultural
+crop rotation	agronomic
+skateboarding	recreational
+retirement	long-term
+mouth	facial
+solar power	renewable
+dietary habit	environmental
+same sex marriage	social
+acyclovir	antiviral
+cardiology	medical
+alcohol intake	environmental
+star	massive
+lip	sensitive
+lip	facial
+terrorist attack	catastrophic
+terrorist attack	unanticipated
+terrorist attack	unforeseen
+gambling	illegal
+gambling	addictive
+confidence	personal
+bbc	international
+iridium	noble
+hyaluronic acid	active
+hyaluronic acid	natural
+ultimate tensile strength	mechanical
+assembly	secondary
+pretzel	healthy
+pretzel	hard
+animation	advanced
+flooring	combustible
+creek	natural
+prostate	solid
+car repair	unexpected
+crutch	medical
+crutch	assistive
+acetaldehyde	aliphatic
+blood clot	serious
+png	popular
+eu	international
+eu	regional
+bandwidth	limited
+standard chartered	international
+integrated circuit	electronic
+integrated circuit	electrical
+sapphire	precious
+diffusion	physical
+xenon	noble
+denim	heavy
+full name	personal
+full name	personally identifiable
+grassland	open
+blood vessel	soft
+beam	structural
+cattail	aquatic
+motor home	recreational
+free energy	thermodynamic
+zinc oxide	white
+photoperiod	environmental
+photoperiod	abiotic
+bcl 2	antiapoptotic
+lifting	strenuous
+lifting	physical
+sulfuric	strong
+medline	electronic
+crunch	abdominal
+rooftop	impervious
+rooftop	unstable
+faxing	basic
+faxing	administrative
+alkyl	functional
+preference	demographic
+roof	impervious
+roof	impermeable
+water supply	basic
+water supply	essential
+pancreatitis	serious
+pectin	soluble
+hemoglobin	hematological
+strain	structural
+strain	physical
+strain	microstructural
+zimbabwe	southern
+pharmacist	medical
+encryption	cryptographic
+air quality	environmental
+restroom	common
+down syndrome	genetic
+poetry	literary
+pudding	soft
+hobby	personal
+laboratory	physical
+laboratory	ancillary
+laboratory	diagnostic
+diagnosis	clinical
+romania	eastern
+phone call	personal
+extreme temperature	environmental
+cottage cheese	soft
+tong	suitable
+fine	criminal
+retinal detachment	serious
+glycerin	active
+underwear	personal
+cooperation	social
+anchovy	small
+anchovy	oily
+lymphoma	hematological
+pentane	aliphatic
+pentane	aliphatic and aromatic
+flu	viral
+flu	common
+flu	upper
+video camera	electronic
+video camera	portable electronic
+video camera	portable
+neoprene	chemically
+zebra mussel	aquatic
+zebra mussel	invasive
+portable computer	portable
+portable computer	electronic
+portable computer	portable electronic
+credit risk	financial
+can	recyclable
+seoul	asian
+stockholm	european
+team building	soft
+toughness	mechanical
+toughness	excellent physical
+primate	social
+primate	large
+mitsubishi	japanese
+fluoroquinolone	antimicrobial
+solution	common topical
+solution	common
+alzheimer's disease	neurodegenerative
+alzheimer's disease	neurological
+car accident	traumatic
+woodland	natural
+gas station	local
+sas	statistical
+wiring	electrical
+sun	environmental
+sun	external
+sun	natural
+sun	renewable
+soil fertility	environmental
+multiplication	arithmetic
+tensile modulus	mechanical
+naoh	strong
+drug delivery	biomedical
+spatula	suitable
+young person	vulnerable
+government regulation	external
+second	ordinal
+bank account number	personal
+bank account number	sensitive
+bank account number	financial
+epithelial cell	structural
+uv stabilizer	conventional
+pedestrian	vulnerable
+atkins	popular
+heating	mechanical
+endowment	institutional
+bronchitis	medical
+colonoscopy	diagnostic
+helicopter	aerodynamic
+sewing	practical
+area	morphological
+photovoltaic	renewable
+deletion	genetic
+low temperature	external
+low temperature	environmental
+isolation	social
+hplc	analytical
+hplc	chromatographic
+respiratory depression	severe
+frankfurt	european
+hyperthyroidism	medical
+lymph node	secondary
+rhodamine	organic
+raman spectroscopy	analytical
+motion	legal
+elongation	mechanical
+elongation	physical
+tertiary amine	organic
+chase	large
+cheerleading	athletic
+emerald	precious
+jehovah s witnesses	religious
+malic acid	organic
+photosynthesis	biological
+photosynthesis	physiological
+linoleic acid	unsaturated
+linoleic acid	essential
+mechanical	physical
+chest	unpleasant
+applesauce	soft
+diabetic retinopathy	pathological
+krypton	noble
+plant height	agronomic
+plant height	morphological
+harassment	unacceptable
+breast augmentation	cosmetic
+breast augmentation	surgical
+alliteration	poetic
+alliteration	literary
+ferret	small
+ferret	exotic
+saving	financial
+sound wave	longitudinal
+lysozyme	hydrolytic
+atrial fibrillation	atrial
+subsidy	financial
+subsidy	economic
+mathematica	mathematical
+cd player	electronic
+cd player	external
+toxin	environmental
+volcano	natural
+twig	natural
+hatred	negative
+ostrich	exotic
+parkinson's disease	medical
+parkinson's disease	neurological
+parkinson's disease	neurodegenerative
+relay	electrical
+relay	electronic
+waste	environmental
+household size	demographic
+rayon	synthetic
+rayon	natural
+metformin	antidiabetic
+aluminum oxide	ceramic
+carnegie hall	prestigious
+accountancy	professional
+haloperidol	typical
+haloperidol	antipsychotic
+foreclosure	poor
+foreclosure	negative
+foreclosure	undesirable
+foreclosure	terrible
+foreclosure	low
+medical record	sensitive
+shelf	loose
+shelf	removable
+spinal cord injury	neurological
+spinal cord injury	catastrophic
+spinal cord injury	serious
+lactobacillus	probiotic
+ivory	natural
+blender	small
+thermal	physical
+arthralgia	systemic
+arthralgia	constitutional
+commission	initial direct
+aldehyde	volatile
+aldehyde	organic
+face detection	advanced
+solar radiation	environmental
+rhino	large
+stevia	natural
+trumpet	musical
+play	cultural
+play	basic
+chipmunk	small
+salicylic acid	active
+columbus	italian
+smoke	atmospheric
+smoke	environmental
+stones	natural
+aniline	aromatic
+toxoplasmosis	opportunistic
+american medical association	professional
+american medical association	medical
+eli lilly	pharmaceutical
+pca	statistical
+protozoon	seemingly diverse
+reverse osmosis	conventional
+username	personal
+username	sensitive
+vaseline	oil-based
+ethylene glycol	organic
+acceleration	physical
+petrol	flammable
+angioplasty	surgical
+force	physical
+cyclohexane	organic
+cyclohexane	non polar
+cyclohexane	aliphatic
+cyclohexane	aliphatic and aromatic
+graphic	visual
+wto	international
+kidney failure	serious
+kidney failure	medical
+coffee maker	small
+coffee maker	electrical
+stomach pain	physical
+xvid	popular
+bht	synthetic
+formic	organic
+medical check up	adequate medical
+hepatitis	viral
+hydrophobicity	physicochemical
+fragrance	optional
+pantiliner	disposable
+unhcr	international
+insolvency	poor
+insolvency	negative
+insolvency	terrible
+insolvency	undesirable
+shale	sedimentary
+live music	regular
+hearing aid	assistive
+hearing aid	medical
+leaflet	promotional
+employer	third
+pda	electronic
+pda	portable
+pda	portable electronic
+transcription	cellular
+transcription	biological
+transcription	nuclear
+driving	daily
+white tailed deer	large
+ear	sensitive
+ear	facial
+heated seat	great
+amplifier	active
+tension	psychological
+malic	organic
+bmp	popular
+bmp	graphic
+facelift	surgical
+facelift	facial
+current	environmental
+merger	corporate
+merger	identifiable
+merger	organizational
+zoledronic acid	intravenous
+retinopathy	diabetic
+isoflurane	volatile
+lipstick	cosmetic
+theft	serious
+theft	operational
+theft	illegal
+theft	criminal
+heart palpitation	physical
+affiliate marketing	supplementary
+affiliate marketing	fresh
+viewer feedback forum	supplementary
+viewer feedback forum	fresh
+blogging	supplementary
+blogging	fresh
+christmas party	social
+advil	over-the-counter
+shrew	small
+myocardial infarction	serious
+myocardial infarction	pathological
+myocardial infarction	clinical
+communication skill	soft
+communication skill	transferable
+swiss	hard
+arrear	poor
+arrear	undesirable
+arrear	negative
+arrear	terrible
+arrear	low
+urgency	urinary
+educational background	personal
+headphone	electrical
+deep vein thrombosis	serious
+health club	recreational
+outer	spatially
+outer	spatially relative
+inner	spatially
+inner	spatially relative
+inner	spatial or directional
+emotional stress	environmental
+nucleating agent	conventional
+carboxylic acid	functional
+stream	natural
+loneliness	negative
+dumbbell	free
+sorrow	negative
+sorrow	strong
+selection	genetic
+selection	evolutionary
+tea tree oil	natural
+tea tree oil	essential
+farmer	occupational
+warehouse	large
+warehouse	commercial
+warehouse	industrial
+rhinoceros	large
+honeybee	social
+honeybee	beneficial
+heat exchanger	auxiliary
+fruit juice	sugary
+fruit juice	pourable
+regulator	external
+imagery	literary
+imagery	poetic
+elongation at break	mechanical
+countertop	hard
+desktop	electronic
+desktop	personal
+impact strength	mechanical
+black bear	large
+water content	environmental
+water content	physical
+spray drying	conventional
+golf course	recreational
+liquidity risk	financial
+rage	negative
+mozzarella	soft
+tissue paper	flammable
+dielectric constant	electrical
+dielectric constant	physical
+wwf	environmental
+day care	essential
+simulated annealing	heuristic
+simulated annealing	stochastic
+simulated annealing	metaheuristic
+simulated annealing	global
+unemployment rate	economic
+porch	architectural
+imaging	ancillary
+brussel sprout	cruciferous
+stack	basic
+methylprednisolone	cortic
+fault	structural
+fault	geological
+creditor	third
+sit-ups	abdominal
+roche	pharmaceutical
+banner	promotional
+complete blood count	diagnostic
+director	senior
+disappointment	negative
+botswana	southern
+credit card information	sensitive
+credit card information	personal
+credit card information	personally identifiable
+actin	structural
+america online	commercial
+aac	popular
+garnet	semi precious
+pest	biotic
+adhesion	excellent physical
+adhesion	mechanical
+adhesion	physical
+adhesion	cellular
+dimethyl sulfoxide	organic
+ataxia	neurological
+short	comfortable
+short	casual
+contact number	personal
+regret	negative
+gdp	economic
+gdp	macroeconomic
+m4a	popular
+glass transition temperature	physical
+ideality factor	electronic
+mechanical strength	physical
+radiology	ancillary
+tissue	personal
+tissue	biological
+check	financial
+billing	administrative
+hope	positive
+bergamot	essential
+small sample size	methodological
+k mean	traditional
+display	electronic
+ridge	topographic
+ridge	natural
+sewerage	basic
+filtration	conventional
+carpeting	porous
+promoter	transcriptional and translational
+promoter	transcriptional
+promoter	transcriptional and translational regulatory
+promoter	regulatory
+promoter	transcriptional regulatory
+minnow	small
+minnow	live
+spss	statistical
+polysaccharide	natural
+polysaccharide	biological
+thumb sucking	oral
+chromatography	analytical
+column	structural
+column	architectural
+ship	large
+incontinence pad	disposable
+oxidation	biochemical
+chamber of commerce	local
+lab	ancillary
+implementation	professional
+google drive	popular
+acetylene	flammable
+maximum	statistical
+pepsin	proteolytic
+flac	popular
+endoscopy	medical
+endoscopy	diagnostic
+patio	hard
+patio	ancillary
+meal preparation	daily
+strontium	heavy
+budapest	european
+gsm	cellular
+last name	personal
+geranium	essential
+finite element	numerical
+disk drive	peripheral
+disk drive	magnetic and optical
+disk drive	electronic
+ceiling tile	porous
+african union	regional
+african union	international
+brother	close
+crm	advanced
+crm	large
+crm	big
+charge	physicochemical
+accelerometers	inertial
+surface tension	physical
+manual	technical
+sandalwood	essential
+monster com	free
+usb	serial
+tower	architectural
+body temperature	physiological
+hearing loss	serious
+rubella	viral
+heat shock	environmental
+heat shock	cellular
+catechin	dietary
+asf	popular
+queue	basic
+advertiser	unaffiliated
+speeding	risky
+serum	biological
+classical	musical
+nec	japanese
+monet	famous
+elasticity	mechanical
+elasticity	physical
+boiling point	physical
+tuition	educational
+mixer	small
+myalgia	systemic
+myalgia	constitutional
+autonomy	ethical
+sound	nice
+sound	external
+scheduling	administrative
+high	external
+grant	financial
+hydrocarbon	organic
+world trade organization	international
+erosion	natural
+erosion	geological
+erosion	physical
+frankincense	essential
+key chain	promotional
+mashed potato	soft
+bagel	prepared
+aloe	natural
+podcast	social
+bulgaria	eastern
+hearing protection	personal
+hay fever	seasonal
+tachycardia	systemic
+tachycardia	severe
+tachycardia	clinical
+accounts receivable	tangible
+accounts receivable	financial
+permethrin	synthetic
+tamil	indian
+tamil	dravidian
+recognition	intrinsic
+sound card	unnecessary
+broth	clear
+cola	sugary
+cola	soft
+waste management	environmental
+soil ph	environmental
+health insurance portability	federal
+haddock	white
+palm oil	tropical
+palm oil	agricultural
+fda	regulatory
+fda	federal
+plasma	biological
+postcard	promotional
+heptane	organic
+heptane	aliphatic
+hair	physical
+hair	biological
+vacuum cleaner	electrical
+vacuum cleaner	small
+loader	heavy
+safety goggle	personal
+telephone call	personal
+palm	tropical
+garden	common
+chemical peel	cosmetic
+chemical peel	surgical
+stereo	valuable
+stereo	electronic
+bill	private
+nato	international
+nato	regional
+leds	optoelectronic
+sputum	clinical
+floppy disk	portable
+floppy disk	removable
+floppy disk	magnetic
+md5	cryptographic
+md5	iterative
+absorption	optical
+absorption	pharmacokinetic
+photon	elementary
+limited liability company	unincorporated domestic
+sunroof	great
+taxi	commercial
+weight lifting	strenuous
+forest fire	natural
+endophthalmitis	serious
+envy	negative
+google scholar	academic
+ethernet	conventional
+ethernet	serial
+driver	closely related
+gasification	thermochemical
+european commission	international
+angry birds	popular
+hospital bed	durable medical
+hospital bed	medical
+hospital bed	durable
+czech republic	eastern
+czech republic	central
+dysuria	urinary
+ethnic minority	vulnerable
+page number	nonessential
+dining room	formal
+dining room	common
+mobile telephone	portable
+mobile telephone	electronic
+mobile telephone	portable electronic
+nitro	functional
+gay right	social
+tax credit	financial
+video game	interactive
+video game	sedentary
+total dissolved solid	physicochemical
+total dissolved solid	physical
+hydralazine	arterial
+high performance liquid chromatography	chromatographic
+high performance liquid chromatography	analytical
+sewage treatment	basic
+neuropathy	diabetic
+driveway	hard
+driveway	impervious
+cross	religious
+aikido	
+heat capacity	thermodynamic
+heat capacity	physical
+beeswax	natural
+urine testing	adequate medical
+balance	physical
+physical address	personal
+jainism	indian
+tariff	traditional
+polyethylene terephthalate	thermoplastic
+polyethylene terephthalate	aromatic
+hilton	international
+astrazeneca	pharmaceutical
+boredom	negative
+sun damage	common
+honey bee	social
+honey bee	beneficial
+street address	personal
+national science foundation	federal
+macrophages	phagocytic
+cable tv	modern
+bandage	medical
+allergic reaction	severe
+allergic reaction	serious
+amniocentesis	diagnostic
+amniocentesis	invasive
+getting married	positive
+symbolism	literary
+eclipse	modern
+mini bar	modern
+turquoise	soft
+finite difference	numerical
+credit	financial
+tax break	financial
+bebo	popular
+controller	electronic
+hay	combustible
+hay	organic
+condenser	auxiliary
+tillage	agricultural
+tillage	cultural
+tillage	agronomic
+preposition	functional
+high ceiling	original
+soil characteristic	environmental
+currant	small
+mountain	natural
+mountain	physical
+mountain	geographical
+mountain	geographic
+crustacean	aquatic
+gerbil	small
+splenda	artificial
+flash memory	non volatile
+flash memory	non-volatile
+niv	modern
+amethyst	semi precious
+amethyst	semi-precious
+contractor	third
+scheme	functional
+dermatology	adequate medical
+snowmobiling	recreational
+product launch	corporate
+syringe	diabetic
+syringe	medical
+lipid	biological
+lipid	organic
+lipid	cellular
+intravenous	parenteral
+coma	severe
+hyperactivity	behavioral
+social network	complex
+social network	social
+water availability	environmental
+water availability	abiotic
+desktop computer	electronic
+desktop computer	personal
+integer	basic
+hydrocortisone	topical
+hydrocortisone	cortic
+kettle	small
+kettle	electrical
+lactobacillus acidophilus	beneficial
+credit card detail	sensitive
+credit card detail	personal
+ftir	analytical
+sickle cell anemia	medical
+sickle cell anemia	genetic
+encephalitis	serious
+fluorescent lamp	conventional
+embase	electronic
+drug administration	regulatory
+drug administration	federal
+gum arabic	natural
+setting	literary
+casserole	perishable
+pine	coniferous
+nasturtium	edible
+chard	green
+neosporin	antibiotic
+clearance	pharmacokinetic
+consistency	asymptotic
+clinic	medical
+aspen	deciduous
+apathy	neuropsychiatric
+apathy	negative
+jojoba oil	natural
+bacterial vaginosis	vaginal
+poison ivy	poisonous
+factory	large
+factory	commercial
+factory	industrial
+legislation	external
+allergen	environmental
+stacking fault	structural
+carbide	hard
+loan	financial
+sweeping	basic
+camper	recreational
+bagging	ensemble
+bean sprout	fresh
+abrasion resistance	mechanical
+abrasion resistance	excellent physical
+haskell	functional
+estonia	eastern
+u2	great
+forceps	surgical
+backache	physical
+almond oil	natural
+injection	therapeutic
+injection	medical
+cluster analysis	statistical
+cluster analysis	unsupervised
+vaccine	unfinished
+sword	sharp
+water lily	aquatic
+lacewing	natural
+lacewing	beneficial
+specific heat	physical
+specific heat	thermophysical
+specific heat	thermodynamic
+hotmail	free
+hotmail	personal
+enhancer	regulatory
+mountain lion	large
+rsi	technical
+neurology	medical
+foundation	cosmetic
+foundation	legal
+bacitracin	topical
+bacitracin	antibiotic
+histone	nuclear
+hydropower	renewable
+hydro	renewable
+enzyme linked immunosorbent assay	immunological
+enzyme linked immunosorbent assay	serological
+neutron	neutral
+neutron	subatomic
+neutron	uncharged
+thunderbird	
+high fever	severe
+pelvic inflammatory disease	medical
+breast tenderness	physical
+swot analysis	efficient analytical
+demographic information	personal
+resistivity	electrical
+disk space	limited
+jaguar	big
+herpes simplex	viral
+copd	medical
+zircon	heavy
+estradiol	natural
+yellowstone	national
+dvd	electronic
+travertine	natural
+dimethylsulfoxide	organic
+chemical precipitation	conventional
+coagulation	conventional
+centers for disease control	federal
+symptom	clinical
+hedgehog	small
+water pollution	environmental
+sleeplessness	physical
+lowe s	local
+sedimentation	physical
+sandal	open
+ringworm	medical
+worldcom	corporate
+factor analysis	statistical
+urea	nitrogenous
+urea	small
+alternator	electrical
+essential oil	natural
+rvs	large
+pda s	electronic
+mycophenolate mofetil	immunosuppressive
+elevator	common
+insertion	basic
+cd rom	portable
+microsatellite	genetic
+microsatellite	polymorphic
+microsatellite	nuclear
+facial expression	nonverbal
+facial expression	visual
+facial expression	non-verbal
+baclofen	oral
+peer	environmental
+fluorescence	optical
+gas chromatography	chromatographic
+gas chromatography	analytical
+blower	electrical
+50 cent	popular
+chardonnay	white
+high humidity	environmental
+sports drink	sugary
+mp2	popular
+shaving	traditional
+intramuscular	parenteral
+gratitude	positive
+biochemistry	interdisciplinary
+biochemistry	scientific
+brain injury	catastrophic
+acquisition	corporate
+acquisition	organizational
+investment bank	financial
+muscle tension	physical
+yen	conventional
+rgb	additive
+chymotrypsin	proteolytic
+plot	literary
+disk	magnetic
+tide	environmental
+aeration	environmental
+mayfly	aquatic
+swine	domestic
+estate	legal
+dresser	large
+wind turbine	renewable
+sidewalk	impervious
+sidewalk	hard
+sidewalk	pedestrian
+flag	national
+dollar	traditional
+hispanics	ethnic
+performance status	prognostic
+new yorker	american
+granola bar	healthy
+rag	combustible
+rag	porous
+maple syrup	natural
+lab coat	personal
+cmv	viral
+fossil fuel	natural
+fossil fuel	nonrenewable
+cortisone	cortic
+water absorption	physical
+carbon sequestration	environmental
+erythema	local
+step	functional and decorative
+gemcitabine	chemotherapeutic
+numeracy	basic
+friendster	popular
+lemongras	aromatic
+oboe	musical
+papain	proteolytic
+ogg	popular
+equinox	popular
+circuit breaker	electrical
+microscope	optical
+water hyacinth	aquatic
+newspaper article	secondary
+newspaper article	authentic
+earth	natural
+polylactic acid	biodegradable
+polylactic acid	synthetic
+canary	small
+laser diode	optoelectronic
+knot	natural
+mutation	evolutionary
+mutation	genetic
+taxane	chemotherapeutic
+camcorder	electronic
+camcorder	portable electronic
+camcorder	portable
+skin color	physical
+election	political
+zirconia	ceramic
+result	educational
+major depression	affective
+major depression	serious
+rubber glove	personal
+rebate	financial
+participant observation	ethnographic
+financial debt	negative
+financial debt	poor
+financial debt	undesirable
+financial debt	terrible
+vincent van gogh	famous
+herpesviruses	large
+personal digital assistants	portable
+flash drive	external
+clary sage	essential
+taoism	eastern
+chinese new year	chinese
+colon	solid
+colon	illegal
+acrylic resin	organic
+respiration	biological
+respiration	physiological
+respiration	bodily
+cave	natural
+concussion	serious
+corridor	common
+number of child	demographic
+mormons	religious
+mormons	religiously conservative
+famine	natural
+biofuel	renewable
+publication	professional
+pleasure	positive
+triethanolamine	tertiary
+scanning	administrative
+bracket	architectural
+bracket	removable
+financial obligation	poor
+financial obligation	negative
+financial obligation	terrible
+financial obligation	undesirable
+starvation	environmental
+baking soda	natural
+pub	local
+personal loan	unsecured
+malay	austronesian
+male sex	traditional
+endocarditis	serious
+endocarditis	severe
+amphibole	hydrous
+domain name	statistical
+spinner	small
+site name	anonymous
+benzoyl peroxide	organic
+formula	competitively sensitive
+oncology	therapeutic
+heat resistance	notable
+variance	statistical
+wildlife	natural
+minocycline	oral
+canopy	architectural
+rhythm	musical
+barrier height	electronic
+passing	basic
+achievement	intrinsic
+poor	vulnerable
+slovenia	eastern
+measles	viral
+carbonyl	functional
+heavy lifting	strenuous
+chlorpromazine	typical
+chlorpromazine	antipsychotic
+jehovah's witnesses	religious
+theme	literary
+novel	literary
+novel	creative
+viral load	viral
+carrageenan	natural
+triglyceride	neutral
+moving average	technical
+photographer	creative
+branch	natural
+dent	cosmetic
+suspension	common topical
+suspension	disciplinary
+machining	secondary
+quiz night	social
+card game	recreational
+showering	daily
+showering	normal
+osaka	large
+selectivity	analytical
+regression analysis	statistical
+exposed beam	original
+propionic acid	organic
+cbt	psychological
+cognitive behavioral therapy	behavioral
+cognitive behavioral therapy	psychological
+hood	large
+google glass	wearable
+income statement	financial
+computer system	electronic
+bell	musical
+bell	audible
+breathing	bodily
+breathing	involuntary
+breathing	autonomic
+breathing	basic
+breathing	normal
+team working	transferable
+acid reflux	medical
+pearl	precious
+koh	strong
+protective clothing	personal
+face shield	personal
+roquefort	soft
+independence day	national
+thalamus	subcortical
+limit of detection	analytical
+hysterectomy	surgical
+eyelid surgery	cosmetic
+raw vegetable	nutritious
+molasses	natural
+namibia	southern
+department of defense	federal
+credit card debt	unsecured
+comforter	large
+wrinkle	common
+angiogenesis	biological
+angiogenesis	cellular
+natural rubber	natural
+nitrile	chemically
+sikhism	indian
+safety shoe	personal
+propionic	organic
+propyl gallate	synthetic
+telescope	optical
+head injury	serious
+head injury	environmental
+fumaric acid	organic
+macd	technical
+silica fume	supplementary cementitious
+conference room	common
+cochlear implant	prosthetic and orthotic
+family photo	personal
+caching	disable
+artifact	secondary
+motor oil	hazardous
+asean	regional
+brace	assistive
+chlorophyll	photosynthetic
+gastrointestinal tract	visceral
+peat moss	organic
+mulching	cultural
+dimethyl formamide	organic
+noun	grammatical
+compact disc	removable
+toaster oven	small
+aripiprazole	atypical
+muslims	religious
+flag football	intramural
+spelling	basic
+biogas	renewable
+snowmobile	recreational
+skewness	statistical
+cabernet sauvignon	international
+cabernet sauvignon	red
+poor lighting	environmental
+omega-3	essential
+prism	optical
+billboard	traditional
+legal service	professional
+industrialization	economic
+surface charge	physicochemical
+laundry room	common
+laundry room	small
+modulus of elasticity	mechanical
+copy	basic
+magnet	promotional
+sevoflurane	volatile
+sharing	social
+rivaroxaban	oral
+rivaroxaban	novel oral
+eyebrow	facial
+vinblastine	chemotherapeutic
+gorilla	great
+tretinoin	topical
+jpg	popular
+contentment	positive
+first name	personal
+osce	international
+hurricane sandy	natural
+crystallinity	physicochemical
+crystallinity	physical
+defibrillator	implantable
+defibrillator	implantable medical
+defibrillator	medical
+chickenpox	viral
+digestion	bodily
+bay window	architectural
+compuserve	commercial
+parakeet	small
+total protein	biochemical
+anthrax	biological
+coffee mug	promotional
+unep	international
+environmental concern	geopolitical
+nocturia	urinary
+duckweed	aquatic
+merlot	international
+merlot	red
+oscilloscope	electronic
+yield	complex
+yield	agronomic
+impotence	sexual
+cardiac pacemaker	implantable medical
+cardiac pacemaker	implantable
+securities	regulatory
+internet explorer 9	modern
+attic	uninhabited
+government department	large
+bed frame	large
+gluten	common
+division	arithmetic
+high wind	climatic
+booklet	educational
+fertilization	cultural
+fertilization	agricultural
+fertilization	agronomic
+basalt	igneous
+internet explorer 8	modern
+coke	soft
+slovakia	eastern
+slovakia	central
+mascara	cosmetic
+national park service	federal
+raccoons cat	extremely
+barbell	free
+alkoxy	hydrolyzable
+alkoxy	functional
+nitroglycerin	organic
+barbecue	social
+refinery	industrial
+ray ban	popular
+mustard green	cruciferous
+initiative	personal
+cognitive behavioural therapy	psychological
+hydroxy	functional
+dna damage	cellular
+ointment	common
+aldi	hard
+explosive	hazardous
+explosive	energetic
+meadow	sensitive
+meadow	open
+pause	basic
+powers of attorney	legal
+castor oil	natural
+vapor pressure	physical
+peat	organic
+respiratory rate	physiological
+gene therapy	therapeutic
+stevens johnson syndrome	serious
+stevens johnson syndrome	severe
+propofol	anesthetic
+propofol	intravenous
+flash point	physical
+tear	external
+solar panel	renewable
+sin	mathematical
+lint	large
+bureau of land management	federal
+citronella	essential
+office building	commercial
+native americans	ethnic
+asians	ethnic
+brine shrimp	live
+third	ordinal
+global climate change	environmental
+centrifugation	conventional
+auditorium	large
+dry cleaner	small
+heart problem	medical
+media player	portable
+media player	electronic
+media player	portable electronic
+jetty	artificial
+forest service	federal
+vincristine	chemotherapeutic
+vincristine	antineoplastic
+upper lip	small
+upper lip	sensitive
+molybdenum disulfide	solid
+reuters	international
+american academy of pediatrics	professional
+tape drive	peripheral
+electroplating	industrial
+genetic drift	evolutionary
+oil paint	traditional
+hair color	physical
+variable	basic
+underarm	sensitive
+underarm	small
+federal bureau of investigation	federal
+account	personal
+account	sensitive
+account	financial
+g csf	hematopoietic
+siren	external
+katrina	natural
+power of attorney	legal
+collard green	cruciferous
+collard green	green
+ferrari	exotic
+ru	noble
+rmvb	popular
+curcumin	dietary
+curcumin	natural
+crystallite size	structural
+crystallite size	microstructural
+designer	creative
+stents	implantable
+stents	medical
+stents	implantable medical
+polygamy	traditional
+delinquency	terrible
+netbook	electronic
+chemical oxygen demand	physicochemical
+urban development	federal
+hydroxyl group	functional
+poisson s ratio	mechanical
+dabigatran	oral
+dabigatran	novel oral
+optical	physical
+lightning	severe
+lightning	natural
+lightning	easily recognizable
+acid rain	environmental
+driving a car	normal
+low birth weight	environmental
+liberty	basic
+pavement	impervious
+pavement	hard
+lung cancer	solid
+japanese knotweed	invasive
+ziprasidone	atypical
+correlation	statistical
+correlation	inferential
+female genital mutilation	harmful traditional
+female genital mutilation	cultural
+female genital mutilation	traditional
+oxygen concentration	environmental
+soil erosion	environmental
+wound healing	biological
+wound healing	physiological
+wound healing	pathological
+asian development bank	international
+lancet	medical
+mullet	live
+smith	classical
+indonesian	austronesian
+granule	solid
+department of health	federal
+derivative	financial
+dyspepsia	upper
+bunion	common
+abrasion	superficial
+deafness	physical
+hydrogen bond	weak
+diffusion coefficient	kinetic
+vitamin k	healthy
+billing address	personal
+nephropathy	diabetic
+siamese	oriental
+pruning	cultural
+sodium hydride	strong
+endoscope	medical
+gingivitis	oral
+aorta	large
+cellphone	electronic
+satellite tv	modern
+heated pool	popular
+satisfaction	positive
+halide	functional
+aluminum nitride	ceramic
+purple loosestrife	invasive
+psychiatry	medical
+cyanobacteria	oxygenic
+cyanobacteria	photosynthetic
+chiropractor	medical
+lounge	common
+orkut	popular
+power plant	stationary
+chlorobenzene	aromatic
+sewage	basic
+product manager	closely related
+calendula	edible
+ground squirrel	small
+gully	natural
+television set	electronic
+ac3	popular
+juniper	essential
+serious illness	exceptional
+serious illness	extraordinary
+wordsworth	romantic
+urinalysis	diagnostic
+mold spore	airborne
+gneiss	metamorphic
+hemophilia	genetic
+electrochemical impedance spectroscopy	electrochemical
+wsdl	open
+hematocrit	hematological
+thorium	heavy
+switchgras	native
+halothane	volatile
+auto attendant	advanced
+load balancing	advanced
+low grade fever	constitutional
+liquefied petroleum gas	gaseous
+social security administration	federal
+briefcase	personal
+well	private
+well	physical
+apixaban	oral
+apixaban	novel oral
+baptists	religious
+gross domestic product	economic
+gross domestic product	macroeconomic
+ketones	organic
+osteomyelitis	serious
+pla	biodegradable
+hdfc bank	private
+ethylbenzene	aromatic
+ethylbenzene	monoaromatic
+watercress	cruciferous
+department of energy	federal
+ky jelly	water-based
+cypermethrin	synthetic
+acrolein	unsaturated
+hypoglycemia	medical
+drug addiction	social
+mkv	popular
+cashmere	luxurious
+polyacrylamide	synthetic
+cellulose acetate	porous
+denture	personal
+sha 1	cryptographic
+sha 1	iterative
+ricotta	soft
+ricotta	fresh
+intron	regulatory
+mistletoe	parasitic
+resistance	electrical
+organization for economic cooperation	international
+jackfruit	tropical
+lychee	tropical
+ceramic tile	hard
+bending strength	mechanical
+sulphuric acid	strong
+24 hour fitness center	recreational
+transcription factor	regulatory
+department of transportation	federal
+amoeba	unicellular
+despair	negative
+injunction	equitable
+deltamethrin	synthetic
+elastin	structural
+elastin	fibrous
+tissue engineering	biomedical
+motion detection	advanced
+social withdrawal	negative
+amputation	serious
+pyrolysis	thermochemical
+traumatic brain injury	serious
+traumatic brain injury	neurological
+mineral streak	natural
+real estate foreclosure	negative
+real estate foreclosure	undesirable
+real estate foreclosure	poor
+real estate foreclosure	terrible
+teenage pregnancy	economic and social
+feminism	social
+vcr	auxiliary
+vcr	external
+erythropoietin	hematopoietic
+gooseberry	small
+blood work	diagnostic
+interpersonal skill	soft
+ferrite	magnetic
+nutrient cycling	ecological
+carboplatin	chemotherapeutic
+law enforcement	basic
+law enforcement	essential
+linoleum	hard
+migrant	vulnerable
+cell proliferation	cellular
+cell proliferation	biological
+affidavit	legal
+internal revenue service	federal
+lithuania	eastern
+international labor organization	international
+benzoic acid	aromatic
+daily mail	new
+mowing	cultural
+ozone depletion	environmental
+tartaric	organic
+eye contact	nonverbal
+chihuahua	small
+scar	natural
+scheduling appointment	administrative
+bromelain	proteolytic
+ionizing radiation	environmental
+high speed internet access	modern
+music player	electronic
+mris	diagnostic
+honeysuckle	invasive
+ice storm	catastrophic
+test	formal
+grand canyon	national
+silo	agricultural
+keratin	structural
+keratin	fibrous
+chlorite	secondary
+clean water act	federal
+clean water act	environmental
+pilchard	oily
+spacex	private
+competitor	external
+foursquare	location-based
+logistic regression	statistical
+soil temperature	environmental
+council of europe	international
+quakers	religious
+atelectasis	pulmonary
+signal transduction	cellular
+signal transduction	biological
+hall	common
+genital herpes	viral
+creatinine	biochemical
+neutrophils	phagocytic
+benzaldehyde	aromatic
+dhs	federal
+ultraviolet radiation	environmental
+bicycle riding	strenuous
+tone	literary
+norm	informal
+trail mix	healthy
+log	natural
+log	mathematical
+lung disease	medical
+thyroid problem	medical
+chloro	functional
+national institutes of health	federal
+psychosis	neuropsychiatric
+psychosis	medical
+thunderstorm	severe
+earned income tax credit	refundable
+hpv	viral
+payment	financial
+ventilator	medical
+discount rate	actuarial
+chimney	architectural
+u s fish	federal
+relief	positive
+profit	financial
+yeast extract	organic
+mandarin chinese	tonal
+anonymity	ethical
+reagent	biological
+regression	statistical
+jasmine	essential
+pleading	legal
+nsf	federal
+usda	federal
+federal trade commission	federal
+body language	nonverbal
+glycol	organic
+ranbaxy	indian
+ft ir	analytical
+home foreclosure	undesirable
+home foreclosure	poor
+home foreclosure	negative
+home foreclosure	terrible
+dna replication	cellular
+dna replication	biological
+reproduction	biological
+reproduction	physiological
+chemokine	soluble
+myrrh	essential
+english ivy	invasive
+clutch	fourth
+clutch	third
+amphipod	small
+infant mortality	social
+polycaprolactone	biodegradable
+irish	ethnic
+spectrophotometry	analytical
+infant	vulnerable
+herpes simplex virus thymidine kinase	screenable
+lute	musical
+heart condition	medical
+drinking glass	personal
+linear regression	statistical
+endangered species act	environmental
+endangered species act	federal
+anova	statistical
+retail sale	economic
+bayesian network	probabilistic
+matrix metalloproteinase	proteolytic
+grader	heavy
+elastase	proteolytic
+tooth	hard
+drinking water	basic
+replication	biological
+replication	cellular
+artificial insemination	medical
+roast	large
+capacitance	electrical
+iaea	international
+spyware	malicious
+pasture	open
+atmospheric pressure	meteorological
+asset management	financial
+bowling alley	popular
+sushi	japanese
+journal article	secondary
+rutabaga	cruciferous
+musician	creative
+psp	portable
+hill	topographical
+hill	natural
+hill	topographic
+impedance	electrical
+thyroid disorder	medical
+linoleic	essential
+real name	personal
+basal ganglion	subcortical
+desertification	environmental
+diffusion weighted imaging	advanced
+periodical	contemporary
+boulder	natural
+imidacloprid	systemic
+indebtedness	negative
+indebtedness	undesirable
+indebtedness	poor
+indebtedness	terrible
+pollutant	environmental
+subtraction	arithmetic
+sit	basic
+cream cheese	soft
+steam room	recreational
+particle size distribution	physical
+dietary fiber	healthy
+pitcher plant	carnivorous
+ilmenite	heavy
+department store	large
+varicose vein	medical
+insurer	third
+guppy	small
+riesling	italian
+riesling	white
+lactobacilli	probiotic
+house foreclosure	poor
+house foreclosure	terrible
+house foreclosure	negative
+house foreclosure	undesirable
+utilitarianism	ethical
+suffering	non economic
+driver s license number	personal
+day length	environmental
+random access memory	volatile
+hurricanes katrina	natural
+yosemite	national
+pinot noir	red
+mortgage foreclosure	negative
+mortgage foreclosure	undesirable
+mortgage foreclosure	poor
+mortgage foreclosure	terrible
+cymbal	musical
+hot chocolate	hot
+taco	mexican
+currency	financial
+trifluoroacetic acid	organic
+lactulose	osmotic
+neroli	essential
+financial information	personal
+financial information	sensitive
+particle swarm optimization	evolutionary
+astroglide	water-based
+rhyme	poetic
+veneer	cosmetic
+hot	environmental
+unemployed	vulnerable
+bisphosphonate	antiresorptive
+hanoi	big
+etoposide	chemotherapeutic
+gif	popular
+human services	federal
+enantiomer	stere
+lipophilicity	physicochemical
+blue cheese	soft
+property foreclosure	poor
+property foreclosure	undesirable
+property foreclosure	negative
+property foreclosure	terrible
+praying mantis	beneficial
+stair	common
+chat room	interactive
+room temperature	environmental
+reproducibility	analytical
+rutile	heavy
+mechanical property	physical
+american psychological association	professional
+erectile dysfunction	sexual
+lycra	synthetic
+periodontal disease	oral
+sewage sludge	organic
+aiff	popular
+vending machine	accessible
+annuity	financial
+momentum	physical
+interest rate risk	financial
+portland cement	cementitious
+dragon	mythical
+low self-esteem	psychological
+cantonese	chinese
+microalgae	photosynthetic
+stomach ache	physical
+secret service	federal
+semiconductor device	electronic
+sovereign wealth fund	institutional
+starter	electrical
+heritage foundation	conservative
+americans with disabilities act	federal
+adipic acid	aliphatic
+threshold voltage	electrical
+granulocyte colony stimulating factor	hematopoietic
+gate	physical
+anthracycline	chemotherapeutic
+sift	local
+handheld computer	electronic
+clean water	basic
+souvenir	personal
+workplace	social
+durian	tropical
+friends of the earth	environmental
+rattan	natural
+nitrocellulose	porous
+prophecy	spiritual
+isotretinoin	oral
+severe weather	natural
+venus flytrap	carnivorous
+ventricular tachycardia	dangerous
+u s environmental protection agency	regulatory
+u s environmental protection agency	federal
+drug trafficking	criminal
+drug trafficking	illegal
+mmr	live
+astm	international
+sexual assault	traumatic
+mechanic	closely related
+flat screen tv	modern
+avocado oil	natural
+social networking site	social
+paranoia	psychotic
+scalpel	sharp
+scalpel	surgical
+genoa	italian
+cuckoo	domestic
+food scrap	organic
+yahoo messenger	popular
+lunch boxes	personal
+circular dichroism	biophysical
+uv radiation	environmental
+kenmore	great
+gnutella	unstructured
+program manager	closely related
+thallium	heavy
+bulb	consumable
+octane	aliphatic
+albert einstein	famous
+nissan leaf	electric
+beneficence	ethical
+wordnet	lexical
+lithium ion battery	secondary
+lithium ion battery	rechargeable
+mule deer	large
+cpa	professional
+principal components analysis	statistical
+agave	natural
+italians	ethnic
+trade creditor	financial
+model checking	formal
+golfer	professional
+naphthalene	aromatic
+illustration	technical
+persuasion	social
+transformation	cellular
+bleomycin	chemotherapeutic
+sex worker	vulnerable
+cell division	cellular
+cell division	biological
+press	traditional
+hot plate	electrical
+smoothie	healthy and delicious
+reservoir	open
+sauvignon blanc	white
+curiosity	positive
+industrial production	economic
+peppermint oil	essential
+schistosomiasi	parasitic
+adult incontinence product	disposable
+trim	removable
+human error	operational
+family emergency	exceptional
+wills	legal
+harmony	musical
+uv light	exogenous
+uv light	environmental
+retroviral vector	viral
+wildlife service	federal
+financial distress	poor
+financial distress	terrible
+financial distress	negative
+financial distress	undesirable
+fitbit	wearable
+push notification	customizable
+liquidation	poor
+liquidation	negative
+liquidation	undesirable
+liquidation	terrible
+tungsten carbide	hard
+romano	hard
+polyglycolic acid	synthetic
+titanium nitride	hard
+opening	morphological
+hopelessness	negative
+u s forest service	federal
+dod	federal
+passion fruit	tropical
+videotape	supplementary
+cyclamate	artificial
+anhedonia	negative
+xanthan gum	natural
+slip agent	conventional
+stadium	large
+stadium	large modern
+plutonium	heavy
+awning	architectural
+occupational safety	regulatory
+oxygen level	environmental
+thin layer chromatography	chromatographic
+account balance	personal
+eiffel tower	famous
+prostate cancer	serious medical
+prostate cancer	solid
+spinal cord	critical
+kriging	geostatistical
+dicumyl peroxide	organic
+infectious disease	external
+scorpion	venomous
+sole	white
+bifidobacteria	beneficial
+gypsum board	combustible
+paint shop pro	graphic
+water stress	environmental
+ground penetrating radar	geophysical
+hydroelectric	renewable
+mammoth	large
+raw carrot	hard
+landform	natural
+monte carlo simulation	numerical
+portable media player	portable
+irs	federal
+nickel cadmium	rechargeable
+building society	financial
+smart watch	wearable
+hierarchical clustering	traditional
+direct mail	traditional
+fema	federal
+noaa	federal
+overconfidence	behavioral
+violet	edible
+rambutan	tropical
+massive bleeding	serious
+croatia	eastern
+cypress	essential
+little bluestem	native
+upholstery	porous
+curling iron	small
+iucn	international
+burrito	mexican
+lip balm	personal
+impact	mechanical
+telepathy	psychic
+candidiasis	vaginal
+coleridge	romantic
+ladies home journal	american
+hostility	negative
+enthusiasm	personal
+enthusiasm	positive
+rm	popular
+meoh	protic
+network card	unnecessary
+age limit	detailed
+infectious agent	environmental
+department of housing	federal
+cell migration	biological
+cell migration	cellular
+apple juice	clear
+reminder	great
+tomato sauce	pourable
+stock market	financial
+multiple regression	statistical
+school name	personal
+united nations development programme	international
+hairbrush	personal
+head trauma	serious
+department of education	federal
+polypeptide	large
+patchouli	essential
+chinchilla	small
+wounding	environmental
+insulin pump	medical
+creep	mechanical
+joan baez	contemporary and classic
+peptone	organic
+north american free trade agreement	free
+north american free trade agreement	regional
+spanking	physical
+nutrient concentration	environmental
+impact resistance	mechanical
+stomachache	physical
+light exposure	environmental
+asylum seeker	vulnerable
+brokerage firm	financial
+brokerage firm	private
+young	vulnerable
+office manager	closely related
+diskette	removable
+diskette	magnetic
+dna repair	cellular
+bus driver	closely related
+safety helmet	personal
+overeating	unhealthy
+low humidity	environmental
+dysarthria	neurological
+yeast infection	vaginal
+spandex	synthetic
+iom	international
+organisation for economic co operation	international
+lubricating oil	hazardous
+barracuda	offshore
+radiograph	diagnostic
+chihuahuas	small
+piperidine	secondary
+survival	demographic
+game console	external
+writer	creative
+kidney problem	medical
+big ben	famous
+wicker	natural
+ray	cartilaginous
+u s dollar	conventional
+incandescent lamp	conventional
+chernobyl	nuclear
+chapter 7	poor
+chapter 7	negative
+chapter 7	terrible
+penne	short
+early marriage	harmful traditional
+early marriage	traditional
+early marriage	cultural
+blackbeard	famous
+mitomycin c	chemotherapeutic
+nail clipper	personal
+canoe	small
+water body	natural
+thermal expansion	physical
+retention time	chromatographic
+archive	cultural
+table of content	basic
+ibis	long necked
+food processor	small
+administrative assistant	administrative
+passport number	personal
+dermal filler	non surgical
+architectural	professional
+hail	severe
+ssn	sensitive
+ssn	personal
+dacron	synthetic
+food waste	organic
+ladybird	beneficial
+steep slope	environmentally sensitive
+fire station	critical
+urinary catheter	invasive
+urinary catheter	medical
+cell growth	biological
+cell growth	cellular
+signal communication apprentice jobs	closely related
+laughter	positive
+laughter	strong
+tower of london	famous
+discriminant analysis	statistical
+switchgear	electrical
+tractor trailer	commercial
+orphan	vulnerable
+bloodworm	live
+autophagy	cellular
+distress	negative
+dipole	complete
+big bluestem	native
+trimethylamine	tertiary
+wireless telephone	electronic
+linear	statistical
+national aeronautics	federal
+polycystic ovary syndrome	medical
+hydrofluoric acid	strong
+maleic acid	unsaturated
+maleic acid	organic
+franciscans	religious
+poxviruses	large
+intangible asset	non financial
+welder	stationary
+agreement	legal
+iea	international
+evening primrose oil	dietary
+mortality rate	demographic
+selection process	detailed
+chicken pox	viral
+acitretin	oral
+individual bankruptcy	poor
+individual bankruptcy	negative
+individual bankruptcy	terrible
+individual bankruptcy	undesirable
+emission	environmental
+uv ray	environmental
+invoicing	administrative
+solid wood	natural
+hyperparathyroidism	medical
+uncontrolled diabetes	medical
+stone wall	original
+bronchoscopy	invasive
+bronchoscopy	diagnostic
+lean protein	healthy
+clean air act	federal
+witch hazel	natural
+histology	prognostic
+irradiance	environmental
+direct thrombin inhibitor	oral
+onyx	natural
+hard candy	hard
+rest	supplementary
+rest	conservative
+book bag	personal
+detection limit	analytical
+indians	ethnic
+hepatotoxicity	serious
+point of view	literary
+friedrich nietzsche	western
+flash memory device	non volatile
+handcuff	mechanical
+mobile number	personal
+postal code	demographic
+eating utensil	personal
+blm	federal
+systematic desensitization	behavioral
+harper s	american
+a m best	independent
+home phone number	personal
+whole-wheat bread	whole
+toddler	young
+organic light emitting diode	organic electronic
+cultivation	cultural
+floodplain	environmentally sensitive
+fondant	edible
+gc	chromatographic
+tambourine	musical
+adapalene	topical
+henri bergson	western
+quark	elementary
+graphic designer	creative
+joist	structural
+eligibility criterion	detailed
+bankruptcy proceeding	undesirable
+bankruptcy proceeding	negative
+bankruptcy proceeding	poor
+bankruptcy proceeding	terrible
+video clip	continuous
+cos	mathematical
+bitterness	negative
+surname	personal
+exchange commission	regulatory
+cytokeratin	epithelial
+turn taking	social
+cell cycle	cellular
+sanitary towel	disposable
+liquid crystal	soft
+chapter 13	poor
+chapter 13	negative
+chapter 13	terrible
+company driver	closely related
+chi square test	statistical
+calcitonin	antiresorptive
+fitness facility	recreational
+protective layer	functional
+cannondale	popular
+department of labor	federal
+coprecipitation	conventional
+puppy	small
+puppy	young
+sepiolite	fibrous
+personal bankruptcy	poor
+personal bankruptcy	terrible
+k-y jelly	water-based
+kingfish	offshore
+rapid heartbeat	physical
+video file	large
+varicella	viral
+nanowires	one-dimensional
+chlorhexidine	antimicrobial
+cyfluthrin	synthetic
+fresh water	natural
+stairwell	common
+radio shack	electronic
+kohlrabi	cruciferous
+stay	basic
+master s	advanced
+shad	anadromous
+return on investment	financial
+epidemic	natural
+specific surface area	physical
+skyscraper	large modern
+ftc	federal
+health business	closely related
+eurasian watermilfoil	aquatic
+bowel injury	serious
+schwinn	popular
+isosorbide dinitrate	organic
+emergency response	basic
+handheld device	serial
+lymph node metastasis	clinicopathological
+ultraviolet light	environmental
+reagent concentration	analytical
+project support	closely related
+red squirrel	small
+tree line	physical
+manslaughter	serious
+premature ejaculation	sexual
+boolean	basic
+masons	fraternal
+osmolarity	environmental
+drug enforcement administration	federal
+rubble	hard
+adult incontinence article	disposable
+dbu	organic
+crystal structure	physical
+hindus	religious
+return on equity	financial
+tanglin club	prestigious
+drivers	closely related
+agave nectar	natural
