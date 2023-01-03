@@ -23,7 +23,7 @@ from transformers import (
     get_linear_schedule_with_warmup,
 )
 
-from utils.je_utils import compute_scores, read_config
+from utils.je_utils import compute_scores, read_config, set_seed
 
 warnings.filterwarnings("ignore")
 
@@ -597,6 +597,8 @@ def do_cv(config):
 
 
 if __name__ == "__main__":
+
+    set_seed(12345)
 
     parser = ArgumentParser(description="Joint Encoder Property Augmentation Model")
 
