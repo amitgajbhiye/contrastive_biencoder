@@ -509,55 +509,68 @@ def get_predict_prop_similar_properties(
                 if not match_multi_words(predict_property, prop)
             ]
 
-            print(f"similar_props 1 : {similar_props}")
+            print(f"similar_props 0 : {similar_props}")
 
-            embed_predict_prop = predict_prop_embeds_dict[predict_property]
-            embed_similar_prop = [
-                prop_vocab_embeds_dict[prop] for prop in similar_props
-            ]
+            if len(similar_props) != 0:
 
-            zero_embed_predict_prop = np.array(
-                np.insert(embed_predict_prop, 0, float(0))
-            ).reshape(1, -1)
-            transformed_embed_similar_prop = np.array(transform(embed_similar_prop))
+                print(f"similar_props 1 : {similar_props}")
 
-            if len(similar_props) >= num_prop_conjuct:
-                num_nearest_neighbours = num_prop_conjuct
+                embed_predict_prop = predict_prop_embeds_dict[predict_property]
+                embed_similar_prop = [
+                    prop_vocab_embeds_dict[prop] for prop in similar_props
+                ]
+
+                zero_embed_predict_prop = np.array(
+                    np.insert(embed_predict_prop, 0, float(0))
+                ).reshape(1, -1)
+                transformed_embed_similar_prop = np.array(transform(embed_similar_prop))
+
+                if len(similar_props) >= num_prop_conjuct:
+                    num_nearest_neighbours = num_prop_conjuct
+                else:
+                    num_nearest_neighbours = len(similar_props)
+
+                predict_prop_similar_props = NearestNeighbors(
+                    n_neighbors=num_nearest_neighbours, algorithm="brute"
+                ).fit(transformed_embed_similar_prop)
+
+                (
+                    similar_prop_distances,
+                    similar_prop_indices,
+                ) = predict_prop_similar_props.kneighbors(zero_embed_predict_prop)
+
+                if similar_prop_indices.shape[1] != 1:
+                    similar_prop_indices = np.squeeze(similar_prop_indices)
+                else:
+                    concepts_with_one_similar_prop += 1
+                    print(f"similar_props : {similar_props}")
+                    similar_prop_indices = similar_prop_indices[0]
+
+                similar_properties = [
+                    similar_props[idx] for idx in similar_prop_indices
+                ]
+
+                conjuct_similar_props = ", ".join(similar_properties)
+
+                print(f"Concept : {concept}", flush=True)
+                print(f"Predict Property : {predict_property}", flush=True)
+                print(f"Predict Property Similar Properties", flush=True)
+                print(similar_properties, flush=True)
+                print(f"Conjuct Similar Props", flush=True)
+                print(conjuct_similar_props, flush=True)
+                print("*" * 30, flush=True)
+                print(flush=True)
+
+                all_data.append(
+                    [concept, conjuct_similar_props, predict_property, int(label)]
+                )
             else:
-                num_nearest_neighbours = len(similar_props)
-
-            predict_prop_similar_props = NearestNeighbors(
-                n_neighbors=num_nearest_neighbours, algorithm="brute"
-            ).fit(transformed_embed_similar_prop)
-
-            (
-                similar_prop_distances,
-                similar_prop_indices,
-            ) = predict_prop_similar_props.kneighbors(zero_embed_predict_prop)
-
-            if similar_prop_indices.shape[1] != 1:
-                similar_prop_indices = np.squeeze(similar_prop_indices)
-            else:
-                concepts_with_one_similar_prop += 1
-                print(f"similar_props : {similar_props}")
-                similar_prop_indices = similar_prop_indices[0]
-
-            similar_properties = [similar_props[idx] for idx in similar_prop_indices]
-
-            conjuct_similar_props = ", ".join(similar_properties)
-
-            print(f"Concept : {concept}", flush=True)
-            print(f"Predict Property : {predict_property}", flush=True)
-            print(f"Predict Property Similar Properties", flush=True)
-            print(similar_properties, flush=True)
-            print(f"Conjuct Similar Props", flush=True)
-            print(conjuct_similar_props, flush=True)
-            print("*" * 30, flush=True)
-            print(flush=True)
-
-            all_data.append(
-                [concept, conjuct_similar_props, predict_property, int(label)]
-            )
+                concepts_with_no_similar_props.append(concept)
+                print(f"Concept : {concept}, has no similar properties")
+                conjuct_similar_props = "no_similar_property"
+                all_data.append(
+                    [concept, conjuct_similar_props, predict_property, int(label)]
+                )
 
     df_all_data = pd.DataFrame.from_records(all_data)
     df_all_data.to_csv(save_file, sep="\t", header=None, index=None)
