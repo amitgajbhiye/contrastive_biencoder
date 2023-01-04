@@ -436,8 +436,12 @@ def get_predict_prop_similar_properties(
 
     je_filtered_concepts = je_filtered_con_prop_df["concept"].unique().tolist()
 
+    ######## Concepts that do not have similar properties ########
+
+    no_similar_prop_concept = set(input_concepts).difference(set(je_filtered_concepts))
+
     print(
-        f"Number of Unique Concept in je_filtered_con_prop_df : {len(je_filtered_concepts)}"
+        f"Concepts with no similar properties : {len(no_similar_prop_concept)} - {no_similar_prop_concept}"
     )
 
     with open(prop_vocab_embed_pkl, "rb") as prop_vocab_pkl:
@@ -451,13 +455,16 @@ def get_predict_prop_similar_properties(
         flush=True,
     )
     print(
+        f"Number of Unique Concept in je_filtered_con_prop_df : {len(je_filtered_concepts)}"
+    )
+
+    print(
         f"Unique Properties in JE Filtered Con Prop Df : {len(je_filtered_con_prop_df['similar_property'].unique())}",
         flush=True,
     )
 
     print(
-        f"Whole Property Vocab Embeddings : {len(prop_vocab_embeds_dict.keys())}",
-        flush=True,
+        f"Property Vocab Embeddings : {len(prop_vocab_embeds_dict.keys())}", flush=True,
     )
 
     print()
@@ -478,7 +485,7 @@ def get_predict_prop_similar_properties(
 
         if concept not in set((je_filtered_concepts)):
 
-            concepts_with_no_similar_props.appen(concept)
+            concepts_with_no_similar_props.append(concept)
             print(f"Concept : {concept}, has no similar properties")
             conjuct_similar_props = "no_similar_property"
             all_data.append(
