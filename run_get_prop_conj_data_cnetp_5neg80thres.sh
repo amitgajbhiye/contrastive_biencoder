@@ -1,6 +1,6 @@
 #!/bin/bash --login
 
-#SBATCH --job-name=McRps5Neg50th
+#SBATCH --job-name=5neg80thres
 
 #SBATCH --output=logs/data_sampling/out_pretrain_cnetp_get_predict_prop_sim_props_5neg80thresh.txt
 #SBATCH --error=logs/data_sampling/err_pretrain_cnetp_get_predict_prop_sim_props_5neg80thresh.txt
