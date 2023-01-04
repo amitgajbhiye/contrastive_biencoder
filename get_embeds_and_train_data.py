@@ -465,7 +465,7 @@ def get_predict_prop_similar_properties(
     print(f"#Unique input concepts : {num_input_concepts}", flush=True)
     print(f"#Unique input predict properties : {num_input_predict_props}", flush=True)
 
-    all_data, skipped_concepts = [], []
+    all_data, concepts_with_no_similar_props = [], []
     concepts_with_one_similar_prop = 0
     for idx, (concept, predict_property, label) in enumerate(
         zip(input_df["concept"], input_df["predict_property"], input_df["label"])
@@ -476,78 +476,89 @@ def get_predict_prop_similar_properties(
             f"Concept, Predict Property, Label : {(concept, predict_property, label)}"
         )
 
-        if concept not in (je_filtered_concepts):
-            skipped_concepts.append(concept)
-            print(
-                f"Skipping concept : {concept}, as it is not in je_filtered_con_prop_df"
+        if concept not in set((je_filtered_concepts)):
+
+            concepts_with_no_similar_props.appen(concept)
+            print(f"Concept : {concept}, has no similar properties")
+            conjuct_similar_props = "no_similar_property"
+            all_data.append(
+                [concept, conjuct_similar_props, predict_property, int(label)]
             )
             continue
 
-        similar_props = (
-            je_filtered_con_prop_df[je_filtered_con_prop_df["concept"] == concept][
-                "similar_property"
+        else:
+            similar_props = (
+                je_filtered_con_prop_df[je_filtered_con_prop_df["concept"] == concept][
+                    "similar_property"
+                ]
+                .unique()
+                .tolist()
+            )
+
+            similar_props = [
+                prop
+                for prop in similar_props
+                if not match_multi_words(predict_property, prop)
             ]
-            .unique()
-            .tolist()
-        )
 
-        similar_props = [
-            prop
-            for prop in similar_props
-            if not match_multi_words(predict_property, prop)
-        ]
+            print(f"similar_props 1 : {similar_props}")
 
-        print(f"similar_props 1 : {similar_props}")
+            embed_predict_prop = predict_prop_embeds_dict[predict_property]
+            embed_similar_prop = [
+                prop_vocab_embeds_dict[prop] for prop in similar_props
+            ]
 
-        embed_predict_prop = predict_prop_embeds_dict[predict_property]
-        embed_similar_prop = [prop_vocab_embeds_dict[prop] for prop in similar_props]
+            zero_embed_predict_prop = np.array(
+                np.insert(embed_predict_prop, 0, float(0))
+            ).reshape(1, -1)
+            transformed_embed_similar_prop = np.array(transform(embed_similar_prop))
 
-        zero_embed_predict_prop = np.array(
-            np.insert(embed_predict_prop, 0, float(0))
-        ).reshape(1, -1)
-        transformed_embed_similar_prop = np.array(transform(embed_similar_prop))
+            if len(similar_props) >= num_prop_conjuct:
+                num_nearest_neighbours = num_prop_conjuct
+            else:
+                num_nearest_neighbours = len(similar_props)
 
-        if len(similar_props) >= num_prop_conjuct:
-            num_nearest_neighbours = num_prop_conjuct
-        else:
-            num_nearest_neighbours = len(similar_props)
+            predict_prop_similar_props = NearestNeighbors(
+                n_neighbors=num_nearest_neighbours, algorithm="brute"
+            ).fit(transformed_embed_similar_prop)
 
-        predict_prop_similar_props = NearestNeighbors(
-            n_neighbors=num_nearest_neighbours, algorithm="brute"
-        ).fit(transformed_embed_similar_prop)
+            (
+                similar_prop_distances,
+                similar_prop_indices,
+            ) = predict_prop_similar_props.kneighbors(zero_embed_predict_prop)
 
-        (
-            similar_prop_distances,
-            similar_prop_indices,
-        ) = predict_prop_similar_props.kneighbors(zero_embed_predict_prop)
+            if similar_prop_indices.shape[1] != 1:
+                similar_prop_indices = np.squeeze(similar_prop_indices)
+            else:
+                concepts_with_one_similar_prop += 1
+                print(f"similar_props : {similar_props}")
+                similar_prop_indices = similar_prop_indices[0]
 
-        if similar_prop_indices.shape[1] != 1:
-            similar_prop_indices = np.squeeze(similar_prop_indices)
-        else:
-            concepts_with_one_similar_prop += 1
-            print(f"similar_props : {similar_props}")
-            similar_prop_indices = similar_prop_indices[0]
+            similar_properties = [similar_props[idx] for idx in similar_prop_indices]
 
-        similar_properties = [similar_props[idx] for idx in similar_prop_indices]
+            conjuct_similar_props = ", ".join(similar_properties)
 
-        conjuct_similar_props = ", ".join(similar_properties)
+            print(f"Concept : {concept}", flush=True)
+            print(f"Predict Property : {predict_property}", flush=True)
+            print(f"Predict Property Similar Properties", flush=True)
+            print(similar_properties, flush=True)
+            print(f"Conjuct Similar Props", flush=True)
+            print(conjuct_similar_props, flush=True)
+            print("*" * 30, flush=True)
+            print(flush=True)
 
-        print(f"Concept : {concept}", flush=True)
-        print(f"Predict Property : {predict_property}", flush=True)
-        print(f"Predict Property Similar Properties", flush=True)
-        print(similar_properties, flush=True)
-        print(f"Conjuct Similar Props", flush=True)
-        print(conjuct_similar_props, flush=True)
-        print("*" * 30, flush=True)
-        print(flush=True)
-
-        all_data.append([concept, conjuct_similar_props, predict_property, int(label)])
+            all_data.append(
+                [concept, conjuct_similar_props, predict_property, int(label)]
+            )
 
     df_all_data = pd.DataFrame.from_records(all_data)
     df_all_data.to_csv(save_file, sep="\t", header=None, index=None)
 
     print(f"concepts_with_one_similar_prop : {concepts_with_one_similar_prop}")
-    print(f"Skipped Concepts : {skipped_concepts}", flush=True)
+    print(
+        f"Concepts With No Similar Properties: {concepts_with_no_similar_props}",
+        flush=True,
+    )
 
 
 if __name__ == "__main__":
@@ -575,9 +586,13 @@ if __name__ == "__main__":
 
     inference_params = config.get("inference_params")
 
+    ######################### Important Flags #########################
+
     get_con_prop_embeds = inference_params["get_con_prop_embeds"]
     get_con_sim_vocab_properties = inference_params["get_con_sim_vocab_properties"]
     get_predict_prop_similar_props = inference_params["get_predict_prop_similar_props"]
+
+    ######################### Important Flags #########################
 
     log.info(
         f"Get Concept, Property or Concept and Property Embedings : {get_con_prop_embeds}"
@@ -646,57 +661,47 @@ if __name__ == "__main__":
 
         if pretrain_data:
 
-            input_file_base_path = inference_params["input_file_base_path"]
+            train_file_path = inference_params["pretrain_train_file"]
+            path, train_filename = os.path.split(train_file_path)
 
-            print(f"Input File Base Path : {input_file_base_path}", flush=True)
-            print(f"Save File Path : {save_dir}", flush=True)
-
-            # train_file = os.path.join(input_file_base_path, "5_neg_train_cnetp.tsv")
-            # save_train_file = os.path.join(
-            #     save_dir, "pt10neg50thres_train_5neg_cnetp_5prop_conj.tsv"
-            # )
-
-            train_file = os.path.join(input_file_base_path, "10_neg_train_cnetp.tsv")
-
-            save_train_file = os.path.join(
-                save_dir, "pt10neg50thres_train_10neg_cnetp_5prop_conj.tsv"
+            save_prefix = inference_params["save_prefix"]
+            save_train_file_path = os.path.join(
+                save_dir, f"{save_prefix}_{train_filename}"
             )
 
             print(flush=True)
-            print(f"Train File Path : {train_file}", flush=True)
-            print(f"Train Save File Path : {save_train_file}", flush=True)
+            print(f"Train File Path : {train_file_path}", flush=True)
+            print(f"Train Save File Path : {save_train_file_path}", flush=True)
             print(flush=True)
 
-            # valid_file = os.path.join(input_file_base_path, "5_neg_valid_cnetp.tsv")
-            # save_valid_file = os.path.join(
-            #     save_dir, "pt10neg50thres_valid_5neg_cnetp_5prop_conj.tsv"
-            # )
+            valid_file_path = inference_params["pretrain_valid_file"]
 
-            valid_file = os.path.join(input_file_base_path, "10_neg_valid_cnetp.tsv")
-            save_valid_file = os.path.join(
-                save_dir, "pt10neg50thres_valid_10neg_cnetp_5prop_conj.tsv"
+            path, valid_file_name = os.path.split(valid_file_path)
+
+            save_valid_file_path = os.path.join(
+                save_dir, f"{save_prefix}_{valid_file_name}"
             )
 
             print(flush=True)
-            print(f"Valid File Path : {valid_file}", flush=True)
-            print(f"Valid Save File Path : {save_valid_file}", flush=True)
+            print(f"Valid File Path : {valid_file_path}", flush=True)
+            print(f"Valid Save File Path : {save_valid_file_path}", flush=True)
             print(flush=True)
 
             get_predict_prop_similar_properties(
-                input_file=train_file,
+                input_file=train_file_path,
                 con_similar_prop=concept_similar_prop_file,
                 prop_vocab_embed_pkl=vocab_property_embed_pkl,
                 predict_prop_embed_pkl=predict_property_embed_pkl,
-                save_file=save_train_file,
+                save_file=save_train_file_path,
                 num_prop_conjuct=num_prop_conjuct,
             )
 
             get_predict_prop_similar_properties(
-                input_file=valid_file,
+                input_file=valid_file_path,
                 con_similar_prop=concept_similar_prop_file,
                 prop_vocab_embed_pkl=vocab_property_embed_pkl,
                 predict_prop_embed_pkl=predict_property_embed_pkl,
-                save_file=save_valid_file,
+                save_file=save_valid_file_path,
                 num_prop_conjuct=num_prop_conjuct,
             )
 
@@ -704,6 +709,8 @@ if __name__ == "__main__":
 
             split_type = inference_params["split_type"]
             log.info(f"Split Type : {split_type}")
+
+            input_file_base_path = inference_params["fold_file_base_path"]
 
             if split_type == "property_split":
                 num_folds = 5

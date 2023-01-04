@@ -1,5 +1,5 @@
 {
-    "experiment_name": "get_predict_property_similiar_props_5neg70threshold",
+    "experiment_name": "get_predict_property_similiar_props_5neg50threshold",
     "log_dirctory": "data_sampling",
     "dataset_params": {
         "dataset_name": "predict_property_similiar_props_5neg50threshold",

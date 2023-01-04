@@ -103,10 +103,10 @@ class DatasetPropConjuction(Dataset):
         predict_prop = self.data_df["predict_prop"][idx].replace(".", "").strip()
         labels = self.data_df["labels"][idx]
 
-        if conjuct_props == "Nothing to Conjuct":
+        if conjuct_props == "no_similar_property":
 
             con_prop_conj = concept + " " + self.sep_token
-            prop_to_predict = predict_prop + " "
+            prop_to_predict = " " + predict_prop + " "
 
         else:
 
