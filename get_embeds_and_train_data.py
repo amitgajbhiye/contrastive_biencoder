@@ -290,12 +290,11 @@ def get_concept_similar_vocab_properties(
     log.info(f"Getting Concept Similar Vocab Properties ....")
 
     inference_params = config.get("inference_params")
-    input_data_type = inference_params["input_data_type"]
+    # input_data_type = inference_params["input_data_type"]
+    # log.info(f"Input Data Type : {input_data_type}")
 
     dataset_params = config.get("dataset_params")
     save_dir = inference_params["save_dir"]
-
-    log.info(f"Input Data Type : {input_data_type}")
 
     with open(concept_embed_pkl, "rb") as con_pkl_file, open(
         vocab_property_embed_pkl, "rb"
@@ -334,7 +333,9 @@ def get_concept_similar_vocab_properties(
     prop_dict_zero = {prop: trans for prop, trans in zip(properties, zero_prop_embeds)}
 
     # Learning Nearest Neighbours
-    num_nearest_neighbours = 50
+    # num_nearest_neighbours = 50
+    num_nearest_neighbours = inference_params["num_nearest_neighbours"]
+
     log.info(f"Learning {num_nearest_neighbours} neighbours !!")
 
     con_similar_properties = NearestNeighbors(
