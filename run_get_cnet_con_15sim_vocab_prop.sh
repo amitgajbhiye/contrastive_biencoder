@@ -2,7 +2,7 @@
 
 #SBATCH --job-name=conSim15Emb
 
-#SBATCH --output=logs/data_sampling/out_pretrain_cnetp_get_cnet_con_15sim_vocab_prop/txt
+#SBATCH --output=logs/data_sampling/out_pretrain_cnetp_get_cnet_con_15sim_vocab_prop.txt
 #SBATCH --error=logs/data_sampling/err_pretrain_cnetp_get_cnet_con_15sim_vocab_prop.txt
 
 #SBATCH --tasks-per-node=5
