@@ -90,7 +90,7 @@ class DatasetPropConjuction(Dataset):
         self.sep_token = self.tokenizer.sep_token
         self.cls_token = self.tokenizer.cls_token
 
-        self.print_freq = 2
+        self.print_freq = 0
 
     def __len__(self):
 
