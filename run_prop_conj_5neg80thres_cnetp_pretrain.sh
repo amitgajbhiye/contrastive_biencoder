@@ -8,12 +8,12 @@
 #SBATCH --tasks-per-node=5
 #SBATCH --ntasks=5
 #SBATCH --account scw1858
-
 #SBATCH --partition gpu_v100
+
 #SBATCH --mem=10g
 #SBATCH --gres=gpu:1
 
-#SBATCH -t 2-00:00:00
+#SBATCH -t 0-01:00:00
 
 ##SBATCH --qos="gpu7d"
 
