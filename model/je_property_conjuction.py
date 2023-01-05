@@ -106,12 +106,12 @@ class DatasetPropConjuction(Dataset):
         if conjuct_props == "no_similar_property":
 
             con_prop_conj = concept + " " + self.sep_token
-            prop_to_predict = predict_prop + " "
+            prop_to_predict = predict_prop
 
         else:
 
             con_prop_conj = concept + " " + self.sep_token + " " + conjuct_props
-            prop_to_predict = predict_prop + " "
+            prop_to_predict = predict_prop
 
         encoded_dict = self.tokenizer.encode_plus(
             text=con_prop_conj,
@@ -130,6 +130,7 @@ class DatasetPropConjuction(Dataset):
 
         if self.print_freq < 2:
 
+            print()
             print(f"con_prop_conj : {con_prop_conj}", flush=True)
             print(f"prop_to_predict : {prop_to_predict}", flush=True)
             print(
@@ -138,6 +139,7 @@ class DatasetPropConjuction(Dataset):
             )
 
             self.print_freq += 1
+            print()
 
         return {
             "input_ids": input_ids,
