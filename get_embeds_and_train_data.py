@@ -708,14 +708,14 @@ if __name__ == "__main__":
             print(f"Valid Save File Path : {save_valid_file_path}", flush=True)
             print(flush=True)
 
-            # get_predict_prop_similar_properties(
-            #     input_file=train_file_path,
-            #     con_similar_prop=concept_similar_prop_file,
-            #     prop_vocab_embed_pkl=vocab_property_embed_pkl,
-            #     predict_prop_embed_pkl=predict_property_embed_pkl,
-            #     save_file=save_train_file_path,
-            #     num_prop_conjuct=num_prop_conjuct,
-            # )
+            get_predict_prop_similar_properties(
+                input_file=train_file_path,
+                con_similar_prop=concept_similar_prop_file,
+                prop_vocab_embed_pkl=vocab_property_embed_pkl,
+                predict_prop_embed_pkl=predict_property_embed_pkl,
+                save_file=save_train_file_path,
+                num_prop_conjuct=num_prop_conjuct,
+            )
 
             get_predict_prop_similar_properties(
                 input_file=valid_file_path,
