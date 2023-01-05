@@ -90,7 +90,7 @@ class DatasetPropConjuction(Dataset):
         self.sep_token = self.tokenizer.sep_token
         self.cls_token = self.tokenizer.cls_token
 
-        self.print_freq = 0
+        self.print_freq = 2
 
     def __len__(self):
 
@@ -106,12 +106,12 @@ class DatasetPropConjuction(Dataset):
         if conjuct_props == "no_similar_property":
 
             con_prop_conj = concept + " " + self.sep_token
-            prop_to_predict = " " + predict_prop + " "
+            prop_to_predict = predict_prop + " "
 
         else:
 
             con_prop_conj = concept + " " + self.sep_token + " " + conjuct_props
-            prop_to_predict = " " + predict_prop + " "
+            prop_to_predict = predict_prop + " "
 
         encoded_dict = self.tokenizer.encode_plus(
             text=con_prop_conj,
@@ -128,13 +128,16 @@ class DatasetPropConjuction(Dataset):
         attention_mask = encoded_dict["attention_mask"]
         token_type_ids = encoded_dict["token_type_ids"]
 
-        # if self.print_freq < 1:
+        if self.print_freq < 2:
 
-        #     log.info(f"con_prop_conj : {con_prop_conj}")
-        #     log.info(f"prop_to_predict : {prop_to_predict}")
-        #     log.info(f"Decoded Sent - {self.tokenizer.decode(input_ids.squeeze())}")
+            print(f"con_prop_conj : {con_prop_conj}", flush=True)
+            print(f"prop_to_predict : {prop_to_predict}", flush=True)
+            print(
+                f"Decoded Sent - {self.tokenizer.decode(input_ids.squeeze())}",
+                flush=True,
+            )
 
-        #     self.print_freq += 1
+            self.print_freq += 1
 
         return {
             "input_ids": input_ids,
