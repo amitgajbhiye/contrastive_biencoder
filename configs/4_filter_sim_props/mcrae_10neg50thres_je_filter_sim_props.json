@@ -6,7 +6,7 @@
         "pretrain": false,
         "train_file_path": null,
         "val_file_path": null,
-        "test_file_path": "data/evaluation_data/prop_conjuction/mcrae/mcrae_con_sim_50_vocab_props.tsv",
+        "test_file_path": "data/evaluation_data/prop_conjuction/mcrae/with_false_label_mcrae_con_sim_50_vocab_props.tsv",
         "finetune": false,
         "load_pretrained": true,
         "pretrained_model_path": "trained_models/je_con_prop_cnetp_pretrained/je_con_prop_cnet_premium_10negdata_pretrained_model.pt",
