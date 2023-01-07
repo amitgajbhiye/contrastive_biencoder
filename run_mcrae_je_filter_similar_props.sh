@@ -9,8 +9,11 @@
 #SBATCH --ntasks=5
 #SBATCH --account scw1858
 
-#SBATCH -p compute
-#SBATCH -t 0-05:00:00
+#SBATCH --partition gpu_v100,gpu
+#SBATCH --mem=9G
+#SBATCH --gres=gpu:1
+
+#SBATCH -t 0-02:00:00
 
 
 echo 'This script is running on:'
