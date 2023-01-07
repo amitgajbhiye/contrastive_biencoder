@@ -2,8 +2,8 @@
 
 #SBATCH --job-name=McRconPropEmbed
 
-#SBATCH --output=logs/get_embeddings/out_get_embeds_concepts_and_properties_cnetp.txt
-#SBATCH --error=logs/get_embeddings/err_get_embeds_concepts_and_properties_cnetp.txt
+#SBATCH --output=logs/embeddings/out_mcrae_get_embeds_concepts_and_properties.txt
+#SBATCH --error=logs/embeddings/err_mcrae_get_embeds_concepts_and_properties.txt
 
 #SBATCH --tasks-per-node=5
 #SBATCH --ntasks=5
@@ -25,7 +25,7 @@ module load anaconda/2020.02
 
 conda activate venv
 
-python3 get_embeds_and_train_data.py --config_file configs/2_configs_get_embeds_and_train_data/mcrae_1_get_embeds_concepts.json
-python3 get_embeds_and_train_data.py --config_file configs/2_configs_get_embeds_and_train_data/mcrae_2_get_embeds_predict_property.json
+python3 get_embeds_and_train_data.py --config_file configs/2_configs_get_embeds_and_train_data/mcrae_get_embeds_concepts.json
+python3 get_embeds_and_train_data.py --config_file configs/2_configs_get_embeds_and_train_data/mcrae_get_embeds_property.json
 
-echo 'finished!'
+echo 'Job Finished!'
