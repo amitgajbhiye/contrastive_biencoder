@@ -2,7 +2,7 @@
     "experiment_name": "mcrae_get_embeds_property",
     "log_dirctory": "embeddings",
     "dataset_params": {
-        "dataset_name": "mcrae_property_embeddings",
+        "dataset_name": "mcrae",
         "train_file_path": null,
         "val_file_path": null,
         "test_file_path": null,

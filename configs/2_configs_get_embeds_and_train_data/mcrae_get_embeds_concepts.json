@@ -2,7 +2,7 @@
     "experiment_name": "mcrae_get_embeds_concepts",
     "log_dirctory": "embeddings",
     "dataset_params": {
-        "dataset_name": "mcrae_concepts_embedding",
+        "dataset_name": "mcrae",
         "train_file_path": null,
         "val_file_path": null,
         "test_file_path": null,
