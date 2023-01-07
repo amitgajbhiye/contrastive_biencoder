@@ -119,6 +119,7 @@ if __name__ == "__main__":
     log.info(f"Test File : {test_file}")
     log.info(f"Filtering Threshold : {threshold}")
     log.info(f"Save Dir : {save_dir}")
+    log.info(f"pretrained_model_num_neg : {pretrained_model_num_neg}")
     log.info(f"Pretrained Model Path : {pretrained_model_path}")
 
     test_df = pd.read_csv(

@@ -17,7 +17,7 @@
         "num_warmup_steps": 0,
         "patience_early_stopping": 10,
         "save_dir": "trained_models/je_prop_conj_cnetp_pretrained",
-        "model_name": "je_propconj_con15_cnetp_pretrain.pt",
+        "model_name": "je_propconj_5negcon15_cnetp_pretrain.pt",
         "lr_policy": null,
         "lr_decay_iters": null
     },
