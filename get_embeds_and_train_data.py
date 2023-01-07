@@ -352,6 +352,7 @@ def get_concept_similar_vocab_properties(
     con_similar_prop_dict = {}
     file_name = os.path.join(save_dir, dataset_params["dataset_name"]) + ".tsv"
 
+    total_sim_props = 0
     with open(file_name, "w") as file:
 
         for con_idx, prop_idx in enumerate(con_indices):
@@ -367,12 +368,17 @@ def get_concept_similar_vocab_properties(
 
             con_similar_prop_dict[concept] = similar_properties
 
+            print(f"Number Similar Props : {len(similar_properties)}")
             print(f"{concept} \t {similar_properties}\n")
+
+            total_sim_props += len(similar_properties)
 
             for prop in similar_properties:
                 line = concept + "\t" + prop + "\n"
                 file.write(line)
 
+    log.info(f"Total Number of input concepts : {len(concepts)}")
+    log.info(f"Total Sim Properties Generated : {total_sim_props}")
     log.info(f"Finished getting similar properties")
 
 
