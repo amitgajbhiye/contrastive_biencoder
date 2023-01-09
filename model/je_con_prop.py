@@ -98,8 +98,12 @@ class DatasetConceptProperty(Dataset):
 
     def __getitem__(self, idx):
 
-        concept = self.data_df["concept"][idx].replace(".", "").strip()
-        property = self.data_df["property"][idx].replace(".", "").strip()
+        # concept = self.data_df["concept"][idx].replace(".", "").strip()
+        # property = self.data_df["property"][idx].replace(".", "").strip()
+        # labels = self.data_df["label"][idx]
+
+        concept = self.data_df["concept"][idx]
+        property = self.data_df["property"][idx]
         labels = self.data_df["label"][idx]
 
         encoded_dict = self.tokenizer.encode_plus(
@@ -628,11 +632,20 @@ if __name__ == "__main__":
 
         log.info(f"Pretraining the Concept Property Model ...")
 
+        dataset_name = training_params["dataset_name"]
+
         train_file = training_params["train_file_path"]
         valid_file = training_params["val_file_path"]
 
+        if dataset_name in ("wanli"):
+            test_file = training_params["test_file_path"]
+        else:
+            test_file = None
+
+        log.info(f"Pretraining on dataset : {dataset_name}")
         log.info(f"Train File  : {train_file}")
         log.info(f"Valid File  : {valid_file}")
+        log.info(f"Test File  : {test_file}")
 
         (
             model,
@@ -642,14 +655,17 @@ if __name__ == "__main__":
             val_dataloader,
             test_dataloader,
         ) = prepare_data_and_models(
-            config=config, train_file=train_file, valid_file=valid_file, test_file=None,
+            config=config,
+            train_file=train_file,
+            valid_file=valid_file,
+            test_file=test_file,
         )
 
         log.info(f"Test Data Loader is - {test_dataloader}")
 
-        assert (
-            test_dataloader is None
-        ), "For Pretraining Test Dataloader Should be None, it is not at the moment !!! - Check"
+        # assert (
+        #     test_dataloader is None
+        # ), "For Pretraining Test Dataloader Should be None, it is not at the moment !!! - Check"
 
         train(
             training_params=training_params,
@@ -668,4 +684,3 @@ if __name__ == "__main__":
 
 else:
     log = logging.getLogger(__name__)
-
