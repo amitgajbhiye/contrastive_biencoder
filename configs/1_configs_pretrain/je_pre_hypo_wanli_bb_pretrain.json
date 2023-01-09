@@ -4,9 +4,9 @@
     "training_params": {
         "dataset_name": "wanli",
         "pretrain": true,
-        "train_file_path": "data/train_data/je_con_prop/wanli/wanli_train_df.pkl",
-        "val_file_path": "data/train_data/je_con_prop/wanli/wanli_valid_df.pkl",
-        "test_file_path": "data/train_data/je_con_prop/wanli/wanli_test_df.pkl",
+        "train_file_path": "data/train_data/je_con_prop/wanli/1wanli_train_df.pkl",
+        "val_file_path": "data/train_data/je_con_prop/wanli/1wanli_valid_df.pkl",
+        "test_file_path": "data/train_data/je_con_prop/wanli/1wanli_test_df.pkl",
         "finetune": false,
         "load_pretrained": false,
         "pretrained_model_path": null,
