@@ -68,7 +68,7 @@ class DatasetConceptProperty(Dataset):
 
             self.data_df = pd.read_csv(
                 concept_property_file,
-                sep="\t",
+                sep="|",
                 header=None,
                 names=["concept", "property", "label"],
                 # encoding="utf16",
