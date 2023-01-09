@@ -77,15 +77,19 @@ class DatasetConceptProperty(Dataset):
             )
 
             log.info(f"Loaded Df Columns : {self.data_df.columns}")
-            log.info(f"Loaded Df Columns Dtypes: {self.data_df.dtypes}")
+            # log.info(f"Loaded Df Columns Dtypes: {self.data_df.dtypes}")
             log.info(f"Loaded Df Info")
 
             log.info(self.data_df.info())
 
             log.info(f"Do DF contain Nan : {self.data_df.isna().any()}")
+
             log.info(f"Loaded Df Shape before NaN : {self.data_df.shape}")
+
             self.data_df.dropna(inplace=True)
+
             log.info(f"Loaded Df Shape After NaN : {self.data_df.shape}")
+
             self.data_df.reset_index(inplace=True, drop=True)
 
             self.data_df = self.data_df.astype(
