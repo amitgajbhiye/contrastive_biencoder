@@ -497,6 +497,7 @@ def do_cv(config):
 
     cv_type = training_params["cv_type"]
     data_dir = training_params["data_dir"]
+    save_prefix = training_params["save_prefix"]
 
     log.info(f"CV Type : {cv_type}")
 
@@ -538,8 +539,8 @@ def do_cv(config):
         if cv_type == "property_split":
 
             num_fold = 5
-            train_file_base_name = "train_prop_conj_prop_split.tsv"
-            test_file_base_name = "test_prop_conj_prop_split.tsv"
+            train_file_base_name = "train_prop_conj"
+            test_file_base_name = "test_prop_conj"
 
         elif cv_type == "concept_property_split":
 
@@ -548,7 +549,9 @@ def do_cv(config):
             test_file_base_name = "--------------"
 
         else:
-            raise Exception(f"Specify a Correct Split")
+            raise NameError(
+                "Specify cv_type from : 'concept_split', 'property_split', 'concept_property_split'"
+            )
 
         log.info(f"Number of Folds : {num_fold}")
         log.info(f"Data Dir : {data_dir}")
@@ -562,8 +565,12 @@ def do_cv(config):
             log.info(f"Training the model on Fold : {fold} of {num_fold}")
             log.info("*" * 50)
 
-            train_file_name = os.path.join(data_dir, f"{fold}_{train_file_base_name}")
-            test_file_name = os.path.join(data_dir, f"{fold}_{test_file_base_name}")
+            train_file_name = os.path.join(
+                data_dir, f"{save_prefix}_{fold}_{train_file_base_name}_{cv_type}.tsv"
+            )
+            test_file_name = os.path.join(
+                data_dir, f"{save_prefix}_{fold}_{test_file_base_name}_{cv_type}.tsv"
+            )
 
             log.info(f"Train File Name : {train_file_name}")
             log.info(f"Test File Name : {test_file_name}")
