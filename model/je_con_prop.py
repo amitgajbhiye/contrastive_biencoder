@@ -2,6 +2,7 @@ import logging
 import os
 import sys
 import time
+import pickle
 
 sys.path.insert(0, os.getcwd())
 
@@ -52,6 +53,10 @@ def set_logger(config):
 class DatasetConceptProperty(Dataset):
     def __init__(self, concept_property_file, dataset_params):
 
+        _, file_ext = os.path.splitext(concept_property_file)
+
+        log.info(f"Concept Property File Ext : {file_ext}")
+
         if isinstance(concept_property_file, pd.DataFrame):
 
             self.data_df = concept_property_file
@@ -59,7 +64,7 @@ class DatasetConceptProperty(Dataset):
                 f"Supplied Concept Property File is a Dataframe : {self.data_df.shape}",
             )
 
-        elif os.path.isfile(concept_property_file):
+        elif file_ext in (".tsv"):
 
             log.info(
                 f"Supplied Concept Property File is a Path : {concept_property_file}"
@@ -87,6 +92,41 @@ class DatasetConceptProperty(Dataset):
 
             self.data_df.dropna(inplace=True)
 
+            log.info(f"Loaded Df Shape After NaN : {self.data_df.shape}")
+
+            self.data_df.reset_index(inplace=True, drop=True)
+
+            self.data_df = self.data_df.astype(
+                {"concept": str, "property": str, "label": int}
+            )
+
+            log.info(f"Loaded Daraframe")
+            log.info(self.data_df.head(n=10))
+
+        elif file_ext in (".pkl"):
+
+            log.info(f"File is being loaded from PICKLE")
+
+            with open(concept_property_file, "rb") as inp_file:
+                self.data_df = pickle.load(inp_file)
+
+            self.data_df.rename(
+                columns={
+                    "premise": "concept",
+                    "hypothesis": "property",
+                    "label": "label",
+                },
+                inplace=True,
+            )
+
+            log.info(f"Loaded Df Columns : {self.data_df.columns}")
+
+            log.info(f"Loaded Df Info")
+            log.info(self.data_df.info())
+
+            log.info(f"Do DF contain Nan : {self.data_df.isna().any()}")
+            log.info(f"Loaded Df Shape before NaN : {self.data_df.shape}")
+            self.data_df.dropna(inplace=True)
             log.info(f"Loaded Df Shape After NaN : {self.data_df.shape}")
 
             self.data_df.reset_index(inplace=True, drop=True)
