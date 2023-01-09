@@ -71,10 +71,12 @@ class DatasetConceptProperty(Dataset):
                 sep="|",
                 header=None,
                 names=["concept", "property", "label"],
-                # encoding="utf16",
+                dtype={"concept": str, "property": str, "label": int},
             )
 
             log.info(f"Loaded Df Columns : {self.data_df.columns}")
+            log.info(f"Loaded Df Columns Dtypes: {self.data_df.dtypes}")
+            log.info(f"Loaded Df info {self.data_df.info()}")
 
         else:
             raise TypeError(
