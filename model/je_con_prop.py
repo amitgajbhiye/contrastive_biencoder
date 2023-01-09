@@ -71,6 +71,7 @@ class DatasetConceptProperty(Dataset):
                 sep="|",
                 header=None,
                 names=["concept", "property", "label"],
+                encoding="utf-8",
                 # dtype={"concept": str, "property": str, "label": int},
             )
 
