@@ -72,12 +72,15 @@ class DatasetConceptProperty(Dataset):
                 header=None,
                 names=["concept", "property", "label"],
                 encoding="utf-8",
+                quotechar='\\"'
                 # dtype={"concept": str, "property": str, "label": int},
             )
 
             log.info(f"Loaded Df Columns : {self.data_df.columns}")
             log.info(f"Loaded Df Columns Dtypes: {self.data_df.dtypes}")
-            log.info(f"Loaded Df info {self.data_df.info()}")
+            log.info(f"Loaded Df Info")
+
+            log.info(self.data_df.info())
 
             log.info(f"Do DF contain Nan : {self.data_df.isna().any()}")
             log.info(f"Loaded Df Shape before NaN : {self.data_df.shape}")
