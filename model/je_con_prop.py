@@ -71,7 +71,7 @@ class DatasetConceptProperty(Dataset):
                 sep="\t",
                 header=None,
                 names=["concept", "property", "label"],
-                encoding="utf16",
+                # encoding="utf16",
             )
 
             log.info(f"Loaded Df Columns : {self.data_df.columns}")
