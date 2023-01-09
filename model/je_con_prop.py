@@ -117,7 +117,7 @@ class DatasetConceptProperty(Dataset):
             # log.info(f"Loaded Df Shape before NaN : {self.data_df.shape}")
             # self.data_df.dropna(inplace=True)
             # log.info(f"Loaded Df Shape After NaN : {self.data_df.shape}")
-            # self.data_df.reset_index(inplace=True, drop=True)
+            self.data_df.reset_index(inplace=True, drop=True)
 
             log.info(f"Loaded Daraframe")
             log.info(self.data_df.head(n=10))
