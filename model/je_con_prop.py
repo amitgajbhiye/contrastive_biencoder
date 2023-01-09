@@ -100,11 +100,11 @@ class DatasetConceptProperty(Dataset):
 
         # concept = self.data_df["concept"][idx].replace(".", "").strip()
         # property = self.data_df["property"][idx].replace(".", "").strip()
-        # labels = self.data_df["label"][idx]
+        # labels = int(self.data_df["label"][idx])
 
         concept = self.data_df["concept"][idx]
         property = self.data_df["property"][idx]
-        labels = self.data_df["label"][idx]
+        labels = int(self.data_df["label"][idx])
 
         encoded_dict = self.tokenizer.encode_plus(
             text=concept,
