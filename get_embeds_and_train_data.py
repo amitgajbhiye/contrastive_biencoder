@@ -737,15 +737,23 @@ if __name__ == "__main__":
             split_type = inference_params["split_type"]
             log.info(f"Split Type : {split_type}")
 
-            input_file_base_path = inference_params["fold_file_base_path"]
+            if split_type not in (
+                "concept_split",
+                "property_split",
+                "concept_property_split",
+            ):
+                raise NameError(
+                    "Specify split from : 'concept_split', 'property_split', 'concept_property_split'"
+                )
+
+            fold_file_base_path = inference_params["fold_file_base_path"]
+            save_prefix = inference_params["save_prefix"]
 
             if split_type == "property_split":
                 num_folds = 5
 
                 train_file_suffix = "train_prop_split_con_prop.pkl"
                 test_file_suffix = "test_prop_split_con_prop.pkl"
-
-                input_file_base_path = inference_params["input_file_base_path"]
 
             elif split_type == "concept_property_split":
                 num_folds = 9
@@ -757,10 +765,10 @@ if __name__ == "__main__":
             for fold_num in range(num_folds):
 
                 train_file = os.path.join(
-                    input_file_base_path, f"{fold_num}_{train_file_suffix}"
+                    fold_file_base_path, f"{fold_num}_{train_file_suffix}"
                 )
                 test_file = os.path.join(
-                    input_file_base_path, f"{fold_num}_{test_file_suffix}"
+                    fold_file_base_path, f"{fold_num}_{test_file_suffix}"
                 )
 
                 with open(train_file, "rb") as train_pkl, open(
@@ -770,10 +778,12 @@ if __name__ == "__main__":
                     test_df = pickle.load(test_pkl)
 
                 train_save_file_name = os.path.join(
-                    save_dir, f"{fold_num}_train_prop_conj_prop_split.tsv"
+                    save_dir,
+                    f"{save_prefix}_{fold_num}_train_prop_conj_{split_type}.tsv",
                 )
                 test_save_file_name = os.path.join(
-                    save_dir, f"{fold_num}_test_prop_conj_prop_split.tsv"
+                    save_dir,
+                    f"{save_prefix}_{fold_num}_test_prop_conj_{split_type}.tsv",
                 )
 
                 log.info(f"Fold Number : {fold_num}")
