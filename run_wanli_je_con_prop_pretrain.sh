@@ -15,7 +15,7 @@
 
 ##SBATCH --qos="gpu7d"
 
-#SBATCH -t 1-15:00:00
+#SBATCH -t 00-01:00:00
 
 echo 'This script is running on:'
 hostname

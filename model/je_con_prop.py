@@ -71,9 +71,10 @@ class DatasetConceptProperty(Dataset):
                 sep="\t",
                 header=None,
                 names=["concept", "property", "label"],
+                encoding="utf16",
             )
 
-            log.info(f"Loaded Dataframe Shape: {self.data_df.shape}")
+            log.info(f"Loaded Df Columns : {self.data_df.columns}")
 
         else:
             raise TypeError(
