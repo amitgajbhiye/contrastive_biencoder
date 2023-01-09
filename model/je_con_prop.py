@@ -81,6 +81,10 @@ class DatasetConceptProperty(Dataset):
                 f"Input file type is not correct !!! - {concept_property_file}"
             )
 
+        log.info(f"Loaded Df Shape before NaN : {self.data_df.shape}")
+        self.data_df.dropna(inplace=True)
+        log.info(f"Loaded Df Shape After NaN : {self.data_df.shape}")
+
         log.info(f"Loaded Daraframe")
         log.info(self.data_df.head(n=10))
 
