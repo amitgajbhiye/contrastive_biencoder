@@ -31,7 +31,7 @@
         "concept_file": null,
         "property_file": null,
         "concept_property_file": null,
-        "save_dir": "evaluation_data/prop_conjuction/mcrae/prop_split/10neg75thres",
+        "save_dir": "data/evaluation_data/prop_conjuction/mcrae/prop_split/10neg75thres",
         "get_con_sim_vocab_properties": false,
         "concept_embed_pkl": null,
         "property_embed_pkl": null,
