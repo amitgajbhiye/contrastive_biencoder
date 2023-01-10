@@ -9,13 +9,13 @@
 #SBATCH --ntasks=5
 #SBATCH --account scw1858
 
-#SBATCH --partition gpu,gpu_v100
+#SBATCH --partition gpu_v100
 #SBATCH --mem=15g
 #SBATCH --gres=gpu:1
 
 ##SBATCH --qos="gpu7d"
 
-#SBATCH -t 00-01:00:00
+#SBATCH -t 01-20:00:00
 
 echo 'This script is running on:'
 hostname
