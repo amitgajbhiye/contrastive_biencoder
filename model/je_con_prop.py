@@ -140,6 +140,7 @@ class DatasetConceptProperty(Dataset):
         self.cls_token = self.tokenizer.cls_token
 
         self.context_id = dataset_params["context_id"]
+        log.info(f"Adding Context : {context_templates[self.context_id]}")
 
         self.print_freq = 0
 
@@ -156,7 +157,7 @@ class DatasetConceptProperty(Dataset):
         if self.context_id:
 
             template = context_templates[self.context_id]
-            log.info(f"Adding Context : {template}")
+            # log.info(f"Adding Context : {template}")
 
             concept = template.replace("<con>", concept)
             property = template.replace("<con>", property)
