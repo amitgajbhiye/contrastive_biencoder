@@ -50,6 +50,9 @@ def set_logger(config):
     )
 
 
+context_templates = {1: "It can be described as <con>"}
+
+
 class DatasetConceptProperty(Dataset):
     def __init__(self, concept_property_file, dataset_params):
 
@@ -67,7 +70,7 @@ class DatasetConceptProperty(Dataset):
         elif file_ext in (".tsv"):
 
             log.info(
-                f"Supplied Concept Property File is a Path : {concept_property_file}"
+                f"Supplied Concept Property File is a TSV Path : {concept_property_file}"
             )
             log.info(f"Loading into Dataframe ... ")
 
@@ -136,19 +139,33 @@ class DatasetConceptProperty(Dataset):
         self.sep_token = self.tokenizer.sep_token
         self.cls_token = self.tokenizer.cls_token
 
+        self.context_id = dataset_params["context_id"]
+
+        self.print_freq = 0
+
     def __len__(self):
 
         return len(self.data_df)
 
     def __getitem__(self, idx):
 
-        # concept = self.data_df["concept"][idx].replace(".", "").strip()
-        # property = self.data_df["property"][idx].replace(".", "").strip()
-        # labels = int(self.data_df["label"][idx])
-
         concept = self.data_df["concept"][idx]
         property = self.data_df["property"][idx]
         labels = int(self.data_df["label"][idx])
+
+        if self.context_id:
+
+            template = context_templates[self.context_id]
+            log.info(f"Adding Context : {template}")
+
+            concept = template.replace("<con>", concept)
+            property = template.replace("<con>", property)
+
+        if self.print_freq < 2:
+            print(f"Concept : {concept}", flush=True)
+            print(f"Property : {property}", flush=True)
+            print(flush=True)
+            self.print_freq += 1
 
         encoded_dict = self.tokenizer.encode_plus(
             text=concept,
