@@ -2,8 +2,8 @@
 
 #SBATCH --job-name=wanliCnet5negFilter
 
-#SBATCH --output=logs/data_sampling/out_je_wanli_cnetp5n3g_pretrained_filter_sim_props.txt
-#SBATCH --error=logs/data_sampling/err_je_wanli_cnetp5n3g_pretrained_filter_sim_props.txt
+#SBATCH --output=logs/data_sampling/out_je_wanli_cnetp5neg_pretrained_filter_sim_clean_props.txt
+#SBATCH --error=logs/data_sampling/err_je_wanli_cnetp5neg_pretrained_filter_sim_clean_props.txt
 
 #SBATCH --tasks-per-node=5
 #SBATCH --ntasks=5
@@ -24,7 +24,7 @@ module load anaconda/2020.02
 
 conda activate venv
 
-python3 je_filter_similar_props.py --config_file configs/4_filter_sim_props/je_wanli_pretrained_filter_sim_props.json
+python3 je_filter_similar_props.py --config_file configs/4_filter_sim_props/je_wanli_pretrained_filter_sim_clean_props.json
 
 
 echo 'Job Finished!'
