@@ -141,6 +141,7 @@ class DatasetConceptProperty(Dataset):
 
         self.context_id = dataset_params["context_id"]
         log.info(f"Adding Context : {context_templates[self.context_id]}")
+        print(f"Context ID : {self.context_id}")
 
         self.print_freq = 0
 
