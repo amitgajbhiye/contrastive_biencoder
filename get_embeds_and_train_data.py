@@ -637,15 +637,14 @@ def create_con_only_similar_data(input_file, con_similar_file, save_prefix, save
         )
 
         similar_props = ", ".join(similar_props)
-        print(f"similar_props : {similar_props}", flush=True)
+        # print(f"similar_props : {similar_props}", flush=True)
 
         all_prop_augmented_data.append(
-            (concept, similar_props, similar_props, predict_property, label)
+            (concept, similar_props, predict_property, label)
         )
 
         print(
-            f"Data : {(concept, similar_props, similar_props, predict_property, label)}",
-            flush=True,
+            f"Data : {(concept, similar_props, predict_property, label)}", flush=True,
         )
         print(flush=True)
 
@@ -657,9 +656,6 @@ def create_con_only_similar_data(input_file, con_similar_file, save_prefix, save
 
     print(f"Only Concept Augmented Data Saved in  {save_file_name}", flush=True)
     log.info(f"Only Concept Augmented Data Saved in  {save_file_name}")
-
-
-# create_con_only_similar_data(input_file=input_file, con_similar_file=con_similar_file)
 
 
 if __name__ == "__main__":
