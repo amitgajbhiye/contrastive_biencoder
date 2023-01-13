@@ -549,7 +549,6 @@ def do_cv(config):
 
     cv_type = training_params["cv_type"]
     data_dir = training_params["data_dir"]
-    save_prefix = training_params["save_prefix"]
 
     log.info(f"CV Type : {cv_type}")
 
@@ -558,12 +557,8 @@ def do_cv(config):
         train_file_base_name = "train_mcrae"
         test_file_base_name = "test_mcrae"
 
-        train_file_name = os.path.join(
-            data_dir, f"{save_prefix}_{train_file_base_name}.tsv"
-        )
-        test_file_name = os.path.join(
-            data_dir, f"{save_prefix}_{test_file_base_name}.tsv"
-        )
+        train_file_name = os.path.join(data_dir, f"{train_file_base_name}.tsv")
+        test_file_name = os.path.join(data_dir, f"{test_file_base_name}.tsv")
 
         log.info(f"Train File Name : {train_file_name}")
         log.info(f"Test File Name : {test_file_name}")
