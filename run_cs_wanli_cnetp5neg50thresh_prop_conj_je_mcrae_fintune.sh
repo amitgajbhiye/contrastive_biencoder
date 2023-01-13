@@ -24,6 +24,6 @@ module load anaconda/2020.02
 
 conda activate venv
 
-python3 model/je_con_prop.py --config_file configs/3_finetune/cs_wanli_cnetp5neg50thresh_prop_conj_je_mcrae_fintune.json
+python3 model/je_property_conjuction.py  --config_file configs/3_finetune/cs_wanli_cnetp5neg50thresh_prop_conj_je_mcrae_fintune.json
 
 echo 'Job Finished !!!'
