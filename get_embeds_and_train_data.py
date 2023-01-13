@@ -588,6 +588,80 @@ def get_predict_prop_similar_properties(
     )
 
 
+def create_con_only_similar_data(input_file, con_similar_file, save_prefix, save_dir):
+
+    inp_file_path, inp_file_name = os.path.split(input_file)
+
+    print(f"Input File Path : {inp_file_path}", flush=True)
+    print(f"Input File Name : {inp_file_name}", flush=True)
+
+    log.info(f"Input File Path : {inp_file_path}")
+    log.info(f"Input File Name : {inp_file_name}")
+
+    inp_df = pd.read_csv(
+        input_file, sep="\t", names=["concept", "predict_property", "label"]
+    )
+
+    inp_concepts = inp_df["concept"].unique()
+    num_inp_concepts = len(inp_concepts)
+
+    print(f"Input Data DF", flush=True)
+    print(inp_df)
+    print(f"num_inp_concepts : {num_inp_concepts}", flush=True)
+    print(flush=True)
+
+    con_similar_data = pd.read_csv(
+        con_similar_file, sep="\t", names=["concept", "similar_property"]
+    )
+    con_similar_concepts = con_similar_data["concept"].unique()
+    num_con_similar_concepts = len(con_similar_concepts)
+
+    print(flush=True)
+    print(f"Concept Similar Property File", flush=True)
+    print(con_similar_data, flush=True)
+    print(f"num_con_similar_concepts : {num_con_similar_concepts}", flush=True)
+
+    all_prop_augmented_data = []
+    for idx, (concept, predict_property, label) in enumerate(
+        zip(inp_df["concept"], inp_df["predict_property"], inp_df["label"])
+    ):
+
+        print(
+            f"concept, predict_property, label : {concept, predict_property, label}",
+            flush=True,
+        )
+        similar_props = (
+            con_similar_data[con_similar_data["concept"] == concept]["similar_property"]
+            .unique()
+            .tolist()
+        )
+
+        similar_props = ", ".join(similar_props)
+        print(f"similar_props : {similar_props}", flush=True)
+
+        all_prop_augmented_data.append(
+            (concept, similar_props, similar_props, predict_property, label)
+        )
+
+        print(
+            f"Data : {(concept, similar_props, similar_props, predict_property, label)}",
+            flush=True,
+        )
+        print(flush=True)
+
+    df = pd.DataFrame.from_records(all_prop_augmented_data)
+
+    save_file_name = os.path.join(save_dir, f"{save_prefix}_{inp_file_name}")
+
+    df.to_csv(save_file_name, sep="\t", index=None, header=None)
+
+    print(f"Only Concept Augmented Data Saved in  {save_file_name}", flush=True)
+    log.info(f"Only Concept Augmented Data Saved in  {save_file_name}")
+
+
+# create_con_only_similar_data(input_file=input_file, con_similar_file=con_similar_file)
+
+
 if __name__ == "__main__":
 
     log.info(f"\n {'*' * 50}")
@@ -618,6 +692,7 @@ if __name__ == "__main__":
     get_con_prop_embeds = inference_params["get_con_prop_embeds"]
     get_con_sim_vocab_properties = inference_params["get_con_sim_vocab_properties"]
     get_predict_prop_similar_props = inference_params["get_predict_prop_similar_props"]
+    get_con_only_similar_data = inference_params["con_only_similar_data"]
 
     ######################### Important Flags #########################
 
@@ -627,6 +702,9 @@ if __name__ == "__main__":
     log.info(f"Get Concept Similar Vocab Properties  : {get_con_sim_vocab_properties} ")
     log.info(
         f"Get Predict Similar JE Filtered Properties  : {get_predict_prop_similar_props} "
+    )
+    log.info(
+        f"Get Concept Only Similar Property Conjuction Data : {get_con_only_similar_data}"
     )
 
     if get_con_prop_embeds:
@@ -811,3 +889,33 @@ if __name__ == "__main__":
                     save_file=test_save_file_name,
                     num_prop_conjuct=num_prop_conjuct,
                 )
+
+    if get_con_only_similar_data:
+
+        train_file = inference_params["pretrain_train_file"]
+        valid_file = inference_params["pretrain_valid_file"]
+        con_similar_file = inference_params["concept_similar_prop_file"]
+        save_prefix = inference_params["save_prefix"]
+        save_dir = inference_params["save_dir"]
+
+        log.info(f"train_file  : {train_file}")
+        log.info(f"valid_file  : {valid_file}")
+        log.info(f"con_similar_file  : {con_similar_file}")
+
+        log.info(f"save_prefix  : {save_prefix}")
+        log.info(f"save_dir  : {save_dir}")
+
+        create_con_only_similar_data(
+            input_file=train_file,
+            con_similar_file=con_similar_file,
+            save_prefix=save_prefix,
+            save_dir=save_dir,
+        )
+
+        create_con_only_similar_data(
+            input_file=valid_file,
+            con_similar_file=con_similar_file,
+            save_prefix=save_prefix,
+            save_dir=save_dir,
+        )
+
