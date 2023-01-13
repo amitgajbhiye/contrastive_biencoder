@@ -1,6 +1,6 @@
 {
     "experiment_name": "cs_mcrae_5negcnetp_con_prop_pretrained_finetune",
-    "log_dirctory": "data_sampling",
+    "log_dirctory": "mcrae_finetune",
     "training_params": {
         "dataset_name": "5negcnetp_pretrained_finetune_on_mcrae_con_split",
         "pretrain": false,
