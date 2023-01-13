@@ -549,13 +549,21 @@ def do_cv(config):
 
     cv_type = training_params["cv_type"]
     data_dir = training_params["data_dir"]
+    save_prefix = training_params["save_prefix"]
 
     log.info(f"CV Type : {cv_type}")
 
     if cv_type == "concept_split":
 
-        train_file_name = os.path.join(data_dir, "train_file_name ------")
-        test_file_name = os.path.join(data_dir, "test_file_name ------")
+        train_file_base_name = "train_mcrae"
+        test_file_base_name = "test_mcrae"
+
+        train_file_name = os.path.join(
+            data_dir, f"{save_prefix}_{train_file_base_name}.tsv"
+        )
+        test_file_name = os.path.join(
+            data_dir, f"{save_prefix}_{test_file_base_name}.tsv"
+        )
 
         log.info(f"Train File Name : {train_file_name}")
         log.info(f"Test File Name : {test_file_name}")
@@ -574,7 +582,7 @@ def do_cv(config):
             test_file=test_file_name,
         )
 
-        train(
+        test_preds, test_gold_labels = train(
             training_params,
             model,
             scheduler,
