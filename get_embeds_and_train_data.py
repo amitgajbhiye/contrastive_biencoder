@@ -588,7 +588,9 @@ def get_predict_prop_similar_properties(
     )
 
 
-def create_con_only_similar_data(input_file, con_similar_file, save_prefix, save_dir):
+def create_con_only_similar_data(
+    input_file, con_similar_file, top_k_sim_props, save_prefix, save_dir
+):
 
     inp_file_path, inp_file_name = os.path.split(input_file)
 
@@ -636,8 +638,9 @@ def create_con_only_similar_data(input_file, con_similar_file, save_prefix, save
             .tolist()
         )
 
+        similar_props = similar_props[0:top_k_sim_props]
+
         similar_props = ", ".join(similar_props)
-        # print(f"similar_props : {similar_props}", flush=True)
 
         all_prop_augmented_data.append(
             (concept, similar_props, predict_property, label)
@@ -894,6 +897,8 @@ if __name__ == "__main__":
         save_prefix = inference_params["save_prefix"]
         save_dir = inference_params["save_dir"]
 
+        top_k_sim_props = inference_params["top_k_sim_props"]
+
         log.info(f"train_file  : {train_file}")
         log.info(f"valid_file  : {valid_file}")
         log.info(f"con_similar_file  : {con_similar_file}")
@@ -904,6 +909,7 @@ if __name__ == "__main__":
         create_con_only_similar_data(
             input_file=train_file,
             con_similar_file=con_similar_file,
+            top_k_sim_props=top_k_sim_props,
             save_prefix=save_prefix,
             save_dir=save_dir,
         )
@@ -911,6 +917,7 @@ if __name__ == "__main__":
         create_con_only_similar_data(
             input_file=valid_file,
             con_similar_file=con_similar_file,
+            top_k_sim_props=top_k_sim_props,
             save_prefix=save_prefix,
             save_dir=save_dir,
         )
