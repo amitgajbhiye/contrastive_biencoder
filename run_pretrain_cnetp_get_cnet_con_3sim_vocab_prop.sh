@@ -13,7 +13,7 @@
 ##SBATCH --mem=8g
 ##SBATCH --gres=gpu:1
 
-#SBATCH -p s_highmem_opt
+#SBATCH -p compute
 #SBATCH -t 0-10:00:00
 
 echo 'This script is running on:'
