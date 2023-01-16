@@ -2,8 +2,8 @@
 
 #SBATCH --job-name=conOnlyPretrain
 
-#SBATCH --output=logs/data_sampling/out_run_je_propconj_con_only_similar_prop_cnetp_pretrain.txt
-#SBATCH --error=logs/data_sampling/err_run_je_propconj_con_only_similar_prop_cnetp_pretrain.txt
+#SBATCH --output=logs/pretrain/out_run_je_propconj_con_only_similar_prop_cnetp_pretrain.txt
+#SBATCH --error=logs/pretrain/err_run_je_propconj_con_only_similar_prop_cnetp_pretrain.txt
 
 #SBATCH --tasks-per-node=5
 #SBATCH --ntasks=5
