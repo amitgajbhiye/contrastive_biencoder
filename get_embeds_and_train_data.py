@@ -592,23 +592,26 @@ def create_con_only_similar_data(
     input_file, con_similar_file, top_k_sim_props, save_file,
 ):
 
-    file_name, file_ext = os.path.splitext(input_file)
-
-    log.info(f"Input File Extension : {file_ext}")
-
-    if file_ext in (".txt", ".tsv"):
-        inp_df = pd.read_csv(
-            input_file, sep="\t", names=["concept", "property", "label"]
-        )
-    elif file_ext == ".pkl":
-        with open(input_file, "rb") as pkl_file:
-            inp_df = pickle.load(pkl_file)
-
-    elif isinstance(input_file, pd.DataFrame):
+    if isinstance(input_file, pd.DataFrame):
         inp_df = input_file
+
     else:
-        print((f"Input File Extension is not correct."))
-        log.info(f"Input File Extension is not correct.")
+
+        file_name, file_ext = os.path.splitext(input_file)
+        log.info(f"Input File Extension : {file_ext}")
+
+        if file_ext in (".txt", ".tsv"):
+            inp_df = pd.read_csv(
+                input_file, sep="\t", names=["concept", "property", "label"]
+            )
+        elif file_ext == ".pkl":
+
+            with open(input_file, "rb") as pkl_file:
+                inp_df = pickle.load(pkl_file)
+
+        else:
+            print((f"Input File Extension is not correct."))
+            log.info(f"Input File Extension is not correct.")
 
     inp_df.rename(
         columns={
