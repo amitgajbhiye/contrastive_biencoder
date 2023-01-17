@@ -40,7 +40,7 @@
         "pretrain_data": false,
         "pretrain_train_file": null,
         "pretrain_valid_file": null,
-        "save_prefix": "con_only_2sim",
+        "save_prefix": "con_only_3sim",
         "finetune_data": true,
         "split_type": "property_split",
         "fold_file_base_path": "/scratch/c.scmag3/hawk_data/property_augmentation/data/evaluation_data/con_prop/mcrae_prop_split_train_test_files",
