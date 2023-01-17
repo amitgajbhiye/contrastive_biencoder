@@ -19,7 +19,7 @@
 echo 'This script is running on:'
 hostname
 
-module load anaconda/2020.02
+#module load anaconda/2020.02
 
 #. activate
 
