@@ -589,28 +589,48 @@ def get_predict_prop_similar_properties(
 
 
 def create_con_only_similar_data(
-    input_file, con_similar_file, top_k_sim_props, save_prefix, save_dir
+    input_file, con_similar_file, top_k_sim_props, save_file,
 ):
 
-    inp_file_path, inp_file_name = os.path.split(input_file)
+    file_name, file_ext = os.path.splitext(input_file)
 
-    print(f"Input File Path : {inp_file_path}", flush=True)
-    print(f"Input File Name : {inp_file_name}", flush=True)
+    log.info(f"Input File Extension : {file_ext}")
 
-    log.info(f"Input File Path : {inp_file_path}")
-    log.info(f"Input File Name : {inp_file_name}")
+    if file_ext in (".txt", ".tsv"):
+        inp_df = pd.read_csv(
+            input_file, sep="\t", names=["concept", "property", "label"]
+        )
+    elif file_ext == ".pkl":
+        with open(input_file, "rb") as pkl_file:
+            inp_df = pickle.load(pkl_file)
 
-    inp_df = pd.read_csv(
-        input_file, sep="\t", names=["concept", "predict_property", "label"]
+    elif isinstance(input_file, pd.DataFrame):
+        inp_df = input_file
+    else:
+        print((f"Input File Extension is not correct."))
+        log.info(f"Input File Extension is not correct.")
+
+    inp_df.rename(
+        columns={
+            "concept": "concept",
+            "property": "predict_property",
+            "label": "label",
+        },
+        inplace=True,
     )
+
+    print("*" * 50)
+    print(inp_df.head(n=20))
+    print("*" * 50)
+
+    log.info("*" * 50)
+    log.info(inp_df.head(n=20))
+    log.info("*" * 50)
 
     inp_concepts = inp_df["concept"].unique()
     num_inp_concepts = len(inp_concepts)
 
-    print(f"Input Data DF", flush=True)
-    print(inp_df)
-    print(f"num_inp_concepts : {num_inp_concepts}", flush=True)
-    print(flush=True)
+    log.info(f"num_inp_concepts : {num_inp_concepts}")
 
     con_similar_data = pd.read_csv(
         con_similar_file, sep="\t", names=["concept", "similar_property"]
@@ -653,12 +673,10 @@ def create_con_only_similar_data(
 
     df = pd.DataFrame.from_records(all_prop_augmented_data)
 
-    save_file_name = os.path.join(save_dir, f"{save_prefix}_{inp_file_name}")
+    df.to_csv(save_file, sep="\t", index=None, header=None)
 
-    df.to_csv(save_file_name, sep="\t", index=None, header=None)
-
-    print(f"Only Concept Augmented Data Saved in  {save_file_name}", flush=True)
-    log.info(f"Only Concept Augmented Data Saved in  {save_file_name}")
+    print(f"Only Concept Augmented Data Saved in  {save_file}", flush=True)
+    log.info(f"Only Concept Augmented Data Saved in  {save_file}")
 
 
 if __name__ == "__main__":
@@ -891,34 +909,124 @@ if __name__ == "__main__":
 
     if get_con_only_similar_data:
 
-        train_file = inference_params["pretrain_train_file"]
-        valid_file = inference_params["pretrain_valid_file"]
-        con_similar_file = inference_params["concept_similar_prop_file"]
-        save_prefix = inference_params["save_prefix"]
-        save_dir = inference_params["save_dir"]
+        if pretrain_data:
 
-        top_k_sim_props = inference_params["top_k_sim_props"]
+            log.info(f"Pretrain Data")
 
-        log.info(f"train_file  : {train_file}")
-        log.info(f"valid_file  : {valid_file}")
-        log.info(f"con_similar_file  : {con_similar_file}")
+            train_file = inference_params["pretrain_train_file"]
+            valid_file = inference_params["pretrain_valid_file"]
 
-        log.info(f"save_prefix  : {save_prefix}")
-        log.info(f"save_dir  : {save_dir}")
+            con_similar_file = inference_params["concept_similar_prop_file"]
+            save_prefix = inference_params["save_prefix"]
+            save_dir = inference_params["save_dir"]
 
-        create_con_only_similar_data(
-            input_file=train_file,
-            con_similar_file=con_similar_file,
-            top_k_sim_props=top_k_sim_props,
-            save_prefix=save_prefix,
-            save_dir=save_dir,
-        )
+            top_k_sim_props = inference_params["top_k_sim_props"]
 
-        create_con_only_similar_data(
-            input_file=valid_file,
-            con_similar_file=con_similar_file,
-            top_k_sim_props=top_k_sim_props,
-            save_prefix=save_prefix,
-            save_dir=save_dir,
-        )
+            log.info(f"train_file  : {train_file}")
+            log.info(f"valid_file  : {valid_file}")
+            log.info(f"con_similar_file  : {con_similar_file}")
+
+            log.info(f"save_prefix  : {save_prefix}")
+            log.info(f"save_dir  : {save_dir}")
+
+            create_con_only_similar_data(
+                input_file=train_file,
+                con_similar_file=con_similar_file,
+                top_k_sim_props=top_k_sim_props,
+                save_file="",
+            )
+
+            create_con_only_similar_data(
+                input_file=valid_file,
+                con_similar_file=con_similar_file,
+                top_k_sim_props=top_k_sim_props,
+                save_file="",
+            )
+
+        elif finetune_data:
+
+            split_type = inference_params["split_type"]
+            log.info(f"Split Type : {split_type}")
+
+            if split_type not in (
+                "concept_split",
+                "property_split",
+                "concept_property_split",
+            ):
+                raise NameError(
+                    "Specify split from : 'concept_split', 'property_split', 'concept_property_split'"
+                )
+
+            con_similar_file = inference_params["concept_similar_prop_file"]
+            save_prefix = inference_params["save_prefix"]
+            save_dir = inference_params["save_dir"]
+            top_k_sim_props = inference_params["top_k_sim_props"]
+
+            fold_file_base_path = inference_params["fold_file_base_path"]
+
+            log.info(f"con_similar_file : {con_similar_file}")
+            log.info(f"save_dir : {save_dir}")
+            log.info(f"save_prefix : {save_prefix}")
+            log.info(f"top_k_sim_props : {top_k_sim_props}")
+            log.info(f"fold_file_base_path : {fold_file_base_path}")
+
+            if split_type == "property_split":
+                num_folds = 5
+
+                train_file_suffix = "train_prop_split_con_prop.pkl"
+                test_file_suffix = "test_prop_split_con_prop.pkl"
+
+            elif split_type == "concept_property_split":
+                num_folds = 9
+
+                train_file_suffix = "------------"
+                test_file_suffix = "------------"
+                save_file_suffix = "------------"
+
+            for fold_num in range(num_folds):
+
+                train_file = os.path.join(
+                    fold_file_base_path, f"{fold_num}_{train_file_suffix}"
+                )
+                test_file = os.path.join(
+                    fold_file_base_path, f"{fold_num}_{test_file_suffix}"
+                )
+
+                with open(train_file, "rb") as train_pkl, open(
+                    test_file, "rb"
+                ) as test_pkl:
+
+                    train_df = pickle.load(train_pkl)
+                    test_df = pickle.load(test_pkl)
+
+                train_save_file_name = os.path.join(
+                    save_dir,
+                    f"{save_prefix}_{fold_num}_train_prop_conj_{split_type}.tsv",
+                )
+                test_save_file_name = os.path.join(
+                    save_dir,
+                    f"{save_prefix}_{fold_num}_test_prop_conj_{split_type}.tsv",
+                )
+
+                log.info(f"Fold Number : {fold_num}")
+                log.info(f"Train File : {train_file}")
+                log.info(f"Test FIle : {test_file}")
+
+                print(f"Fold Number : {fold_num}")
+                print(f"Train File : {train_file}")
+                print(f"Test FIle : {test_file}")
+
+                create_con_only_similar_data(
+                    input_file=train_df,
+                    con_similar_file=con_similar_file,
+                    top_k_sim_props=top_k_sim_props,
+                    save_file=train_save_file_name,
+                )
+
+                create_con_only_similar_data(
+                    input_file=test_df,
+                    con_similar_file=con_similar_file,
+                    top_k_sim_props=top_k_sim_props,
+                    save_file=test_save_file_name,
+                )
 
