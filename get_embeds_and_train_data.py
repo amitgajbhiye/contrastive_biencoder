@@ -909,6 +909,9 @@ if __name__ == "__main__":
 
     if get_con_only_similar_data:
 
+        pretrain_data = inference_params["pretrain_data"]
+        finetune_data = inference_params["finetune_data"]
+
         if pretrain_data:
 
             log.info(f"Pretrain Data")
