@@ -2,8 +2,8 @@
 
 #SBATCH --job-name=MscgCnetPConSim50Props
 
-#SBATCH --output=logs/embeddings/out_get_mscg_cnet_con_50sim_vocab_prop.txt
-#SBATCH --error=logs/embeddings/err_get_mscg_cnet_con_50sim_vocab_prop.txt
+#SBATCH --output=logs/data_sampling/out_get_mscg_cnet_con_50sim_vocab_prop.txt
+#SBATCH --error=logs/data_sampling/err_get_mscg_cnet_con_50sim_vocab_prop.txt
 
 #SBATCH --tasks-per-node=5
 #SBATCH --ntasks=5

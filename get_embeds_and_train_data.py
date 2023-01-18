@@ -10,6 +10,7 @@ import numpy as np
 
 import torch
 
+import nltk
 from nltk.stem import WordNetLemmatizer
 from utils.functions import (
     create_model,
@@ -24,6 +25,8 @@ log = logging.getLogger(__name__)
 cuda_available = torch.cuda.is_available()
 
 device = torch.device("cuda") if cuda_available else torch.device("cpu")
+
+nltk.data.path.append("/scratch/c.scmag3/")
 
 
 def preprocess_get_embedding_data(config):
