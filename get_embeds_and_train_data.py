@@ -26,7 +26,7 @@ cuda_available = torch.cuda.is_available()
 
 device = torch.device("cuda") if cuda_available else torch.device("cpu")
 
-nltk.data.path.append("/scratch/c.scmag3/")
+nltk.data.path.append("/scratch/c.scmag3/nltk_data")
 
 
 def preprocess_get_embedding_data(config):
