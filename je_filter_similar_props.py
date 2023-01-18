@@ -233,7 +233,9 @@ if __name__ == "__main__":
             filtered_data_filename, "w"
         ) as entailed_file:
 
-            for concept, property in zip(test_df["concept"], test_df["property"]):
+            for i, (concept, property) in enumerate(
+                zip(test_df["concept"], test_df["property"])
+            ):
 
                 input = tokenizer(
                     concept, property, truncation=True, return_tensors="pt"
@@ -254,6 +256,10 @@ if __name__ == "__main__":
                     "{0}\t{1}\t{2}\t{3}{4}".format(
                         concept, property, prediction_dict, predicted_class, "\n"
                     )
+                )
+
+                print(
+                    i, concept, property, prediction_dict, predicted_class,
                 )
 
                 if predicted_class == "entailment":
