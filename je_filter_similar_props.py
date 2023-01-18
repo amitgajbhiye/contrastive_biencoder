@@ -11,6 +11,8 @@ import torch
 from model.je_con_prop import prepare_data_and_models
 from utils.je_utils import read_config
 
+from transformers import AutoTokenizer, AutoModelForSequenceClassification
+
 
 def set_logger(config):
 
@@ -115,6 +117,7 @@ if __name__ == "__main__":
     pretrained_model_path = training_params["pretrained_model_path"]
     pretrained_model_num_neg = training_params["pretrained_model_num_neg"]
     dataset_name = training_params["dataset_name"]
+    pretrained_model_to_use = training_params["pretrained_model_to_use"]
 
     log.info(f"Test File : {test_file}")
     log.info(f"Filtering Threshold : {threshold}")
@@ -122,72 +125,140 @@ if __name__ == "__main__":
     log.info(f"pretrained_model_num_neg : {pretrained_model_num_neg}")
     log.info(f"Pretrained Model Path : {pretrained_model_path}")
 
-    test_df = pd.read_csv(
-        test_file, sep="\t", header=None, names=["concept", "property", "label"],
-    )
+    if pretrained_model_to_use == "je_con_prop":
 
-    log.info(f"Test Df")
-    log.info(test_df)
+        test_df = pd.read_csv(
+            test_file, sep="\t", header=None, names=["concept", "property", "label"],
+        )
 
-    model, test_dataloader = prepare_data_and_models(
-        config=config, train_file=None, valid_file=None, test_file=test_file
-    )
+        log.info(f"Test Df")
+        log.info(test_df)
 
-    loss, accuracy, predictions, logit = predict(
-        model=model, test_dataloader=test_dataloader
-    )
+        model, test_dataloader = prepare_data_and_models(
+            config=config, train_file=None, valid_file=None, test_file=test_file
+        )
 
-    positive_class_logits = [l[1] for l in logit]
+        loss, accuracy, predictions, logit = predict(
+            model=model, test_dataloader=test_dataloader
+        )
 
-    log.info(f"Number of Logits : {len(positive_class_logits)}")
+        positive_class_logits = [l[1] for l in logit]
 
-    assert test_df.shape[0] == len(
-        positive_class_logits
-    ), "length of test dataframe is not equal to logits"
+        log.info(f"Number of Logits : {len(positive_class_logits)}")
 
-    new_test_dataframe = test_df.copy(deep=True)
-    new_test_dataframe.drop("label", axis=1, inplace=True)
-    new_test_dataframe["logit"] = positive_class_logits
+        assert test_df.shape[0] == len(
+            positive_class_logits
+        ), "length of test dataframe is not equal to logits"
 
-    log.info(f"new_test_dataframe")
-    log.info(new_test_dataframe.head(n=20))
+        new_test_dataframe = test_df.copy(deep=True)
+        new_test_dataframe.drop("label", axis=1, inplace=True)
+        new_test_dataframe["logit"] = positive_class_logits
 
-    all_logit_filename = os.path.join(
-        save_dir,
-        f"{pretrained_model_num_neg}neg_with_logits_all_data_{dataset_name}_con_50sim_vocab_prop.tsv",
-    )
-    new_test_dataframe.to_csv(
-        all_logit_filename, sep="\t", index=None, header=None, float_format="%.5f"
-    )
+        log.info(f"new_test_dataframe")
+        log.info(new_test_dataframe.head(n=20))
 
-    log.info(f"All Data - Dataframe With Logits")
-    log.info(new_test_dataframe.head(n=20))
+        all_logit_filename = os.path.join(
+            save_dir,
+            f"{pretrained_model_num_neg}neg_with_logits_all_data_{dataset_name}_con_50sim_vocab_prop.tsv",
+        )
+        new_test_dataframe.to_csv(
+            all_logit_filename, sep="\t", index=None, header=None, float_format="%.5f"
+        )
 
-    df_with_threshold = new_test_dataframe[new_test_dataframe["logit"] > threshold]
+        log.info(f"All Data - Dataframe With Logits")
+        log.info(new_test_dataframe.head(n=20))
 
-    with_threshold_logit_filename = os.path.join(
-        save_dir,
-        f"{pretrained_model_num_neg}neg{threshold}thres_with_logits_{dataset_name}_con_50sim_vocab_prop.tsv",
-    )
+        df_with_threshold = new_test_dataframe[new_test_dataframe["logit"] > threshold]
 
-    df_with_threshold.to_csv(
-        with_threshold_logit_filename,
-        sep="\t",
-        index=None,
-        header=None,
-        float_format="%.5f",
-    )
+        with_threshold_logit_filename = os.path.join(
+            save_dir,
+            f"{pretrained_model_num_neg}neg{threshold}thres_with_logits_{dataset_name}_con_50sim_vocab_prop.tsv",
+        )
 
-    log.info(f"Threshold {threshold} Data - Dataframe With Logits")
-    log.info(df_with_threshold.head(n=20))
+        df_with_threshold.to_csv(
+            with_threshold_logit_filename,
+            sep="\t",
+            index=None,
+            header=None,
+            float_format="%.5f",
+        )
 
-    df_with_threshold.drop(labels="logit", axis=1, inplace=True)
-    logit_filename = os.path.join(
-        save_dir,
-        f"{pretrained_model_num_neg}neg{threshold}thres_without_logits_conprop_{dataset_name}_con_50sim_vocab_prop.tsv",
-    )
-    df_with_threshold.to_csv(logit_filename, sep="\t", index=None, header=None)
+        log.info(f"Threshold {threshold} Data - Dataframe With Logits")
+        log.info(df_with_threshold.head(n=20))
 
-    log.info(f"Data after logit column is dropped")
-    log.info(df_with_threshold.head(n=20))
+        df_with_threshold.drop(labels="logit", axis=1, inplace=True)
+        logit_filename = os.path.join(
+            save_dir,
+            f"{pretrained_model_num_neg}neg{threshold}thres_without_logits_conprop_{dataset_name}_con_50sim_vocab_prop.tsv",
+        )
+        df_with_threshold.to_csv(logit_filename, sep="\t", index=None, header=None)
+
+        log.info(f"Data after logit column is dropped")
+        log.info(df_with_threshold.head(n=20))
+
+    elif pretrained_model_to_use == "nli":
+
+        nli_tokenizer_path = training_params["nli_tokenizer_path"]
+        nli_model_path = training_params["nli_model_path"]
+
+        tokenizer = AutoTokenizer.from_pretrained(nli_tokenizer_path)
+        model = AutoModelForSequenceClassification.from_pretrained(nli_model_path).to(
+            device
+        )
+
+        test_df = pd.read_csv(
+            test_file, sep="\t", header=None, names=["concept", "property"],
+        )
+
+        log.info(f"Test Df")
+        log.info(test_df)
+
+        all_data_filename = os.path.join(
+            save_dir,
+            f"{pretrained_model_num_neg}_nli_{dataset_name}_with_all_classess.tsv",
+        )
+
+        filtered_data_filename = os.path.join(
+            save_dir,
+            f"{pretrained_model_num_neg}_nli_{dataset_name}_with_entailed_class.tsv",
+        )
+
+        log.info(f"all_data_filename : {all_data_filename}")
+        log.info(f"filtered_data_filename : {filtered_data_filename}")
+
+        label_names = ["entailment", "neutral", "contradiction"]
+        id2label = {id: label for id, label in enumerate(label_names)}
+
+        with open(all_data_filename, "w") as all_file, open(
+            filtered_data_filename
+        ) as entailed_file:
+
+            for concept, property in zip(test_df["concept"], test_df["property"]):
+
+                input = tokenizer(
+                    concept, property, truncation=True, return_tensors="pt"
+                )
+
+                output = model(input["input_ids"].to(device))
+
+                prediction = torch.softmax(output["logits"][0], -1).tolist()
+                prediction = [round(float(pred) * 100, 1) for pred in prediction]
+
+                predicted_class = id2label[np.argmax(prediction, axis=0)]
+
+                prediction_dict = {
+                    name: pred for pred, name in zip(prediction, label_names)
+                }
+
+                all_file.write(
+                    "{0}\t{1}\t{2}\t{3}\t{4}".format(
+                        concept, property, prediction_dict, predicted_class, "\n"
+                    )
+                )
+
+                if predicted_class == "entailment":
+                    entailed_file.write("{0}\t{1}".format(concept, property))
+
+        log.info(f"All data with NLI classes saved in : {all_data_filename}")
+        log.info(f"Entailed data saved in : {filtered_data_filename}")
 

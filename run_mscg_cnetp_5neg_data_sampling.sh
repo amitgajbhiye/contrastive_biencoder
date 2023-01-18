@@ -1,6 +1,6 @@
 #!/bin/bash --login
 
-#SBATCH --job-name=mscgCnetpNegDataSampling
+#SBATCH --job-name=5negDataMSCG_CNETP
 
 #SBATCH --output=logs/data_sampling/out_mscg_cnetp_neg_data_sampling_for_conprop_je_enc.txt
 #SBATCH --error=logs/data_sampling/err_mscg_cnetp_neg_data_sampling_for_conprop_je_enc.txt
@@ -13,7 +13,7 @@
 ##SBATCH --mem=8g
 ##SBATCH --gres=gpu:1
 
-#SBATCH -t 0-05:00:00
+#SBATCH -t 0-10:00:00
 
 echo 'This script is running on:' hostname
 
