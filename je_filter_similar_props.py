@@ -208,7 +208,7 @@ if __name__ == "__main__":
 
         test_df = pd.read_csv(
             test_file, sep="\t", header=None, names=["concept", "property"],
-        )[0:1000]
+        )
 
         log.info(f"Test Df")
         log.info(test_df)
