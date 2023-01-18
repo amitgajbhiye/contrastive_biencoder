@@ -259,7 +259,7 @@ if __name__ == "__main__":
                 )
 
                 print(
-                    i, concept, property, prediction_dict, predicted_class,
+                    i, concept, property, prediction_dict, predicted_class, flush=True
                 )
 
                 if predicted_class == "entailment":
