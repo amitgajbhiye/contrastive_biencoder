@@ -251,13 +251,13 @@ if __name__ == "__main__":
                 }
 
                 all_file.write(
-                    "{0}\t{1}\t{2}\t{3}\t{4}".format(
+                    "{0}\t{1}\t{2}\t{3}{4}".format(
                         concept, property, prediction_dict, predicted_class, "\n"
                     )
                 )
 
                 if predicted_class == "entailment":
-                    entailed_file.write("{0}\t{1}".format(concept, property))
+                    entailed_file.write("{0}\t{1}{2}".format(concept, property, "\n"))
 
         log.info(f"All data with NLI classes saved in : {all_data_filename}")
         log.info(f"Entailed data saved in : {filtered_data_filename}")
