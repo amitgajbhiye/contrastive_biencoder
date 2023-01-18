@@ -230,7 +230,7 @@ if __name__ == "__main__":
         id2label = {id: label for id, label in enumerate(label_names)}
 
         with open(all_data_filename, "w") as all_file, open(
-            filtered_data_filename
+            filtered_data_filename, "w"
         ) as entailed_file:
 
             for concept, property in zip(test_df["concept"], test_df["property"]):
