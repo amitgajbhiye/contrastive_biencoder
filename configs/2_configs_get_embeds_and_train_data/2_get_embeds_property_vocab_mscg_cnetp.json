@@ -1,6 +1,6 @@
 {
     "experiment_name": "get_embeds_property_vocab_mscg_cnetp",
-    "log_dirctory": "data_sampling",
+    "log_dirctory": "embeddings",
     "dataset_params": {
         "dataset_name": "mscg_cnetp_property_vocab",
         "train_file_path": null,
@@ -25,7 +25,7 @@
         "vector_strategy": "mask_token"
     },
     "inference_params": {
-        "pretrained_model_path": "/scratch/c.scmag3/hawk_data/biencoder_concept_property/trained_models/gkb_source_analysis/bb_gkb_cnet_plus_cnet_has_property.pt",
+        "pretrained_model_path": "/scratch/c.scmag3/hawk_data/biencoder_concept_property/trained_models/gkb_source_analysis/bb_gkb_cnet_plus_cnet_has_property_plus_mscg.pt",
         "get_con_prop_embeds": true,
         "input_data_type": "property",
         "concept_file": null,
