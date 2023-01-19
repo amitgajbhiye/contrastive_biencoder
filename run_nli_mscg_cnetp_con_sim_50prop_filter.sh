@@ -2,8 +2,8 @@
 
 #SBATCH --job-name=nliFilSim
 
-#SBATCH --output=logs/data_sampling/out_bs_nli_mscg_cnetp_con_sim_50prop_filter.txt
-#SBATCH --error=logs/data_sampling/err_bs_nli_mscg_cnetp_con_sim_50prop_filter.txt
+#SBATCH --output=logs/data_sampling/out_nli_mscg_cnetp_con_sim_50prop_filter.txt
+#SBATCH --error=logs/data_sampling/err_nli_mscg_cnetp_con_sim_50prop_filter.txt
 
 #SBATCH --tasks-per-node=5
 #SBATCH --ntasks=5
@@ -15,8 +15,7 @@
 
 #SBATCH --gres=gpu:1
 
-#SBATCH -t 0-02:00:00
-
+#SBATCH -t 2-00:00:00
 
 echo 'This script is running on:' hostname
 

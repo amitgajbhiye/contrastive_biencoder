@@ -210,7 +210,7 @@ if __name__ == "__main__":
 
         test_df = pd.read_csv(
             test_file, sep="\t", header=None, names=["concept", "property"],
-        )[0:10000]
+        )
 
         log.info(f"Test Df")
         log.info(test_df)
@@ -254,10 +254,8 @@ if __name__ == "__main__":
                     return_tensors="pt",
                 )
 
-                # with torch.no_grad():
-                #     output = model(input["input_ids"].to(device))
-
-                output = model(input["input_ids"].to(device))
+                with torch.no_grad():
+                    output = model(input["input_ids"].to(device))
 
                 probs = torch.softmax(output["logits"], -1)
                 conf = [torch.round(pred * 100) for pred in probs]
@@ -283,38 +281,38 @@ if __name__ == "__main__":
 
                         entailed_file.write("{0}\n".format(con_prop_entailed))
 
-            # for i, (concept, property) in enumerate(
-            #     zip(test_df["concept"], test_df["property"])
-            # ):
-
-            #     input = tokenizer(
-            #         concept, property, truncation=True, return_tensors="pt"
-            #     )
-
-            #     output = model(input["input_ids"].to(device))
-
-            #     prediction = torch.softmax(output["logits"][0], -1).tolist()
-            #     prediction = [round(float(pred) * 100, 1) for pred in prediction]
-
-            #     predicted_class = id2label[np.argmax(prediction, axis=0)]
-
-            #     prediction_dict = {
-            #         name: pred for pred, name in zip(prediction, label_names)
-            #     }
-
-            #     all_file.write(
-            #         "{0}\t{1}\t{2}\t{3}{4}".format(
-            #             concept, property, prediction_dict, predicted_class, "\n"
-            #         )
-            #     )
-
-            #     print(
-            #         i, concept, property, prediction_dict, predicted_class, flush=True
-            #     )
-
-            #     if predicted_class == "entailment":
-            #         entailed_file.write("{0}\t{1}{2}".format(concept, property, "\n"))
-
         log.info(f"All data with NLI classes saved in : {all_data_filename}")
         log.info(f"Entailed data saved in : {filtered_data_filename}")
+
+        # for i, (concept, property) in enumerate(
+        #     zip(test_df["concept"], test_df["property"])
+        # ):
+
+        #     input = tokenizer(
+        #         concept, property, truncation=True, return_tensors="pt"
+        #     )
+
+        #     output = model(input["input_ids"].to(device))
+
+        #     prediction = torch.softmax(output["logits"][0], -1).tolist()
+        #     prediction = [round(float(pred) * 100, 1) for pred in prediction]
+
+        #     predicted_class = id2label[np.argmax(prediction, axis=0)]
+
+        #     prediction_dict = {
+        #         name: pred for pred, name in zip(prediction, label_names)
+        #     }
+
+        #     all_file.write(
+        #         "{0}\t{1}\t{2}\t{3}{4}".format(
+        #             concept, property, prediction_dict, predicted_class, "\n"
+        #         )
+        #     )
+
+        #     print(
+        #         i, concept, property, prediction_dict, predicted_class, flush=True
+        #     )
+
+        #     if predicted_class == "entailment":
+        #         entailed_file.write("{0}\t{1}{2}".format(concept, property, "\n"))
 

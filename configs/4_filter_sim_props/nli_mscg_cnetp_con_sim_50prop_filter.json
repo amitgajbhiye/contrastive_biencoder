@@ -13,7 +13,7 @@
         "finetune": true,
         "load_pretrained": false,
         "pretrained_model_path": null,
-        "pretrained_model_num_neg": "bs_deberta_v3_large",
+        "pretrained_model_num_neg": "deberta_v3_large",
         "threshold": null,
         "cv_type": null,
         "data_dir": null,
