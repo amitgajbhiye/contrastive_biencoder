@@ -10,7 +10,8 @@
 #SBATCH --account scw1858
 
 #SBATCH -p gpu
-#SBATCH --mem=15g
+#SBATCH --mem=0
+
 #SBATCH --gres=gpu:1
 
 #SBATCH -t 0-02:00:00
