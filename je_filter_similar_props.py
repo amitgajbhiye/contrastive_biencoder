@@ -231,6 +231,8 @@ if __name__ == "__main__":
         label_names = ["entailment", "neutral", "contradiction"]
         id2label = {id: label for id, label in enumerate(label_names)}
 
+        batch_counter = 0
+
         with open(all_data_filename, "w") as all_file, open(
             filtered_data_filename, "w"
         ) as entailed_file:
@@ -238,7 +240,7 @@ if __name__ == "__main__":
             for idx in range(0, len(test_df), batch_size):
 
                 log.info(
-                    f"Processing Batch : {idx} / {ceil(len(test_df) / batch_size)}"
+                    f"Processing Batch : {batch_counter} / {ceil(len(test_df) / batch_size)}"
                 )
 
                 end_idx = idx + batch_size
@@ -280,6 +282,9 @@ if __name__ == "__main__":
                         con_prop_entailed = "\t".join(con_prop_entailed)
 
                         entailed_file.write("{0}\n".format(con_prop_entailed))
+
+                batch_counter += 1
+                log.info(f"Records Processed:  {end_idx} / {len(test_df)}")
 
         log.info(f"All data with NLI classes saved in : {all_data_filename}")
         log.info(f"Entailed data saved in : {filtered_data_filename}")
