@@ -17,7 +17,7 @@
         "threshold": null,
         "cv_type": null,
         "data_dir": null,
-        "batch_size": 512,
+        "batch_size": 64,
         "lr": null,
         "max_epochs": 0,
         "num_warmup_steps": 0,
