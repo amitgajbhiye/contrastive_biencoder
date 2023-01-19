@@ -3,7 +3,7 @@
 #SBATCH --job-name=nliFilSim
 
 #SBATCH --output=logs/data_sampling/out_bs_nli_mscg_cnetp_con_sim_50prop_filter.txt
-#SBATCH --error=logs/data_sampling/err_nli_mscg_cnetp_con_sim_50prop_filter.txt
+#SBATCH --error=logs/data_sampling/err_bs_nli_mscg_cnetp_con_sim_50prop_filter.txt
 
 #SBATCH --tasks-per-node=5
 #SBATCH --ntasks=5

@@ -272,7 +272,7 @@ if __name__ == "__main__":
 
                     line_to_write = "\t".join(item)
                     all_file.write("{0}\n".format(line_to_write))
-                    print(line_to_write)
+                    print(line_to_write, flush=True)
 
                     if item[3] == "entailment":
 
