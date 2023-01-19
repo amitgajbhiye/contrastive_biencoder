@@ -254,8 +254,10 @@ if __name__ == "__main__":
                     return_tensors="pt",
                 )
 
-                with torch.no_grad():
-                    output = model(input["input_ids"].to(device))
+                # with torch.no_grad():
+                #     output = model(input["input_ids"].to(device))
+
+                output = model(input["input_ids"].to(device))
 
                 probs = torch.softmax(output["logits"], -1)
                 conf = [torch.round(pred * 100) for pred in probs]
