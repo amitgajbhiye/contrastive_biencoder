@@ -10,8 +10,8 @@
 #SBATCH --account scw1858
 
 #SBATCH -p gpu
-#SBATCH --mem=0
-#SBATCH --exclusive
+#SBATCH --mem=25G
+##SBATCH --exclusive
 
 #SBATCH --gres=gpu:1
 
@@ -24,6 +24,5 @@ echo 'This script is running on:' hostname
 conda activate venv
 
 python3 je_filter_similar_props.py --config_file configs/4_filter_sim_props/nli_mscg_cnetp_con_sim_50prop_filter.json
-
 
 echo 'Job Finished!'
