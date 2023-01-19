@@ -10,7 +10,7 @@
 #SBATCH --account scw1858
 
 #SBATCH -p gpu
-#SBATCH --mem=0
+#SBATCH --mem=20G
 
 #SBATCH --gres=gpu:1
 
