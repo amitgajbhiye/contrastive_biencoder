@@ -629,20 +629,25 @@ def create_con_only_similar_data(
         inplace=True,
     )
 
-    print("*" * 50)
-    print(inp_df.shape)
-    print(inp_df.head(n=20))
-    print("*" * 50)
-
-    log.info("*" * 50)
-    log.info(inp_df.shape)
-    log.info(inp_df.head(n=20))
-    log.info("*" * 50)
-
     inp_concepts = inp_df["concept"].unique()
     num_inp_concepts = len(inp_concepts)
 
+    print(flush=True)
+    print("*" * 50)
+    print(f"Input File : {input_file}")
+    print(inp_df.shape)
+    print(f"num_inp_concepts : {num_inp_concepts}", flush=True)
+    print(inp_df.head(n=20))
+    print("*" * 50)
+    print(flush=True)
+
+    log.info("*" * 50)
+    log.info(inp_df.shape)
     log.info(f"num_inp_concepts : {num_inp_concepts}")
+    log.info(inp_df.head(n=20))
+    log.info("*" * 50)
+
+    #############################
 
     con_similar_data = pd.read_csv(
         con_similar_file, sep="\t", names=["concept", "similar_property"]
@@ -651,9 +656,11 @@ def create_con_only_similar_data(
     num_con_similar_concepts = len(con_similar_concepts)
 
     print(flush=True)
-    print(f"Concept Similar Property File", flush=True)
+    print("*" * 50, flush=True)
+    print(f"Concept Similar Property File : {con_similar_file}", flush=True)
     print(con_similar_data, flush=True)
     print(f"num_con_similar_concepts : {num_con_similar_concepts}", flush=True)
+    print("*" * 50)
 
     all_prop_augmented_data, concepts_with_no_similar_props = [], []
 
