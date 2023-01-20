@@ -601,6 +601,7 @@ def create_con_only_similar_data(
     else:
 
         file_name, file_ext = os.path.splitext(input_file)
+
         log.info(f"Input File Extension : {file_ext}")
 
         if file_ext in (".txt", ".tsv"):
@@ -626,10 +627,12 @@ def create_con_only_similar_data(
     )
 
     print("*" * 50)
+    print(inp_df.shape)
     print(inp_df.head(n=20))
     print("*" * 50)
 
     log.info("*" * 50)
+    log.info(inp_df.shape)
     log.info(inp_df.head(n=20))
     log.info("*" * 50)
 
@@ -649,38 +652,63 @@ def create_con_only_similar_data(
     print(con_similar_data, flush=True)
     print(f"num_con_similar_concepts : {num_con_similar_concepts}", flush=True)
 
-    all_prop_augmented_data = []
+    all_prop_augmented_data, concepts_with_no_similar_props = [], []
+
     for idx, (concept, predict_property, label) in enumerate(
         zip(inp_df["concept"], inp_df["predict_property"], inp_df["label"])
     ):
 
+        print(f"Processing concept : {idx} / {len(inp_df)}", flush=True)
         print(
             f"concept, predict_property, label : {concept, predict_property, label}",
             flush=True,
         )
-        similar_props = (
-            con_similar_data[con_similar_data["concept"] == concept]["similar_property"]
-            .unique()
-            .tolist()
-        )
 
-        similar_props = similar_props[0:top_k_sim_props]
+        if concept not in set(con_similar_concepts):
 
-        similar_props = ", ".join(similar_props)
+            similar_props = "no_similar_property"
+            concepts_with_no_similar_props.append(concept)
 
-        all_prop_augmented_data.append(
-            (concept, similar_props, predict_property, label)
-        )
+            print(f"Concept : {concept}, has no similar properties", flush=True)
+            print(flush=True)
 
-        print(
-            f"Data : {(concept, similar_props, predict_property, label)}", flush=True,
-        )
-        print(flush=True)
+            all_prop_augmented_data.append(
+                (concept, similar_props, predict_property, label)
+            )
+
+            continue
+        else:
+
+            similar_props = (
+                con_similar_data[con_similar_data["concept"] == concept][
+                    "similar_property"
+                ]
+                .unique()
+                .tolist()
+            )
+
+            similar_props = similar_props[0:top_k_sim_props]
+
+            similar_props = ", ".join(similar_props)
+
+            all_prop_augmented_data.append(
+                (concept, similar_props, predict_property, label)
+            )
+
+            print(
+                f"Data : {(concept, similar_props, predict_property, label)}",
+                flush=True,
+            )
+            print(flush=True)
 
     df = pd.DataFrame.from_records(all_prop_augmented_data)
 
     df.to_csv(save_file, sep="\t", index=None, header=None)
 
+    print(
+        f"num concepts_with_no_similar_props : {len(set(concepts_with_no_similar_props))}"
+    )
+    print(f"concepts_with_no_similar_props : {set(concepts_with_no_similar_props)}")
     print(f"Only Concept Augmented Data Saved in  {save_file}", flush=True)
     log.info(f"Only Concept Augmented Data Saved in  {save_file}")
 
@@ -938,18 +966,25 @@ if __name__ == "__main__":
             log.info(f"save_prefix  : {save_prefix}")
             log.info(f"save_dir  : {save_dir}")
 
+            train_save_file_name = os.path.join(
+                save_dir, f"{save_prefix}_pretrain_train_prop_conj.tsv",
+            )
+            valid_save_file_name = os.path.join(
+                save_dir, f"{save_prefix}_pretrain_valid_prop_conj.tsv",
+            )
+
             create_con_only_similar_data(
                 input_file=train_file,
                 con_similar_file=con_similar_file,
                 top_k_sim_props=top_k_sim_props,
-                save_file="",
+                save_file=train_save_file_name,
             )
 
             create_con_only_similar_data(
                 input_file=valid_file,
                 con_similar_file=con_similar_file,
                 top_k_sim_props=top_k_sim_props,
-                save_file="",
+                save_file=valid_save_file_name,
             )
 
         elif finetune_data:
