@@ -451,7 +451,7 @@ def get_predict_prop_similar_properties(
     no_similar_prop_concept = set(input_concepts).difference(set(je_filtered_concepts))
 
     print(
-        f"Concepts with no similar properties : {len(no_similar_prop_concept)} - {no_similar_prop_concept}"
+        f"Concepts with no similar properties : {len(no_similar_prop_concept)} , {no_similar_prop_concept}"
     )
 
     with open(prop_vocab_embed_pkl, "rb") as prop_vocab_pkl:
