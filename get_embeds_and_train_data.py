@@ -606,7 +606,10 @@ def create_con_only_similar_data(
 
         if file_ext in (".txt", ".tsv"):
             inp_df = pd.read_csv(
-                input_file, sep="\t", names=["concept", "property", "label"]
+                input_file,
+                sep="\t",
+                names=["concept", "property", "label"],
+                dtype={"concept": str, "property": str, "label": int},
             )
         elif file_ext == ".pkl":
 
@@ -670,6 +673,10 @@ def create_con_only_similar_data(
             concepts_with_no_similar_props.append(concept)
 
             print(f"Concept : {concept}, has no similar properties", flush=True)
+            print(
+                f"Augmented Data : {(concept, similar_props, predict_property, label)}",
+                flush=True,
+            )
             print(flush=True)
 
             all_prop_augmented_data.append(
@@ -696,12 +703,15 @@ def create_con_only_similar_data(
             )
 
             print(
-                f"Data : {(concept, similar_props, predict_property, label)}",
+                f"Augmented Data : {(concept, similar_props, predict_property, label)}",
                 flush=True,
             )
             print(flush=True)
 
     df = pd.DataFrame.from_records(all_prop_augmented_data)
+
+    print(f"Data After Augmentation : {df.shape}", flush=True)
+    print(df, flush=True)
 
     df.to_csv(save_file, sep="\t", index=None, header=None)
 
