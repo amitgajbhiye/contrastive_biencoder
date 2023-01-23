@@ -130,7 +130,7 @@ class DatasetPropConjuction(Dataset):
         concept = self.data_df["concept"][idx].replace(".", "").strip()
         conjuct_props = self.data_df["conjuct_prop"][idx].strip()
         predict_prop = self.data_df["predict_prop"][idx].replace(".", "").strip()
-        labels = torch.tensor(self.data_df["labels"][idx], dtype=torch.float32)
+        labels = torch.tensor(self.data_df["labels"][idx])
 
         # print(f"Data Row : {self.data_df[idx].to_list()}", flush=True)
 
@@ -307,8 +307,9 @@ class ModelPropConjuctionJoint(nn.Module):
             print(f"Labels Shape :{labels.shape}")
 
             print(f"mask_logits : {mask_logits}")
+            print(f"labels : {labels}")
 
-            mask_loss = loss_fct(mask_logits, labels)
+            mask_loss = loss_fct(mask_logits, labels.float())
 
             print("Mask Loss : {mask_loss}")
 
