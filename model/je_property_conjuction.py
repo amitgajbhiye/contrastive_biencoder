@@ -50,6 +50,17 @@ def set_logger(config):
     )
 
 
+context_templates = {
+    1: [
+        "concept <con> can be described as <prop_list>.",
+        "concept <con> can be described as <predict_prop>.",
+    ],
+    2: [
+        "concept <<con>> can be described as <<prop_list>> ? [MASK], concept <<con>> can be described as <<predict_prop>>."
+    ],
+}
+
+
 class DatasetPropConjuction(Dataset):
     def __init__(self, concept_property_file, dataset_params):
 
@@ -90,6 +101,13 @@ class DatasetPropConjuction(Dataset):
         self.sep_token = self.tokenizer.sep_token
         self.cls_token = self.tokenizer.cls_token
 
+        self.context_id = dataset_params["context_id"]
+
+        log.info(f"Context ID : {self.context_id}")
+
+        if self.context_id:
+            log.info(f"Adding Context : {context_templates[self.context_id]}")
+
         self.print_freq = 0
 
     def __len__(self):
@@ -105,17 +123,53 @@ class DatasetPropConjuction(Dataset):
 
         if conjuct_props == "no_similar_property":
 
-            con_prop_conj = concept + " " + self.sep_token
-            prop_to_predict = predict_prop
+            sent_1 = f"concept can be described as {concept}."
+            sent_2 = f"concept can be described as {predict_prop}."
 
         else:
+            if self.context_id == 1:
 
-            con_prop_conj = concept + " " + self.sep_token + " " + conjuct_props
-            prop_to_predict = predict_prop
+                con_prop_template, predict_prop_template = context_templates[
+                    self.context_id
+                ]
+
+                conjuct_props = conjuct_props.split(", ")
+                if len(conjuct_props) >= 2:
+
+                    conjuct_props[-1] = "and " + conjuct_props[-1]
+                    conjuct_props = ", ".join(conjuct_props)
+                else:
+                    conjuct_props = ", ".join(conjuct_props)
+
+                # 1: ["concept <con> can be described as <prop_list>.",
+                #     "concept <con> can be described as <predict_prop>."]
+
+                sent_1 = con_prop_template.replace("<con>", concept).replace(
+                    "<prop_list>", conjuct_props
+                )
+                sent_2 = predict_prop_template.replace("<con>", concept).replace(
+                    "<predict_prop>", predict_prop
+                )
+
+        print(f"sent_1 : {sent_1}")
+        print(f"sent_2 : {sent_2}")
+        print()
+
+        # ++++++++++++++++++++++++
+
+        # if conjuct_props == "no_similar_property":
+
+        #     con_prop_conj = concept + " " + self.sep_token
+        #     prop_to_predict = predict_prop
+
+        # else:
+
+        #     con_prop_conj = concept + " " + self.sep_token + " " + conjuct_props
+        #     prop_to_predict = predict_prop
 
         encoded_dict = self.tokenizer.encode_plus(
-            text=con_prop_conj,
-            text_pair=prop_to_predict,
+            text=sent_1,
+            text_pair=sent_2,
             max_length=self.max_len,
             add_special_tokens=True,
             padding="max_length",
@@ -131,8 +185,8 @@ class DatasetPropConjuction(Dataset):
         if self.print_freq < 2:
 
             print()
-            print(f"con_prop_conj : {con_prop_conj}", flush=True)
-            print(f"prop_to_predict : {prop_to_predict}", flush=True)
+            print(f"sent_1 : {sent_1}", flush=True)
+            print(f"sent_2 : {sent_2}", flush=True)
             print(
                 f"Decoded Sent - {self.tokenizer.decode(input_ids.squeeze())}",
                 flush=True,
