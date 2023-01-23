@@ -157,7 +157,8 @@ class DatasetPropConjuction(Dataset):
 
                 # 2: ["concept <con> can be described as <prop_list> ? <[MASK]>, concept <con> can be described as <predict_prop>."]
 
-                con_prop_template = context_templates[self.context_id]
+                con_prop_template = context_templates[self.context_id][0]
+                log.info(f"Template : {con_prop_template}")
 
                 conjuct_props = conjuct_props.split(", ")
                 if len(conjuct_props) >= 2:
