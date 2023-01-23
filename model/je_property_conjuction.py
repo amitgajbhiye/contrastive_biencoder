@@ -90,7 +90,7 @@ class DatasetPropConjuction(Dataset):
                     "predict_prop": str,
                     "labels": int,
                 },
-            )
+            )[0:1000]
 
             log.info(f"Loaded Dataframe Shape: {self.data_df.shape}")
 
