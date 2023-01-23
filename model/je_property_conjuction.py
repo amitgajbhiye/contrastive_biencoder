@@ -299,6 +299,7 @@ class ModelPropConjuctionJoint(nn.Module):
 
             mask_vectors = self.dropout(mask_vectors)
             mask_logits = self.classifier(mask_vectors)
+            labels = torch.unsqueeze(labels, dim=-1)
 
             print("self.context_id : {self.context_id}")
             print(f"Mask Vector Shape : {mask_vectors.shape}")
