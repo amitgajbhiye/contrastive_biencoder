@@ -56,7 +56,7 @@ context_templates = {
         "concept <con> can be described as <predict_prop>.",
     ],
     2: [
-        "concept <<con>> can be described as <<prop_list>> ? [MASK], concept <<con>> can be described as <<predict_prop>>."
+        "concept <con> can be described as <prop_list> ? <[MASK]>, concept <con> can be described as <predict_prop>."
     ],
 }
 
@@ -83,7 +83,7 @@ class DatasetPropConjuction(Dataset):
                 sep="\t",
                 header=None,
                 names=["concept", "conjuct_prop", "predict_prop", "labels"],
-            )
+            )[0:1000]
 
             log.info(f"Loaded Dataframe Shape: {self.data_df.shape}")
 
@@ -100,6 +100,8 @@ class DatasetPropConjuction(Dataset):
 
         self.sep_token = self.tokenizer.sep_token
         self.cls_token = self.tokenizer.cls_token
+        self.mask_token = self.tokenizer.mask_token
+        self.mask_token_id = self.tokenizer.mask_token_id
 
         self.context_id = dataset_params["context_id"]
 
@@ -119,7 +121,7 @@ class DatasetPropConjuction(Dataset):
         concept = self.data_df["concept"][idx].replace(".", "").strip()
         conjuct_props = self.data_df["conjuct_prop"][idx].strip()
         predict_prop = self.data_df["predict_prop"][idx].replace(".", "").strip()
-        labels = self.data_df["labels"][idx]
+        labels = torch.tensor(self.data_df["labels"][idx])
 
         if conjuct_props == "no_similar_property":
 
@@ -150,6 +152,29 @@ class DatasetPropConjuction(Dataset):
                 sent_2 = predict_prop_template.replace("<con>", concept).replace(
                     "<predict_prop>", predict_prop
                 )
+
+            elif self.context_id == 2:
+
+                # 2: ["concept <con> can be described as <prop_list> ? <[MASK]>, concept <con> can be described as <predict_prop>."]
+
+                con_prop_template = context_templates[self.context_id]
+
+                conjuct_props = conjuct_props.split(", ")
+                if len(conjuct_props) >= 2:
+
+                    conjuct_props[-1] = "and " + conjuct_props[-1]
+                    conjuct_props = ", ".join(conjuct_props)
+                else:
+                    conjuct_props = ", ".join(conjuct_props)
+
+                sent_1 = (
+                    con_prop_template.replace("<con>", concept)
+                    .replace("<prop_list>", conjuct_props)
+                    .replace("<[MASK]>", self.mask_token)
+                    .replace("<predict_prop>", predict_prop)
+                )
+
+                sent_2 = None
 
         print(f"sent_1 : {sent_1}", flush=True)
         print(f"sent_2 : {sent_2}", flush=True)
@@ -210,12 +235,18 @@ class ModelPropConjuctionJoint(nn.Module):
         self.hf_checkpoint_name = model_params["hf_checkpoint_name"]
         self.hf_model_path = model_params["hf_model_path"]
         self.num_labels = model_params["num_labels"]
+        self.context_id = model_params["context_id"]
 
         self.bert = BertForSequenceClassification.from_pretrained(
-            self.hf_model_path, num_labels=self.num_labels
+            self.hf_model_path, num_labels=self.num_labels, output_hidden_states=True
         )
 
         assert self.bert.config.num_labels == 2
+
+        classifier_dropout = self.bert.config.hidden_dropout_prob
+
+        self.dropout = nn.Dropout(classifier_dropout)
+        self.classifier = nn.Linear(self.bert.config.hidden_size, 1)
 
     def forward(self, input_ids, token_type_ids, attention_mask, labels):
 
@@ -226,9 +257,49 @@ class ModelPropConjuctionJoint(nn.Module):
             labels=labels,
         )
 
-        loss, logits = output.loss, output.logits
+        loss, logits, hidden_states = output.loss, output.logits, output.hidden_states
 
-        return loss, logits
+        if self.context_id == 2:
+
+            loss_fct = nn.BCEWithLogitsLoss()
+
+            BERT_MASK_TOKEN_ID = 103
+
+            def get_mask_token_embeddings(last_layer_hidden_states):
+
+                _, mask_token_index = (
+                    input_ids == torch.tensor(BERT_MASK_TOKEN_ID)
+                ).nonzero(as_tuple=True)
+
+                mask_vectors = torch.vstack(
+                    [
+                        torch.index_select(v, 0, torch.tensor(idx))
+                        for v, idx in zip(last_layer_hidden_states, mask_token_index)
+                    ]
+                )
+
+                return mask_vectors
+
+            mask_vectors = get_mask_token_embeddings(
+                last_layer_hidden_states=hidden_states[-1]
+            )
+
+            mask_vectors = self.dropout(mask_vectors)
+            mask_logits = self.classifier(mask_vectors)
+
+            print("self.context_id : {self.context_id}")
+            print(f"Mask Vector Shape : {mask_vectors.shape}")
+            print(f"Mask Logit Shape : {mask_logits.shape}")
+            print(f"Labels Shape :{labels.shape}")
+
+            mask_loss = loss_fct(mask_logits, labels)
+
+            print("Mask Loss : {mask_loss}")
+
+            return mask_loss, mask_logits
+
+        else:
+            return loss, logits
 
 
 def prepare_data_and_models(
