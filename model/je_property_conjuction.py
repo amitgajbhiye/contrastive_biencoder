@@ -93,6 +93,8 @@ class DatasetPropConjuction(Dataset):
                 f"Input file type is not correct !!! - {concept_property_file}"
             )
 
+        self.data_df.reset_index(inplace=True, drop=True)
+
         self.hf_tokenizer_name = dataset_params["hf_tokenizer_name"]
         self.hf_tokenizer_path = dataset_params["hf_tokenizer_path"]
 
