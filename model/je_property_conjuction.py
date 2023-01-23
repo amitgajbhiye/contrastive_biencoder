@@ -84,6 +84,12 @@ class DatasetPropConjuction(Dataset):
                 sep="\t",
                 header=None,
                 names=["concept", "conjuct_prop", "predict_prop", "labels"],
+                dtype={
+                    "concept": str,
+                    "conjuct_prop": str,
+                    "predict_prop": str,
+                    "labels": int,
+                },
             )
 
             log.info(f"Loaded Dataframe Shape: {self.data_df.shape}")
