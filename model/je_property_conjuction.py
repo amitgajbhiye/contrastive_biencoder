@@ -56,7 +56,8 @@ context_templates = {
         "concept <con> can be described as <predict_prop>.",
     ],
     2: [
-        "concept <con> can be described as <prop_list> ? <[MASK]>, concept <con> can be described as <predict_prop>."
+        "concept <con> can be described as <prop_list> ?",
+        "<[MASK]>, concept <con> can be described as <predict_prop>.",
     ],
 }
 
@@ -123,59 +124,62 @@ class DatasetPropConjuction(Dataset):
         predict_prop = self.data_df["predict_prop"][idx].replace(".", "").strip()
         labels = torch.tensor(self.data_df["labels"][idx])
 
+        print(f"Data Row : {self.data_df[idx].to_list()}", flush=True)
+
         if conjuct_props == "no_similar_property":
-
-            sent_1 = f"concept can be described as {concept}."
-            sent_2 = f"concept can be described as {predict_prop}."
-
+            conjuct_props = ""
         else:
-            if self.context_id == 1:
 
-                con_prop_template, predict_prop_template = context_templates[
-                    self.context_id
-                ]
+            conjuct_props = conjuct_props.split(", ")
 
-                conjuct_props = conjuct_props.split(", ")
-                if len(conjuct_props) >= 2:
+            if len(conjuct_props) >= 2:
 
-                    conjuct_props[-1] = "and " + conjuct_props[-1]
-                    conjuct_props = ", ".join(conjuct_props)
-                else:
-                    conjuct_props = ", ".join(conjuct_props)
+                conjuct_props[-1] = "and " + conjuct_props[-1]
+                conjuct_props = ", ".join(conjuct_props)
+            else:
 
-                # 1: ["concept <con> can be described as <prop_list>.",
-                #     "concept <con> can be described as <predict_prop>."]
+                conjuct_props = ", ".join(conjuct_props)
 
-                sent_1 = con_prop_template.replace("<con>", concept).replace(
-                    "<prop_list>", conjuct_props
-                )
-                sent_2 = predict_prop_template.replace("<con>", concept).replace(
-                    "<predict_prop>", predict_prop
-                )
+        if self.context_id == 1:
 
-            elif self.context_id == 2:
+            # NLI Formulation
+            # sent_1 = "concept <con> can be described as <prop_list>.
+            # sent_2 = "concept <con> can be described as <predict_prop>.
 
-                # 2: ["concept <con> can be described as <prop_list> ? <[MASK]>, concept <con> can be described as <predict_prop>."]
+            con_prop_template, predict_prop_template = context_templates[
+                self.context_id
+            ]
 
-                con_prop_template = context_templates[self.context_id][0]
-                log.info(f"Template : {con_prop_template}")
+            sent_1 = con_prop_template.replace("<con>", concept).replace(
+                "<prop_list>", conjuct_props
+            )
 
-                conjuct_props = conjuct_props.split(", ")
-                if len(conjuct_props) >= 2:
+            sent_2 = predict_prop_template.replace("<con>", concept).replace(
+                "<predict_prop>", predict_prop
+            )
 
-                    conjuct_props[-1] = "and " + conjuct_props[-1]
-                    conjuct_props = ", ".join(conjuct_props)
-                else:
-                    conjuct_props = ", ".join(conjuct_props)
+        elif self.context_id == 2:
 
-                sent_1 = (
-                    con_prop_template.replace("<con>", concept)
-                    .replace("<prop_list>", conjuct_props)
-                    .replace("<[MASK]>", self.mask_token)
-                    .replace("<predict_prop>", predict_prop)
-                )
+            # MLM Formulation
+            # sent_1 = concept <con> can be described as <prop_list> ?
+            # sent_2 = <[MASK]>, concept <con> can be described as <predict_prop>.
 
-                sent_2 = None
+            # 2: ["concept <con> can be described as <prop_list> ?",
+            # "<[MASK]>, concept <con> can be described as <predict_prop>.",]
+
+            con_prop_template, predict_prop_template = context_templates[
+                self.context_id
+            ]
+
+            sent_1 = con_prop_template.replace("<con>", concept).replace(
+                "<prop_list>", conjuct_props
+            )
+
+            sent_2 = (
+                predict_prop_template.replace("<[MASK]>", self.mask_token)
+                .replace("<con>", concept)
+                .replace("<predict_prop>", predict_prop)
+            )
 
         print(f"sent_1 : {sent_1}", flush=True)
         print(f"sent_2 : {sent_2}", flush=True)
