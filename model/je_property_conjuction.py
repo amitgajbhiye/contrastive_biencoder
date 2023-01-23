@@ -99,7 +99,7 @@ class DatasetPropConjuction(Dataset):
                 f"Input file type is not correct !!! - {concept_property_file}"
             )
 
-        # self.data_df.reset_index(inplace=True, drop=True)
+        self.data_df.reset_index(inplace=True, drop=True)
 
         self.hf_tokenizer_name = dataset_params["hf_tokenizer_name"]
         self.hf_tokenizer_path = dataset_params["hf_tokenizer_path"]
@@ -132,7 +132,7 @@ class DatasetPropConjuction(Dataset):
         predict_prop = self.data_df["predict_prop"][idx].replace(".", "").strip()
         labels = torch.tensor(self.data_df["labels"][idx])
 
-        print(f"Data Row : {self.data_df[idx].to_list()}", flush=True)
+        # print(f"Data Row : {self.data_df[idx].to_list()}", flush=True)
 
         if conjuct_props == "no_similar_property":
             conjuct_props = ""
