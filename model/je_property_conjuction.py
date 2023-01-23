@@ -151,9 +151,9 @@ class DatasetPropConjuction(Dataset):
                     "<predict_prop>", predict_prop
                 )
 
-        print(f"sent_1 : {sent_1}")
-        print(f"sent_2 : {sent_2}")
-        print()
+        print(f"sent_1 : {sent_1}", flush=True)
+        print(f"sent_2 : {sent_2}", flush=True)
+        print(flush=True)
 
         # ++++++++++++++++++++++++
 
