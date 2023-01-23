@@ -1,6 +1,6 @@
 #!/bin/bash --login
 
-#SBATCH --job-name=3simCOpre
+#SBATCH --job-name=NLI3simCO
 
 #SBATCH --output=logs/pretrain/out_je_pretrain_propconj_mscg_cnetp_con_only_3sim.txt
 #SBATCH --error=logs/pretrain/err_je_pretrain_propconj_mscg_cnetp_con_only_3sim.txt

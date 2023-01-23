@@ -1,6 +1,6 @@
 #!/bin/bash --login
 
-#SBATCH --job-name=Mask3simPP
+#SBATCH --job-name=MLM3simPP
 
 #SBATCH --output=logs/pretrain/out_je_pretrain_mask_id_propconj_mscg_cnetp_prdict_prop_3sim.txt
 #SBATCH --error=logs/pretrain/err_je_pretrain_mask_id_propconj_mscg_cnetp_prdict_prop_3sim.txt
@@ -9,11 +9,11 @@
 #SBATCH --ntasks=5
 #SBATCH -A scw1858
 
-#SBATCH -p compute
+#SBATCH -p gpu
 #SBATCH --mem=10g
 
-##SBATCH --gres=gpu:1
-#SBATCH --time 0-00:30:00
+#SBATCH --gres=gpu:1
+#SBATCH --time 2-00:00:00
 
 echo 'This script is running on:' hostname
 
