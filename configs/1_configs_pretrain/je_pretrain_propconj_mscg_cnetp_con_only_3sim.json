@@ -11,7 +11,7 @@
         "pretrained_model_path": null,
         "cv_type": null,
         "data_dir": null,
-        "batch_size": 64,
+        "batch_size": 32,
         "lr": 2e-5,
         "max_epochs": 100,
         "num_warmup_steps": 0,
