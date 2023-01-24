@@ -1,6 +1,6 @@
 #!/bin/bash --login
 
-#SBATCH --job-name=MLM3simPP
+#SBATCH --job-name=DuMLM3sPP
 
 #SBATCH --output=logs/pretrain/out_je_pretrain_mask_id_propconj_mscg_cnetp_prdict_prop_3sim.txt
 #SBATCH --error=logs/pretrain/err_je_pretrain_mask_id_propconj_mscg_cnetp_prdict_prop_3sim.txt
