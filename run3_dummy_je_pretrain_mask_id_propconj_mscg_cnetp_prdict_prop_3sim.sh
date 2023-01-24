@@ -9,13 +9,14 @@
 #SBATCH --ntasks=5
 #SBATCH -A scw1858
 
-#SBATCH -p development
+#SBATCH -p gpu
 #SBATCH --mem=10g
 
 #SBATCH --gres=gpu:1
-#SBATCH --time 0-00:30:00
+#SBATCH --time 2-00:00:00
 
 echo 'This script is running on:' hostname
+
 
 conda activate venv
 
