@@ -12,8 +12,9 @@
 #SBATCH -p development
 #SBATCH --mem=10g
 
-#SBATCH --gres=gpu:1
 #SBATCH --time 0-00:30:00
+
+##SBATCH --gres=gpu:1
 
 echo 'This script is running on:' hostname
 
