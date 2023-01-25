@@ -872,7 +872,7 @@ if __name__ == "__main__":
 
                         print(flush=True)
                         print(f"Running with new config", flush=True)
-                        pprint(config, sort_dicts=False, flush=True)
+                        pprint(config, sort_dicts=False)
 
                         do_cv(config=config)
 
