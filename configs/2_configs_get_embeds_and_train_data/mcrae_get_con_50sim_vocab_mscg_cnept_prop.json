@@ -2,7 +2,7 @@
     "experiment_name": "mcrae_get_con_50sim_vocab_mscg_cnept_prop",
     "log_dirctory": "data_sampling",
     "dataset_params": {
-        "dataset_name": "mcrae_get_con_50sim_vocab_mscg_cnept_prop",
+        "dataset_name": "mcrae_con_50sim_vocab_mscg_cnept_properties",
         "train_file_path": null,
         "val_file_path": null,
         "test_file_path": null,
@@ -31,10 +31,10 @@
         "concept_file": null,
         "property_file": null,
         "concept_property_file": null,
-        "save_dir": "data/train_data",
+        "save_dir": "data/evaluation_data/prop_conjuction/mcrae",
         "get_con_sim_vocab_properties": true,
         "num_nearest_neighbours": 50,
-        "concept_embed_pkl": "trained_models/embeddings/mscg_cnetp_concepts_concept_embeddings.pkl",
+        "concept_embed_pkl": "trained_models/embeddings/mcrae_concepts_mscg_cnetp_pretraind_model_concept_embeddings.pkl",
         "get_predict_prop_similar_props": false,
         "num_prop_conjuct": null,
         "pretrain_data": false,
@@ -48,6 +48,6 @@
         "vocab_property_embed_pkl": "trained_models/embeddings/mscg_cnetp_property_vocab_property_embeddings.pkl",
         "predict_property_embed_pkl": null,
         "con_only_similar_data": false,
-        "top_k_sim_props": 3
+        "top_k_sim_props": null
     }
 }
