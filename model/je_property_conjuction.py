@@ -301,19 +301,19 @@ class ModelPropConjuctionJoint(nn.Module):
             mask_logits = self.classifier(mask_vectors)
             labels = torch.unsqueeze(labels, dim=-1)
 
-            print("self.context_id : {self.context_id}")
-            print(f"Mask Vector Shape : {mask_vectors.shape}")
-            print(f"Mask Logit Shape : {mask_logits.shape}")
-            print(f"Labels Shape :{labels.shape}")
+            print("self.context_id : {self.context_id}", flush=True)
+            print(f"Mask Vector Shape : {mask_vectors.shape}", flush=True)
+            print(f"Mask Logit Shape : {mask_logits.shape}", flush=True)
+            print(f"Labels Shape :{labels.shape}", flush=True)
 
-            print(f"mask_logits : {mask_logits}")
-            print(f"labels : {labels}")
+            print(f"mask_logits : {mask_logits}", flush=True)
+            print(f"labels : {labels}", flush=True)
 
             mask_loss = loss_fct(mask_logits, labels.float())
 
-            print("Mask Loss : {mask_loss}")
+            print(f"Mask Loss : {mask_loss}", flush=True)
 
-            return mask_loss, mask_logits
+            return mask_loss, mask_logits  # CHeck issue here ++++++++++++++
 
         else:
             return loss, logits
@@ -764,15 +764,18 @@ def do_cv(config):
 
         log.info("*" * 50)
         log.info(f"Calculating the scores for All Folds")
+        print(f"Calculating the scores for All Folds")
+
         scores = compute_scores(all_folds_test_labels, all_folds_test_preds)
 
         for key, value in scores.items():
             log.info(f"{key} : {value}")
+            print(f"{key} : {value}")
 
 
 if __name__ == "__main__":
 
-    set_seed(12345)
+    set_seed(131)
 
     parser = ArgumentParser(description="Joint Encoder Property Augmentation Model")
 
@@ -829,5 +832,48 @@ if __name__ == "__main__":
         )
 
     elif finetune:
-        do_cv(config=config)
+
+        hp_tuning = training_params["hp_tuning"]
+
+        if not hp_tuning:
+
+            do_cv(config=config)
+
+        else:
+
+            log.info("Grid Search - Hyperparameter Tuning")
+
+            epochs = [8, 10, 12, 14, 16, 20]
+            batch_size = [4, 8, 16, 32, 64]
+            learning_rate = [1e-5, 2e-5, 5e-5, 1e-6, 2e-6, 5e-5]
+
+            log.info(f"Max Epochs :  {epochs}")
+            log.info(f"Batch Sizes : {batch_size}")
+            log.info(f"Learning Rates : {learning_rate}")
+
+            for ep in epochs:
+                for bs in batch_size:
+                    for lr in learning_rate:
+
+                        log.info("*" * 60)
+                        log.info(f"New Run : Epoch: {ep}, Batch Size: {bs}, LR: {lr}")
+                        log.info("*" * 60)
+
+                        config["training_params"]["max_epochs"] = ep
+                        config["training_params"]["batch_size"] = bs
+                        config["training_params"]["lr"] = lr
+
+                        print(
+                            f"Running With Params Max Epochs, Batch Size, LR :",
+                            config["training_params"]["max_epochs"],
+                            config["training_params"]["batch_size"],
+                            config["training_params"]["lr"],
+                        )
+
+                        print(f"Running with new config")
+                        pprint(config, sort_dicts=False)
+
+                        do_cv(config=config)
+
+                        print()
 
