@@ -39,8 +39,8 @@ def set_logger(config):
         f"log_{config.get('experiment_name')}_{time.strftime('%d-%m-%Y_%H-%M-%S')}.txt",
     )
 
-    print("config.get('experiment_name') :", config.get("experiment_name"))
-    print("\nlog_file_name :", log_file_name)
+    print("config.get('experiment_name') :", config.get("experiment_name"), flush=True)
+    print("\nlog_file_name :", log_file_name, flush=True)
 
     logging.basicConfig(
         level=logging.DEBUG,
@@ -189,9 +189,9 @@ class DatasetPropConjuction(Dataset):
                 .replace("<predict_prop>", predict_prop)
             )
 
-        print(f"sent_1 : {sent_1}", flush=True)
-        print(f"sent_2 : {sent_2}", flush=True)
-        print(flush=True)
+        # print(f"sent_1 : {sent_1}", flush=True)
+        # print(f"sent_2 : {sent_2}", flush=True)
+        # print(flush=True)
 
         # ++++++++++++++++++++++++
 
@@ -222,7 +222,7 @@ class DatasetPropConjuction(Dataset):
 
         if self.print_freq < 2:
 
-            print()
+            print(flush=True)
             print(f"sent_1 : {sent_1}", flush=True)
             print(f"sent_2 : {sent_2}", flush=True)
             print(
@@ -231,7 +231,7 @@ class DatasetPropConjuction(Dataset):
             )
 
             self.print_freq += 1
-            print()
+            print(flush=True)
 
         return {
             "input_ids": input_ids,
@@ -764,13 +764,13 @@ def do_cv(config):
 
         log.info("*" * 50)
         log.info(f"Calculating the scores for All Folds")
-        print(f"Calculating the scores for All Folds")
+        print(f"Calculating the scores for All Folds", flush=True)
 
         scores = compute_scores(all_folds_test_labels, all_folds_test_preds)
 
         for key, value in scores.items():
             log.info(f"{key} : {value}")
-            print(f"{key} : {value}")
+            print(f"{key} : {value}", flush=True)
 
 
 if __name__ == "__main__":
@@ -791,7 +791,7 @@ if __name__ == "__main__":
 
     log.info("The model is run with the following configuration")
     log.info(f"\n {config} \n")
-    pprint(config)
+    pprint(config, sort_dicts=False)
 
     training_params = config["training_params"]  # Training Parameters
 
@@ -870,10 +870,11 @@ if __name__ == "__main__":
                             config["training_params"]["lr"],
                         )
 
-                        print(f"Running with new config")
-                        pprint(config, sort_dicts=False)
+                        print(flush=True)
+                        print(f"Running with new config", flush=True)
+                        pprint(config, sort_dicts=False, flush=True)
 
                         do_cv(config=config)
 
-                        print()
+                        print(flush=True)
 
