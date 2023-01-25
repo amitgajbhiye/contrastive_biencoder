@@ -843,8 +843,8 @@ if __name__ == "__main__":
 
             log.info("Grid Search - Hyperparameter Tuning")
 
-            epochs = [8, 10, 12, 14, 16, 20]
-            batch_size = [4, 8, 16, 32, 64]
+            epochs = [8, 10, 12, 16, 20]
+            batch_size = [8, 16, 32, 64]
             learning_rate = [1e-5, 2e-5, 5e-5, 1e-6, 2e-6, 5e-5]
 
             log.info(f"Max Epochs :  {epochs}")
