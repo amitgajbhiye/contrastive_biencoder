@@ -501,17 +501,13 @@ def evaluate(model, dataloader):
 
         val_losses.append(loss.item())
 
-        batch_preds = torch.argmax(logits, dim=1).flatten()
+        if model.context_id == 1:
+            batch_preds = torch.argmax(logits, dim=1).flatten()
+        elif model.context_id == 2:
+            batch_preds = logits
 
         val_preds.extend(batch_preds.cpu().detach().numpy())
         val_labels.extend(labels.cpu().detach().numpy())
-
-        # if step % 100 == 0 and not step == 0:
-        #     log.info(
-        #         "   Batch {} of Batch {} ---> Batch Loss {}".format(
-        #             step, len(dataloader), round(loss.item(), 4)
-        #         )
-        #     )
 
     avg_val_loss = round(np.mean(val_losses), 4)
 
