@@ -504,7 +504,7 @@ def evaluate(model, dataloader):
         if model.context_id == 1:
             batch_preds = torch.argmax(logits, dim=1).flatten()
         elif model.context_id == 2:
-            batch_preds = logits
+            batch_preds = torch.round(torch.sigmoid(logits))
 
         val_preds.extend(batch_preds.cpu().detach().numpy())
         val_labels.extend(labels.cpu().detach().numpy())
