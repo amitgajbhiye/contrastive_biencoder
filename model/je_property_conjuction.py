@@ -90,7 +90,7 @@ class DatasetPropConjuction(Dataset):
                     "predict_prop": str,
                     "labels": int,
                 },
-            )
+            )[0:1000]
 
             log.info(f"Loaded Dataframe Shape: {self.data_df.shape}")
 
@@ -263,22 +263,35 @@ class ModelPropConjuctionJoint(nn.Module):
 
     def forward(self, input_ids, token_type_ids, attention_mask, labels):
 
-        output = self.bert(
-            input_ids,
-            token_type_ids=token_type_ids,
-            attention_mask=attention_mask,
-            labels=labels,
-        )
+        loss_fct = nn.BCEWithLogitsLoss()
 
-        loss, logits, hidden_states = output.loss, output.logits, output.hidden_states
+        if self.context_id == 1:
 
-        if self.context_id == 2:
+            output = self.bert(
+                input_ids,
+                token_type_ids=token_type_ids,
+                attention_mask=attention_mask,
+                labels=labels,
+            )
 
-            loss_fct = nn.BCEWithLogitsLoss()
+            loss, logits = output.loss, output.logits
 
-            BERT_MASK_TOKEN_ID = 103
+            return loss, logits
+
+        elif self.context_id == 2:
+
+            output = self.bert(
+                input_ids,
+                token_type_ids=token_type_ids,
+                attention_mask=attention_mask,
+                labels=labels,
+            )
+
+            hidden_states = output.hidden_states
 
             def get_mask_token_embeddings(last_layer_hidden_states):
+
+                BERT_MASK_TOKEN_ID = 103
 
                 _, mask_token_index = (
                     input_ids == torch.tensor(BERT_MASK_TOKEN_ID)
@@ -298,8 +311,8 @@ class ModelPropConjuctionJoint(nn.Module):
             )
 
             mask_vectors = self.dropout(mask_vectors)
-            mask_logits = self.classifier(mask_vectors)
-            labels = torch.unsqueeze(labels, dim=-1)
+            mask_logits = self.classifier(mask_vectors).view(-1)
+            labels = labels.view(-1).float()
 
             print("self.context_id : {self.context_id}", flush=True)
             print(f"Mask Vector Shape : {mask_vectors.shape}", flush=True)
@@ -309,14 +322,11 @@ class ModelPropConjuctionJoint(nn.Module):
             print(f"mask_logits : {mask_logits}", flush=True)
             print(f"labels : {labels}", flush=True)
 
-            mask_loss = loss_fct(mask_logits, labels.float())
+            mask_loss = loss_fct(mask_logits, labels)
 
             print(f"Mask Loss : {mask_loss}", flush=True)
 
-            return mask_loss, mask_logits  # CHeck issue here ++++++++++++++
-
-        else:
-            return loss, logits
+            return mask_loss, mask_logits
 
 
 def prepare_data_and_models(
