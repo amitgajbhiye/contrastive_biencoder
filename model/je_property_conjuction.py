@@ -256,10 +256,10 @@ class ModelPropConjuctionJoint(nn.Module):
 
         assert self.bert.config.num_labels == 2
 
-        classifier_dropout = self.bert.config.hidden_dropout_prob
-
-        self.dropout = nn.Dropout(classifier_dropout)
-        self.classifier = nn.Linear(self.bert.config.hidden_size, 1)
+        if self.context_id == 2:
+            classifier_dropout = self.bert.config.hidden_dropout_prob
+            self.dropout = nn.Dropout(classifier_dropout)
+            self.classifier = nn.Linear(self.bert.config.hidden_size, 1)
 
     def forward(self, input_ids, token_type_ids, attention_mask, labels):
 
