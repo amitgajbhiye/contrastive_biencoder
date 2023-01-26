@@ -506,6 +506,9 @@ def evaluate(model, dataloader):
         elif model.context_id == 2:
             batch_preds = torch.round(torch.sigmoid(logits))
 
+            print("batch_preds :", batch_preds)
+            log.info(f"batch_preds : {batch_preds}")
+
         val_preds.extend(batch_preds.cpu().detach().numpy())
         val_labels.extend(labels.cpu().detach().numpy())
 
