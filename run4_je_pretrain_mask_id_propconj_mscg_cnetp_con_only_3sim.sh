@@ -17,7 +17,6 @@
 
 echo 'This script is running on:' hostname
 
-
 conda activate venv
 
 python3 model/je_property_conjuction.py --config_file configs/1_configs_pretrain/je_pretrain_mask_id_propconj_mscg_cnetp_con_only_3sim.json

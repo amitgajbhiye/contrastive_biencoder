@@ -1,5 +1,5 @@
 {
-    "experiment_name": "dummy_je_pretrain_mask_id_propconj_mscg_cnetp_prdict_prop_3sim",
+    "experiment_name": "je_pretrain_mask_id_propconj_mscg_cnetp_prdict_prop_3sim",
     "log_dirctory": "pretrain",
     "training_params": {
         "dataset_name": "mscg_cnetp_predict_prop_3sim",

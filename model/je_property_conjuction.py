@@ -3,7 +3,6 @@ import sys
 import time
 import logging
 
-
 sys.path.insert(0, os.getcwd())
 
 import warnings
@@ -24,6 +23,7 @@ from transformers import (
     BertTokenizer,
     get_linear_schedule_with_warmup,
 )
+
 from utils.je_utils import compute_scores, read_config, set_seed
 
 warnings.filterwarnings("ignore")
@@ -90,7 +90,7 @@ class DatasetPropConjuction(Dataset):
                     "predict_prop": str,
                     "labels": int,
                 },
-            )[0:10000]
+            )
 
             log.info(f"Loaded Dataframe Shape: {self.data_df.shape}")
 
@@ -325,6 +325,7 @@ class ModelPropConjuctionJoint(nn.Module):
             mask_loss = loss_fct(mask_logits, labels)
 
             print(f"Mask Loss : {mask_loss}", flush=True)
+            print(flush=True)
 
             return mask_loss, mask_logits
 
@@ -505,9 +506,6 @@ def evaluate(model, dataloader):
             batch_preds = torch.argmax(logits, dim=1).flatten()
         elif model.context_id == 2:
             batch_preds = torch.round(torch.sigmoid(logits))
-
-            print("batch_preds :", batch_preds)
-            log.info(f"batch_preds : {batch_preds}")
 
         val_preds.extend(batch_preds.cpu().detach().numpy())
         val_labels.extend(labels.cpu().detach().numpy())
