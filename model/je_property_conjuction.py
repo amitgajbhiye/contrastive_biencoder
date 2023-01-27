@@ -59,6 +59,10 @@ context_templates = {
         "concept <con> can be described as <prop_list>?",
         "<[MASK]>, concept <con> can be described as <predict_prop>.",
     ],
+    3: [
+        "concept <con> can be described as <predict_prop>?"
+        "<[MASK]>, concept <con> can be described as <prop_list>",
+    ],
 }
 
 
@@ -168,8 +172,8 @@ class DatasetPropConjuction(Dataset):
 
         elif self.context_id == 2:
 
-            # MLM Formulation
-            # sent_1 = concept <con> can be described as <prop_list> ?
+            # MLM Formulation - Premises First, Followed by Hypothesis
+            # sent_1 = concept <con> can be described as <prop_list>?
             # sent_2 = <[MASK]>, concept <con> can be described as <predict_prop>.
 
             # 2: ["concept <con> can be described as <prop_list> ?",
@@ -187,6 +191,29 @@ class DatasetPropConjuction(Dataset):
                 predict_prop_template.replace("<[MASK]>", self.mask_token)
                 .replace("<con>", concept)
                 .replace("<predict_prop>", predict_prop)
+            )
+
+        elif self.context_id == 3:
+
+            # MLM Formulation - Hypothesis First, followed by premises
+            # sent_1 = concept <con> can be described as <predict_prop>?
+            # sent_2 = <[MASK]>, concept <con> can be described as <prop_list>.
+
+            # 3: ["concept <con> can be described as <predict_prop>?"
+            # "<[MASK]>, concept <con> can be described as <prop_list>",]
+
+            predict_prop_template, con_prop_template, = context_templates[
+                self.context_id
+            ]
+
+            sent_1 = predict_prop_template.replace("<con>", concept).replace(
+                "<predict_prop>", predict_prop
+            )
+
+            sent_2 = (
+                con_prop_template.replace("<[MASK]>", self.mask_token)
+                .replace("<con>", concept)
+                .replace("<prop_list>", conjuct_props)
             )
 
         # print(f"sent_1 : {sent_1}", flush=True)
@@ -256,7 +283,7 @@ class ModelPropConjuctionJoint(nn.Module):
 
         assert self.bert.config.num_labels == 2
 
-        if self.context_id == 2:
+        if self.context_id in (2, 3):
             classifier_dropout = self.bert.config.hidden_dropout_prob
             self.dropout = nn.Dropout(classifier_dropout)
             self.classifier = nn.Linear(self.bert.config.hidden_size, 1)
@@ -278,7 +305,7 @@ class ModelPropConjuctionJoint(nn.Module):
 
             return loss, logits
 
-        elif self.context_id == 2:
+        elif self.context_id in (2, 3):
 
             output = self.bert(
                 input_ids,
@@ -314,7 +341,7 @@ class ModelPropConjuctionJoint(nn.Module):
             mask_logits = self.classifier(mask_vectors).view(-1)
             labels = labels.view(-1).float()
 
-            print("self.context_id : {self.context_id}", flush=True)
+            print(f"self.context_id : {self.context_id}", flush=True)
             print(f"Mask Vector Shape : {mask_vectors.shape}", flush=True)
             print(f"Mask Logit Shape : {mask_logits.shape}", flush=True)
             print(f"Labels Shape :{labels.shape}", flush=True)
@@ -504,7 +531,7 @@ def evaluate(model, dataloader):
 
         if model.context_id == 1:
             batch_preds = torch.argmax(logits, dim=1).flatten()
-        elif model.context_id == 2:
+        elif model.context_id in (2, 3):
             batch_preds = torch.round(torch.sigmoid(logits))
 
         val_preds.extend(batch_preds.cpu().detach().numpy())
