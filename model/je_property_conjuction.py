@@ -60,7 +60,7 @@ context_templates = {
         "<[MASK]>, concept <con> can be described as <predict_prop>.",
     ],
     3: [
-        "concept <con> can be described as <predict_prop>?"
+        "concept <con> can be described as <predict_prop>?",
         "<[MASK]>, concept <con> can be described as <prop_list>",
     ],
 }
@@ -252,6 +252,10 @@ class DatasetPropConjuction(Dataset):
             print(flush=True)
             print(f"sent_1 : {sent_1}", flush=True)
             print(f"sent_2 : {sent_2}", flush=True)
+            print(
+                f"tokenized sent : {[self.tokenizer.convert_ids_to_tokens(inp_id) for inp_id in input_ids]}",
+                flush=True,
+            )
             print(
                 f"Decoded Sent - {self.tokenizer.decode(input_ids.squeeze())}",
                 flush=True,
