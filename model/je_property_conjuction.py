@@ -61,6 +61,8 @@ context_templates = {
     ],
 }
 
+print_freq = 0
+
 
 class DatasetPropConjuction(Dataset):
     def __init__(self, concept_property_file, dataset_params):
@@ -118,8 +120,6 @@ class DatasetPropConjuction(Dataset):
 
         if self.context_id:
             log.info(f"Adding Context : {context_templates[self.context_id]}")
-
-        self.print_freq = 0
 
     def __len__(self):
 
@@ -220,7 +220,7 @@ class DatasetPropConjuction(Dataset):
         attention_mask = encoded_dict["attention_mask"]
         token_type_ids = encoded_dict["token_type_ids"]
 
-        if self.print_freq < 2:
+        if print_freq < 2:
 
             print(flush=True)
             print(f"sent_1 : {sent_1}", flush=True)
@@ -230,7 +230,7 @@ class DatasetPropConjuction(Dataset):
                 flush=True,
             )
 
-            self.print_freq += 1
+            print_freq += 1
             print(flush=True)
 
         return {
@@ -782,7 +782,7 @@ def do_cv(config):
 
 if __name__ == "__main__":
 
-    set_seed(131)
+    # set_seed(131)
 
     parser = ArgumentParser(description="Joint Encoder Property Augmentation Model")
 
@@ -850,9 +850,9 @@ if __name__ == "__main__":
 
             log.info("Grid Search - Hyperparameter Tuning")
 
-            epochs = [8, 10, 12, 16, 20]
-            batch_size = [8, 16, 32, 64]
-            learning_rate = [1e-5, 2e-5, 5e-5, 1e-6, 2e-6, 5e-5]
+            epochs = [12, 16, 20]
+            batch_size = [16, 32, 64]
+            learning_rate = [1e-5, 2e-5, 5e-5, 1e-6, 2e-6, 5e-6]
 
             log.info(f"Max Epochs :  {epochs}")
             log.info(f"Batch Sizes : {batch_size}")
@@ -870,18 +870,23 @@ if __name__ == "__main__":
                         config["training_params"]["batch_size"] = bs
                         config["training_params"]["lr"] = lr
 
+                        print(flush=True)
                         print(
                             f"Running With Params Max Epochs, Batch Size, LR :",
                             config["training_params"]["max_epochs"],
                             config["training_params"]["batch_size"],
                             config["training_params"]["lr"],
                         )
-
-                        print(flush=True)
                         print(f"Running with new config", flush=True)
                         pprint(config, sort_dicts=False)
 
                         do_cv(config=config)
-
+                        print(
+                            f"Above Resulst are Running With Params Max Epochs, Batch Size, LR :",
+                            config["training_params"]["max_epochs"],
+                            config["training_params"]["batch_size"],
+                            config["training_params"]["lr"],
+                        )
+                        print("One Run Finished !!!", flush=True)
                         print(flush=True)
 
