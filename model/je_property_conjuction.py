@@ -852,7 +852,7 @@ if __name__ == "__main__":
 
             epochs = [12, 16, 20]
             batch_size = [16, 32, 64]
-            learning_rate = [1e-5, 2e-5, 5e-5, 1e-6, 2e-6, 5e-6]
+            learning_rate = [2e-5, 5e-5, 2e-6, 3e-05, 5e-6]
 
             log.info(f"Max Epochs :  {epochs}")
             log.info(f"Batch Sizes : {batch_size}")
