@@ -61,8 +61,6 @@ context_templates = {
     ],
 }
 
-print_freq = 0
-
 
 class DatasetPropConjuction(Dataset):
     def __init__(self, concept_property_file, dataset_params):
@@ -120,6 +118,8 @@ class DatasetPropConjuction(Dataset):
 
         if self.context_id:
             log.info(f"Adding Context : {context_templates[self.context_id]}")
+
+        self.print_freq = 0
 
     def __len__(self):
 
@@ -220,7 +220,7 @@ class DatasetPropConjuction(Dataset):
         attention_mask = encoded_dict["attention_mask"]
         token_type_ids = encoded_dict["token_type_ids"]
 
-        if print_freq < 2:
+        if self.print_freq < 2:
 
             print(flush=True)
             print(f"sent_1 : {sent_1}", flush=True)
@@ -230,7 +230,7 @@ class DatasetPropConjuction(Dataset):
                 flush=True,
             )
 
-            print_freq += 1
+            self.print_freq += 1
             print(flush=True)
 
         return {
