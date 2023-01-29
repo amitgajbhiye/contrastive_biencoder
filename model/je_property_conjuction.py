@@ -19,8 +19,10 @@ from torch.utils.data import DataLoader, Dataset, RandomSampler, SequentialSampl
 from torch.utils.data._utils.collate import default_convert
 from transformers import (
     AdamW,
-    BertForSequenceClassification,
     BertTokenizer,
+    BertForSequenceClassification,
+    RobertaTokenizer,
+    RobertaForSequenceClassification,
     get_linear_schedule_with_warmup,
 )
 
@@ -63,6 +65,13 @@ context_templates = {
         "concept <con> can be described as <predict_prop>?",
         "<[MASK]>, concept <con> can be described as <prop_list>.",
     ],
+}
+
+MODEL_CLASS = {
+    "bert-base-uncased": BertForSequenceClassification,
+    "bert-large-uncased": BertForSequenceClassification,
+    "roberta-base": RobertaForSequenceClassification,
+    "roberta-large": RobertaForSequenceClassification,
 }
 
 
@@ -277,15 +286,17 @@ class ModelPropConjuctionJoint(nn.Module):
         super(ModelPropConjuctionJoint, self).__init__()
 
         self.hf_checkpoint_name = model_params["hf_checkpoint_name"]
+
         self.hf_model_path = model_params["hf_model_path"]
+
         self.num_labels = model_params["num_labels"]
         self.context_id = model_params["context_id"]
 
-        self.bert = BertForSequenceClassification.from_pretrained(
+        self.encoder = BertForSequenceClassification.from_pretrained(
             self.hf_model_path, num_labels=self.num_labels, output_hidden_states=True
         )
 
-        assert self.bert.config.num_labels == 2
+        assert self.encoder.config.num_labels == 2
 
         if self.context_id in (2, 3):
             classifier_dropout = self.bert.config.hidden_dropout_prob
@@ -298,7 +309,7 @@ class ModelPropConjuctionJoint(nn.Module):
 
         if self.context_id == 1:
 
-            output = self.bert(
+            output = self.encoder(
                 input_ids,
                 token_type_ids=token_type_ids,
                 attention_mask=attention_mask,
@@ -311,7 +322,7 @@ class ModelPropConjuctionJoint(nn.Module):
 
         elif self.context_id in (2, 3):
 
-            output = self.bert(
+            output = self.encoder(
                 input_ids,
                 token_type_ids=token_type_ids,
                 attention_mask=attention_mask,
@@ -345,18 +356,18 @@ class ModelPropConjuctionJoint(nn.Module):
             mask_logits = self.classifier(mask_vectors).view(-1)
             labels = labels.view(-1).float()
 
-            print(f"self.context_id : {self.context_id}", flush=True)
-            print(f"Mask Vector Shape : {mask_vectors.shape}", flush=True)
-            print(f"Mask Logit Shape : {mask_logits.shape}", flush=True)
-            print(f"Labels Shape :{labels.shape}", flush=True)
+            # print(f"self.context_id : {self.context_id}", flush=True)
+            # print(f"Mask Vector Shape : {mask_vectors.shape}", flush=True)
+            # print(f"Mask Logit Shape : {mask_logits.shape}", flush=True)
+            # print(f"Labels Shape :{labels.shape}", flush=True)
 
-            print(f"mask_logits : {mask_logits}", flush=True)
-            print(f"labels : {labels}", flush=True)
+            # print(f"mask_logits : {mask_logits}", flush=True)
+            # print(f"labels : {labels}", flush=True)
 
             mask_loss = loss_fct(mask_logits, labels)
 
-            print(f"Mask Loss : {mask_loss}", flush=True)
-            print(flush=True)
+            # print(f"Mask Loss : {mask_loss}", flush=True)
+            # print(flush=True)
 
             return mask_loss, mask_logits
 
@@ -804,11 +815,13 @@ def do_cv(config):
         log.info(f"Calculating the scores for All Folds")
         print(f"Calculating the scores for All Folds", flush=True)
 
-        scores = compute_scores(all_folds_test_labels, all_folds_test_preds)
+        all_folds_scores = compute_scores(all_folds_test_labels, all_folds_test_preds)
 
-        for key, value in scores.items():
+        for key, value in all_folds_scores.items():
             log.info(f"{key} : {value}")
             print(f"{key} : {value}", flush=True)
+
+        return all_folds_scores
 
 
 if __name__ == "__main__":
@@ -875,19 +888,21 @@ if __name__ == "__main__":
 
         if not hp_tuning:
 
-            do_cv(config=config)
+            all_folds_scores = do_cv(config=config)
 
         else:
 
             log.info("Grid Search - Hyperparameter Tuning")
 
-            epochs = [12, 16, 20]
-            batch_size = [16, 32, 64]
-            learning_rate = [2e-5, 5e-5, 2e-6, 3e-05, 5e-6]
+            epochs = [8, 12, 16, 20]
+            batch_size = [32, 64]
+            learning_rate = [2e-5, 5e-5, 2e-6, 5e-6]
 
             log.info(f"Max Epochs :  {epochs}")
             log.info(f"Batch Sizes : {batch_size}")
             log.info(f"Learning Rates : {learning_rate}")
+
+            hp_combination_list, all_folds_scores_lists = [], []
 
             for ep in epochs:
                 for bs in batch_size:
@@ -911,7 +926,7 @@ if __name__ == "__main__":
                         print(f"Running with new config", flush=True)
                         pprint(config, sort_dicts=False)
 
-                        do_cv(config=config)
+                        all_folds_scores = do_cv(config=config)
                         print(
                             f"Above Resulst are Running With Params Max Epochs, Batch Size, LR :",
                             config["training_params"]["max_epochs"],
@@ -920,4 +935,15 @@ if __name__ == "__main__":
                         )
                         print("One Run Finished !!!", flush=True)
                         print(flush=True)
+
+                        hp_combination_list.append(
+                            f"Epoch: {ep}, Batch Size: {bs}, LR: {lr}"
+                        )
+                        all_folds_scores_lists.append(all_folds_scores)
+
+                        log.info("*" * 60)
+                        log.info(f"Epoch: {ep}, Batch Size: {bs}, LR: {lr}")
+                        for key, value in all_folds_scores.items():
+                            log.info(f"{key} : {value}")
+                        log.info("*" * 60)
 
