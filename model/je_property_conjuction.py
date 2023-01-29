@@ -296,7 +296,7 @@ class ModelPropConjuctionJoint(nn.Module):
             self.hf_model_path, num_labels=self.num_labels, output_hidden_states=True
         )
 
-        assert self.encoder.config.num_labels == 2
+        assert self.bert.config.num_labels == 2
 
         if self.context_id in (2, 3):
             classifier_dropout = self.bert.config.hidden_dropout_prob
