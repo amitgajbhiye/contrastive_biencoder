@@ -292,7 +292,7 @@ class ModelPropConjuctionJoint(nn.Module):
         self.num_labels = model_params["num_labels"]
         self.context_id = model_params["context_id"]
 
-        self.encoder = BertForSequenceClassification.from_pretrained(
+        self.bert = BertForSequenceClassification.from_pretrained(
             self.hf_model_path, num_labels=self.num_labels, output_hidden_states=True
         )
 
@@ -309,7 +309,7 @@ class ModelPropConjuctionJoint(nn.Module):
 
         if self.context_id == 1:
 
-            output = self.encoder(
+            output = self.bert(
                 input_ids,
                 token_type_ids=token_type_ids,
                 attention_mask=attention_mask,
@@ -322,7 +322,7 @@ class ModelPropConjuctionJoint(nn.Module):
 
         elif self.context_id in (2, 3):
 
-            output = self.encoder(
+            output = self.bert(
                 input_ids,
                 token_type_ids=token_type_ids,
                 attention_mask=attention_mask,
