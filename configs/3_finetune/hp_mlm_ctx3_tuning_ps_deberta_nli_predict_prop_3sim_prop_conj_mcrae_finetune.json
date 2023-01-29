@@ -11,7 +11,7 @@
         "pretrained_model_path": "trained_models/mscg_cnetp_pretrained/predict_prop_similar/je_pretrain_mask_id_ctx3_propconj_mscg_cnetp_prdict_prop_3sim.pt",
         "cv_type": "property_split",
         "data_dir": "data/evaluation_data/prop_conjuction/mcrae/prop_split/deberta_filtered/predict_prop_sim3",
-        "save_prefix": "sim3_ctx3_deberta_nli_predict_prop_similar",
+        "save_prefix": "sim3_deberta_nli_predict_prop_similar",
         "batch_size": 0,
         "lr": 0,
         "max_epochs": 0,
