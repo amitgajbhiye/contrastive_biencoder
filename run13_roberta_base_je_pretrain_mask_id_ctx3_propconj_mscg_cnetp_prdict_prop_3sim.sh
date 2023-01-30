@@ -1,6 +1,6 @@
 #!/bin/bash --login
 
-#SBATCH --job-name=MLMctx3PPpretrain
+#SBATCH --job-name=rbMLMctx3PPpretrain
 
 #SBATCH --output=logs/pretrain/out_roberta_base_je_pretrain_mask_id_ctx3_propconj_mscg_cnetp_prdict_prop_3sim.txt
 #SBATCH --error=logs/pretrain/err_roberta_base_je_pretrain_mask_id_ctx3_propconj_mscg_cnetp_prdict_prop_3sim.txt
@@ -12,7 +12,7 @@
 #SBATCH -p gpu
 #SBATCH --mem=10g
 
-#SBATCH --time 0-02:00:00
+#SBATCH --time 2-00:00:00
 #SBATCH --gres=gpu:1
 
 echo 'This script is running on:' hostname
