@@ -293,9 +293,9 @@ class ModelPropConjuctionJoint(nn.Module):
         # input_ids = input_ids.squeeze()
         # attention_mask = attention_mask.squeeze()
 
-        print(f"input_ids : {input_ids.shape}")
-        print(f"attention_mask : {attention_mask.shape}")
-        print(f"labels : {labels.shape}")
+        print(f"input_ids : {input_ids.shape}", flush=True)
+        print(f"attention_mask : {attention_mask.shape}", flush=True)
+        print(f"labels : {labels.shape}", flush=True)
 
         loss_fct = nn.BCEWithLogitsLoss()
 
@@ -303,7 +303,7 @@ class ModelPropConjuctionJoint(nn.Module):
 
         hidden_states = output.last_hidden_state
 
-        print(f"hidden_states : {hidden_states.shape}")
+        print(f"hidden_states : {hidden_states.shape}", flush=True)
 
         def get_mask_token_embeddings(last_layer_hidden_states):
 
@@ -322,9 +322,8 @@ class ModelPropConjuctionJoint(nn.Module):
 
             return mask_vectors
 
-        print(f"mask_vectors :{mask_vectors.shape}")
-
         mask_vectors = get_mask_token_embeddings(last_layer_hidden_states=hidden_states)
+        print(f"mask_vectors :{mask_vectors.shape}", flush=True)
 
         mask_vectors = self.dropout(mask_vectors)
         mask_logits = self.classifier(mask_vectors).view(-1)
@@ -334,7 +333,7 @@ class ModelPropConjuctionJoint(nn.Module):
             labels = labels.view(-1).float()
             loss = loss_fct(mask_logits, labels)
 
-        print("Step loss :", loss)
+        print("Step loss :", loss, flush=True)
 
         return (loss, mask_logits, mask_vectors)
 
@@ -420,6 +419,8 @@ def prepare_data_and_models(
         model = ModelPropConjuctionJoint(model_params)
 
     model.to(device)
+    print("Model", flush=True)
+    print(model, flush=True)
 
     optimizer = AdamW(model.parameters(), lr=lr, weight_decay=weight_decay)
     total_steps = len(train_dataloader) * max_epochs
