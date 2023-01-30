@@ -102,7 +102,7 @@ class DatasetPropConjuction(Dataset):
                     "predict_prop": str,
                     "labels": float,
                 },
-            )[0:1000]
+            )[0:5000]
 
             log.info(f"Loaded Dataframe Shape: {self.data_df.shape}")
 
@@ -590,24 +590,26 @@ def train(
             scores = compute_scores(valid_gold_labels, valid_preds)
             valid_binary_f1 = scores["binary_f1"]
 
-            if best_valid_f1 > valid_binary_f1:
+            if best_valid_f1 >= valid_binary_f1:
                 patience_counter += 1
             else:
                 patience_counter = 0
-                best_valid_f1 = valid_binary_f1
 
-                log.info("\n '+' * 20")
+                log.info(f"{'*' * 50}")
+                log.info(
+                    f"Current Binary F1 : {valid_binary_f1} is better than previous best : {best_valid_f1}"
+                )
                 log.info("Epoch :", epoch)
                 log.info(f"Saving best model at epoch - {epoch} : {model_name}")
                 log.info("   Best Validation F1:", best_valid_f1)
+
+                best_valid_f1 = valid_binary_f1
 
                 torch.save(model.state_dict(), best_model_path)
                 log.info(f"The best model is saved at : {best_model_path}")
 
             train_losses.append(train_loss)
             valid_losses.append(valid_loss)
-
-            log.info("+" * 50)
 
             log.info(f"valid_preds shape: {valid_preds.shape}")
             log.info(f"val_gold_labels shape: {valid_gold_labels.shape}")
