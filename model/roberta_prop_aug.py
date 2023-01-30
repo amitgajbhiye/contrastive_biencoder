@@ -465,9 +465,10 @@ def train_on_single_epoch(model, scheduler, optimizer, train_dataloader):
         labels = batch["labels"].to(device)
 
         print(f"In Step {step}", flush=True)
-        print(f"input_ids.shape : {input_ids.shape}")
-        print(f"attention_mask.shape : {attention_mask.shape}")
-        print(f"labels.shape : {labels.shape}")
+        print(f"input_ids.shape : {input_ids.shape}", flush=True)
+        print(f"attention_mask.shape : {attention_mask.shape}", flush=True)
+        print(f"labels.shape : {labels.shape}", flush=True)
+        print(f"attention_mask : {attention_mask}", flush=True)
 
         loss, logits, mask_vector = model(
             input_ids=input_ids, attention_mask=attention_mask, labels=labels,
