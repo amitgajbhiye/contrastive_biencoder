@@ -468,7 +468,7 @@ def train_on_single_epoch(model, scheduler, optimizer, train_dataloader):
         print(f"input_ids.shape : {input_ids.shape}", flush=True)
         print(f"attention_mask.shape : {attention_mask.shape}", flush=True)
         print(f"labels.shape : {labels.shape}", flush=True)
-        print(f"attention_mask : {attention_mask}", flush=True)
+        print(f"attention_mask : {attention_mask[0]}", flush=True)
 
         loss, logits, mask_vector = model(
             input_ids=input_ids, attention_mask=attention_mask, labels=labels,
