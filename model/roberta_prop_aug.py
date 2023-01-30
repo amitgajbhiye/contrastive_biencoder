@@ -283,7 +283,7 @@ class ModelPropConjuctionJoint(nn.Module):
 
         self.encoder = RobertaModel.from_pretrained(self.hf_model_path)
 
-        classifier_dropout = self.encoder.hidden_dropout_prob
+        classifier_dropout = self.encoder.config.hidden_dropout_prob
 
         self.dropout = nn.Dropout(classifier_dropout)
         self.classifier = nn.Linear(self.encoder.config.hidden_size, 1)
