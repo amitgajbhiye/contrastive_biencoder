@@ -452,15 +452,6 @@ def train_on_single_epoch(model, scheduler, optimizer, train_dataloader):
 
         model.zero_grad()
 
-        # input_ids = torch.cat([x["input_ids"] for x in batch], dim=0).to(device)
-        # token_type_ids = torch.cat([x["token_type_ids"] for x in batch], dim=0).to(
-        #     device
-        # )
-        # attention_mask = torch.cat([x["attention_mask"] for x in batch], dim=0).to(
-        #     device
-        # )
-        # labels = torch.tensor([x["labels"] for x in batch]).to(device)
-
         input_ids = batch["input_ids"].squeeze().to(device)
         attention_mask = batch["attention_mask"].squeeze().to(device)
         labels = batch["labels"].to(device)
@@ -505,15 +496,6 @@ def evaluate(model, dataloader):
 
     for step, batch in enumerate(dataloader):
 
-        # input_ids = torch.cat([x["input_ids"] for x in batch], dim=0).to(device)
-        # token_type_ids = torch.cat([x["token_type_ids"] for x in batch], dim=0).to(
-        #     device
-        # )
-        # attention_mask = torch.cat([x["attention_mask"] for x in batch], dim=0).to(
-        #     device
-        # )
-        # labels = torch.tensor([x["labels"] for x in batch]).to(device)
-
         input_ids = batch["input_ids"].squeeze().to(device)
         attention_mask = batch["attention_mask"].squeeze().to(device)
         labels = batch["labels"].to(device)
@@ -556,30 +538,66 @@ def train(
     model_name = training_params["model_name"]
     save_dir = training_params["save_dir"]
 
-    # if fold is not None:
-    #     best_model_path = os.path.join(save_dir, f"{fold}_{model_name}")
-    # else:
-    #     best_model_path = os.path.join(save_dir, model_name)
-
     best_model_path = os.path.join(save_dir, model_name)
-
     patience_early_stopping = training_params["patience_early_stopping"]
 
     best_valid_f1 = 0.0
     patience_counter = 0
     start_epoch = 1
-    train_losses, valid_losses = [], []
+    epoch_train_losses, epoch_valid_losses = [], []
 
     for epoch in range(start_epoch, max_epochs + 1):
 
         log.info("Epoch {:} of {:}".format(epoch, max_epochs))
 
-        train_loss, model = train_on_single_epoch(
-            model=model,
-            scheduler=scheduler,
-            optimizer=optimizer,
-            train_dataloader=train_dataloader,
-        )
+        step_train_losses = []
+
+        model.train()
+        for step, batch in enumerate(train_dataloader):
+
+            model.zero_grad()
+
+            input_ids = batch["input_ids"].squeeze().to(device)
+            attention_mask = batch["attention_mask"].squeeze().to(device)
+            labels = batch["labels"].to(device)
+
+            print(flush=True)
+            print(f"In Step {step}", flush=True)
+            print(f"input_ids.shape : {input_ids.shape}", flush=True)
+            print(f"attention_mask.shape : {attention_mask.shape}", flush=True)
+            print(f"labels.shape : {labels.shape}", flush=True)
+            print(f"attention_mask : {attention_mask[0]}", flush=True)
+
+            loss, logits, mask_vector = model(
+                input_ids=input_ids, attention_mask=attention_mask, labels=labels,
+            )
+
+            step_train_losses.append(loss.item())
+
+            torch.nn.utils.clip_grad_norm_(model.parameters(), 1.0)
+
+            loss.backward()
+            optimizer.step()
+            scheduler.step()
+
+            if step % 100 == 0 and not step == 0:
+                log.info(
+                    "   Batch {} of Batch {} ---> Batch Loss {}".format(
+                        step, len(train_dataloader), round(loss.item(), 4)
+                    )
+                )
+
+        avg_train_loss = round(np.mean(step_train_losses), 4)
+        log.info("Average Train Loss :", avg_train_loss)
+
+        # +++++++++++++++++++++++++++++
+
+        # train_loss, model = train_on_single_epoch(
+        #     model=model,
+        #     scheduler=scheduler,
+        #     optimizer=optimizer,
+        #     train_dataloader=train_dataloader,
+        # )
 
         if (val_dataloader is not None) and (fold is None):
 
@@ -593,6 +611,9 @@ def train(
             valid_binary_f1 = scores["binary_f1"]
 
             if best_valid_f1 >= valid_binary_f1:
+                log.info(
+                    f"Current Binary F1 : {valid_binary_f1} is worse than or equal to previous best : {best_valid_f1}"
+                )
                 patience_counter += 1
             else:
                 patience_counter = 0
@@ -610,8 +631,8 @@ def train(
                 torch.save(model.state_dict(), best_model_path)
                 log.info(f"The best model is saved at : {best_model_path}")
 
-            train_losses.append(train_loss)
-            valid_losses.append(valid_loss)
+            epoch_train_losses.append(avg_train_loss)
+            epoch_valid_losses.append(valid_loss)
 
             log.info(f"valid_preds shape: {valid_preds.shape}")
             log.info(f"val_gold_labels shape: {valid_gold_labels.shape}")
@@ -619,17 +640,14 @@ def train(
             log.info(f"Current Validation F1 Score Binary {valid_binary_f1}")
             log.info(f"Best Validation F1 Score Yet : {best_valid_f1}")
 
-            log.info(f"Training Loss: {train_loss}")
-            log.info(f"Validation Loss: {valid_loss}")
-
             log.info("Validation Scores")
             for key, value in scores.items():
                 log.info(f" {key} :  {value}")
 
             if patience_counter >= patience_early_stopping:
 
-                log.info(f"Train Losses :", train_losses)
-                log.info(f"Validation Losses: ", valid_losses)
+                log.info(f"Train Losses :", epoch_train_losses)
+                log.info(f"Validation Losses: ", epoch_valid_losses)
 
                 log.info(
                     f"Early Stopping ---> Patience , {patience_early_stopping} Reached !!!"
