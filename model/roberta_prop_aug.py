@@ -357,7 +357,7 @@ def prepare_data_and_models(
     num_workers = 4
 
     train_data = DatasetPropConjuction(train_file, dataset_params)
-    train_sampler = RandomSampler(train_data, num_samples=5000)
+    train_sampler = RandomSampler(train_data)
     train_dataloader = DataLoader(
         train_data,
         batch_size=batch_size,
