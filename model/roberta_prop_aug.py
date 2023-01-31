@@ -365,7 +365,6 @@ def prepare_data_and_models(
         collate_fn=None,
         num_workers=num_workers,
         pin_memory=True,
-        drop_last=True,
     )
 
     log.info(f"Train Data DF shape : {train_data.data_df.shape}")
