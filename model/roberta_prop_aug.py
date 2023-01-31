@@ -357,7 +357,7 @@ def prepare_data_and_models(
     num_workers = 4
 
     train_data = DatasetPropConjuction(train_file, dataset_params)
-    train_sampler = RandomSampler(train_data)
+    train_sampler = RandomSampler(train_data, num_samples=5000)
     train_dataloader = DataLoader(
         train_data,
         batch_size=batch_size,
@@ -365,6 +365,7 @@ def prepare_data_and_models(
         collate_fn=None,
         num_workers=num_workers,
         pin_memory=True,
+        drop_last=True,
     )
 
     log.info(f"Train Data DF shape : {train_data.data_df.shape}")
@@ -379,6 +380,7 @@ def prepare_data_and_models(
             collate_fn=None,
             num_workers=num_workers,
             pin_memory=True,
+            drop_last=True,
         )
         log.info(f"Valid Data DF shape : {val_data.data_df.shape}")
     else:
