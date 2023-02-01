@@ -954,14 +954,14 @@ if __name__ == "__main__":
                         print("One Run Finished !!!", flush=True)
                         print(flush=True)
 
-                        hp_combination_list.append(
-                            f"Epoch: {ep}, Batch Size: {bs}, LR: {lr}"
-                        )
-                        all_folds_scores_lists.append(all_folds_scores)
-
                         log.info("*" * 60)
                         log.info(f"Epoch: {ep}, Batch Size: {bs}, LR: {lr}")
                         for key, value in all_folds_scores.items():
                             log.info(f"{key} : {value}")
                         log.info("*" * 60)
+
+                        hp_combination_list.append(
+                            f"Epoch: {ep}, Batch Size: {bs}, LR: {lr}"
+                        )
+                        all_folds_scores_lists.append(all_folds_scores)
 
