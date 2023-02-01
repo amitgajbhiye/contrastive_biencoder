@@ -599,6 +599,8 @@ def train(
         #     train_dataloader=train_dataloader,
         # )
 
+        # +++++++++++++++++++++++++++++
+
         if (val_dataloader is not None) and (fold is None):
 
             log.info(f"Running Validation ....")
@@ -838,7 +840,7 @@ def do_cv(config):
 
 if __name__ == "__main__":
 
-    # set_seed(131)
+    set_seed(1)
 
     parser = ArgumentParser(description="Joint Encoder Property Augmentation Model")
 
@@ -910,9 +912,9 @@ if __name__ == "__main__":
 
             log.info("Grid Search - Hyperparameter Tuning")
 
-            epochs = [8, 12, 16, 20]
-            batch_size = [32, 64]
-            learning_rate = [2e-5, 5e-5, 2e-6, 5e-6]
+            epochs = [10, 12, 16]
+            batch_size = [16, 32]
+            learning_rate = [1e-5, 2e-5, 1e-6, 2e-6]
 
             log.info(f"Max Epochs :  {epochs}")
             log.info(f"Batch Sizes : {batch_size}")
