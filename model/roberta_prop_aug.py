@@ -64,6 +64,10 @@ context_templates = {
         "concept <con> can be described as <predict_prop>?",
         "<[MASK]>, concept <con> can be described as <prop_list>.",
     ],
+    4: [
+        "concept <con> can be described as <predict_prop>?",
+        "<[MASK]>.",
+    ],  # Prompt for Concept Property Data
 }
 
 # MODEL_CLASS = {
@@ -221,6 +225,24 @@ class DatasetPropConjuction(Dataset):
                 .replace("<con>", concept)
                 .replace("<prop_list>", conjuct_props)
             )
+
+        elif self.context_id == 4:
+
+            # MLM Formulation - Hypothesis First, followed by premises
+            # sent_1 = concept <con> can be described as <predict_prop>?
+            # sent_2 = <[MASK]>.
+
+            # 4: ["concept <con> can be described as <predict_prop>?","<[MASK]>."]
+
+            predict_prop_template, con_prop_template, = context_templates[
+                self.context_id
+            ]
+
+            sent_1 = predict_prop_template.replace("<con>", concept).replace(
+                "<predict_prop>", predict_prop
+            )
+
+            sent_2 = con_prop_template.replace("<[MASK]>", self.mask_token)
 
         # print(f"sent_1 : {sent_1}", flush=True)
         # print(f"sent_2 : {sent_2}", flush=True)
@@ -912,7 +934,7 @@ if __name__ == "__main__":
 
             log.info("Grid Search - Hyperparameter Tuning")
 
-            epochs = [10, 12, 16]
+            epochs = [8, 10, 12]
             batch_size = [16, 32]
             learning_rate = [1e-5, 2e-5, 1e-6, 2e-6]
 
