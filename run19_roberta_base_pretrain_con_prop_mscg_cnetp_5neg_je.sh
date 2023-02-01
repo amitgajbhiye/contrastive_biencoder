@@ -21,6 +21,6 @@ echo 'This script is running on:' hostname
 
 conda activate venv
 
-python3 model/roberta_prop_aug.py --config_file configs/1_configs_pretrain/roberta_base_je_pretrain_mask_id_ctx4_con_prop_mscg_cnetp.json
+python3 model/roberta_con_prop.py --config_file configs/1_configs_pretrain/roberta_base_je_pretrain_mask_id_ctx4_con_prop_mscg_cnetp.json
 
 echo 'Job Finished!'
