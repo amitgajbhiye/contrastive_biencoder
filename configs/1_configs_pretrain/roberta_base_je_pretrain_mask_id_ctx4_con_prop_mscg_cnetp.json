@@ -26,12 +26,12 @@
         "hf_tokenizer_name": "roberta-base",
         "hf_tokenizer_path": "/scratch/c.scmag3/hawk_data/roberta_base_pretrained/tokenizer",
         "max_len": 40,
-        "context_id": 4
+        "context_id": 1
     },
     "model_params": {
         "hf_checkpoint_name": "roberta-base",
         "hf_model_path": "/scratch/c.scmag3/hawk_data/roberta_base_pretrained/model",
         "num_labels": 0,
-        "context_id": 4
+        "context_id": 1
     }
 }
