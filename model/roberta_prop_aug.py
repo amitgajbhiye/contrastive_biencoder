@@ -64,10 +64,6 @@ context_templates = {
         "concept <con> can be described as <predict_prop>?",
         "<[MASK]>, concept <con> can be described as <prop_list>.",
     ],
-    4: [
-        "concept <con> can be described as <predict_prop>?",
-        "<[MASK]>.",
-    ],  # Prompt for Concept Property Data
 }
 
 # MODEL_CLASS = {
@@ -225,22 +221,6 @@ class DatasetPropConjuction(Dataset):
                 .replace("<con>", concept)
                 .replace("<prop_list>", conjuct_props)
             )
-
-        elif self.context_id == 4:
-
-            # MLM Formulation - Hypothesis First, followed by premises
-            # sent_1 = concept <con> can be described as <predict_prop>?
-            # sent_2 = <[MASK]>.
-
-            # 4: ["concept <con> can be described as <predict_prop>?","<[MASK]>."]
-
-            predict_prop_template, mask_template, = context_templates[self.context_id]
-
-            sent_1 = predict_prop_template.replace("<con>", concept).replace(
-                "<predict_prop>", predict_prop
-            )
-
-            sent_2 = mask_template.replace("<[MASK]>", self.mask_token)
 
         # print(f"sent_1 : {sent_1}", flush=True)
         # print(f"sent_2 : {sent_2}", flush=True)
@@ -529,7 +509,7 @@ def evaluate(model, dataloader):
 
         if model.context_id == 1:
             batch_preds = torch.argmax(logits, dim=1).flatten()
-        elif model.context_id in (2, 3, 4):
+        elif model.context_id in (2, 3):
             batch_preds = torch.round(torch.sigmoid(logits))
         else:
             raise KeyError(
