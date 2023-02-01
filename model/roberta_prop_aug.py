@@ -234,15 +234,13 @@ class DatasetPropConjuction(Dataset):
 
             # 4: ["concept <con> can be described as <predict_prop>?","<[MASK]>."]
 
-            predict_prop_template, con_prop_template, = context_templates[
-                self.context_id
-            ]
+            predict_prop_template, mask_template, = context_templates[self.context_id]
 
             sent_1 = predict_prop_template.replace("<con>", concept).replace(
                 "<predict_prop>", predict_prop
             )
 
-            sent_2 = con_prop_template.replace("<[MASK]>", self.mask_token)
+            sent_2 = mask_template.replace("<[MASK]>", self.mask_token)
 
         # print(f"sent_1 : {sent_1}", flush=True)
         # print(f"sent_2 : {sent_2}", flush=True)
@@ -531,8 +529,12 @@ def evaluate(model, dataloader):
 
         if model.context_id == 1:
             batch_preds = torch.argmax(logits, dim=1).flatten()
-        elif model.context_id in (2, 3):
+        elif model.context_id in (2, 3, 4):
             batch_preds = torch.round(torch.sigmoid(logits))
+        else:
+            raise KeyError(
+                f"Specify Correct context_id in config file. Current context_id is: {model.context_id}"
+            )
 
         val_preds.extend(batch_preds.cpu().detach().numpy())
         val_labels.extend(labels.cpu().detach().numpy())
