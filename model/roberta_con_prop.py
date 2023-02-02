@@ -2,6 +2,7 @@ import os
 import sys
 import time
 import logging
+import pickle
 
 sys.path.insert(0, os.getcwd())
 
@@ -76,6 +77,18 @@ class DatasetPropConjuction(Dataset):
                 f"Supplied Concept Property File is a Dataframe : {self.data_df.shape}",
             )
 
+            self.data_df = self.data_df.rename(
+                columns={
+                    "concept": "concept",
+                    "property": "predict_prop",
+                    "label": "labels",
+                },
+            )
+
+            self.data_df = self.data_df.astype(
+                {"concept": str, "predict_prop": str, "labels": float,},
+            )
+
         elif os.path.isfile(concept_property_file):
 
             log.info(
@@ -99,6 +112,9 @@ class DatasetPropConjuction(Dataset):
             )
 
         self.data_df.reset_index(inplace=True, drop=True)
+
+        log.info("Input DF")
+        log.info(self.data_df.head(n=20))
 
         self.hf_tokenizer_name = dataset_params["hf_tokenizer_name"]
         self.hf_tokenizer_path = dataset_params["hf_tokenizer_path"]
@@ -676,8 +692,8 @@ def do_cv(config):
         if cv_type == "property_split":
 
             num_fold = 5
-            train_file_base_name = "train_prop_conj"
-            test_file_base_name = "test_prop_conj"
+            train_file_base_name = "train_prop_split_con_prop.pkl"
+            test_file_base_name = "test_prop_split_con_prop.pkl"
 
         elif cv_type == "concept_property_split":
 
@@ -702,12 +718,15 @@ def do_cv(config):
             log.info(f"Training the model on Fold : {fold} of {num_fold}")
             log.info("*" * 50)
 
-            train_file_name = os.path.join(
-                data_dir, f"{save_prefix}_{fold}_{train_file_base_name}_{cv_type}.tsv"
-            )
-            test_file_name = os.path.join(
-                data_dir, f"{save_prefix}_{fold}_{test_file_base_name}_{cv_type}.tsv"
-            )
+            train_file_name = os.path.join(data_dir, f"{fold}_{train_file_base_name}")
+            test_file_name = os.path.join(data_dir, f"{fold}_{test_file_base_name}")
+
+            with open(train_file_name, "rb") as train_pkl, open(
+                test_file_name, "rb"
+            ) as test_pkl:
+
+                train_df = pickle.load(train_pkl)
+                test_df = pickle.load(test_pkl)
 
             log.info(f"Train File Name : {train_file_name}")
             log.info(f"Test File Name : {test_file_name}")
@@ -720,10 +739,7 @@ def do_cv(config):
                 val_dataloader,
                 test_dataloader,
             ) = prepare_data_and_models(
-                config=config,
-                train_file=train_file_name,
-                valid_file=None,
-                test_file=test_file_name,
+                config=config, train_file=train_df, valid_file=None, test_file=test_df,
             )
 
             assert (
@@ -769,9 +785,9 @@ def do_cv(config):
 
 if __name__ == "__main__":
 
-    # set_seed(1)
+    set_seed(1)
 
-    parser = ArgumentParser(description="Joint Encoder Property Augmentation Model")
+    parser = ArgumentParser(description="Joint Encoder Concept Property Model")
 
     parser.add_argument(
         "-c", "--config_file", required=True, help="path to the configuration file",
