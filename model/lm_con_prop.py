@@ -35,10 +35,10 @@ device = torch.device("cuda") if torch.cuda.is_available() else torch.device("cp
 
 
 CLASSES = {
-    "bert-base-uncased": (BertModel, BertTokenizer),
-    "bert-large-uncased": (BertModel, BertTokenizer),
-    "roberta-base": (RobertaModel, RobertaTokenizer),
-    "roberta-large": (RobertaModel, RobertaTokenizer),
+    "bert-base-uncased": (BertModel, BertTokenizer, 103),
+    "bert-large-uncased": (BertModel, BertTokenizer, 103),
+    "roberta-base": (RobertaModel, RobertaTokenizer, 50264),
+    "roberta-large": (RobertaModel, RobertaTokenizer, 50264),
 }
 
 
@@ -121,7 +121,7 @@ class DatasetConceptPropertyJoint(Dataset):
         self.hf_tokenizer_name = dataset_params["hf_tokenizer_name"]
         self.hf_tokenizer_path = dataset_params["hf_tokenizer_path"]
 
-        _, tokenizer_class = CLASSES[self.hf_tokenizer_name]
+        _, tokenizer_class, _ = CLASSES[self.hf_tokenizer_name]
 
         log.info(f"tokenizer_class : {tokenizer_class}")
 
@@ -168,7 +168,7 @@ class DatasetConceptPropertyJoint(Dataset):
 
             sent_2 = mask_template.replace("<[MASK]>", self.mask_token)
 
-            sent = sent_1 + sent_2
+            sent = sent_1 + " " + sent_2
 
         # print(f"Input Sent : {sent}")
 
@@ -216,7 +216,7 @@ class ModelConceptPropertyJoint(nn.Module):
         self.num_labels = model_params["num_labels"]
         self.context_id = model_params["context_id"]
 
-        model_class, _ = CLASSES[self.hf_checkpoint_name]
+        model_class, _, self.mask_token_id = CLASSES[self.hf_checkpoint_name]
 
         log.info(f"model_class : {model_class}")
 
@@ -251,11 +251,9 @@ class ModelConceptPropertyJoint(nn.Module):
 
         def get_mask_token_embeddings(last_layer_hidden_states):
 
-            MASK_TOKEN_ID = 50264
-
-            _, mask_token_index = (input_ids == torch.tensor(MASK_TOKEN_ID)).nonzero(
-                as_tuple=True
-            )
+            _, mask_token_index = (
+                input_ids == torch.tensor(self.mask_token_id)
+            ).nonzero(as_tuple=True)
 
             mask_vectors = torch.vstack(
                 [
