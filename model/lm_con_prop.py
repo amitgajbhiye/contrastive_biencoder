@@ -20,6 +20,7 @@ from torch.utils.data import DataLoader, Dataset, RandomSampler, SequentialSampl
 from transformers import AutoModel, AutoTokenizer
 
 from transformers import BertModel, BertTokenizer
+from transformers import RobertaModel, RobertaTokenizer
 
 from transformers import (
     AdamW,
@@ -31,6 +32,14 @@ from utils.je_utils import compute_scores, read_config, set_seed
 warnings.filterwarnings("ignore")
 
 device = torch.device("cuda") if torch.cuda.is_available() else torch.device("cpu")
+
+
+CLASSES = {
+    "bert-base-uncased": (BertModel, BertTokenizer),
+    "bert-large-uncased": (BertModel, BertTokenizer),
+    "roberta-base": (RobertaModel, RobertaTokenizer),
+    "roberta-large": (RobertaModel, RobertaTokenizer),
+}
 
 
 def set_logger(config):
@@ -112,7 +121,11 @@ class DatasetConceptPropertyJoint(Dataset):
         self.hf_tokenizer_name = dataset_params["hf_tokenizer_name"]
         self.hf_tokenizer_path = dataset_params["hf_tokenizer_path"]
 
-        self.tokenizer = BertTokenizer.from_pretrained(self.hf_tokenizer_path)
+        _, tokenizer_class = CLASSES[self.hf_tokenizer_name]
+
+        log.info(f"tokenizer_class : {tokenizer_class}")
+
+        self.tokenizer = tokenizer_class.from_pretrained(self.hf_tokenizer_path)
         self.max_len = dataset_params["max_len"]
 
         self.sep_token = self.tokenizer.sep_token
@@ -203,7 +216,11 @@ class ModelConceptPropertyJoint(nn.Module):
         self.num_labels = model_params["num_labels"]
         self.context_id = model_params["context_id"]
 
-        self.encoder = BertModel.from_pretrained(self.hf_model_path)
+        model_class, _ = CLASSES[self.hf_tokenizer_name]
+
+        log.info(f"model_class : {model_class}")
+
+        self.encoder = model_class.from_pretrained(self.hf_model_path)
 
         classifier_dropout = self.encoder.config.hidden_dropout_prob
 
@@ -370,52 +387,6 @@ def prepare_data_and_models(
     )
 
 
-def train_on_single_epoch(model, scheduler, optimizer, train_dataloader):
-
-    train_losses = []
-
-    model.train()
-    for step, batch in enumerate(train_dataloader):
-
-        model.zero_grad()
-
-        input_ids = batch["input_ids"].squeeze().to(device)
-        attention_mask = batch["attention_mask"].squeeze().to(device)
-        token_type_ids = batch["token_type_ids"].squeeze().to(device)
-        labels = batch["labels"].to(device)
-
-        print(f"In Step {step}", flush=True)
-        print(f"input_ids.shape : {input_ids.shape}", flush=True)
-        print(f"attention_mask.shape : {attention_mask.shape}", flush=True)
-        print(f"labels.shape : {labels.shape}", flush=True)
-        print(f"attention_mask : {attention_mask[0]}", flush=True)
-
-        loss, logits, mask_vector = model(
-            input_ids=input_ids, attention_mask=attention_mask, labels=labels,
-        )
-
-        train_losses.append(loss.item())
-
-        torch.nn.utils.clip_grad_norm_(model.parameters(), 1.0)
-
-        loss.backward()
-        optimizer.step()
-        scheduler.step()
-
-        if step % 100 == 0 and not step == 0:
-            log.info(
-                "   Batch {} of Batch {} ---> Batch Loss {}".format(
-                    step, len(train_dataloader), round(loss.item(), 4)
-                )
-            )
-
-    avg_train_loss = round(np.mean(train_losses), 4)
-
-    log.info("Average Train Loss :", avg_train_loss)
-
-    return avg_train_loss, model
-
-
 def evaluate(model, dataloader):
 
     model.eval()
@@ -425,12 +396,17 @@ def evaluate(model, dataloader):
     for step, batch in enumerate(dataloader):
 
         input_ids = batch["input_ids"].squeeze().to(device)
+        token_type_ids = batch["token_type_ids"].squeeze().to(device)
         attention_mask = batch["attention_mask"].squeeze().to(device)
+
         labels = batch["labels"].to(device)
 
         with torch.no_grad():
             loss, logits, mask_vector = model(
-                input_ids=input_ids, attention_mask=attention_mask, labels=labels,
+                input_ids=input_ids,
+                token_type_ids=token_type_ids,
+                attention_mask=attention_mask,
+                labels=labels,
             )
 
         val_losses.append(loss.item())
@@ -491,6 +467,7 @@ def train(
             model.zero_grad()
 
             input_ids = batch["input_ids"].squeeze().to(device)
+            token_type_ids = batch["token_type_ids"].squeeze().to(device)
             attention_mask = batch["attention_mask"].squeeze().to(device)
             labels = batch["labels"].to(device)
 
@@ -502,7 +479,10 @@ def train(
             print(f"attention_mask : {attention_mask[0]}", flush=True)
 
             loss, logits, mask_vector = model(
-                input_ids=input_ids, attention_mask=attention_mask, labels=labels,
+                input_ids=input_ids,
+                token_type_ids=token_type_ids,
+                attention_mask=attention_mask,
+                labels=labels,
             )
 
             step_train_losses.append(loss.item())
