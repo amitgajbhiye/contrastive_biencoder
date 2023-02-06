@@ -17,14 +17,12 @@ import torch.nn as nn
 import torch.nn.functional as F
 
 from torch.utils.data import DataLoader, Dataset, RandomSampler, SequentialSampler
+from transformers import AutoModel, AutoTokenizer
 
 from transformers import (
     AdamW,
-    RobertaModel,
-    RobertaTokenizer,
     get_linear_schedule_with_warmup,
 )
-
 
 from utils.je_utils import compute_scores, read_config, set_seed
 
@@ -59,15 +57,8 @@ context_templates = {
     ],  # Prompt for Concept Property Data
 }
 
-# MODEL_CLASS = {
-#     "bert-base-uncased": BertForSequenceClassification,
-#     "bert-large-uncased": BertForSequenceClassification,
-#     "roberta-base": RobertaForSequenceClassification,
-#     "roberta-large": RobertaForSequenceClassification,
-# }
 
-
-class DatasetPropConjuction(Dataset):
+class DatasetConceptPropertyJoint(Dataset):
     def __init__(self, concept_property_file, dataset_params):
 
         if isinstance(concept_property_file, pd.DataFrame):
@@ -119,7 +110,7 @@ class DatasetPropConjuction(Dataset):
         self.hf_tokenizer_name = dataset_params["hf_tokenizer_name"]
         self.hf_tokenizer_path = dataset_params["hf_tokenizer_path"]
 
-        self.tokenizer = RobertaTokenizer.from_pretrained(self.hf_tokenizer_path)
+        self.tokenizer = AutoTokenizer.from_pretrained(self.hf_tokenizer_path)
         self.max_len = dataset_params["max_len"]
 
         self.sep_token = self.tokenizer.sep_token
@@ -162,31 +153,19 @@ class DatasetPropConjuction(Dataset):
 
             sent_2 = mask_template.replace("<[MASK]>", self.mask_token)
 
-        # print(f"sent_1 : {sent_1}", flush=True)
-        # print(f"sent_2 : {sent_2}", flush=True)
-        # print(flush=True)
+            sent = sent_1 + sent_2
 
-        # ++++++++++++++++++++++++
-
-        # if conjuct_props == "no_similar_property":
-
-        #     con_prop_conj = concept + " " + self.sep_token
-        #     prop_to_predict = predict_prop
-
-        # else:
-
-        #     con_prop_conj = concept + " " + self.sep_token + " " + conjuct_props
-        #     prop_to_predict = predict_prop
+        # print(f"Input Sent : {sent}")
 
         encoded_dict = self.tokenizer.encode_plus(
-            text=sent_1,
-            text_pair=sent_2,
+            text=sent,
+            text_pair=None,
             max_length=self.max_len,
             add_special_tokens=True,
             padding="max_length",
             truncation=True,
             return_tensors="pt",
-            return_token_type_ids=False,
+            return_token_type_ids=True,
         )
 
         encoded_dict["labels"] = labels
@@ -196,6 +175,7 @@ class DatasetPropConjuction(Dataset):
             print(flush=True)
             print(f"sent_1 : {sent_1}", flush=True)
             print(f"sent_2 : {sent_2}", flush=True)
+            print(f"sent : {sent}", flush=True)
             print(
                 f"tokenized sent : {[self.tokenizer.convert_ids_to_tokens(inp_id) for inp_id in encoded_dict['input_ids']]}",
                 flush=True,
@@ -211,9 +191,9 @@ class DatasetPropConjuction(Dataset):
         return encoded_dict
 
 
-class ModelPropConjuctionJoint(nn.Module):
+class ModelConceptPropertyJoint(nn.Module):
     def __init__(self, model_params):
-        super(ModelPropConjuctionJoint, self).__init__()
+        super(ModelConceptPropertyJoint, self).__init__()
 
         self.hf_checkpoint_name = model_params["hf_checkpoint_name"]
         self.hf_model_path = model_params["hf_model_path"]
@@ -221,25 +201,30 @@ class ModelPropConjuctionJoint(nn.Module):
         self.num_labels = model_params["num_labels"]
         self.context_id = model_params["context_id"]
 
-        self.encoder = RobertaModel.from_pretrained(self.hf_model_path)
+        self.encoder = AutoModel.from_pretrained(self.hf_model_path)
 
         classifier_dropout = self.encoder.config.hidden_dropout_prob
 
         self.dropout = nn.Dropout(classifier_dropout)
         self.classifier = nn.Linear(self.encoder.config.hidden_size, 1)
 
-    def forward(self, input_ids, attention_mask, labels=None):
+    def forward(self, input_ids, token_type_ids, attention_mask, labels=None):
 
         # input_ids = input_ids.squeeze()
         # attention_mask = attention_mask.squeeze()
 
         print(f"input_ids : {input_ids.shape}", flush=True)
+        print(f"token_type_ids : {token_type_ids.shape}", flush=True)
         print(f"attention_mask : {attention_mask.shape}", flush=True)
         print(f"labels : {labels.shape}", flush=True)
 
         loss_fct = nn.BCEWithLogitsLoss()
 
-        output = self.encoder(input_ids=input_ids, attention_mask=attention_mask)
+        output = self.encoder(
+            input_ids=input_ids,
+            token_type_ids=token_type_ids,
+            attention_mask=attention_mask,
+        )
 
         hidden_states = output.last_hidden_state
 
@@ -296,7 +281,7 @@ def prepare_data_and_models(
 
     num_workers = 4
 
-    train_data = DatasetPropConjuction(train_file, dataset_params)
+    train_data = DatasetConceptPropertyJoint(train_file, dataset_params)
     train_sampler = RandomSampler(train_data)
     train_dataloader = DataLoader(
         train_data,
@@ -310,7 +295,7 @@ def prepare_data_and_models(
     log.info(f"Train Data DF shape : {train_data.data_df.shape}")
 
     if valid_file is not None:
-        val_data = DatasetPropConjuction(valid_file, dataset_params)
+        val_data = DatasetConceptPropertyJoint(valid_file, dataset_params)
         val_sampler = RandomSampler(val_data)
         val_dataloader = DataLoader(
             val_data,
@@ -327,7 +312,7 @@ def prepare_data_and_models(
         val_dataloader = None
 
     if test_file is not None:
-        test_data = DatasetPropConjuction(test_file, dataset_params)
+        test_data = DatasetConceptPropertyJoint(test_file, dataset_params)
         test_sampler = SequentialSampler(test_data)
         test_dataloader = DataLoader(
             test_data,
@@ -349,7 +334,7 @@ def prepare_data_and_models(
 
         log.info(f"Loading Pretrained Model From : {pretrained_model_path}")
 
-        model = ModelPropConjuctionJoint(model_params)
+        model = ModelConceptPropertyJoint(model_params)
         model.load_state_dict(torch.load(pretrained_model_path))
 
         log.info(f"Loaded Pretrained Model")
@@ -357,7 +342,7 @@ def prepare_data_and_models(
     else:
 
         log.info(f"Training the Model from Scratch ...")
-        model = ModelPropConjuctionJoint(model_params)
+        model = ModelConceptPropertyJoint(model_params)
 
     model.to(device)
     print("Model", flush=True)
@@ -394,6 +379,7 @@ def train_on_single_epoch(model, scheduler, optimizer, train_dataloader):
 
         input_ids = batch["input_ids"].squeeze().to(device)
         attention_mask = batch["attention_mask"].squeeze().to(device)
+        token_type_ids = batch["token_type_ids"].squeeze().to(device)
         labels = batch["labels"].to(device)
 
         print(f"In Step {step}", flush=True)
