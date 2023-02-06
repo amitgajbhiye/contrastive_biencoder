@@ -216,7 +216,7 @@ class ModelConceptPropertyJoint(nn.Module):
         self.num_labels = model_params["num_labels"]
         self.context_id = model_params["context_id"]
 
-        model_class, _ = CLASSES[self.hf_tokenizer_name]
+        model_class, _ = CLASSES[self.hf_checkpoint_name]
 
         log.info(f"model_class : {model_class}")
 
