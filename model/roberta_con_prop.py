@@ -17,7 +17,7 @@ import torch.nn as nn
 import torch.nn.functional as F
 
 from torch.utils.data import DataLoader, Dataset, RandomSampler, SequentialSampler
-from torch.utils.data._utils.collate import default_convert
+
 from transformers import (
     AdamW,
     RobertaModel,
