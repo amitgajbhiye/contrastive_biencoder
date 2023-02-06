@@ -19,6 +19,8 @@ import torch.nn.functional as F
 from torch.utils.data import DataLoader, Dataset, RandomSampler, SequentialSampler
 from transformers import AutoModel, AutoTokenizer
 
+from transformers import BertModel, BertTokenizer
+
 from transformers import (
     AdamW,
     get_linear_schedule_with_warmup,
@@ -110,7 +112,7 @@ class DatasetConceptPropertyJoint(Dataset):
         self.hf_tokenizer_name = dataset_params["hf_tokenizer_name"]
         self.hf_tokenizer_path = dataset_params["hf_tokenizer_path"]
 
-        self.tokenizer = AutoTokenizer.from_pretrained(self.hf_tokenizer_path)
+        self.tokenizer = BertTokenizer.from_pretrained(self.hf_tokenizer_path)
         self.max_len = dataset_params["max_len"]
 
         self.sep_token = self.tokenizer.sep_token
@@ -201,7 +203,7 @@ class ModelConceptPropertyJoint(nn.Module):
         self.num_labels = model_params["num_labels"]
         self.context_id = model_params["context_id"]
 
-        self.encoder = AutoModel.from_pretrained(self.hf_model_path)
+        self.encoder = BertModel.from_pretrained(self.hf_model_path)
 
         classifier_dropout = self.encoder.config.hidden_dropout_prob
 
