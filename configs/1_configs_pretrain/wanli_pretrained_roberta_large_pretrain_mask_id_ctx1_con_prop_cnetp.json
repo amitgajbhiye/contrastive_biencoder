@@ -14,7 +14,7 @@
         "batch_size": 32,
         "lr": 1e-5,
         "max_epochs": 100,
-        "num_warmup_steps": 0,
+        "warmup_ratio": 0,
         "patience_early_stopping": 5,
         "save_dir": "trained_models/je_con_prop_cnetp_pretrained",
         "model_name": "wanli_pretrained_roberta_large_pretrain_mask_id_ctx1_con_prop_cnetp.pt",
