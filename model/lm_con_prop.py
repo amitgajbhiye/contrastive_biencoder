@@ -44,6 +44,7 @@ CLASSES = {
     "bert-large-uncased": (BertModel, BertTokenizer, 103),
     "roberta-base": (RobertaModel, RobertaTokenizer, 50264),
     "roberta-large": (RobertaModel, RobertaTokenizer, 50264),
+    "deberta-v3-large": (AutoModel, AutoTokenizer, 128000),
 }
 
 
@@ -375,6 +376,7 @@ def prepare_data_and_models(
     total_steps = len(train_dataloader) * max_epochs
     warmup_ratio = training_params["warmup_ratio"]
     num_warmup_steps = math.ceil(total_steps * warmup_ratio)
+    log.info(f"num_warmup_steps : {num_warmup_steps}")
 
     # num_warmup_steps = 0
 
