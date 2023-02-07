@@ -21,7 +21,11 @@ from torch.utils.data import DataLoader, Dataset, RandomSampler, SequentialSampl
 from transformers import AutoModel, AutoTokenizer
 
 from transformers import BertModel, BertTokenizer
-from transformers import RobertaModel, RobertaTokenizer
+from transformers import (
+    RobertaModel,
+    RobertaForSequenceClassification,
+    RobertaTokenizer,
+)
 
 from transformers import (
     AdamW,
