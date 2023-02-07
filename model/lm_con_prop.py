@@ -3,6 +3,7 @@ import sys
 import time
 import logging
 import pickle
+import math
 
 sys.path.insert(0, os.getcwd())
 
@@ -366,10 +367,12 @@ def prepare_data_and_models(
     print(model, flush=True)
 
     optimizer = AdamW(model.parameters(), lr=lr, weight_decay=weight_decay)
-    total_steps = len(train_dataloader) * max_epochs
 
-    # num_warmup_steps = len(train_dataloader)  # Try with this number of steps
-    num_warmup_steps = 0
+    total_steps = len(train_dataloader) * max_epochs
+    warmup_ratio = training_params["warmup_ratio"]
+    num_warmup_steps = math.ceil(total_steps * warmup_ratio)
+
+    # num_warmup_steps = 0
 
     scheduler = get_linear_schedule_with_warmup(
         optimizer, num_warmup_steps=num_warmup_steps, num_training_steps=total_steps
@@ -825,55 +828,72 @@ if __name__ == "__main__":
             log.info("Grid Search - Hyperparameter Tuning")
 
             epochs = [8, 10, 12]
-            batch_size = [16, 32]
-            learning_rate = [1e-5, 2e-5, 1e-6, 2e-6]
+            batch_size = [32, 16]
+            learning_rate = [1e-5]
+            warmup_ratio = [0.06, 0.1, 0.15]
+            weight_decay = [0.01, 0.1]
 
             log.info(f"Max Epochs :  {epochs}")
             log.info(f"Batch Sizes : {batch_size}")
             log.info(f"Learning Rates : {learning_rate}")
+            log.info(f"Warmup Ratio : {warmup_ratio}")
+            log.info(f"Weight Decay : {weight_decay}")
 
             hp_combination_list, all_folds_scores_lists = [], []
 
             for ep in epochs:
                 for bs in batch_size:
                     for lr in learning_rate:
+                        for wr in warmup_ratio:
+                            for wd in weight_decay:
 
-                        log.info("*" * 60)
-                        log.info(f"New Run : Epoch: {ep}, Batch Size: {bs}, LR: {lr}")
-                        log.info("*" * 60)
+                                log.info("*" * 60)
+                                log.info(
+                                    f"New Run : Epoch: {ep}, Batch Size: {bs}, LR: {lr}, warmup_ratio: {wr}"
+                                )
+                                log.info("*" * 60)
 
-                        config["training_params"]["max_epochs"] = ep
-                        config["training_params"]["batch_size"] = bs
-                        config["training_params"]["lr"] = lr
+                                config["training_params"]["max_epochs"] = ep
+                                config["training_params"]["batch_size"] = bs
+                                config["training_params"]["lr"] = lr
+                                config["training_params"]["warmup_ratio"] = wr
+                                config["training_params"]["weight_decay"] = wd
 
-                        print(flush=True)
-                        print(
-                            f"Running With Params Max Epochs, Batch Size, LR :",
-                            config["training_params"]["max_epochs"],
-                            config["training_params"]["batch_size"],
-                            config["training_params"]["lr"],
-                        )
-                        print(f"Running with new config", flush=True)
-                        pprint(config, sort_dicts=False)
+                                print(flush=True)
+                                print(
+                                    f"Running With Params Max Epochs, Batch Size, LR, WR:",
+                                    config["training_params"]["max_epochs"],
+                                    config["training_params"]["batch_size"],
+                                    config["training_params"]["lr"],
+                                    config["training_params"]["warmup_ratio"],
+                                    config["training_params"]["weight_decay"],
+                                )
 
-                        all_folds_scores = do_cv(config=config)
-                        print(
-                            f"Above Resulst are Running With Params Max Epochs, Batch Size, LR :",
-                            config["training_params"]["max_epochs"],
-                            config["training_params"]["batch_size"],
-                            config["training_params"]["lr"],
-                        )
-                        print("One Run Finished !!!", flush=True)
-                        print(flush=True)
+                                print(f"Running with new config", flush=True)
+                                pprint(config, sort_dicts=False)
 
-                        log.info("*" * 60)
-                        log.info(f"Epoch: {ep}, Batch Size: {bs}, LR: {lr}")
-                        for key, value in all_folds_scores.items():
-                            log.info(f"{key} : {value}")
-                        log.info("*" * 60)
+                                all_folds_scores = do_cv(config=config)
+                                print(
+                                    f"Above Resulst are Running With Params Max Epochs, Batch Size, LR :",
+                                    config["training_params"]["max_epochs"],
+                                    config["training_params"]["batch_size"],
+                                    config["training_params"]["lr"],
+                                    config["training_params"]["warmup_ratio"],
+                                    config["training_params"]["weight_decay"],
+                                )
+                                print("One Run Finished !!!", flush=True)
+                                print(flush=True)
 
-                        hp_combination_list.append(
-                            f"Epoch: {ep}, Batch Size: {bs}, LR: {lr}"
-                        )
-                        all_folds_scores_lists.append(all_folds_scores)
+                                log.info("*" * 60)
+                                log.info(
+                                    f"Epoch: {ep}, Batch Size: {bs}, LR: {lr}, WR :{wr}"
+                                )
+                                for key, value in all_folds_scores.items():
+                                    log.info(f"{key} : {value}")
+                                log.info("*" * 60)
+
+                                hp_combination_list.append(
+                                    f"Epoch: {ep}, Batch Size: {bs}, LR: {lr}"
+                                )
+                                all_folds_scores_lists.append(all_folds_scores)
 
