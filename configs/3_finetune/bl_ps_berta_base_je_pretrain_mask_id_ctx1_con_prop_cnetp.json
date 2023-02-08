@@ -20,7 +20,8 @@
         "model_name": "bl_ps_berta_base_je_pretrain_mask_id_ctx1_con_prop_cnetp.pt",
         "lr_policy": null,
         "lr_decay_iters": null,
-        "weight_decay": 0.01
+        "weight_decay": 0.01,
+        "hp_tuning": false
     },
     "dataset_params": {
         "hf_tokenizer_name": "bert-base-uncased",
