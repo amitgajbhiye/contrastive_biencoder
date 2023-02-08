@@ -46,7 +46,8 @@ CLASSES = {
     "bert-large-uncased": (BertModel, BertTokenizer, 103),
     "roberta-base": (RobertaModel, RobertaTokenizer, 50264),
     "roberta-large": (RobertaModel, RobertaTokenizer, 50264),
-    "deberta-v3-large": (DebertaV2Model, DebertaV2Tokenizer, 128000),
+    "deberta-v3-large": (AutoModel, AutoTokenizer, 128000)
+    # "deberta-v3-large": (DebertaV2Model, DebertaV2Tokenizer, 128000),
 }
 
 
@@ -133,17 +134,17 @@ class DatasetConceptPropertyJoint(Dataset):
 
         log.info(f"tokenizer_class : {tokenizer_class}")
 
-        # if self.hf_tokenizer_name == "deberta-v3-large":
-        #     self.tokenizer = tokenizer_class.from_pretrained(
-        #         self.hf_tokenizer_path,
-        #         config=AutoConfig.from_pretrained(
-        #             "/scratch/c.scmag3/hf_pretrained_models/deberta_v3_large/model"
-        #         ),
-        #     )
-        # else:
-        #     self.tokenizer = tokenizer_class.from_pretrained(self.hf_tokenizer_path)
+        if self.hf_tokenizer_name == "deberta-v3-large":
+            self.tokenizer = tokenizer_class.from_pretrained(
+                self.hf_tokenizer_path,
+                config=AutoConfig.from_pretrained(
+                    "/scratch/c.scmag3/hf_pretrained_models/deberta_v3_large/model"
+                ),
+            )
+        else:
+            self.tokenizer = tokenizer_class.from_pretrained(self.hf_tokenizer_path)
 
-        self.tokenizer = tokenizer_class.from_pretrained(self.hf_tokenizer_path)
+        # self.tokenizer = tokenizer_class.from_pretrained(self.hf_tokenizer_path)
 
         self.max_len = dataset_params["max_len"]
 
