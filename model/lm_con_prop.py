@@ -27,6 +27,8 @@ from transformers import (
     RobertaTokenizer,
 )
 
+from transformers import DebertaV2Model, DebertaV2Tokenizer
+
 from transformers import (
     AdamW,
     get_linear_schedule_with_warmup,
@@ -44,7 +46,7 @@ CLASSES = {
     "bert-large-uncased": (BertModel, BertTokenizer, 103),
     "roberta-base": (RobertaModel, RobertaTokenizer, 50264),
     "roberta-large": (RobertaModel, RobertaTokenizer, 50264),
-    "deberta-v3-large": (AutoModel, AutoTokenizer, 128000),
+    "deberta-v3-large": (DebertaV2Model, DebertaV2Tokenizer, 128000),
 }
 
 
@@ -131,15 +133,17 @@ class DatasetConceptPropertyJoint(Dataset):
 
         log.info(f"tokenizer_class : {tokenizer_class}")
 
-        if self.hf_tokenizer_name == "deberta-v3-large":
-            self.tokenizer = tokenizer_class.from_pretrained(
-                self.hf_tokenizer_path,
-                config=AutoConfig.from_pretrained(
-                    "/scratch/c.scmag3/hf_pretrained_models/deberta_v3_large/model"
-                ),
-            )
-        else:
-            self.tokenizer = tokenizer_class.from_pretrained(self.hf_tokenizer_path)
+        # if self.hf_tokenizer_name == "deberta-v3-large":
+        #     self.tokenizer = tokenizer_class.from_pretrained(
+        #         self.hf_tokenizer_path,
+        #         config=AutoConfig.from_pretrained(
+        #             "/scratch/c.scmag3/hf_pretrained_models/deberta_v3_large/model"
+        #         ),
+        #     )
+        # else:
+        #     self.tokenizer = tokenizer_class.from_pretrained(self.hf_tokenizer_path)
+
+        self.tokenizer = tokenizer_class.from_pretrained(self.hf_tokenizer_path)
 
         self.max_len = dataset_params["max_len"]
 
@@ -280,6 +284,7 @@ class ModelConceptPropertyJoint(nn.Module):
             return mask_vectors
 
         mask_vectors = get_mask_token_embeddings(last_layer_hidden_states=hidden_states)
+
         print(f"mask_vectors :{mask_vectors.shape}", flush=True)
 
         mask_vectors = self.dropout(mask_vectors)
@@ -385,6 +390,7 @@ def prepare_data_and_models(
     total_steps = len(train_dataloader) * max_epochs
     warmup_ratio = training_params["warmup_ratio"]
     num_warmup_steps = math.ceil(total_steps * warmup_ratio)
+
     log.info(f"num_warmup_steps : {num_warmup_steps}")
 
     # num_warmup_steps = 0
