@@ -14,7 +14,7 @@
         "batch_size": 32,
         "lr": 1e-5,
         "max_epochs": 8,
-        "num_warmup_steps": 0,
+        "warmup_ratio": 0,
         "patience_early_stopping": 15,
         "save_dir": "trained_models/mcrae_finetune/",
         "model_name": "ps_mcrae_con_prop_wanli_pretrained_roberta_large_mask_id_ctx1_cnetp.pt",
