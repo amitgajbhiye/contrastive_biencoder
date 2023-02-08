@@ -1,6 +1,6 @@
 #!/bin/bash --login
 
-#SBATCH --job-name=bdl3Pretrain
+#SBATCH --job-name=dbl3PT
 
 #SBATCH --output=logs/pretrain/out_deberta_v3_large_pretrain_mask_id_ctx1_con_prop_cnetp.txt
 #SBATCH --error=logs/pretrain/err_deberta_v3_large_pretrain_mask_id_ctx1_con_prop_cnetp.txt
