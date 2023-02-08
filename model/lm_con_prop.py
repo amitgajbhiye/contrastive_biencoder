@@ -871,7 +871,7 @@ if __name__ == "__main__":
 
                                 log.info("*" * 60)
                                 log.info(
-                                    f"New Run : Epoch: {ep}, Batch Size: {bs}, LR: {lr}, warmup_ratio: {wr}"
+                                    f"New Run : Epoch: {ep}, Batch Size: {bs}, LR: {lr}, warmup_ratio: {wr}, weight_decay: {wd}"
                                 )
                                 log.info("*" * 60)
 
@@ -908,8 +908,9 @@ if __name__ == "__main__":
 
                                 log.info("*" * 60)
                                 log.info(
-                                    f"Epoch: {ep}, Batch Size: {bs}, LR: {lr}, WR :{wr}"
+                                    f"Epoch: {ep}, Batch Size: {bs}, LR: {lr}, warmup_ratio: {wr}, weight_decay: {wd}"
                                 )
+
                                 for key, value in all_folds_scores.items():
                                     log.info(f"{key} : {value}")
                                 log.info("*" * 60)
