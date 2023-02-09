@@ -9,7 +9,7 @@
 #SBATCH --ntasks=5
 #SBATCH --account scw1858
 
-#SBATCH --partition gpu_v100
+#SBATCH --partition gpu
 #SBATCH --mem=0
 #SBATCH --gres=gpu:1
 
