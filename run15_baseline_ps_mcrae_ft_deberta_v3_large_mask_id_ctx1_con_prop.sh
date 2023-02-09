@@ -17,7 +17,6 @@
 
 #SBATCH -t 0-07:00:00
 
-
 conda activate venv
 
 python3 model/lm_con_prop.py --config_file configs/3_finetune/baseline_ps_mcrae_ft_deberta_v3_large_mask_id_ctx1_con_prop.json
