@@ -12,7 +12,7 @@
         "cv_type": null,
         "data_dir": null,
         "batch_size": 32,
-        "lr": 3e-4,
+        "lr": 1e-5,
         "max_epochs": 100,
         "warmup_ratio": 0,
         "patience_early_stopping": 5,
