@@ -465,7 +465,7 @@ def prepare_data_and_models(
             f"Creating Sequence Classification Model: {model_params['hf_checkpoint_name']}"
         )
 
-        ModelSeqClassificationConPropJoint(model_params)
+        model = ModelSeqClassificationConPropJoint(model_params)
 
     if load_pretrained:
 
