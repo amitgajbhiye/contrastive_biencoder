@@ -380,7 +380,7 @@ class ModelSeqClassificationConPropJoint(nn.Module):
             input_ids=input_ids,
             token_type_ids=token_type_ids,
             attention_mask=attention_mask,
-            labels=labels,
+            labels=labels.long(),
         )
 
         loss, logits = output.loss, output.logits
