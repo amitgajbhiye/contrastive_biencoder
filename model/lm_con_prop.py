@@ -972,7 +972,7 @@ if __name__ == "__main__":
                                 model_name + "_" + discription_str
                             )
 
-                            log.info()
+                            log.info("\n")
                             log.info("*" * 50)
 
                             log.info(
