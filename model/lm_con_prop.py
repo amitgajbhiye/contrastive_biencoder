@@ -20,14 +20,18 @@ import torch.nn.functional as F
 from torch.utils.data import DataLoader, Dataset, RandomSampler, SequentialSampler
 from transformers import AutoConfig, AutoModel, AutoTokenizer
 
-from transformers import BertModel, BertTokenizer
+from transformers import BertModel, BertForSequenceClassification, BertTokenizer
 from transformers import (
     RobertaModel,
     RobertaForSequenceClassification,
     RobertaTokenizer,
 )
 
-from transformers import DebertaV2Model, DebertaV2Tokenizer
+from transformers import (
+    DebertaV2Model,
+    DebertaV2ForSequenceClassification,
+    DebertaV2Tokenizer,
+)
 
 from transformers import (
     AdamW,
@@ -42,12 +46,31 @@ device = torch.device("cuda") if torch.cuda.is_available() else torch.device("cp
 
 
 CLASSES = {
-    "bert-base-uncased": (BertModel, BertTokenizer, 103),
-    "bert-large-uncased": (BertModel, BertTokenizer, 103),
-    "roberta-base": (RobertaModel, RobertaTokenizer, 50264),
-    "roberta-large": (RobertaModel, RobertaTokenizer, 50264),
-    # "deberta-v3-large": (AutoModel, AutoTokenizer, 128000)
-    "deberta-v3-large": (DebertaV2Model, DebertaV2Tokenizer, 128000),
+    "bert-base-uncased": (BertModel, BertForSequenceClassification, BertTokenizer, 103),
+    "bert-large-uncased": (
+        BertModel,
+        BertForSequenceClassification,
+        BertTokenizer,
+        103,
+    ),
+    "roberta-base": (
+        RobertaModel,
+        RobertaForSequenceClassification,
+        RobertaTokenizer,
+        50264,
+    ),
+    "roberta-large": (
+        RobertaModel,
+        RobertaForSequenceClassification,
+        RobertaTokenizer,
+        50264,
+    ),
+    "deberta-v3-large": (
+        DebertaV2Model,
+        DebertaV2ForSequenceClassification,
+        DebertaV2Tokenizer,
+        128000,
+    ),
 }
 
 
@@ -75,6 +98,15 @@ context_templates = {
         "concept <con> can be described as <predict_prop>?",
         "<[MASK]>.",
     ],  # Prompt for Concept Property Data
+    2: ["The concept is <con>.", "It can be can be described as <predict_prop>."],
+    3: [
+        "The concept is <con>.",
+        "The concept can be can be described as <predict_prop>.",
+    ],
+    4: [
+        "The concept is <con>.",
+        "The concept <con> can be can be described as <predict_prop>.",
+    ],
 }
 
 
@@ -113,7 +145,7 @@ class DatasetConceptPropertyJoint(Dataset):
                 header=None,
                 names=["concept", "predict_prop", "labels"],
                 dtype={"concept": str, "predict_prop": str, "labels": float,},
-            )
+            )[0:100]
 
             log.info(f"Loaded Dataframe Shape: {self.data_df.shape}")
 
@@ -130,7 +162,7 @@ class DatasetConceptPropertyJoint(Dataset):
         self.hf_tokenizer_name = dataset_params["hf_tokenizer_name"]
         self.hf_tokenizer_path = dataset_params["hf_tokenizer_path"]
 
-        _, tokenizer_class, _ = CLASSES[self.hf_tokenizer_name]
+        _, _, tokenizer_class, _ = CLASSES[self.hf_tokenizer_name]
 
         log.info(f"tokenizer_class : {tokenizer_class}")
 
@@ -164,7 +196,7 @@ class DatasetConceptPropertyJoint(Dataset):
 
         if self.context_id == 1:
 
-            # MLM Formulation - Hypothesis First, followed by premises
+            # MLM Formulation
             # sent_1 = concept <con> can be described as <predict_prop>?
             # sent_2 = <[MASK]>.
 
@@ -180,18 +212,45 @@ class DatasetConceptPropertyJoint(Dataset):
 
             sent = sent_1 + " " + sent_2
 
-        # print(f"Input Sent : {sent}")
+            # print(f"Input Sent : {sent}")
 
-        encoded_dict = self.tokenizer.encode_plus(
-            text=sent,
-            text_pair=None,
-            max_length=self.max_len,
-            add_special_tokens=True,
-            padding="max_length",
-            truncation=True,
-            return_tensors="pt",
-            return_token_type_ids=True,
-        )
+            encoded_dict = self.tokenizer.encode_plus(
+                text=sent,
+                text_pair=None,
+                max_length=self.max_len,
+                add_special_tokens=True,
+                padding="max_length",
+                truncation=True,
+                return_tensors="pt",
+                return_token_type_ids=True,
+            )
+
+        elif self.context_id in (2, 3, 4):
+
+            # NLI Formulation
+            # 2: ["The concept is <con>.", "It can be can be described as <predict_prop>."]
+            # 3: ["The concept is <con>.", "The concept can be can be described as <predict_prop>."]
+            # 4: ["The concept is <con>.", "The concept <con> can be can be described as <predict_prop>."]
+
+            concept_template, property_template = context_templates[self.context_id]
+
+            sent_1 = concept_template.replace("<con>", concept)
+            sent_2 = property_template.replace("<con>", concept).replace(
+                "<predict_prop>", predict_prop
+            )
+
+            sent = None
+
+            encoded_dict = self.tokenizer.encode_plus(
+                text=sent_1,
+                text_pair=sent_2,
+                max_length=self.max_len,
+                add_special_tokens=True,
+                padding="max_length",
+                truncation=True,
+                return_tensors="pt",
+                return_token_type_ids=True,
+            )
 
         encoded_dict["labels"] = labels
 
@@ -202,7 +261,7 @@ class DatasetConceptPropertyJoint(Dataset):
             print(f"sent_2 : {sent_2}", flush=True)
             print(f"sent : {sent}", flush=True)
             print(
-                f"tokenized sent : {[self.tokenizer.convert_ids_to_tokens(inp_id) for inp_id in encoded_dict['input_ids']]}",
+                f"tokenized sent : {self.tokenizer.convert_ids_to_tokens(encoded_dict['input_ids'].squeeze())}",
                 flush=True,
             )
             print(
@@ -223,10 +282,9 @@ class ModelConceptPropertyJoint(nn.Module):
         self.hf_checkpoint_name = model_params["hf_checkpoint_name"]
         self.hf_model_path = model_params["hf_model_path"]
 
-        self.num_labels = model_params["num_labels"]
         self.context_id = model_params["context_id"]
 
-        model_class, _, self.mask_token_id = CLASSES[self.hf_checkpoint_name]
+        model_class, _, _, self.mask_token_id = CLASSES[self.hf_checkpoint_name]
 
         log.info(f"model_class : {model_class}")
 
@@ -289,6 +347,45 @@ class ModelConceptPropertyJoint(nn.Module):
         print("Step loss :", loss, flush=True)
 
         return (loss, mask_logits, mask_vectors)
+
+
+class ModelSeqClassificationConPropJoint(nn.Module):
+    def __init__(self, model_params):
+        super(ModelSeqClassificationConPropJoint, self).__init__()
+
+        self.hf_checkpoint_name = model_params["hf_checkpoint_name"]
+        self.hf_model_path = model_params["hf_model_path"]
+
+        self.num_labels = model_params["num_labels"]
+        self.context_id = model_params["context_id"]
+
+        _, seq_model_class, _, _, = CLASSES[self.hf_checkpoint_name]
+
+        log.info(f"model_class : {seq_model_class}")
+
+        self.encoder = seq_model_class.from_pretrained(
+            self.hf_model_path, num_labels=self.num_labels
+        )
+
+        assert self.encoder.config.num_labels == 2
+
+    def forward(self, input_ids, token_type_ids, attention_mask, labels=None):
+
+        print(f"input_ids : {input_ids.shape}", flush=True)
+        print(f"token_type_ids : {token_type_ids.shape}", flush=True)
+        print(f"attention_mask : {attention_mask.shape}", flush=True)
+        print(f"labels : {labels.shape}", flush=True)
+
+        output = self.encoder(
+            input_ids=input_ids,
+            token_type_ids=token_type_ids,
+            attention_mask=attention_mask,
+            labels=labels,
+        )
+
+        loss, logits = output.loss, output.logits
+
+        return loss, logits
 
 
 def prepare_data_and_models(
@@ -358,19 +455,25 @@ def prepare_data_and_models(
     log.info(f"Load Pretrained : {load_pretrained}")
     log.info(f"Pretrained Model Path : {pretrained_model_path}")
 
+    # Creating Model
+    if model_params["context_id"] == 1:
+        log.info(f"Creating Model: {model_params['hf_checkpoint_name']}")
+        model = ModelConceptPropertyJoint(model_params)
+
+    elif model_params["context_id"] in (2, 3, 4):
+        log.info(
+            f"Creating Sequence Classification Model: {model_params['hf_checkpoint_name']}"
+        )
+
+        ModelSeqClassificationConPropJoint(model_params)
+
     if load_pretrained:
 
-        log.info(f"Loading Pretrained Model From : {pretrained_model_path}")
-
-        model = ModelConceptPropertyJoint(model_params)
+        log.info(f"load_pretrained is {load_pretrained}")
+        log.info(f"Loading Pretrained Model Weights From : {pretrained_model_path}")
         model.load_state_dict(torch.load(pretrained_model_path))
 
         log.info(f"Loaded Pretrained Model")
-
-    else:
-
-        log.info(f"Training the Model from Scratch ...")
-        model = ModelConceptPropertyJoint(model_params)
 
     model.to(device)
     print("Model", flush=True)
@@ -415,25 +518,37 @@ def evaluate(model, dataloader):
         labels = batch["labels"].to(device)
 
         with torch.no_grad():
-            loss, logits, mask_vector = model(
+
+            outputs = model(
                 input_ids=input_ids,
                 token_type_ids=token_type_ids,
                 attention_mask=attention_mask,
                 labels=labels,
             )
 
+            if model.context_id == 1:
+                loss, logits, mask_vectors = outputs
+
+            elif model.context_id in (2, 3, 4):
+                loss, logits = outputs
+
         val_losses.append(loss.item())
 
-        # if model.context_id == 1:
-        #     batch_preds = torch.argmax(logits, dim=1).flatten()
-        # elif model.context_id in (2, 3, 4):
-        #     batch_preds = torch.round(torch.sigmoid(logits))
-        # else:
-        #     raise KeyError(
-        #         f"Specify Correct context_id in config file. Current context_id is: {model.context_id}"
-        #     )
+        if model.context_id == 1:
+            batch_preds = torch.round(torch.sigmoid(logits))
+        elif model.context_id in (2, 3, 4):
+            batch_probs = logits.softmax(dim=1).squeeze(0)
+            batch_preds = torch.argmax(batch_probs, dim=1).flatten()
 
-        batch_preds = torch.round(torch.sigmoid(logits))
+            print("batch_probs", batch_probs)
+            print("batch_preds", batch_preds)
+
+        else:
+            raise KeyError(
+                f"Specify Correct context_id in config file. Current context_id is: {model.context_id}"
+            )
+
+        # batch_preds = torch.round(torch.sigmoid(logits))
         val_preds.extend(batch_preds.cpu().detach().numpy())
         val_labels.extend(labels.cpu().detach().numpy())
 
@@ -491,12 +606,18 @@ def train(
             print(f"labels.shape : {labels.shape}", flush=True)
             print(f"attention_mask : {attention_mask[0]}", flush=True)
 
-            loss, logits, mask_vector = model(
+            outputs = model(
                 input_ids=input_ids,
                 token_type_ids=token_type_ids,
                 attention_mask=attention_mask,
                 labels=labels,
             )
+
+            if model.context_id == 1:
+                loss, logits, mask_vectors = outputs
+
+            elif model.context_id in (2, 3, 4):
+                loss, logits = outputs
 
             step_train_losses.append(loss.item())
 
@@ -515,17 +636,6 @@ def train(
 
         avg_train_loss = round(np.mean(step_train_losses), 4)
         log.info("Average Train Loss :", avg_train_loss)
-
-        # +++++++++++++++++++++++++++++
-
-        # train_loss, model = train_on_single_epoch(
-        #     model=model,
-        #     scheduler=scheduler,
-        #     optimizer=optimizer,
-        #     train_dataloader=train_dataloader,
-        # )
-
-        # +++++++++++++++++++++++++++++
 
         if (val_dataloader is not None) and (fold is None):
 
@@ -792,6 +902,7 @@ if __name__ == "__main__":
 
     log.info(f"Pretrain : {pretrain}")
     log.info(f"Finetune : {finetune}")
+    hp_tuning = training_params["hp_tuning"]
 
     if pretrain:
 
@@ -801,35 +912,101 @@ if __name__ == "__main__":
         log.info(f"Train File  : {train_file}")
         log.info(f"Valid File  : {valid_file}")
 
-        (
-            model,
-            scheduler,
-            optimizer,
-            train_dataloader,
-            val_dataloader,
-            test_dataloader,
-        ) = prepare_data_and_models(
-            config=config, train_file=train_file, valid_file=valid_file, test_file=None,
-        )
+        if not hp_tuning:
 
-        assert (
-            test_dataloader is None
-        ), "Test dataloader should be None for pretraining on MSCG+CNetP"
+            (
+                model,
+                scheduler,
+                optimizer,
+                train_dataloader,
+                val_dataloader,
+                test_dataloader,
+            ) = prepare_data_and_models(
+                config=config,
+                train_file=train_file,
+                valid_file=valid_file,
+                test_file=None,
+            )
 
-        train(
-            training_params=training_params,
-            model=model,
-            scheduler=scheduler,
-            optimizer=optimizer,
-            train_dataloader=train_dataloader,
-            val_dataloader=val_dataloader,
-            test_dataloader=test_dataloader,
-            fold=None,
-        )
+            assert (
+                test_dataloader is None
+            ), "Test dataloader should be None for pretraining."
+
+            train(
+                training_params=training_params,
+                model=model,
+                scheduler=scheduler,
+                optimizer=optimizer,
+                train_dataloader=train_dataloader,
+                val_dataloader=val_dataloader,
+                test_dataloader=test_dataloader,
+                fold=None,
+            )
+        else:
+
+            log.info("Pretraining Grid Search - Hyperparameter Tuning")
+
+            max_epochs = [8, 10]
+            batch_size = [32]
+            warmup_ratio = [0.06, 0.1, 0.15]
+            weight_decay = [0.01, 0.1]
+
+            log.info(f"batch_size : {batch_size}")
+            log.info(f"warmup_ratio : {warmup_ratio}")
+            log.info(f"weight_decay : {weight_decay}")
+
+            for me in max_epochs:
+                for bs in batch_size:
+                    for wr in warmup_ratio:
+                        for wd in weight_decay:
+
+                            config["max_epochs"] = me
+                            config["batch_size"] = bs
+                            config["warmup_ratio"] = wr
+                            config["weight_decay"] = wd
+
+                            config["model_name"] = (
+                                config["model_name"].split(".")[0]
+                                + f"_me{me}_bs{bs}_wr{wr}_wd{wd}.pt"
+                            )
+
+                            log.info(
+                                f"New Running : max_epochs: {me}, batch_size: {bs}, warmup_ratio : {wr}, weight_decay : {wd}"
+                            )
+                            log.info(f"Model Name: {config['model_name']}")
+                            log.info(f"Config File")
+                            log.info(config)
+
+                            (
+                                model,
+                                scheduler,
+                                optimizer,
+                                train_dataloader,
+                                val_dataloader,
+                                test_dataloader,
+                            ) = prepare_data_and_models(
+                                config=config,
+                                train_file=train_file,
+                                valid_file=valid_file,
+                                test_file=None,
+                            )
+
+                            assert (
+                                test_dataloader is None
+                            ), "Test dataloader should be None for pretraining."
+
+                            train(
+                                training_params=training_params,
+                                model=model,
+                                scheduler=scheduler,
+                                optimizer=optimizer,
+                                train_dataloader=train_dataloader,
+                                val_dataloader=val_dataloader,
+                                test_dataloader=test_dataloader,
+                                fold=None,
+                            )
 
     elif finetune:
-
-        hp_tuning = training_params["hp_tuning"]
 
         if not hp_tuning:
 
