@@ -129,7 +129,7 @@ class DatasetConceptPropertyJoint(Dataset):
             )
 
             self.data_df = self.data_df.astype(
-                {"concept": str, "predict_prop": str, "labels": float,},
+                {"concept": str, "predict_prop": str, "labels": int,},
             )
 
         elif os.path.isfile(concept_property_file):
