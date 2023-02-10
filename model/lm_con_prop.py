@@ -960,21 +960,23 @@ if __name__ == "__main__":
                     for wr in warmup_ratio:
                         for wd in weight_decay:
 
-                            config["max_epochs"] = me
-                            config["batch_size"] = bs
-                            config["warmup_ratio"] = wr
-                            config["weight_decay"] = wd
+                            config["training_params"]["max_epochs"] = me
+                            config["training_params"]["batch_size"] = bs
+                            config["training_params"]["warmup_ratio"] = wr
+                            config["training_params"]["weight_decay"] = wd
 
-                            config["model_name"] = (
-                                config["model_name"].split(".")[0]
+                            config["training_params"]["model_name"] = (
+                                config["training_params"]["model_name"].split(".")[0]
                                 + f"_me{me}_bs{bs}_wr{wr}_wd{wd}.pt"
                             )
 
                             log.info(
                                 f"New Running : max_epochs: {me}, batch_size: {bs}, warmup_ratio : {wr}, weight_decay : {wd}"
                             )
-                            log.info(f"Model Name: {config['model_name']}")
-                            log.info(f"Config File")
+                            log.info(
+                                f"Model Name: {config['training_params']['model_name']}"
+                            )
+                            log.info(f"new_config_file")
                             log.info(config)
 
                             (
