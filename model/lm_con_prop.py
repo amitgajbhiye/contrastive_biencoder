@@ -955,23 +955,28 @@ if __name__ == "__main__":
             log.info(f"warmup_ratio : {warmup_ratio}")
             log.info(f"weight_decay : {weight_decay}")
 
+            model_name = config["model_params"]["hf_checkpoint_name"]
+
             for me in max_epochs:
                 for bs in batch_size:
                     for wr in warmup_ratio:
                         for wd in weight_decay:
 
+                            discription_str = f"me{me}_bs{bs}_wr{wr}_wd{wd}"
+
                             config["training_params"]["max_epochs"] = me
                             config["training_params"]["batch_size"] = bs
                             config["training_params"]["warmup_ratio"] = wr
                             config["training_params"]["weight_decay"] = wd
-
                             config["training_params"]["model_name"] = (
-                                config["training_params"]["model_name"].split(".")[0]
-                                + f"_me{me}_bs{bs}_wr{wr}_wd{wd}.pt"
+                                model_name + "_" + discription_str
                             )
 
+                            log.info()
+                            log.info("*" * 50)
+
                             log.info(
-                                f"New Running : max_epochs: {me}, batch_size: {bs}, warmup_ratio : {wr}, weight_decay : {wd}"
+                                f"New Run : max_epochs: {me}, batch_size: {bs}, warmup_ratio : {wr}, weight_decay : {wd}"
                             )
                             log.info(
                                 f"Model Name: {config['training_params']['model_name']}"
