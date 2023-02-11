@@ -300,10 +300,10 @@ class ModelConceptPropertyJoint(nn.Module):
         # input_ids = input_ids.squeeze()
         # attention_mask = attention_mask.squeeze()
 
-        print(f"input_ids : {input_ids.shape}", flush=True)
-        print(f"token_type_ids : {token_type_ids.shape}", flush=True)
-        print(f"attention_mask : {attention_mask.shape}", flush=True)
-        print(f"labels : {labels.shape}", flush=True)
+        # print(f"input_ids : {input_ids.shape}", flush=True)
+        # print(f"token_type_ids : {token_type_ids.shape}", flush=True)
+        # print(f"attention_mask : {attention_mask.shape}", flush=True)
+        # print(f"labels : {labels.shape}", flush=True)
 
         loss_fct = nn.BCEWithLogitsLoss()
 
@@ -371,10 +371,10 @@ class ModelSeqClassificationConPropJoint(nn.Module):
 
     def forward(self, input_ids, token_type_ids, attention_mask, labels=None):
 
-        print(f"input_ids : {input_ids.shape}", flush=True)
-        print(f"token_type_ids : {token_type_ids.shape}", flush=True)
-        print(f"attention_mask : {attention_mask.shape}", flush=True)
-        print(f"labels : {labels.shape}", flush=True)
+        # print(f"input_ids : {input_ids.shape}", flush=True)
+        # print(f"token_type_ids : {token_type_ids.shape}", flush=True)
+        # print(f"attention_mask : {attention_mask.shape}", flush=True)
+        # print(f"labels : {labels.shape}", flush=True)
 
         output = self.encoder(
             input_ids=input_ids,
@@ -476,8 +476,11 @@ def prepare_data_and_models(
         log.info(f"Loaded Pretrained Model")
 
     model.to(device)
-    print("Model", flush=True)
-    print(model, flush=True)
+    # print("Model", flush=True)
+    # print(model, flush=True)
+
+    log.info("Model")
+    log.info(model)
 
     optimizer = AdamW(model.parameters(), lr=lr, weight_decay=weight_decay)
 
@@ -486,6 +489,7 @@ def prepare_data_and_models(
     num_warmup_steps = math.ceil(total_steps * warmup_ratio)
 
     log.info(f"num_warmup_steps : {num_warmup_steps}")
+    log.info(f"total_steps : {total_steps}")
 
     # num_warmup_steps = 0
 
@@ -540,8 +544,8 @@ def evaluate(model, dataloader):
             batch_probs = logits.softmax(dim=1).squeeze(0)
             batch_preds = torch.argmax(batch_probs, dim=1).flatten()
 
-            print("batch_probs", batch_probs)
-            print("batch_preds", batch_preds)
+            # print("batch_probs", batch_probs)
+            # print("batch_preds", batch_preds)
 
         else:
             raise KeyError(
@@ -599,12 +603,12 @@ def train(
             attention_mask = batch["attention_mask"].squeeze().to(device)
             labels = batch["labels"].to(device)
 
-            print(flush=True)
-            print(f"In Step {step}", flush=True)
-            print(f"input_ids.shape : {input_ids.shape}", flush=True)
-            print(f"attention_mask.shape : {attention_mask.shape}", flush=True)
-            print(f"labels.shape : {labels.shape}", flush=True)
-            print(f"attention_mask : {attention_mask[0]}", flush=True)
+            # print(flush=True)
+            # print(f"In Step {step}", flush=True)
+            # print(f"input_ids.shape : {input_ids.shape}", flush=True)
+            # print(f"attention_mask.shape : {attention_mask.shape}", flush=True)
+            # print(f"labels.shape : {labels.shape}", flush=True)
+            # print(f"attention_mask : {attention_mask[0]}", flush=True)
 
             outputs = model(
                 input_ids=input_ids,
@@ -895,6 +899,8 @@ if __name__ == "__main__":
     log.info(f"\n {config} \n")
     pprint(config, sort_dicts=False)
 
+    log.info(f"context_templates : {context_templates}")
+
     training_params = config["training_params"]  # Training Parameters
 
     pretrain = training_params["pretrain"]
@@ -948,9 +954,10 @@ if __name__ == "__main__":
 
             max_epochs = [8, 10]
             batch_size = [32]
-            warmup_ratio = [0.06, 0.1, 0.15]
+            warmup_ratio = [0.04, 0.06, 0.1, 0.15]
             weight_decay = [0.01, 0.1]
 
+            log.info(f"max_epochs : {max_epochs}")
             log.info(f"batch_size : {batch_size}")
             log.info(f"warmup_ratio : {warmup_ratio}")
             log.info(f"weight_decay : {weight_decay}")
@@ -969,11 +976,17 @@ if __name__ == "__main__":
                             config["training_params"]["warmup_ratio"] = wr
                             config["training_params"]["weight_decay"] = wd
                             config["training_params"]["model_name"] = (
-                                model_name + "_" + discription_str
+                                "cnetp_pretrain"
+                                + model_name.replace("-", "_")
+                                + "_"
+                                + discription_str
+                                + ".pt"
                             )
 
                             log.info("\n")
                             log.info("*" * 50)
+
+                            log.info(f"discription_str : {discription_str}")
 
                             log.info(
                                 f"New Run : max_epochs: {me}, batch_size: {bs}, warmup_ratio : {wr}, weight_decay : {wd}"
