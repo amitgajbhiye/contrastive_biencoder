@@ -10,7 +10,7 @@
 #SBATCH --account scw1858
 
 #SBATCH --partition gpu_v100
-#SBATCH --mem=16g
+#SBATCH --mem=8G
 #SBATCH --gres=gpu:1
 
 #SBATCH --qos="gpu7d"
