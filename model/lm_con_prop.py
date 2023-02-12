@@ -359,7 +359,10 @@ class ModelSeqClassificationConPropJoint(nn.Module):
         self.num_labels = model_params["num_labels"]
         self.context_id = model_params["context_id"]
 
-        _, seq_model_class, _, _, = CLASSES[self.hf_checkpoint_name]
+        if "wanli_roberta_large" in self.hf_model_path:
+            seq_model_class, _, _, _, = CLASSES[self.hf_checkpoint_name]
+        else:
+            _, seq_model_class, _, _, = CLASSES[self.hf_checkpoint_name]
 
         log.info(f"model_class : {seq_model_class}")
 
