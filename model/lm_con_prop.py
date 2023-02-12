@@ -145,7 +145,7 @@ class DatasetConceptPropertyJoint(Dataset):
                 header=None,
                 names=["concept", "predict_prop", "labels"],
                 dtype={"concept": str, "predict_prop": str, "labels": float,},
-            )
+            )[0:1500]
 
             log.info(f"Loaded Dataframe Shape: {self.data_df.shape}")
 
@@ -497,6 +497,11 @@ def prepare_data_and_models(
         optimizer, num_warmup_steps=num_warmup_steps, num_training_steps=total_steps
     )
 
+    assert model.context_id == train_data.context_id, (
+        f"Model context_id should be equal to dataset context_id;"
+        f"model.context_id is {model.context_id} and dataset context_id is {train_data.context_id}"
+    )
+
     return (
         model,
         scheduler,
@@ -631,7 +636,7 @@ def train(
             optimizer.step()
             scheduler.step()
 
-            if step % 100 == 0 and not step == 0:
+            if step % 10 == 0 and not step == 0:
                 log.info(
                     "   Batch {} of Batch {} ---> Batch Loss {}".format(
                         step, len(train_dataloader), round(loss.item(), 4)
