@@ -145,7 +145,7 @@ class DatasetConceptPropertyJoint(Dataset):
                 header=None,
                 names=["concept", "predict_prop", "labels"],
                 dtype={"concept": str, "predict_prop": str, "labels": float,},
-            )[0:1500]
+            )
 
             log.info(f"Loaded Dataframe Shape: {self.data_df.shape}")
 
@@ -636,7 +636,7 @@ def train(
             optimizer.step()
             scheduler.step()
 
-            if step % 10 == 0 and not step == 0:
+            if step % 100 == 0 and not step == 0:
                 log.info(
                     "   Batch {} of Batch {} ---> Batch Loss {}".format(
                         step, len(train_dataloader), round(loss.item(), 4)

@@ -15,7 +15,7 @@
 
 ##SBATCH --qos="gpu7d"
 
-#SBATCH -t 0-03:00:00
+#SBATCH -t 2-00:00:00
 
 conda activate venv
 
