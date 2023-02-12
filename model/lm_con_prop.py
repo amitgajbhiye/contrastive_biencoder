@@ -904,8 +904,6 @@ if __name__ == "__main__":
     log.info(f"\n {config} \n")
     pprint(config, sort_dicts=False)
 
-    log.info(f"context_templates : {context_templates}")
-
     training_params = config["training_params"]  # Training Parameters
 
     pretrain = training_params["pretrain"]
