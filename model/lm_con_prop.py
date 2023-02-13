@@ -388,6 +388,53 @@ class ModelSeqClassificationConPropJoint(nn.Module):
         return loss, logits
 
 
+class ModelAnyNumberLabel(nn.Module):
+    def __init__(self, model_params):
+        super(ModelAnyNumberLabel, self).__init__()
+
+        self.hf_checkpoint_name = model_params["hf_checkpoint_name"]
+        self.hf_model_path = model_params["hf_model_path"]
+
+        self.context_id = model_params["context_id"]
+
+        model_class, _, _, _ = CLASSES[self.hf_checkpoint_name]
+
+        log.info(f"model_class : {model_class}")
+
+        self.encoder = model_class.from_pretrained(self.hf_model_path)
+
+        classifier_dropout = self.encoder.config.hidden_dropout_prob
+
+        self.dropout = nn.Dropout(classifier_dropout)
+        self.classifier = nn.Linear(self.encoder.config.hidden_size, 1)
+
+    def forward(self, input_ids, token_type_ids, attention_mask, labels=None):
+
+        loss_fct = nn.BCEWithLogitsLoss()
+
+        output = self.encoder(
+            input_ids=input_ids,
+            token_type_ids=token_type_ids,
+            attention_mask=attention_mask,
+        )
+
+        cls_token_vectors = output.pooler_output
+
+        print(f"cls_token_vectors : {cls_token_vectors.shape}", flush=True)
+
+        vectors = self.dropout(vectors)
+        logits = self.classifier(vectors).view(-1)
+
+        loss = None
+        if labels is not None:
+            labels = labels.view(-1).float()
+            loss = loss_fct(logits, labels)
+
+        print("Step loss :", loss, flush=True)
+
+        return (loss, logits, vectors)
+
+
 def prepare_data_and_models(
     config, train_file, valid_file=None, test_file=None,
 ):
@@ -455,17 +502,30 @@ def prepare_data_and_models(
     log.info(f"Load Pretrained : {load_pretrained}")
     log.info(f"Pretrained Model Path : {pretrained_model_path}")
 
+    remove_classifier_layer = model_params["remove_classifier_layer"]
+
+    log.info(f"remove_classifier_layer : {remove_classifier_layer}")
+
     # Creating Model
     if model_params["context_id"] == 1:
-        log.info(f"Creating Model: {model_params['hf_checkpoint_name']}")
+        log.info(f"Creating MLM Model: {model_params['hf_checkpoint_name']}")
         model = ModelConceptPropertyJoint(model_params)
 
-    elif model_params["context_id"] in (2, 3, 4):
+    elif model_params["context_id"] in (2, 3, 4) and not remove_classifier_layer:
         log.info(
             f"Creating Sequence Classification Model: {model_params['hf_checkpoint_name']}"
         )
+        log.info(f"Not Removing pretrained model's classifier layer")
 
         model = ModelSeqClassificationConPropJoint(model_params)
+
+    elif model_params["context_id"] in (2, 3, 4) and remove_classifier_layer:
+        log.info(
+            f"Creating Model for Any Number of Label Sentence Classifier Model: {model_params['hf_checkpoint_name']}"
+        )
+        log.info(f"Removing pretrained model's classifier layer")
+
+        model = ModelAnyNumberLabel(model_params)
 
     if load_pretrained:
 

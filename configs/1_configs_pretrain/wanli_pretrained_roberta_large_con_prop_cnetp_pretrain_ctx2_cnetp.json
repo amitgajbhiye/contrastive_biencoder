@@ -33,6 +33,7 @@
         "hf_checkpoint_name": "roberta-large",
         "hf_model_path": "/scratch/c.scmag3/hf_pretrained_models/wanli_roberta_large/model",
         "num_labels": 2,
-        "context_id": 2
+        "context_id": 2,
+        "remove_classifier_layer": false
     }
 }
