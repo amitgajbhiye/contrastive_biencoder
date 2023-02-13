@@ -594,17 +594,17 @@ def evaluate(model, dataloader):
                 labels=labels,
             )
 
-            if isinstance(model, ModelConceptPropertyJoint) or isinstance(
-                model, ModelAnyNumberLabel
-            ):
-                loss, logits, mask_vectors = outputs
-                batch_preds = torch.round(torch.sigmoid(logits))
+        if isinstance(model, ModelConceptPropertyJoint) or isinstance(
+            model, ModelAnyNumberLabel
+        ):
+            loss, logits, mask_vectors = outputs
+            batch_preds = torch.round(torch.sigmoid(logits))
 
-            elif isinstance(model, ModelSeqClassificationConPropJoint):
-                loss, logits = outputs
+        elif isinstance(model, ModelSeqClassificationConPropJoint):
+            loss, logits = outputs
 
-                batch_probs = logits.softmax(dim=1).squeeze(0)
-                batch_preds = torch.argmax(batch_probs, dim=1).flatten()
+            batch_probs = logits.softmax(dim=1).squeeze(0)
+            batch_preds = torch.argmax(batch_probs, dim=1).flatten()
 
         val_losses.append(loss.item())
 
