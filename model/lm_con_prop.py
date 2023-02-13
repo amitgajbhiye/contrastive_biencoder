@@ -541,6 +541,7 @@ def prepare_data_and_models(
 
     log.info("Model")
     log.info(model)
+    log.info(f"Model Class : {model.__class__.__name__}")
 
     optimizer = AdamW(model.parameters(), lr=lr, weight_decay=weight_decay)
 
@@ -603,9 +604,17 @@ def evaluate(model, dataloader):
 
         val_losses.append(loss.item())
 
-        if model.context_id == 1:
+        # if model.context_id == 1:
+        #     batch_preds = torch.round(torch.sigmoid(logits))
+        # elif model.context_id in (2, 3, 4):
+        #     batch_probs = logits.softmax(dim=1).squeeze(0)
+        #     batch_preds = torch.argmax(batch_probs, dim=1).flatten()
+
+        if isinstance(model, ModelConceptPropertyJoint) or isinstance(
+            model, ModelAnyNumberLabel
+        ):
             batch_preds = torch.round(torch.sigmoid(logits))
-        elif model.context_id in (2, 3, 4):
+        elif isinstance(model, ModelSeqClassificationConPropJoint):
             batch_probs = logits.softmax(dim=1).squeeze(0)
             batch_preds = torch.argmax(batch_probs, dim=1).flatten()
 
@@ -682,10 +691,18 @@ def train(
                 labels=labels,
             )
 
-            if model.context_id == 1:
+            # if model.context_id == 1:
+            #     loss, logits, mask_vectors = outputs
+
+            # elif model.context_id in (2, 3, 4):
+            #     loss, logits = outputs
+
+            if isinstance(model, ModelConceptPropertyJoint) or isinstance(
+                model, ModelAnyNumberLabel
+            ):
                 loss, logits, mask_vectors = outputs
 
-            elif model.context_id in (2, 3, 4):
+            elif isinstance(model, ModelSeqClassificationConPropJoint):
                 loss, logits = outputs
 
             step_train_losses.append(loss.item())
@@ -709,6 +726,7 @@ def train(
         if (val_dataloader is not None) and (fold is None):
 
             log.info(f"Running Validation ....")
+            log.info(f"Model Class : {model.__class__.__name__}")
 
             valid_loss, valid_preds, valid_gold_labels = evaluate(
                 model=model, dataloader=val_dataloader

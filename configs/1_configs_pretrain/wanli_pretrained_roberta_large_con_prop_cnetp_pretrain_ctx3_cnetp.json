@@ -1,5 +1,5 @@
 {
-    "experiment_name": "wanli_pretrained_roberta_large_con_prop_cnetp_pretrain_ctx2_cnetp",
+    "experiment_name": "wanli_pretrained_roberta_large_con_prop_cnetp_pretrain_ctx3_cnetp",
     "log_dirctory": "pretrain",
     "training_params": {
         "dataset_name": "cnetp_con_prop_5neg",
@@ -17,7 +17,7 @@
         "warmup_ratio": 0,
         "patience_early_stopping": 5,
         "save_dir": "trained_models/je_con_prop_cnetp_pretrained",
-        "model_name": "wanli_pretrained_roberta_large_con_prop_cnetp_pretrain_ctx2_cnetp.pt",
+        "model_name": "wanli_pretrained_roberta_large_con_prop_cnetp_pretrain_ctx3_cnetp.pt",
         "lr_policy": null,
         "lr_decay_iters": null,
         "weight_decay": 0.01,
@@ -27,13 +27,13 @@
         "hf_tokenizer_name": "roberta-large",
         "hf_tokenizer_path": "/scratch/c.scmag3/hf_pretrained_models/wanli_roberta_large/tokenizer",
         "max_len": 40,
-        "context_id": 2
+        "context_id": 3
     },
     "model_params": {
         "hf_checkpoint_name": "roberta-large",
         "hf_model_path": "/scratch/c.scmag3/hf_pretrained_models/wanli_roberta_large/model",
         "num_labels": 2,
-        "context_id": 2,
-        "remove_classifier_layer": false
+        "context_id": 3,
+        "remove_classifier_layer": true
     }
 }
