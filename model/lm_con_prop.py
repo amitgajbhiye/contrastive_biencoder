@@ -422,15 +422,13 @@ class ModelAnyNumberLabel(nn.Module):
 
         print(f"cls_token_vectors : {cls_token_vectors.shape}", flush=True)
 
-        vectors = self.dropout(vectors)
+        vectors = self.dropout(cls_token_vectors)
         logits = self.classifier(vectors).view(-1)
 
         loss = None
         if labels is not None:
             labels = labels.view(-1).float()
             loss = loss_fct(logits, labels)
-
-        print("Step loss :", loss, flush=True)
 
         return (loss, logits, vectors)
 
