@@ -594,11 +594,17 @@ def evaluate(model, dataloader):
                 labels=labels,
             )
 
-            if model.context_id == 1:
+            if isinstance(model, ModelConceptPropertyJoint) or isinstance(
+                model, ModelAnyNumberLabel
+            ):
                 loss, logits, mask_vectors = outputs
+                batch_preds = torch.round(torch.sigmoid(logits))
 
-            elif model.context_id in (2, 3, 4):
+            elif isinstance(model, ModelSeqClassificationConPropJoint):
                 loss, logits = outputs
+
+                batch_probs = logits.softmax(dim=1).squeeze(0)
+                batch_preds = torch.argmax(batch_probs, dim=1).flatten()
 
         val_losses.append(loss.item())
 
@@ -608,23 +614,24 @@ def evaluate(model, dataloader):
         #     batch_probs = logits.softmax(dim=1).squeeze(0)
         #     batch_preds = torch.argmax(batch_probs, dim=1).flatten()
 
-        if isinstance(model, ModelConceptPropertyJoint) or isinstance(
-            model, ModelAnyNumberLabel
-        ):
-            batch_preds = torch.round(torch.sigmoid(logits))
-        elif isinstance(model, ModelSeqClassificationConPropJoint):
-            batch_probs = logits.softmax(dim=1).squeeze(0)
-            batch_preds = torch.argmax(batch_probs, dim=1).flatten()
+        # if isinstance(model, ModelConceptPropertyJoint) or isinstance(
+        #     model, ModelAnyNumberLabel
+        # ):
+        #     batch_preds = torch.round(torch.sigmoid(logits))
+        # elif isinstance(model, ModelSeqClassificationConPropJoint):
+        #     batch_probs = logits.softmax(dim=1).squeeze(0)
+        #     batch_preds = torch.argmax(batch_probs, dim=1).flatten()
 
-            # print("batch_probs", batch_probs)
-            # print("batch_preds", batch_preds)
+        #     # print("batch_probs", batch_probs)
+        #     # print("batch_preds", batch_preds)
 
-        else:
-            raise KeyError(
-                f"Specify Correct context_id in config file. Current context_id is: {model.context_id}"
-            )
+        # else:
+        #     raise KeyError(
+        #         f"Specify Correct context_id in config file. Current context_id is: {model.context_id}"
+        #     )
 
         # batch_preds = torch.round(torch.sigmoid(logits))
+
         val_preds.extend(batch_preds.cpu().detach().numpy())
         val_labels.extend(labels.cpu().detach().numpy())
 
