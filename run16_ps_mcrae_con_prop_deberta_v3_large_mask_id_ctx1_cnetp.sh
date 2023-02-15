@@ -21,6 +21,6 @@
 
 conda activate venv
 
-python3 model/roberta_con_prop.py --config_file configs/3_finetune/ps_mcrae_con_prop_deberta_v3_large_mask_id_ctx1_cnetp.json
+python3 model/lm_con_prop.py --config_file configs/3_finetune/ps_mcrae_con_prop_deberta_v3_large_mask_id_ctx1_cnetp.json
 
 echo 'Job Finished!'
