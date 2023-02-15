@@ -790,6 +790,9 @@ def train(
         for key, value in scores.items():
             log.info(f" {key} :  {value}")
 
+        del model
+        torch.cuda.empty_cache()
+
         return test_preds, test_gold_labels
 
 
