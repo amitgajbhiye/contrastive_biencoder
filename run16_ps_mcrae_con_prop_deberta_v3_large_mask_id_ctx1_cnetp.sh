@@ -10,14 +10,13 @@
 #SBATCH --account scw1858
 
 #SBATCH --partition gpu_v100
-#SBATCH --mem=16G
+#SBATCH --mem=25G
 #SBATCH --exclusive
 #SBATCH --gres=gpu:1
 
 ##SBATCH --qos="gpu7d"
 
 #SBATCH -t 0-06:00:00
-
 
 conda activate venv
 

@@ -505,7 +505,7 @@ def prepare_data_and_models(
     log.info(f"remove_classifier_layer : {remove_classifier_layer}")
 
     # Creating Model
-    if model_params["context_id"] == 1:
+    if model_params["context_id"] == 1 and not remove_classifier_layer:
         log.info(f"Creating MLM Model: {model_params['hf_checkpoint_name']}")
         model = ModelConceptPropertyJoint(model_params)
 
