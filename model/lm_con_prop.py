@@ -4,6 +4,7 @@ import time
 import logging
 import pickle
 import math
+import gc
 
 sys.path.insert(0, os.getcwd())
 
@@ -790,7 +791,9 @@ def train(
         for key, value in scores.items():
             log.info(f" {key} :  {value}")
 
+        model.to(torch.device("cpu"))
         del model
+        gc.collect()
         torch.cuda.empty_cache()
 
         return test_preds, test_gold_labels
