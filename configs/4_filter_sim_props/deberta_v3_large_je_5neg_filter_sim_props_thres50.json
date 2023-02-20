@@ -1,5 +1,5 @@
 {
-    "experiment_name": "deberta_v3_large_je_5neg_filter_sim_props_thres70",
+    "experiment_name": "deberta_v3_large_je_5neg_filter_sim_props_thres50",
     "log_dirctory": "data_sampling",
     "training_params": {
         "pretrained_model_to_use": "je_con_prop",
@@ -14,7 +14,7 @@
         "load_pretrained": false,
         "pretrained_model_path": null,
         "pretrained_model_num_neg": "deberta_v3_large_ctx1",
-        "threshold": 0.70,
+        "threshold": 0.50,
         "cv_type": null,
         "data_dir": null,
         "batch_size": 64,
