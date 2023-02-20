@@ -203,7 +203,7 @@ if __name__ == "__main__":
         )
 
         loss, accuracy, predictions, logit = predict(
-            model=model, test_dataloader=test_dataloader
+            model=model, dataloader=test_dataloader
         )
 
         # positive_class_logits = [l[1] for l in logit]
