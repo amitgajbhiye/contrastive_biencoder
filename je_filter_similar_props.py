@@ -112,9 +112,6 @@ def predict(model, dataloader):
 
     loss = np.mean(test_loss)
 
-    print("test_loss")
-    print(test_loss)
-
     return loss, test_preds, test_logits
 
 
