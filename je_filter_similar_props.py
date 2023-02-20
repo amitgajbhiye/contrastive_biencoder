@@ -66,6 +66,8 @@ def predict(model, dataloader):
 
     for step, batch in enumerate(dataloader):
 
+        log.info(f"Processing batch: {step} of {len(dataloader)}")
+
         input_ids = batch["input_ids"].squeeze().to(device)
         token_type_ids = batch["token_type_ids"].squeeze().to(device)
         attention_mask = batch["attention_mask"].squeeze().to(device)
@@ -105,7 +107,7 @@ def predict(model, dataloader):
             test_logits.extend(torch.sigmoid(positive_class_logits).cpu().numpy())
             #########
 
-        test_loss.append(loss)
+        test_loss.append(loss.cpu().numpy())
         test_preds.extend(batch_preds.cpu().numpy())
 
     loss = np.mean(test_loss)
