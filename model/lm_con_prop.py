@@ -452,18 +452,19 @@ def prepare_data_and_models(
 
     num_workers = 4
 
-    train_data = DatasetConceptPropertyJoint(train_file, dataset_params)
-    train_sampler = RandomSampler(train_data)
-    train_dataloader = DataLoader(
-        train_data,
-        batch_size=batch_size,
-        sampler=train_sampler,
-        collate_fn=None,
-        num_workers=num_workers,
-        pin_memory=True,
-    )
+    if train_file is not None:
+        train_data = DatasetConceptPropertyJoint(train_file, dataset_params)
+        train_sampler = RandomSampler(train_data)
+        train_dataloader = DataLoader(
+            train_data,
+            batch_size=batch_size,
+            sampler=train_sampler,
+            collate_fn=None,
+            num_workers=num_workers,
+            pin_memory=True,
+        )
 
-    log.info(f"Train Data DF shape : {train_data.data_df.shape}")
+        log.info(f"Train Data DF shape : {train_data.data_df.shape}")
 
     if valid_file is not None:
         val_data = DatasetConceptPropertyJoint(valid_file, dataset_params)
@@ -542,34 +543,36 @@ def prepare_data_and_models(
     log.info(model)
     log.info(f"Model Class : {model.__class__.__name__}")
 
-    optimizer = AdamW(model.parameters(), lr=lr, weight_decay=weight_decay)
+    if train_file is not None:
+        optimizer = AdamW(model.parameters(), lr=lr, weight_decay=weight_decay)
+        total_steps = len(train_dataloader) * max_epochs
+        warmup_ratio = training_params["warmup_ratio"]
+        num_warmup_steps = math.ceil(total_steps * warmup_ratio)
 
-    total_steps = len(train_dataloader) * max_epochs
-    warmup_ratio = training_params["warmup_ratio"]
-    num_warmup_steps = math.ceil(total_steps * warmup_ratio)
+        log.info(f"num_warmup_steps : {num_warmup_steps}")
+        log.info(f"total_steps : {total_steps}")
 
-    log.info(f"num_warmup_steps : {num_warmup_steps}")
-    log.info(f"total_steps : {total_steps}")
+        # num_warmup_steps = 0
 
-    # num_warmup_steps = 0
+        scheduler = get_linear_schedule_with_warmup(
+            optimizer, num_warmup_steps=num_warmup_steps, num_training_steps=total_steps
+        )
 
-    scheduler = get_linear_schedule_with_warmup(
-        optimizer, num_warmup_steps=num_warmup_steps, num_training_steps=total_steps
-    )
+        assert model.context_id == train_data.context_id, (
+            f"Model context_id should be equal to dataset context_id;"
+            f"model.context_id is {model.context_id} and dataset context_id is {train_data.context_id}"
+        )
 
-    assert model.context_id == train_data.context_id, (
-        f"Model context_id should be equal to dataset context_id;"
-        f"model.context_id is {model.context_id} and dataset context_id is {train_data.context_id}"
-    )
-
-    return (
-        model,
-        scheduler,
-        optimizer,
-        train_dataloader,
-        val_dataloader,
-        test_dataloader,
-    )
+        return (
+            model,
+            scheduler,
+            optimizer,
+            train_dataloader,
+            val_dataloader,
+            test_dataloader,
+        )
+    else:
+        return (model, test_dataloader)
 
 
 def evaluate(model, dataloader):

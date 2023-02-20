@@ -9,10 +9,16 @@ import numpy as np
 import pandas as pd
 import torch
 
-from model.je_con_prop import prepare_data_and_models
+from model.lm_con_prop import prepare_data_and_models
 from utils.je_utils import read_config
 
 from transformers import AutoTokenizer, AutoModelForSequenceClassification
+
+from model.lm_con_prop import (
+    ModelConceptPropertyJoint,
+    ModelAnyNumberLabel,
+    ModelSeqClassificationConPropJoint,
+)
 
 
 def set_logger(config):
@@ -51,46 +57,103 @@ device = torch.device("cuda") if torch.cuda.is_available() else torch.device("cp
 # model_name = "je_con_prop_cnet_premium_20negdata_pretrained_model.pt"
 
 
-def predict(model, test_dataloader):
+def predict(model, dataloader):
 
     model.eval()
     model.to(device)
 
     test_loss, test_accuracy, test_preds, test_logits = [], [], [], []
 
-    for step, batch in enumerate(test_dataloader):
+    for step, batch in enumerate(dataloader):
 
-        input_ids = torch.cat([x["input_ids"] for x in batch], dim=0).to(device)
-        attention_mask = torch.cat([x["attention_mask"] for x in batch], dim=0).to(
-            device
-        )
-        token_type_ids = torch.cat([x["token_type_ids"] for x in batch], dim=0).to(
-            device
-        )
-        labels = torch.tensor([x["labels"] for x in batch]).to(device)
+        input_ids = batch["input_ids"].squeeze().to(device)
+        token_type_ids = batch["token_type_ids"].squeeze().to(device)
+        attention_mask = batch["attention_mask"].squeeze().to(device)
+
+        labels = batch["labels"].to(device)
 
         with torch.no_grad():
-            loss, logits = model(
+
+            outputs = model(
                 input_ids=input_ids,
                 token_type_ids=token_type_ids,
                 attention_mask=attention_mask,
                 labels=labels,
             )
-        test_loss.append(loss.item())
 
-        batch_preds = torch.argmax(logits, dim=1).flatten()
+        if isinstance(model, ModelConceptPropertyJoint) or isinstance(
+            model, ModelAnyNumberLabel
+        ):
+            loss, logits, mask_vectors = outputs
+            batch_preds = torch.round(torch.sigmoid(logits))
+
+            print(f"logits : {logits}")
+            print(
+                f"sigmoid(logits) : {torch.sigmoid(logits).shape}, {torch.sigmoid(logits)}"
+            )
+
+            test_logits.extend(torch.sigmoid(logits).cpu().numpy())
+
+        elif isinstance(model, ModelSeqClassificationConPropJoint):
+            loss, logits = outputs
+
+            batch_probs = logits.softmax(dim=1).squeeze(0)
+            batch_preds = torch.argmax(batch_probs, dim=1).flatten()
+
+            ######### - Check this
+            positive_class_logits = [l[1] for l in logit]
+            test_logits.extend(torch.sigmoid(positive_class_logits).cpu().numpy())
+            #########
 
         batch_accuracy = (labels == batch_preds).cpu().numpy().mean() * 100
 
-        test_accuracy.append(batch_accuracy)
-        test_preds.extend(batch_preds.cpu().detach().numpy())
-
-        test_logits.extend(torch.sigmoid(logits).cpu().detach().numpy())
+        test_loss.extend(loss.item())
+        test_preds.extend(batch_preds.cpu().numpy())
+        test_accuracy.extend(batch_accuracy)
 
     loss = np.mean(test_loss)
     accuracy = np.mean(test_accuracy)
 
     return loss, accuracy, test_preds, test_logits
+
+
+# def predict(model, test_dataloader):
+
+#     model.eval()
+#     model.to(device)
+
+#     test_loss, test_accuracy, test_preds, test_logits = [], [], [], []
+
+#     for step, batch in enumerate(test_dataloader):
+
+#         input_ids = batch["input_ids"].squeeze().to(device)
+#         token_type_ids = batch["token_type_ids"].squeeze().to(device)
+#         attention_mask = batch["attention_mask"].squeeze().to(device)
+
+#         labels = batch["labels"].to(device)
+
+#         with torch.no_grad():
+#             loss, logits = model(
+#                 input_ids=input_ids,
+#                 token_type_ids=token_type_ids,
+#                 attention_mask=attention_mask,
+#                 labels=labels,
+#             )
+#         test_loss.append(loss.item())
+
+#         batch_preds = torch.argmax(logits, dim=1).flatten()
+
+#         batch_accuracy = (labels == batch_preds).cpu().numpy().mean() * 100
+
+#         test_accuracy.append(batch_accuracy)
+#         test_preds.extend(batch_preds.cpu().detach().numpy())
+
+#         test_logits.extend(torch.sigmoid(logits).cpu().detach().numpy())
+
+#     loss = np.mean(test_loss)
+#     accuracy = np.mean(test_accuracy)
+
+#     return loss, accuracy, test_preds, test_logits
 
 
 if __name__ == "__main__":
@@ -143,17 +206,17 @@ if __name__ == "__main__":
             model=model, test_dataloader=test_dataloader
         )
 
-        positive_class_logits = [l[1] for l in logit]
+        # positive_class_logits = [l[1] for l in logit]
 
-        log.info(f"Number of Logits : {len(positive_class_logits)}")
+        log.info(f"Number of Logits : {len(logit)}")
 
         assert test_df.shape[0] == len(
-            positive_class_logits
+            logit
         ), "length of test dataframe is not equal to logits"
 
         new_test_dataframe = test_df.copy(deep=True)
         new_test_dataframe.drop("label", axis=1, inplace=True)
-        new_test_dataframe["logit"] = positive_class_logits
+        new_test_dataframe["logit"] = logit
 
         log.info(f"new_test_dataframe")
         log.info(new_test_dataframe.head(n=20))
