@@ -9,7 +9,7 @@
         "pretrain": false,
         "train_file_path": null,
         "val_file_path": null,
-        "test_file_path": "data/train_data/with_false_label_cnetp_con_similar_50_prop_vocab.tsv",
+        "test_file_path": "data/train_data/dummy.tsv",
         "finetune": false,
         "load_pretrained": false,
         "pretrained_model_path": null,
