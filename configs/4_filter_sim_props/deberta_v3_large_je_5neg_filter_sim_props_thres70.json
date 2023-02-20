@@ -1,5 +1,5 @@
 {
-    "experiment_name": "deberta_v3_large_je_5neg_filter_sim_props_thres50",
+    "experiment_name": "deberta_v3_large_je_5neg_filter_sim_props_thres70",
     "log_dirctory": "data_sampling",
     "training_params": {
         "pretrained_model_to_use": "je_con_prop",
@@ -9,12 +9,12 @@
         "pretrain": false,
         "train_file_path": null,
         "val_file_path": null,
-        "test_file_path": "data/train_data/dummy.tsv",
+        "test_file_path": "data/train_data/with_false_label_cnetp_con_similar_50_prop_vocab.tsv",
         "finetune": false,
         "load_pretrained": false,
         "pretrained_model_path": null,
-        "pretrained_model_num_neg": "ctx1",
-        "threshold": 0.5,
+        "pretrained_model_num_neg": "deberta_v3_large_ctx1",
+        "threshold": 0.70,
         "cv_type": null,
         "data_dir": null,
         "batch_size": 64,
