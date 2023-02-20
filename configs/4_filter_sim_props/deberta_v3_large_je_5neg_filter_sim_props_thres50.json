@@ -17,15 +17,16 @@
         "threshold": 0.5,
         "cv_type": null,
         "data_dir": null,
-        "batch_size": 32,
+        "batch_size": 64,
         "lr": null,
         "max_epochs": 0,
-        "num_warmup_steps": 0,
+        "warmup_ratio": 0,
         "patience_early_stopping": 0,
         "save_dir": "train_data/je_prop_conj/deberta_v3_large_ctx1_files",
         "model_name": null,
         "lr_policy": null,
-        "lr_decay_iters": null
+        "lr_decay_iters": null,
+        "weight_decay": 0.01
     },
     "dataset_params": {
         "hf_tokenizer_name": "deberta-v3-large",

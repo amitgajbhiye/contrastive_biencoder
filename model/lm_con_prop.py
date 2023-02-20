@@ -465,6 +465,9 @@ def prepare_data_and_models(
         )
 
         log.info(f"Train Data DF shape : {train_data.data_df.shape}")
+    else:
+        log.info(f"Train File is Empty.")
+        train_dataloader = None
 
     if valid_file is not None:
         val_data = DatasetConceptPropertyJoint(valid_file, dataset_params)
