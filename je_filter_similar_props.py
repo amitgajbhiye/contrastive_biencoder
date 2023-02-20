@@ -62,7 +62,7 @@ def predict(model, dataloader):
     model.eval()
     model.to(device)
 
-    test_loss, test_accuracy, test_preds, test_logits = [], [], [], []
+    test_loss, test_preds, test_logits = [], [], []
 
     for step, batch in enumerate(dataloader):
 
@@ -105,16 +105,12 @@ def predict(model, dataloader):
             test_logits.extend(torch.sigmoid(positive_class_logits).cpu().numpy())
             #########
 
-        batch_accuracy = (labels == batch_preds).cpu().numpy().mean() * 100
-
         test_loss.append(loss)
         test_preds.extend(batch_preds.cpu().numpy())
-        test_accuracy.extend(batch_accuracy)
 
     loss = np.mean(test_loss)
-    accuracy = np.mean(test_accuracy)
 
-    return loss, accuracy, test_preds, test_logits
+    return loss, test_preds, test_logits
 
 
 # def predict(model, test_dataloader):
@@ -202,9 +198,7 @@ if __name__ == "__main__":
             config=config, train_file=None, valid_file=None, test_file=test_file
         )
 
-        loss, accuracy, predictions, logit = predict(
-            model=model, dataloader=test_dataloader
-        )
+        loss, predictions, logit = predict(model=model, dataloader=test_dataloader)
 
         # positive_class_logits = [l[1] for l in logit]
 
