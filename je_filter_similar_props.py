@@ -107,7 +107,7 @@ def predict(model, dataloader):
 
         batch_accuracy = (labels == batch_preds).cpu().numpy().mean() * 100
 
-        test_loss.extend(loss)
+        test_loss.append(loss)
         test_preds.extend(batch_preds.cpu().numpy())
         test_accuracy.extend(batch_accuracy)
 
