@@ -94,6 +94,8 @@ def set_logger(config):
     )
 
 
+log = logging.getLogger(__name__)
+
 context_templates = {
     1: [
         "concept <con> can be described as <predict_prop>?",
