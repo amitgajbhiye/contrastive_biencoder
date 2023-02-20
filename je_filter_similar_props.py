@@ -87,10 +87,10 @@ def predict(model, dataloader):
             loss, logits, mask_vectors = outputs
             batch_preds = torch.round(torch.sigmoid(logits))
 
-            print(f"logits : {logits}")
-            print(
-                f"sigmoid(logits) : {torch.sigmoid(logits).shape}, {torch.sigmoid(logits)}"
-            )
+            # print(f"logits : {logits}")
+            # print(
+            #     f"sigmoid(logits) : {torch.sigmoid(logits).shape}, {torch.sigmoid(logits)}"
+            # )
 
             test_logits.extend(torch.sigmoid(logits).cpu().numpy())
 
