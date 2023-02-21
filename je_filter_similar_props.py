@@ -206,9 +206,9 @@ if __name__ == "__main__":
 
         log.info(f"Number of Logits : {len(logit)}")
 
-        # assert test_df.shape[0] == len(
-        #     logit
-        # ), f"length of test dataframe, {test_df.shape[0]} is not equal to logits, {len(logit)}"
+        assert test_df.shape[0] == len(
+            logit
+        ), f"length of test dataframe, {test_df.shape[0]} is not equal to logits, {len(logit)}"
 
         new_test_dataframe = test_df.copy(deep=True)
         new_test_dataframe.drop("label", axis=1, inplace=True)
