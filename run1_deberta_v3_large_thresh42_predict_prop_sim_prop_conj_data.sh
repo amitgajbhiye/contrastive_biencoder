@@ -20,4 +20,5 @@ conda activate venv
 
 python3 get_embeds_and_train_data.py --config_file configs/5_get_predict_prop_sim_data/deberta_v3_large_thresh42_predict_prop_sim_props.json
 
+
 echo 'Job Finished!'
