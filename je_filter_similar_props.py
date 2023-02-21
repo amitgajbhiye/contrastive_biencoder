@@ -219,7 +219,7 @@ if __name__ == "__main__":
 
         all_logit_filename = os.path.join(
             save_dir,
-            f"{pretrained_model_num_neg}neg_with_logits_all_data_{dataset_name}_con_50sim_vocab_prop.tsv",
+            f"{pretrained_model_num_neg}neg_with_logits_all_data_{dataset_name}_con_50sim_vocab_prop_thresh{threshold}.tsv",
         )
         new_test_dataframe.to_csv(
             all_logit_filename, sep="\t", index=None, header=None, float_format="%.5f"
