@@ -46,6 +46,8 @@
         "fold_file_base_path": "data/evaluation_data/con_prop/mcrae_prop_split_train_test_files",
         "concept_similar_prop_file": "data/evaluation_data/prop_conjuction/mcrae/prop_split/deberta_v3_large_ctx1/deberta_v3_large_filtered_mcrae_con_prop_thres_565.tsv",
         "vocab_property_embed_pkl": "trained_models/redo_prop_conj_exp/prop_vocab_embed_cnetp_property_embeddings.pkl",
-        "predict_property_embed_pkl": "trained_models/embeddings/mcrae_property_embeddings.pkl"
+        "predict_property_embed_pkl": "trained_models/embeddings/mcrae_property_embeddings.pkl",
+        "con_only_similar_data": false,
+        "top_k_sim_props": null
     }
 }
