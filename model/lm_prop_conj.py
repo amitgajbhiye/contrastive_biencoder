@@ -113,10 +113,7 @@ context_templates = {
         "The concept <con> can be described as <prop_list>.",
         "Can the concept be described as <predict_prop>? <[MASK]>.",
     ],
-    # 5: [
-    #     "concept <con> can be described as <predict_prop>?",
-    #     "<[MASK]>, concept <con> can be described as <prop_list>.",
-    # ],
+    5: ["concept <con> is <prop_list>.", "Is it <predict_prop>? <[MASK]>.",],
 }
 
 
@@ -272,12 +269,17 @@ class DatasetConceptPropertyJoint(Dataset):
                 .replace("<prop_list>", conjuct_props)
             )
 
-        elif self.context_id == 4:
+        elif self.context_id in (4, 5):
 
             # MLM Formulation
 
+            # context_id = 4
             # sent_1 = The concept <con> can be described as <prop_list>.
             # sent_2 = Can the concept be described as <predict_prop>? <[MASK]>.
+
+            # context_id = 5
+            # sent_1 = concept <con> is <prop_list>.
+            # Sent_2 = Is it <predict_prop>? <[MASK]>.
 
             con_prop_template, predict_prop_template = context_templates[
                 self.context_id
@@ -368,7 +370,7 @@ class ModelConceptPropertyJoint(nn.Module):
 
         hidden_states = output.last_hidden_state
 
-        print(f"hidden_states : {hidden_states.shape}", flush=True)
+        # print(f"hidden_states : {hidden_states.shape}", flush=True)
 
         def get_mask_token_embeddings(last_layer_hidden_states):
 
@@ -397,7 +399,7 @@ class ModelConceptPropertyJoint(nn.Module):
             labels = labels.view(-1).float()
             loss = loss_fct(mask_logits, labels)
 
-        print("Step loss :", loss, flush=True)
+        # print("Step loss :", loss, flush=True)
 
         return (loss, mask_logits, mask_vectors)
 
@@ -562,7 +564,7 @@ def prepare_data_and_models(
     log.info(f"remove_classifier_layer : {remove_classifier_layer}")
 
     # Creating Model
-    if model_params["context_id"] == 4 and not remove_classifier_layer:
+    if model_params["context_id"] in (4, 5) and not remove_classifier_layer:
         log.info(f"Creating MLM Model: {model_params['hf_checkpoint_name']}")
         model = ModelConceptPropertyJoint(model_params)
 
