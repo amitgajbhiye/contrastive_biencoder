@@ -644,7 +644,6 @@ def evaluate(model, dataloader):
         input_ids = batch["input_ids"].squeeze().to(device)
         token_type_ids = batch["token_type_ids"].squeeze().to(device)
         attention_mask = batch["attention_mask"].squeeze().to(device)
-
         labels = batch["labels"].to(device)
 
         with torch.no_grad():
