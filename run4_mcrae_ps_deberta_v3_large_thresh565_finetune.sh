@@ -10,10 +10,12 @@
 #SBATCH --account scw1858
 
 #SBATCH --partition gpu_v100
-#SBATCH --mem=32G
-#SBATCH --gres=gpu:1
-#SBATCH --exclusive
+#SBATCH --mem-per-cpu=32G
 
+#SBATCH --mem=0
+#SBATCH --gres=gpu:1
+
+#SBATCH --exclusive
 #SBATCH --time 0-10:00:00
 
 conda activate venv
