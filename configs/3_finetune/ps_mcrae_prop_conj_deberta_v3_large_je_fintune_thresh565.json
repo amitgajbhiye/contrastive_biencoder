@@ -16,6 +16,7 @@
         "lr": 1e-5,
         "max_epochs": 8,
         "num_warmup_steps": 0,
+        "warmup_ratio": 0,
         "patience_early_stopping": 20,
         "save_dir": "trained_models/mcrae_finetune",
         "model_name": "ps_prop_conj_deberta_v3_large_je_mcrae_fintune_thresh565.pt",
