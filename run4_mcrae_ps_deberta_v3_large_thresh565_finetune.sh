@@ -1,6 +1,6 @@
 #!/bin/bash --login
 
-#SBATCH --job-name=dbv5MCFT
+#SBATCH --job-name=dbv3MCFT
 
 #SBATCH --output=logs/mcrae_finetune/out_ps_mcrae_prop_conj_deberta_v3_large_je_fintune_thresh565.txt
 #SBATCH --error=logs/mcrae_finetune/err_ps_mcrae_prop_conj_deberta_v3_large_je_fintune_thresh565.txt
