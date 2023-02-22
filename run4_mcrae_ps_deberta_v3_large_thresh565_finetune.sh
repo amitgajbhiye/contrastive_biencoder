@@ -11,8 +11,6 @@
 
 #SBATCH --partition gpu_v100
 
-##SBATCH --mem-per-cpu=32G
-
 #SBATCH --mem=0
 #SBATCH --gres=gpu:1
 
@@ -22,6 +20,5 @@
 conda activate venv
 
 python3 model/lm_prop_conj.py --config_file configs/3_finetune/ps_mcrae_prop_conj_deberta_v3_large_je_fintune_thresh565.json
-
 
 echo 'Job Finished!'
