@@ -12,7 +12,7 @@
         "cv_type": "property_split",
         "data_dir": "data/evaluation_data/prop_conjuction/mcrae/prop_split/deberta_v3_large_ctx1",
         "save_prefix": "deberta_v3_large_thresh565",
-        "batch_size": 32,
+        "batch_size": 16,
         "lr": 1e-5,
         "max_epochs": 8,
         "num_warmup_steps": 0,
@@ -28,14 +28,14 @@
     "dataset_params": {
         "hf_tokenizer_name": "deberta-v3-large",
         "hf_tokenizer_path": "/scratch/c.scmag3/hf_pretrained_models/deberta_v3_large/tokenizer",
-        "max_len": 80,
-        "context_id": 4
+        "max_len": 60,
+        "context_id": 5
     },
     "model_params": {
         "hf_checkpoint_name": "deberta-v3-large",
         "hf_model_path": "/scratch/c.scmag3/hf_pretrained_models/deberta_v3_large/model",
         "num_labels": 0,
-        "context_id": 4,
+        "context_id": 5,
         "remove_classifier_layer": false
     }
 }
