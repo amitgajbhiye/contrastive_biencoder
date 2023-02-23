@@ -12,7 +12,7 @@
         "cv_type": "property_split",
         "data_dir": "data/evaluation_data/prop_conjuction/mcrae/prop_split/deberta_v3_large_ctx1",
         "save_prefix": "deberta_v3_large_thresh565",
-        "batch_size": 16,
+        "batch_size": 32,
         "lr": 1e-5,
         "max_epochs": 8,
         "num_warmup_steps": 0,
