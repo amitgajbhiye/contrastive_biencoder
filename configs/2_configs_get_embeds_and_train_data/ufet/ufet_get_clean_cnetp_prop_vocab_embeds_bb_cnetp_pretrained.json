@@ -2,7 +2,7 @@
     "experiment_name": "ufet_get_clean_cnetp_prop_vocab_embeds_bb_cnetp_pretrained",
     "log_dirctory": "ufet_exp",
     "dataset_params": {
-        "dataset_name": "ufet_types",
+        "dataset_name": "cnetp_prop_vocab",
         "train_file_path": null,
         "val_file_path": null,
         "test_file_path": null,
