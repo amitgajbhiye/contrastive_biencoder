@@ -23,7 +23,7 @@
         "lr_policy": null,
         "lr_decay_iters": null,
         "weight_decay": 0,
-        "hp_tuning": false
+        "hp_tuning": true
     },
     "dataset_params": {
         "hf_tokenizer_name": "bert-base-uncased",

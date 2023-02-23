@@ -1165,7 +1165,8 @@ if __name__ == "__main__":
             warmup_ratio = [0.06, 0.1, 0.15]
             weight_decay = [0.01, 0.1, 0.2]
 
-            # epochs = [8]
+            # For Roberta-large Model
+            # epochs = [8, 10]
             # batch_size = [16, 32]
             # learning_rate = [1e-5]
             # warmup_ratio = [0.06, 0.1, 0.15]
