@@ -7,7 +7,7 @@
         "val_file_path": null,
         "test_file_path": null,
         "hf_tokenizer_name": "bert-base-uncased",
-        "hf_tokenizer_path": "/scratch/c.scmag3/hawk_data/conceptEmbeddingModel/bertBaseUncasedPreTrained/tokenizer",
+        "hf_tokenizer_path": "/scratch/c.scmag3/conceptEmbeddingModel/bertBaseUncasedPreTrained/tokenizer",
         "concept_max_len": 32,
         "property_max_len": 32,
         "add_context": true,
@@ -21,7 +21,7 @@
     "model_params": {
         "model_name": null,
         "hf_checkpoint_name": "bert-base-uncased",
-        "hf_model_path": "/scratch/c.scmag3/hawk_data/conceptEmbeddingModel/bertBaseUncasedPreTrained",
+        "hf_model_path": "/scratch/c.scmag3/conceptEmbeddingModel/bertBaseUncasedPreTrained",
         "vector_strategy": "mask_token"
     },
     "inference_params": {
