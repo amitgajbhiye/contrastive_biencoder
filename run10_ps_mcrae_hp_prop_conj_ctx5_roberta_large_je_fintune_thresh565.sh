@@ -21,5 +21,4 @@ conda activate venv
 
 python3 model/lm_prop_conj.py --config_file configs/3_finetune/ps_mcrae_hp_prop_conj_ctx5_roberta_large_je_fintune_thresh565.json
 
-
 echo 'Job Finished!'
