@@ -20,6 +20,6 @@ echo $SLURM_JOB_ID
 
 conda activate venv
 
-python3 get_embeds_and_train_data.py --config_file configs/2_configs_get_embeds_and_train_data/ufet_get_type_concepts_embeds_bb_cnetp_pretrained.json
+python3 get_embeds_and_train_data.py --config_file configs/2_configs_get_embeds_and_train_data/ufet/ufet_get_type_concepts_embeds_bb_cnetp_pretrained.json
 
 echo 'Job Finished!'
