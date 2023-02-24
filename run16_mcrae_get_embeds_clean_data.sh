@@ -13,7 +13,7 @@
 ##SBATCH --gres=gpu:1
 
 
-#SBATCH -p htp
+#SBATCH -p htc
 #SBATCH --mem=8G
 #SBATCH -t 0-02:00:00
 
