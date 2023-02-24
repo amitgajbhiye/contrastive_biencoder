@@ -9,9 +9,11 @@
 #SBATCH --ntasks=5
 #SBATCH -A scw1858
 
-#SBATCH -p gpu
-#SBATCH --gres=gpu:1
+##SBATCH -p gpu
+##SBATCH --gres=gpu:1
 
+
+#SBATCH -p htp
 #SBATCH --mem=8G
 #SBATCH -t 0-02:00:00
 
