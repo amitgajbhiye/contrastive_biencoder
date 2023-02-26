@@ -10,7 +10,7 @@ import pandas as pd
 import torch
 
 from model.lm_con_prop import prepare_data_and_models
-from utils.je_utils import read_config
+from utils.je_utils import read_config, set_seed
 
 from transformers import AutoTokenizer, AutoModelForSequenceClassification
 
@@ -155,6 +155,8 @@ def predict(model, dataloader):
 
 
 if __name__ == "__main__":
+
+    set_seed(1)
 
     parser = ArgumentParser()
     parser.add_argument(
