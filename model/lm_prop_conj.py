@@ -189,6 +189,9 @@ class DatasetConceptPropertyJoint(Dataset):
         predict_prop = self.data_df["predict_prop"][idx].replace(".", "").strip()
         labels = self.data_df["labels"][idx]
 
+        if conjuct_props == "no_similar_property":
+            conjuct_props = None
+
         # print(f"Data Row : {self.data_df[idx].to_list()}", flush=True)
 
         # if conjuct_props == "no_similar_property":
@@ -285,16 +288,22 @@ class DatasetConceptPropertyJoint(Dataset):
                 self.context_id
             ]
 
-            sent_a = con_prop_template.replace("<con>", concept).replace(
-                "<prop_list>", conjuct_props
-            )
+            if conjuct_props is None:
 
-            sent_b = predict_prop_template.replace(
-                "<predict_prop>", predict_prop
-            ).replace("<[MASK]>", self.mask_token)
+                sent_1 = f"concept {concept} is {predict_prop}? {self.mask_token}"
+                sent_2 = None
 
-            sent_1 = sent_a + " " + sent_b
-            sent_2 = None
+            else:
+                sent_a = con_prop_template.replace("<con>", concept).replace(
+                    "<prop_list>", conjuct_props
+                )
+
+                sent_b = predict_prop_template.replace(
+                    "<predict_prop>", predict_prop
+                ).replace("<[MASK]>", self.mask_token)
+
+                sent_1 = sent_a + " " + sent_b
+                sent_2 = None
 
         encoded_dict = self.tokenizer.encode_plus(
             text=sent_1,
