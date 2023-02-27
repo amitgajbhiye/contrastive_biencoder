@@ -1,6 +1,6 @@
 #!/bin/bash --login
 
-#SBATCH --job-name=fileter10Props
+#SBATCH --job-name=file10Props
 
 #SBATCH --output=logs/mcrae_clean_vocab_data/out_mcrae_deberta_v3_large_je_5neg_filter_10sim_props_thres50.txt
 #SBATCH --error=logs/mcrae_clean_vocab_data/err_mcrae_deberta_v3_large_je_5neg_filter_10sim_props_thres50.txt
@@ -9,7 +9,7 @@
 #SBATCH --ntasks=5
 #SBATCH -A scw1858
 
-#SBATCH -p gpu
+#SBATCH -p gpu_v100,gpu
 #SBATCH --gres=gpu:1
 
 #SBATCH --mem=16G
