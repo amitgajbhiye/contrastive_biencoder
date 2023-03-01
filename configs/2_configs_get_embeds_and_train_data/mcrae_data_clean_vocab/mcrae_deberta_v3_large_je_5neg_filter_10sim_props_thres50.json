@@ -33,7 +33,7 @@
         "hf_tokenizer_path": "/scratch/c.scmag3/hf_pretrained_models/deberta_v3_large/tokenizer",
         "max_len": 40,
         "context_id": 1,
-        "dataset_name": "mcrae_prop_split"
+        "dataset_name": "mcrae_con_sim_10_vocab_props"
     },
     "model_params": {
         "hf_checkpoint_name": "deberta-v3-large",
