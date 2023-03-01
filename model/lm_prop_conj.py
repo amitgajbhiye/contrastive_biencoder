@@ -290,7 +290,7 @@ class DatasetConceptPropertyJoint(Dataset):
 
             if conjuct_props is None:
 
-                sent_1 = f"concept {concept} is {predict_prop}? {self.mask_token}"
+                sent_1 = f"is {concept} {predict_prop}? {self.mask_token}"
                 sent_2 = None
 
             else:
