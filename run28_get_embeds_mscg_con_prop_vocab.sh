@@ -13,15 +13,12 @@
 #SBATCH --mem=8g
 #SBATCH --gres=gpu:1
 
-
 #SBATCH -t 0-03:00:00
-
 
 conda activate venv
 
 python3 get_embeds_and_train_data.py --config_file configs/2_configs_get_embeds_and_train_data/mscg_100k/mscg_get_con_embeddings.json
 python3 get_embeds_and_train_data.py --config_file configs/2_configs_get_embeds_and_train_data/mscg_100k/mscg_get_prop_embeddings.json 
 python3 get_embeds_and_train_data.py --config_file configs/2_configs_get_embeds_and_train_data/mscg_100k/mscg_prop_vocab_embeddings.json
-
 
 echo 'finished!'

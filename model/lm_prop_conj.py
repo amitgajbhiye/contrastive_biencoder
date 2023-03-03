@@ -168,6 +168,7 @@ class DatasetConceptPropertyJoint(Dataset):
         self.cls_token = self.tokenizer.cls_token
         self.mask_token = self.tokenizer.mask_token
         self.mask_token_id = self.tokenizer.mask_token_id
+        self.num_prop_to_augument = dataset_params["num_prop_to_augument"]
 
         self.context_id = dataset_params["context_id"]
 
@@ -189,8 +190,20 @@ class DatasetConceptPropertyJoint(Dataset):
         predict_prop = self.data_df["predict_prop"][idx].replace(".", "").strip()
         labels = self.data_df["labels"][idx]
 
+        print(f"conjuct_props 1 : {conjuct_props}")
+
         if conjuct_props == "no_similar_property":
             conjuct_props = None
+        elif self.num_prop_to_augument:  # 0 to augment all the properties
+
+            props = [p.strip() for p in conjuct_props.split(",")]
+
+            if len(props) <= self.num_prop_to_augument:
+                conjuct_props = ", ".join(props[0 : self.num_prop_to_augument])
+            else:
+                conjuct_props = ", ".join(props)
+
+        print(f"conjuct_props 2 : {self.num_prop_to_augument}, {conjuct_props}")
 
         # print(f"Data Row : {self.data_df[idx].to_list()}", flush=True)
 
