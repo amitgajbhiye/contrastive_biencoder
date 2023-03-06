@@ -33,6 +33,7 @@
         "hf_checkpoint_name": "deberta-v3-large",
         "hf_model_path": "/scratch/c.scmag3/hf_pretrained_models/deberta_v3_large/model",
         "num_labels": 0,
-        "context_id": 5
+        "context_id": 5,
+        "remove_classifier_layer": false
     }
 }
