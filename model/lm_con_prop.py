@@ -265,7 +265,7 @@ class DatasetConceptPropertyJoint(Dataset):
             therefore = context_templates[self.context_id]
 
             premise = concept.rstrip(".")
-            hypothesis = predict_prop
+            hypothesis = predict_prop[0].lower() + predict_prop[1:]
 
             sent = premise + therefore + hypothesis + " " + self.mask_token
 
@@ -284,21 +284,19 @@ class DatasetConceptPropertyJoint(Dataset):
 
         encoded_dict["labels"] = labels
 
-        if self.print_freq < 2:
+        print(flush=True)
+        print(f"sent : {sent}", flush=True)
+        print(
+            f"tokenized sent : {self.tokenizer.convert_ids_to_tokens(encoded_dict['input_ids'].squeeze())}",
+            flush=True,
+        )
+        print(
+            f"Decoded Sent - {self.tokenizer.decode(encoded_dict['input_ids'].squeeze())}",
+            flush=True,
+        )
 
-            print(flush=True)
-            print(f"sent : {sent}", flush=True)
-            print(
-                f"tokenized sent : {self.tokenizer.convert_ids_to_tokens(encoded_dict['input_ids'].squeeze())}",
-                flush=True,
-            )
-            print(
-                f"Decoded Sent - {self.tokenizer.decode(encoded_dict['input_ids'].squeeze())}",
-                flush=True,
-            )
-
-            self.print_freq += 1
-            print(flush=True)
+        self.print_freq += 1
+        print(flush=True)
 
         # if self.print_freq < 2:
 
