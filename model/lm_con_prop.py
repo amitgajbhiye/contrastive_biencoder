@@ -110,7 +110,7 @@ context_templates = {
         "The concept is <con>.",
         "The concept <con> can be can be described as <predict_prop>.",
     ],
-    5: [],++++++++++++++++
+    5: "; therefore, ",
 }
 
 
@@ -149,6 +149,7 @@ class DatasetConceptPropertyJoint(Dataset):
                 header=None,
                 names=["concept", "predict_prop", "labels"],
                 dtype={"concept": str, "predict_prop": str, "labels": float,},
+                on_bad_lines="skip",
             )
 
             log.info(f"Loaded Dataframe Shape: {self.data_df.shape}")
@@ -248,6 +249,31 @@ class DatasetConceptPropertyJoint(Dataset):
             encoded_dict = self.tokenizer.encode_plus(
                 text=sent_1,
                 text_pair=sent_2,
+                max_length=self.max_len,
+                add_special_tokens=True,
+                padding="max_length",
+                truncation=True,
+                return_tensors="pt",
+                return_token_type_ids=True,
+            )
+
+        elif self.context_id == 5:
+
+            # MLM Formulation for Wanli Pretraining
+            # 5:"; therefore, "
+
+            therefore = context_templates[self.context_id]
+
+            premise = concept.rstrip(".")
+            hypothesis = predict_prop
+
+            sent = premise + therefore + hypothesis + self.mask_token
+
+            print(sent, flush=True)
+
+            encoded_dict = self.tokenizer.encode_plus(
+                text=sent,
+                text_pair=None,
                 max_length=self.max_len,
                 add_special_tokens=True,
                 padding="max_length",
@@ -513,7 +539,7 @@ def prepare_data_and_models(
     log.info(f"remove_classifier_layer : {remove_classifier_layer}")
 
     # Creating Model
-    if model_params["context_id"] == 1 and not remove_classifier_layer:
+    if model_params["context_id"] in (1, 5) and not remove_classifier_layer:
         log.info(f"Creating MLM Model: {model_params['hf_checkpoint_name']}")
         model = ModelConceptPropertyJoint(model_params)
 
