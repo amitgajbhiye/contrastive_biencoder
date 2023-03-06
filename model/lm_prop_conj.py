@@ -190,7 +190,7 @@ class DatasetConceptPropertyJoint(Dataset):
         predict_prop = self.data_df["predict_prop"][idx].replace(".", "").strip()
         labels = self.data_df["labels"][idx]
 
-        print(f"conjuct_props 1 : {conjuct_props}")
+        print(f"conjuct_props 1 : {conjuct_props}", flush=True)
 
         if conjuct_props == "no_similar_property":
             conjuct_props = None
@@ -198,12 +198,16 @@ class DatasetConceptPropertyJoint(Dataset):
 
             props = [p.strip() for p in conjuct_props.split(",")]
 
-            if len(props) <= self.num_prop_to_augument:
+            if self.num_prop_to_augument <= len(props):
                 conjuct_props = ", ".join(props[0 : self.num_prop_to_augument])
             else:
                 conjuct_props = ", ".join(props)
 
-        print(f"conjuct_props 2 : {self.num_prop_to_augument}, {conjuct_props}")
+        print(
+            f"conjuct_props 2 : {self.num_prop_to_augument}, {conjuct_props}",
+            flush=True,
+        )
+        print(flush=True)
 
         # print(f"Data Row : {self.data_df[idx].to_list()}", flush=True)
 
