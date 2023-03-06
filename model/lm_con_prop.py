@@ -282,21 +282,30 @@ class DatasetConceptPropertyJoint(Dataset):
                 return_token_type_ids=True,
             )
 
+        elif self.context_id == 6:
+
+            # MLM Formulation for Wanli Pretraining
+            # 6:"premise. [MASK], hypothesis"
+
+            premise = concept
+            hypothesis = predict_prop[0].lower() + predict_prop[1:]
+
+            sent = premise + " " + self.mask_token + "," + " " + hypothesis
+
+            print(sent, flush=True)
+
+            encoded_dict = self.tokenizer.encode_plus(
+                text=sent,
+                text_pair=None,
+                max_length=self.max_len,
+                add_special_tokens=True,
+                padding="max_length",
+                truncation=True,
+                return_tensors="pt",
+                return_token_type_ids=True,
+            )
+
         encoded_dict["labels"] = labels
-
-        print(flush=True)
-        print(f"sent : {sent}", flush=True)
-        print(
-            f"tokenized sent : {self.tokenizer.convert_ids_to_tokens(encoded_dict['input_ids'].squeeze())}",
-            flush=True,
-        )
-        print(
-            f"Decoded Sent - {self.tokenizer.decode(encoded_dict['input_ids'].squeeze())}",
-            flush=True,
-        )
-
-        self.print_freq += 1
-        print(flush=True)
 
         # if self.print_freq < 2:
 
