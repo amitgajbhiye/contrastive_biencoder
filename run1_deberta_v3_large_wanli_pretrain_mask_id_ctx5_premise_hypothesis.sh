@@ -12,6 +12,7 @@
 #SBATCH --partition gpu_v100
 #SBATCH --mem=32G
 #SBATCH --gres=gpu:1
+#SBATCH --exclusive
 
 #SBATCH -t 0-00:45:00
 
