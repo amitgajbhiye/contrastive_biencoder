@@ -1,5 +1,5 @@
 {
-    "experiment_name": "bienc_bert_large_cnetp_pretrain",
+    "experiment_name": "bienc_bert_large_cnetp_pretrain_lr15",
     "log_dirctory": "pretrain",
     "dataset_params": {
         "dataset_name": "cnetp",
@@ -19,22 +19,22 @@
         }
     },
     "model_params": {
-        "model_name": "bienc_bert_large_cnetp_pretrain.pt",
+        "model_name": "bienc_bert_large_cnetp_pretrain_lr15.pt",
         "hf_checkpoint_name": "bert-large-uncased",
         "hf_model_path": "/scratch/c.scmag3/hf_pretrained_models/bert_large_uncased/model",
         "vector_strategy": "mask_token"
     },
     "training_params": {
-        "lr": 1e-5,
-        "num_warmup_steps": 0,
-        "max_epochs": 100,
-        "early_stopping_patience": 20,
+        "lr": 1e-05,
+        "num_warmup_steps": 0.15,
+        "max_epochs": 8,
+        "early_stopping_patience": 3,
         "export_path": "trained_models/bienc_cnetp_pretrained",
         "printout_freq": 100,
         "checkpoint_path": "",
         "load_checkpoint": -1,
         "lr_policy": "warmup",
-        "lr_decay_iters": 15
+        "weight_decay": 0.01
     },
     "visualization_params": {
         "name": "None"

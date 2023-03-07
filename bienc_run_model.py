@@ -1,6 +1,7 @@
 import argparse
 import logging
 import os
+import math
 
 
 import numpy as np
@@ -238,18 +239,33 @@ def train(config):
 
     # -------------------- Preparation for training  ------------------- #
 
+    weight_decay = config["training_params"]["weight_decay"]
+
     loss_fn = nn.BCEWithLogitsLoss()
-    optimizer = AdamW(model.parameters(), lr=config["training_params"].get("lr"))
+
+    optimizer = AdamW(
+        model.parameters(),
+        lr=config["training_params"]["lr"],
+        weight_decay=weight_decay,
+    )
+
     total_training_steps = len(train_dataloader) * config["training_params"].get(
         "max_epochs"
     )
 
-    # warmup_steps = math.ceil(len(train_dataloader) * num_epochs * 0.1)  # 10% of train data for warm-up
-    # log.info(f"Warmup-steps: {warmup_steps}")
+    num_epochs = config["training_params"]["max_epochs"]
+    num_warmup_steps = config["training_params"]["num_warmup_steps"]
+
+    if config["training_params"]["lr_policy"] == "warmup":
+        warmup_steps = math.ceil(len(train_dataloader) * num_epochs * num_warmup_steps)
+    else:
+        warmup_steps = 0
+
+    log.info(f"Warmup-steps: {warmup_steps}")
 
     scheduler = get_linear_schedule_with_warmup(
         optimizer,
-        num_warmup_steps=config["training_params"].get("num_warmup_steps"),
+        num_warmup_steps=warmup_steps,
         num_training_steps=total_training_steps,
     )
 
