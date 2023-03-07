@@ -27,8 +27,8 @@
     "training_params": {
         "lr": 1e-05,
         "num_warmup_steps": 0.15,
-        "max_epochs": 8,
-        "early_stopping_patience": 3,
+        "max_epochs": 12,
+        "early_stopping_patience": 5,
         "export_path": "trained_models/bienc_cnetp_pretrained",
         "printout_freq": 100,
         "checkpoint_path": "",
