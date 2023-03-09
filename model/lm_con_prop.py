@@ -122,7 +122,7 @@ class DatasetConceptPropertyJoint(Dataset):
             self.data_df = concept_property_file
             log.info(
                 f"Supplied Concept Property File is a Dataframe : {self.data_df.shape}",
-            )[0:2000]
+            )
 
             self.data_df = self.data_df.rename(
                 columns={
@@ -150,7 +150,7 @@ class DatasetConceptPropertyJoint(Dataset):
                 names=["concept", "predict_prop", "labels"],
                 dtype={"concept": str, "predict_prop": str, "labels": float,},
                 on_bad_lines="skip",
-            )
+            )[0:2000]
 
             log.info(f"Loaded Dataframe Shape: {self.data_df.shape}")
 
