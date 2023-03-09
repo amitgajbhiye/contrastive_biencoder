@@ -122,7 +122,7 @@ class DatasetConceptPropertyJoint(Dataset):
             self.data_df = concept_property_file
             log.info(
                 f"Supplied Concept Property File is a Dataframe : {self.data_df.shape}",
-            )
+            )[0:2000]
 
             self.data_df = self.data_df.rename(
                 columns={
@@ -822,15 +822,23 @@ def train(
                 log.info(f"The Best Model is saved at : {best_model_path}")
                 break
 
-    if (test_dataloader is not None) and (fold is not None):
+    # if (test_dataloader is not None) and (fold is not None):
+    if test_dataloader is not None:
 
-        best_model_path = os.path.join(save_dir, f"{fold}_{model_name}")
+        if fold is not None:
 
-        torch.save(model.state_dict(), best_model_path)
+            best_model_path = os.path.join(save_dir, f"{fold}_{model_name}")
+            torch.save(model.state_dict(), best_model_path)
 
-        log.info(f"Testing the Model on Fold : {fold}")
-        log.info(f"Testing the model after epochs : {max_epochs} ")
-        log.info(f"The model for fold {fold} is saved at : {best_model_path}")
+            log.info(f"Testing the Model on Fold : {fold}")
+            log.info(f"Testing the model after epochs : {max_epochs}")
+            log.info(f"The model for fold {fold} is saved at : {best_model_path}")
+
+        else:
+            log.info(f"Fold is : {fold}")
+            best_model_path = os.path.join(save_dir, model_name)
+
+        log.info(f"Testing the Model loaded from : {best_model_path}")
 
         _, test_preds, test_gold_labels = evaluate(
             model=model, dataloader=test_dataloader
@@ -1040,9 +1048,11 @@ if __name__ == "__main__":
 
         train_file = training_params["train_file_path"]
         valid_file = training_params["val_file_path"]
+        test_file = training_params["test_file_path"]
 
         log.info(f"Train File  : {train_file}")
         log.info(f"Valid File  : {valid_file}")
+        log.info(f"Test File : {test_file}")
 
         if not hp_tuning:
 
@@ -1057,12 +1067,12 @@ if __name__ == "__main__":
                 config=config,
                 train_file=train_file,
                 valid_file=valid_file,
-                test_file=None,
+                test_file=test_file,
             )
 
-            assert (
-                test_dataloader is None
-            ), "Test dataloader should be None for pretraining."
+            # assert (
+            #     test_dataloader is None
+            # ), "Test dataloader should be None for pretraining."
 
             train(
                 training_params=training_params,
@@ -1134,12 +1144,12 @@ if __name__ == "__main__":
                                 config=config,
                                 train_file=train_file,
                                 valid_file=valid_file,
-                                test_file=None,
+                                test_file=test_file,
                             )
 
-                            assert (
-                                test_dataloader is None
-                            ), "Test dataloader should be None for pretraining."
+                            # assert (
+                            #     test_dataloader is None
+                            # ), "Test dataloader should be None for pretraining."
 
                             train(
                                 training_params=training_params,
