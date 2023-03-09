@@ -2,8 +2,8 @@
 
 #SBATCH --job-name=1NconPropCSLBPretrain
 
-#SBATCH --output=logs/pretrain/out_deberta_v3_large_pretrain_mask_id_ctx1_cslb_1neg_con_prop.txt
-#SBATCH --error=logs/pretrain/err_deberta_v3_large_pretrain_mask_id_ctx1_cslb_1neg_con_prop.txt
+#SBATCH --output=logs/pretrain/out_dummy_deberta_v3_large_pretrain_mask_id_ctx1_cslb_1neg_con_prop.txt
+#SBATCH --error=logs/pretrain/err_dummy_deberta_v3_large_pretrain_mask_id_ctx1_cslb_1neg_con_prop.txt
 
 #SBATCH --tasks-per-node=5
 #SBATCH --ntasks=5
