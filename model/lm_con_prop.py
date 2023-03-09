@@ -827,6 +827,9 @@ def train(
 
         if fold is not None:
 
+            # For finetuning - Property Split and concept_property split.
+            # Fold will not be None
+
             best_model_path = os.path.join(save_dir, f"{fold}_{model_name}")
             torch.save(model.state_dict(), best_model_path)
 
@@ -835,8 +838,14 @@ def train(
             log.info(f"The model for fold {fold} is saved at : {best_model_path}")
 
         else:
+
+            # For pretraining for the datasets with a test set available;
+            # For pretraining the fold will be None
+
             log.info(f"Fold is : {fold}")
             best_model_path = os.path.join(save_dir, model_name)
+
+        model.load_state_dict(torch.load(best_model_path))
 
         log.info(f"Testing the Model loaded from : {best_model_path}")
 
