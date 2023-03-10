@@ -150,7 +150,7 @@ class DatasetConceptPropertyJoint(Dataset):
                 names=["concept", "predict_prop", "labels"],
                 dtype={"concept": str, "predict_prop": str, "labels": float,},
                 on_bad_lines="skip",
-            )
+            )[0:1500]
 
             log.info(f"Loaded Dataframe Shape: {self.data_df.shape}")
 
@@ -693,13 +693,13 @@ def train(
     model_name = training_params["model_name"]
     save_dir = training_params["save_dir"]
 
-    best_model_path = os.path.join(save_dir, model_name)
     patience_early_stopping = training_params["patience_early_stopping"]
 
     best_valid_f1 = 0.0
     patience_counter = 0
     start_epoch = 1
     epoch_train_losses, epoch_valid_losses = [], []
+    best_model_to_test = None
 
     for epoch in range(start_epoch, max_epochs + 1):
 
@@ -793,6 +793,12 @@ def train(
 
                 best_valid_f1 = valid_binary_f1
 
+                best_model_path = os.path.join(
+                    save_dir, f"{str(best_valid_f1)}_{model_name}"
+                )
+
+                best_model_to_test = best_model_path
+
                 torch.save(model.state_dict(), best_model_path)
                 log.info(f"The best model is saved at : {best_model_path}")
 
@@ -843,7 +849,7 @@ def train(
             # For pretraining the fold will be None
 
             log.info(f"Fold is : {fold}")
-            best_model_path = os.path.join(save_dir, model_name)
+            best_model_path = best_model_to_test
 
         model.load_state_dict(torch.load(best_model_path))
 
