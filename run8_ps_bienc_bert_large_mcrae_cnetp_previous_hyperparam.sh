@@ -19,6 +19,6 @@
 conda activate venv
 
 
-python3 fine_tune.py --config_file configs/3_finetune/ps_bienc_bert_large_mcrae_cnetp_previous_hyperparam.json
+python3 bienc_fine_tune.py --config_file configs/3_finetune/ps_bienc_bert_large_mcrae_cnetp_previous_hyperparam.json
 
 echo 'Job Finished !!!'
