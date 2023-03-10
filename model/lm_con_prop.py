@@ -699,7 +699,7 @@ def train(
     patience_counter = 0
     start_epoch = 1
     epoch_train_losses, epoch_valid_losses = [], []
-    best_model_to_test = None
+    best_model_to_test, best_model_path, = None, None
 
     for epoch in range(start_epoch, max_epochs + 1):
 
@@ -793,14 +793,19 @@ def train(
 
                 best_valid_f1 = valid_binary_f1
 
+                if best_model_path is not None:
+                    log.info(f"Deleting the previous best model : {best_model_path}")
+                    os.remove(best_model_path)
+
                 best_model_path = os.path.join(
-                    save_dir, f"{str(best_valid_f1)}_{model_name}"
+                    save_dir, f"val_score_{str(best_valid_f1)}_{model_name}"
                 )
 
-                best_model_to_test = best_model_path
-
+                log.info(f"Saving the current best Model: {best_model_path}")
                 torch.save(model.state_dict(), best_model_path)
                 log.info(f"The best model is saved at : {best_model_path}")
+
+                best_model_to_test = best_model_path
 
             epoch_train_losses.append(avg_train_loss)
             epoch_valid_losses.append(valid_loss)
