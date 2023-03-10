@@ -150,7 +150,7 @@ class DatasetConceptPropertyJoint(Dataset):
                 names=["concept", "predict_prop", "labels"],
                 dtype={"concept": str, "predict_prop": str, "labels": float,},
                 on_bad_lines="skip",
-            )[0:1500]
+            )
 
             log.info(f"Loaded Dataframe Shape: {self.data_df.shape}")
 
@@ -788,7 +788,6 @@ def train(
                     f"Current Binary F1 : {valid_binary_f1} is better than previous best : {best_valid_f1}"
                 )
                 log.info("Epoch :", epoch)
-                log.info(f"Saving best model at epoch - {epoch} : {model_name}")
                 log.info("   Best Validation F1:", best_valid_f1)
 
                 best_valid_f1 = valid_binary_f1
@@ -801,7 +800,9 @@ def train(
                     save_dir, f"val_score_{str(best_valid_f1)}_{model_name}"
                 )
 
-                log.info(f"Saving the current best Model: {best_model_path}")
+                log.info(
+                    f"Saving the current best Model at Epoch {epoch}: {best_model_path}"
+                )
                 torch.save(model.state_dict(), best_model_path)
                 log.info(f"The best model is saved at : {best_model_path}")
 
