@@ -150,7 +150,7 @@ class DatasetConceptPropertyJoint(Dataset):
                 names=["concept", "predict_prop", "labels"],
                 dtype={"concept": str, "predict_prop": str, "labels": float,},
                 on_bad_lines="skip",
-            )[0:2000]
+            )
 
             log.info(f"Loaded Dataframe Shape: {self.data_df.shape}")
 
