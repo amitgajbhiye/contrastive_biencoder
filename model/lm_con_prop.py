@@ -110,7 +110,7 @@ context_templates = {
         "The concept is <con>.",
         "The concept <con> can be can be described as <predict_prop>.",
     ],
-    5: ["can <con> can be described as <predict_prop>?", "<[MASK]>.",],
+    5: ["can <con> be described as <predict_prop>?", "<[MASK]>.",],
 }
 
 
