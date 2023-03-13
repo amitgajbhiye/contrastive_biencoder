@@ -31,7 +31,7 @@
         "context_id": 1
     },
     "model_params": {
-        "hf_checkpoint_name": "roberta_large",
+        "hf_checkpoint_name": "roberta-large",
         "hf_model_path": "/scratch/c.scmag3/hf_pretrained_models/roberta_large/model",
         "num_labels": 0,
         "context_id": 1,
