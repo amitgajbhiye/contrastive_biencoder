@@ -22,7 +22,7 @@
         "load_pretrained": true,
         "pretrained_model_name": "bienc_bert_large_cnetp_pretrain_lr15Epoch50.pt",
         "pretrained_model_path": "trained_models/bienc_cnetp_pretrained/bienc_bert_large_cnetp_pretrain_lr15Epoch50.pt",
-        "model_name": "ps_bienc_bert_large_mcrae_cnetp_lr15_pretrained_model.pt",
+        "model_name": "ps_bienc_bert_large_mcrae_cnetp_lr15Epoch50_pretrained_model_ftlr15.pt",
         "hf_checkpoint_name": "bert-large-uncased",
         "hf_model_path": "/scratch/c.scmag3/hf_pretrained_models/bert_large_uncased/model",
         "vector_strategy": "mask_token"
