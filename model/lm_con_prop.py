@@ -110,7 +110,7 @@ context_templates = {
         "The concept is <con>.",
         "The concept <con> can be can be described as <predict_prop>.",
     ],
-    5: "; therefore, ",
+    5: ["can <con> can be described as <predict_prop>?", "<[MASK]>.",],
 }
 
 
@@ -199,13 +199,13 @@ class DatasetConceptPropertyJoint(Dataset):
         predict_prop = self.data_df["predict_prop"][idx].replace(".", "").strip()
         labels = self.data_df["labels"][idx]
 
-        if self.context_id == 1:
+        if self.context_id in (1, 5):
 
             # MLM Formulation
             # sent_1 = concept <con> can be described as <predict_prop>?
             # sent_2 = <[MASK]>.
 
-            # 4: ["concept <con> can be described as <predict_prop>?","<[MASK]>."]
+            # 5: ["can <con> can be described as <predict_prop>?", "<[MASK]>.",]
 
             predict_prop_template, mask_template, = context_templates[self.context_id]
 
@@ -249,54 +249,6 @@ class DatasetConceptPropertyJoint(Dataset):
             encoded_dict = self.tokenizer.encode_plus(
                 text=sent_1,
                 text_pair=sent_2,
-                max_length=self.max_len,
-                add_special_tokens=True,
-                padding="max_length",
-                truncation=True,
-                return_tensors="pt",
-                return_token_type_ids=True,
-            )
-
-        elif self.context_id == 5:
-
-            # MLM Formulation for Wanli Pretraining
-            # 5:"; therefore, "
-
-            therefore = context_templates[self.context_id]
-
-            premise = concept.rstrip(".")
-            hypothesis = predict_prop[0].lower() + predict_prop[1:]
-
-            sent = premise + therefore + hypothesis + " " + self.mask_token
-
-            print(sent, flush=True)
-
-            encoded_dict = self.tokenizer.encode_plus(
-                text=sent,
-                text_pair=None,
-                max_length=self.max_len,
-                add_special_tokens=True,
-                padding="max_length",
-                truncation=True,
-                return_tensors="pt",
-                return_token_type_ids=True,
-            )
-
-        elif self.context_id == 6:
-
-            # MLM Formulation for Wanli Pretraining
-            # 6:"premise. [MASK], hypothesis"
-
-            premise = concept
-            hypothesis = predict_prop[0].lower() + predict_prop[1:]
-
-            sent = premise + " " + self.mask_token + "," + " " + hypothesis
-
-            print(sent, flush=True)
-
-            encoded_dict = self.tokenizer.encode_plus(
-                text=sent,
-                text_pair=None,
                 max_length=self.max_len,
                 add_special_tokens=True,
                 padding="max_length",
