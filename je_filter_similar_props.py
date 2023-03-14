@@ -221,7 +221,7 @@ if __name__ == "__main__":
 
         all_logit_filename = os.path.join(
             save_dir,
-            f"{pretrained_model_num_neg}neg_with_logits_all_data_{dataset_name}.tsv",
+            f"{pretrained_model_num_neg}_with_logits_all_data_{dataset_name}.tsv",
         )
         new_test_dataframe.to_csv(
             all_logit_filename, sep="\t", index=None, header=None, float_format="%.5f"
@@ -234,7 +234,7 @@ if __name__ == "__main__":
 
         with_threshold_logit_filename = os.path.join(
             save_dir,
-            f"{pretrained_model_num_neg}neg{threshold}thres_with_logits_{dataset_name}_con_50sim_vocab_prop.tsv",
+            f"{pretrained_model_num_neg}_{threshold}thres_filtered_with_logits_{dataset_name}.tsv",
         )
 
         df_with_threshold.to_csv(
@@ -249,9 +249,10 @@ if __name__ == "__main__":
         log.info(df_with_threshold.head(n=20))
 
         df_with_threshold.drop(labels="logit", axis=1, inplace=True)
+
         logit_filename = os.path.join(
             save_dir,
-            f"{pretrained_model_num_neg}neg{threshold}thres_without_logits_conprop_{dataset_name}_con_50sim_vocab_prop.tsv",
+            f"{pretrained_model_num_neg}_{threshold}thres_filtered_without_logits_conprop_{dataset_name}.tsv",
         )
         df_with_threshold.to_csv(logit_filename, sep="\t", index=None, header=None)
 
