@@ -453,6 +453,9 @@ def get_predict_prop_similar_properties(
     print(
         f"Concepts with no similar properties : {len(no_similar_prop_concept)} , {no_similar_prop_concept}"
     )
+    log.info(
+        f"Concepts with no similar properties : {len(no_similar_prop_concept)} , {no_similar_prop_concept}"
+    )
 
     with open(prop_vocab_embed_pkl, "rb") as prop_vocab_pkl:
         prop_vocab_embeds_dict = pickle.load(prop_vocab_pkl)

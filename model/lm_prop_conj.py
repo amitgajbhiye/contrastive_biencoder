@@ -114,6 +114,7 @@ context_templates = {
         "Can the concept be described as <predict_prop>? <[MASK]>.",
     ],
     5: ["concept <con> is <prop_list>.", "Is it <predict_prop>? <[MASK]>.",],
+    6: ["<con> is <prop_list>.", "Is it <predict_prop>? <[MASK]>.",],
 }
 
 
@@ -194,7 +195,7 @@ class DatasetConceptPropertyJoint(Dataset):
 
         if conjuct_props == "no_similar_property":
             conjuct_props = None
-        elif self.num_prop_to_augument:  # 0 to augment all the properties
+        elif self.num_prop_to_augument:  # None to augment all the properties
 
             props = [p.strip() for p in conjuct_props.split(",")]
 
@@ -289,7 +290,7 @@ class DatasetConceptPropertyJoint(Dataset):
                 .replace("<prop_list>", conjuct_props)
             )
 
-        elif self.context_id in (4, 5):
+        elif self.context_id in (4, 5, 6):
 
             # MLM Formulation
 
@@ -299,6 +300,10 @@ class DatasetConceptPropertyJoint(Dataset):
 
             # context_id = 5
             # sent_1 = concept <con> is <prop_list>.
+            # Sent_2 = Is it <predict_prop>? <[MASK]>.
+
+            # context_id = 6
+            # sent_1 = <con> is <prop_list>.
             # Sent_2 = Is it <predict_prop>? <[MASK]>.
 
             con_prop_template, predict_prop_template = context_templates[
@@ -590,7 +595,7 @@ def prepare_data_and_models(
     log.info(f"remove_classifier_layer : {remove_classifier_layer}")
 
     # Creating Model
-    if model_params["context_id"] in (4, 5) and not remove_classifier_layer:
+    if model_params["context_id"] in (4, 5, 6) and not remove_classifier_layer:
         log.info(f"Creating MLM Model: {model_params['hf_checkpoint_name']}")
         model = ModelConceptPropertyJoint(model_params)
 
