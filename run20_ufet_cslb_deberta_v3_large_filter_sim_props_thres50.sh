@@ -10,7 +10,7 @@
 #SBATCH --account scw1858
 
 #SBATCH --partition gpu_v100
-#SBATCH --mem=32G
+#SBATCH --mem=16G
 #SBATCH --gres=gpu:1
 
 #SBATCH --time 0-02:00:00
