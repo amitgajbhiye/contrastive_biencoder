@@ -9,7 +9,7 @@
         "pretrain": false,
         "train_file_path": null,
         "val_file_path": null,
-        "test_file_path": "data/ufet/embeddings/bert_large_con_similar_50cnet_vocab_props.tsv",
+        "test_file_path": "data/ufet/with_false_label_bert_large_con_similar_50cnet_vocab_props.tsv",
         "finetune": null,
         "load_pretrained": true,
         "pretrained_model_path": "trained_models/clean_cslb_pretrained_je/1neg/val_score_0.828_cslb_pretrain_deberta_v3_large_mask_id_ctx5_cslb_1neg_con_prop.pt",
