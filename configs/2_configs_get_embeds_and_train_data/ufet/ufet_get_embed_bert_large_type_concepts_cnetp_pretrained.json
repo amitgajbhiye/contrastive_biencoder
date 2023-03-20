@@ -28,7 +28,7 @@
         "pretrained_model_path": "trained_models/bienc_cnetp_pretrained/bienc_bert_large_cnetp_pretrain_lr26.pt",
         "get_con_prop_embeds": true,
         "input_data_type": "concept",
-        "concept_file": "data/ufet/types.txt",
+        "concept_file": "data/ufet/clean_types.txt",
         "property_file": null,
         "concept_property_file": null,
         "save_dir": "data/ufet/embeddings",
