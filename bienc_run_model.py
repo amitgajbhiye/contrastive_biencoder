@@ -54,15 +54,6 @@ def train_single_epoch(
 
         ids_dict = train_dataset.tokenize(concepts_batch, property_batch)
 
-        # log.info(f"\n")
-        # log.info(f"******************************")
-
-        # for key, value in ids_dict.items():
-        #     log.info(f"{key} : {value}")
-
-        # log.info(f"******************************")
-        # log.info(f"\n")
-
         if train_dataset.hf_tokenizer_name in ("roberta-base", "roberta-large"):
 
             (
@@ -126,22 +117,10 @@ def train_single_epoch(
 
         epoch_loss += batch_loss.item()
 
-        if step % 10 == 0 and not step == 0:
-
-            # batch_labels = batch_labels.reshape(-1, 1).detach().cpu().numpy()
-
-            # batch_logits = (
-            #     torch.round(torch.sigmoid(batch_logits))
-            #     .reshape(-1, 1)
-            #     .detach()
-            #     .cpu()
-            #     .numpy()
-            # )
-
-            # batch_scores = compute_scores(batch_labels, batch_logits)
+        if step % 100 == 0 and not step == 0:
 
             log.info(
-                f"Batch {step} of {len(train_dataloader)} ----> Batch Loss : {batch_loss}"
+                f"Batch {step} of {len(train_dataloader)} ----> Train Batch Loss : {round(batch_loss, 4)}"
             )
 
     avg_epoch_loss = round(epoch_loss / len(train_dataloader), 4)
@@ -196,15 +175,6 @@ def evaluate(model, valid_dataset, valid_dataloader, loss_fn, device):
                 property_token_type_id=property_token_type_id,
             )
 
-        # batch_loss, batch_logits, batch_labels = calculate_loss(
-        #     dataset=valid_dataset,
-        #     batch=batch,
-        #     concept_embedding=concept_embedding,
-        #     property_embedding=property_embedding,
-        #     loss_fn=loss_fn,
-        #     device=device,
-        # )  # dataset, batch, concept_embedding, property_embedding, loss_fn, device
-
         if isinstance(loss_fn, nn.BCEWithLogitsLoss):
 
             batch_loss, batch_logits, batch_labels = calculate_cross_entropy_loss(
@@ -231,18 +201,6 @@ def evaluate(model, valid_dataset, valid_dataloader, loss_fn, device):
 
         val_loss += batch_loss.item()
         torch.cuda.empty_cache()
-
-    # epoch_logits = (
-    #     torch.round(torch.sigmoid(torch.vstack(epoch_logits)))
-    #     .reshape(-1, 1)
-    #     .detach()
-    #     .cpu()
-    #     .numpy()
-    # )
-
-    # epoch_labels = torch.vstack(epoch_labels).reshape(-1, 1).detach().cpu().numpy()
-
-    # scores = compute_scores(epoch_labels, epoch_logits)
 
     avg_val_loss = round(val_loss / len(valid_dataloader), 4)
 
