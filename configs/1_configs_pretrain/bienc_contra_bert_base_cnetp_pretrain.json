@@ -26,17 +26,14 @@
     },
     "training_params": {
         "loss_function": "infonce",
-        "tau": 0.07,
+        "tau": 0.05,
         "lr": 2e-6,
         "num_warmup_steps": 0,
         "max_epochs": 100,
         "early_stopping_patience": 20,
         "export_path": "trained_models/bienc_cnetp_pretrained",
         "printout_freq": 100,
-        "checkpoint_path": "",
-        "load_checkpoint": -1,
         "lr_policy": null,
-        "lr_decay_iters": 15,
         "weight_decay": 0.01
     }
 }
