@@ -126,28 +126,23 @@ def train_single_epoch(
 
         epoch_loss += batch_loss.item()
 
-        if step % 100 == 0 and not step == 0:
+        if step % 10 == 0 and not step == 0:
 
-            batch_labels = batch_labels.reshape(-1, 1).detach().cpu().numpy()
+            # batch_labels = batch_labels.reshape(-1, 1).detach().cpu().numpy()
 
-            batch_logits = (
-                torch.round(torch.sigmoid(batch_logits))
-                .reshape(-1, 1)
-                .detach()
-                .cpu()
-                .numpy()
-            )
+            # batch_logits = (
+            #     torch.round(torch.sigmoid(batch_logits))
+            #     .reshape(-1, 1)
+            #     .detach()
+            #     .cpu()
+            #     .numpy()
+            # )
 
-            batch_scores = compute_scores(batch_labels, batch_logits)
+            # batch_scores = compute_scores(batch_labels, batch_logits)
 
             log.info(
-                f"Batch {step} of {len(train_dataloader)} ----> Batch Loss : {batch_loss}, Batch Binary F1 {batch_scores.get('binary_f1')}"
+                f"Batch {step} of {len(train_dataloader)} ----> Batch Loss : {batch_loss}"
             )
-            print(
-                f"Batch {step} of {len(train_dataloader)} ----> Batch Loss : {batch_loss}, Batch Binary F1 {batch_scores.get('binary_f1')}",
-                flush=True,
-            )
-            print(flush=True)
 
     avg_epoch_loss = epoch_loss / len(train_dataloader)
 
