@@ -12,9 +12,9 @@
 ##SBATCH --partition gpu,gpu_v100
 ##SBATCH --gres=gpu:1
 
-#SBATCH --mem=7G
+#SBATCH --mem=5G
 
-#SBATCH --partition dev
+#SBATCH --partition compute
 #SBATCH --time 0-01:00:00
 
 
