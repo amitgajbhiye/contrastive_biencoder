@@ -13,7 +13,7 @@
 ##SBATCH --gres=gpu:1
 #SBATCH --mem=10G
 
-#SBATCH --partition dev
+#SBATCH --partition compute
 
 #SBATCH --time 0-01:00:00
 
