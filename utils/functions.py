@@ -263,7 +263,7 @@ def compute_scores(labels, preds):
 def calculate_contrastive_loss(
     dataset, batch, concept_embedding, property_embedding, loss_fn, device
 ):
-    embed_all = torch.cat(concept_embedding, property_embedding, dim=0).to(device)
+    embed_all = torch.cat([concept_embedding, property_embedding], dim=0).to(device)
 
     log.info(f"In calculate_contrastive_loss function")
     log.info(f"concept_embedding.shape : {concept_embedding.shape}")
