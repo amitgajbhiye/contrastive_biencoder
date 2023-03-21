@@ -265,15 +265,15 @@ def calculate_contrastive_loss(
 ):
     embed_all = torch.cat([concept_embedding, property_embedding], dim=0).to(device)
 
-    log.info(f"In calculate_contrastive_loss function")
-    log.info(f"concept_embedding.shape : {concept_embedding.shape}")
-    log.info(f"property_embedding.shape : {property_embedding.shape}")
-    log.info(f"embed_all.shape : {embed_all.shape}")
+    # log.info(f"In calculate_contrastive_loss function")
+    # log.info(f"concept_embedding.shape : {concept_embedding.shape}")
+    # log.info(f"property_embedding.shape : {property_embedding.shape}")
+    # log.info(f"embed_all.shape : {embed_all.shape}")
 
     indices = torch.arange(0, concept_embedding.size(0), device=device)
     labels = torch.cat((indices, indices), dim=0)
 
-    log.info(f"Labels : {labels}")
+    # log.info(f"Labels : {labels}")
 
     loss = loss_fn(embed_all, labels)
 

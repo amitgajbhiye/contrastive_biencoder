@@ -27,7 +27,7 @@ class ConceptPropertyDataset(Dataset):
                 sep="\t",
                 header=None,
                 names=["concept", "property"],
-            )[0:2000]
+            )[0:2500]
 
             self.data_df.drop_duplicates(inplace=True)
             self.data_df.dropna(inplace=True)
@@ -42,7 +42,7 @@ class ConceptPropertyDataset(Dataset):
                 sep="\t",
                 header=None,
                 names=["concept", "property"],
-            )[0:1000]
+            )[0:400]
 
             self.data_df.drop_duplicates(inplace=True)
             self.data_df.dropna(inplace=True)
