@@ -1,2 +1,4 @@
-# biencoder_concept_property
-biencoder_concept_property_model
+# BiEncoder Model
+
+This is the BiEncoder model trained with contrastive loss
+

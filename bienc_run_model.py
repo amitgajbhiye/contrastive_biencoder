@@ -10,6 +10,7 @@ import torch.nn as nn
 from tqdm.std import trange
 from pprint import pprint
 from transformers import AdamW, get_linear_schedule_with_warmup
+from pytorch_metric_learning import losses, miners
 
 from utils.functions import (
     compute_scores,
@@ -17,7 +18,8 @@ from utils.functions import (
     create_model,
     read_config,
     set_seed,
-    calculate_loss,
+    calculate_cross_entropy_loss,
+    calculate_contrastive_loss,
 )
 
 log = logging.getLogger(__name__)
@@ -92,16 +94,26 @@ def train_single_epoch(
             property_token_type_id=property_token_type_id,
         )
 
-        batch_loss, batch_logits, batch_labels = calculate_loss(
-            dataset=train_dataset,
-            batch=batch,
-            concept_embedding=concept_embedding,
-            property_embedding=property_embedding,
-            loss_fn=loss_fn,
-            device=device,
-        )
+        if isinstance(loss_fn, nn.BCEWithLogitsLoss):
 
-        epoch_loss += batch_loss.item()
+            batch_loss, batch_logits, batch_labels = calculate_cross_entropy_loss(
+                dataset=train_dataset,
+                batch=batch,
+                concept_embedding=concept_embedding,
+                property_embedding=property_embedding,
+                loss_fn=loss_fn,
+                device=device,
+            )
+        elif isinstance(loss_fn, losses.NTXentLoss):
+
+            batch_loss = calculate_contrastive_loss(
+                dataset=train_dataset,
+                batch=batch,
+                concept_embedding=concept_embedding,
+                property_embedding=property_embedding,
+                loss_fn=loss_fn,
+                device=device,
+            )
 
         batch_loss.backward()
         torch.cuda.empty_cache()
@@ -111,6 +123,8 @@ def train_single_epoch(
         optimizer.step()
         scheduler.step()
         torch.cuda.empty_cache()
+
+        epoch_loss += batch_loss.item()
 
         if step % 100 == 0 and not step == 0:
 
@@ -187,36 +201,57 @@ def evaluate(model, valid_dataset, valid_dataloader, loss_fn, device):
                 property_token_type_id=property_token_type_id,
             )
 
-        batch_loss, batch_logits, batch_labels = calculate_loss(
-            dataset=valid_dataset,
-            batch=batch,
-            concept_embedding=concept_embedding,
-            property_embedding=property_embedding,
-            loss_fn=loss_fn,
-            device=device,
-        )  # dataset, batch, concept_embedding, property_embedding, loss_fn, device
+        # batch_loss, batch_logits, batch_labels = calculate_loss(
+        #     dataset=valid_dataset,
+        #     batch=batch,
+        #     concept_embedding=concept_embedding,
+        #     property_embedding=property_embedding,
+        #     loss_fn=loss_fn,
+        #     device=device,
+        # )  # dataset, batch, concept_embedding, property_embedding, loss_fn, device
 
-        epoch_logits.append(batch_logits)
-        epoch_labels.append(batch_labels)
+        if isinstance(loss_fn, nn.BCEWithLogitsLoss):
+
+            batch_loss, batch_logits, batch_labels = calculate_cross_entropy_loss(
+                dataset=valid_dataset,
+                batch=batch,
+                concept_embedding=concept_embedding,
+                property_embedding=property_embedding,
+                loss_fn=loss_fn,
+                device=device,
+            )
+        elif isinstance(loss_fn, losses.NTXentLoss):
+
+            batch_loss = calculate_contrastive_loss(
+                dataset=valid_dataset,
+                batch=batch,
+                concept_embedding=concept_embedding,
+                property_embedding=property_embedding,
+                loss_fn=loss_fn,
+                device=device,
+            )
+
+        # epoch_logits.append(batch_logits)
+        # epoch_labels.append(batch_labels)
 
         val_loss += batch_loss.item()
         torch.cuda.empty_cache()
 
-    epoch_logits = (
-        torch.round(torch.sigmoid(torch.vstack(epoch_logits)))
-        .reshape(-1, 1)
-        .detach()
-        .cpu()
-        .numpy()
-    )
+    # epoch_logits = (
+    #     torch.round(torch.sigmoid(torch.vstack(epoch_logits)))
+    #     .reshape(-1, 1)
+    #     .detach()
+    #     .cpu()
+    #     .numpy()
+    # )
 
-    epoch_labels = torch.vstack(epoch_labels).reshape(-1, 1).detach().cpu().numpy()
+    # epoch_labels = torch.vstack(epoch_labels).reshape(-1, 1).detach().cpu().numpy()
 
-    scores = compute_scores(epoch_labels, epoch_logits)
+    # scores = compute_scores(epoch_labels, epoch_logits)
 
     avg_val_loss = val_loss / len(valid_dataloader)
 
-    return avg_val_loss, scores
+    return avg_val_loss
 
 
 def train(config):
@@ -241,7 +276,16 @@ def train(config):
 
     weight_decay = config["training_params"]["weight_decay"]
 
-    loss_fn = nn.BCEWithLogitsLoss()
+    loss_function = config["training_params"]["loss_function"]
+
+    log.info(f"Loss Function Name  : {loss_function}")
+
+    if loss_function == "cross_entropy":
+        loss_fn = nn.BCEWithLogitsLoss()
+    elif loss_function == "infonce":
+
+        tau = config["training_params"]["tau"]
+        loss_fn = losses.NTXentLoss(temperature=tau)
 
     optimizer = AdamW(
         model.parameters(),
@@ -270,6 +314,7 @@ def train(config):
     )
 
     best_val_f1 = 0.0
+    best_val_loss = float("-inf")
     start_epoch = 1
 
     epoch_count = []
@@ -306,7 +351,7 @@ def train(config):
         log.info(f"Running Validation ....")
         print(flush=True)
 
-        valid_loss, valid_scores = evaluate(
+        valid_loss = evaluate(
             model=model,
             valid_dataset=valid_dataset,
             valid_dataloader=valid_dataloader,
@@ -321,13 +366,24 @@ def train(config):
         log.info(f"  Average validation Loss: {valid_loss}")
         print(flush=True)
 
-        val_binary_f1 = valid_scores.get("binary_f1")
+        # val_binary_f1 = valid_scores.get("binary_f1")
 
-        if val_binary_f1 < best_val_f1:
+        if valid_loss > best_val_loss:
             patience_counter += 1
+            log.info(
+                f"Current validation loss: {valid_loss} is greater than the previous best loss: {best_val_loss}"
+            )
+            log.info("Incrementing Patience Counter")
         else:
             patience_counter = 0
-            best_val_f1 = val_binary_f1
+
+            log.info(
+                f"Current epoch {epoch}, validation loss {valid_loss} is less than the previous best loss : {best_val_loss}"
+            )
+            log.info(f"Resetting the Patience Counter to {patience_counter}")
+
+            # best_val_f1 = val_binary_f1
+            best_val_loss = valid_loss
 
             best_model_path = os.path.join(
                 config["training_params"].get("export_path"),
@@ -341,17 +397,13 @@ def train(config):
                 model.state_dict(), best_model_path,
             )
 
-            log.info(f"Best model at epoch: {epoch}, Binary F1: {val_binary_f1}")
+            log.info(f"Best model at epoch: {epoch}, Validation Loss : {valid_loss}")
             log.info(f"The model is saved in : {best_model_path}")
 
         log.info("Validation Scores")
-        log.info(f" Best Validation F1 yet : {best_val_f1}")
-
-        for key, value in valid_scores.items():
-            log.info(f"{key} : {value}")
+        log.info(f" Best Validation Loss Yet : {best_val_loss}")
 
         print(flush=True)
-
         print("train_losses", flush=True)
         print(train_losses, flush=True)
         print("valid_losses", flush=True)
@@ -432,7 +484,7 @@ def test_best_model(config):
 
 if __name__ == "__main__":
 
-    set_seed(12345)
+    set_seed(1)
 
     parser = argparse.ArgumentParser(description="Biencoder Concept Property Model")
 

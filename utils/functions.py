@@ -260,7 +260,29 @@ def compute_scores(labels, preds):
     return scores
 
 
-def calculate_loss(
+def calculate_contrastive_loss(
+    dataset, batch, concept_embedding, property_embedding, loss_fn, device
+):
+    embed_all = torch.cat(concept_embedding, property_embedding, dim=0).to(device)
+
+    log.info(f"In calculate_contrastive_loss function")
+    log.info(f"concept_embedding.shape : {concept_embedding.shape}")
+    log.info(f"property_embedding.shape : {property_embedding.shape}")
+    log.info(f"embed_all.shape : {embed_all.shape}")
+
+    indices = torch.arange(0, concept_embedding.size(0), device=device)
+    labels = torch.cat((indices, indices), dim=0)
+
+    log.info(f"Labels : {labels}")
+
+    loss = loss_fn(embed_all, labels)
+
+    log.info(f"Loss value in calculate_contrastive_loss function:  {loss.item()}")
+
+    return loss
+
+
+def calculate_cross_entropy_loss(
     dataset, batch, concept_embedding, property_embedding, loss_fn, device
 ):
 
