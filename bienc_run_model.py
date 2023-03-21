@@ -144,7 +144,7 @@ def train_single_epoch(
                 f"Batch {step} of {len(train_dataloader)} ----> Batch Loss : {batch_loss}"
             )
 
-    avg_epoch_loss = epoch_loss / len(train_dataloader)
+    avg_epoch_loss = round(epoch_loss / len(train_dataloader), 4)
 
     return avg_epoch_loss
 
@@ -244,7 +244,7 @@ def evaluate(model, valid_dataset, valid_dataloader, loss_fn, device):
 
     # scores = compute_scores(epoch_labels, epoch_logits)
 
-    avg_val_loss = val_loss / len(valid_dataloader)
+    avg_val_loss = round(val_loss / len(valid_dataloader), 4)
 
     return avg_val_loss
 
@@ -309,7 +309,7 @@ def train(config):
     )
 
     best_val_f1 = 0.0
-    best_val_loss = float("-inf")
+    best_val_loss = float("inf")
     start_epoch = 1
 
     epoch_count = []

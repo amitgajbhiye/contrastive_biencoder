@@ -277,7 +277,7 @@ def calculate_contrastive_loss(
 
     loss = loss_fn(embed_all, labels)
 
-    log.info(f"Loss value in calculate_contrastive_loss function:  {loss.item()}")
+    # log.info(f"Loss value in calculate_contrastive_loss function:  {loss.item()}")
 
     return loss
 
