@@ -120,7 +120,7 @@ def train_single_epoch(
         if step % 100 == 0 and not step == 0:
 
             log.info(
-                f"Batch {step} of {len(train_dataloader)} ----> Train Batch Loss : {round(batch_loss, 4)}"
+                f"Batch {step} of {len(train_dataloader)} ----> Train Batch Loss : {round(batch_loss.item(), 4)}"
             )
 
     avg_epoch_loss = round(epoch_loss / len(train_dataloader), 4)
