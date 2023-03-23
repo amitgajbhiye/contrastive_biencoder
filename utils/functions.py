@@ -302,7 +302,7 @@ def calculate_ntxent_loss(
     print("Batch Properties", len(batch[1]), flush=True)
     print(batch[1], flush=True)
 
-    loss = 0.0
+    total_batch_loss = 0.0
 
     for i in range(len(concept_id_list_for_batch)):
 
@@ -369,11 +369,11 @@ def calculate_ntxent_loss(
         print(f"Loss for concept : {loss_for_concept}", flush=True)
         print(flush=True)
 
-        total_loss += loss_for_concept
+        total_batch_loss += loss_for_concept
 
-    print(f"Total Loss for batch : {total_loss}", flush=True)
+    print(f"Total Loss for batch : {total_batch_loss}", flush=True)
 
-    return loss
+    return total_batch_loss
 
 
 def calculate_cross_entropy_loss(
