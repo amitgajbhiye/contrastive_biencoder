@@ -3,7 +3,7 @@
 #SBATCH --job-name=contraBienc
 
 #SBATCH --output=logs/pretrain/out_bienc_new_contra_bert_base_cnetp_pretrain.txt
-#SBATCH --error=logs/pretrain/err_bienc_contra_bert_base_cnetp_pretrain.txt
+#SBATCH --error=logs/pretrain/err_bienc_new_contra_bert_base_cnetp_pretrain.txt
 
 #SBATCH --tasks-per-node=5
 #SBATCH --ntasks=5
@@ -13,7 +13,7 @@
 #SBATCH --gres=gpu:1
 #SBATCH --mem=10G
 
-#SBATCH --time 2-00:00:00
+#SBATCH --time 0-01:00:00
 
 conda activate venv
 
