@@ -44,14 +44,14 @@ def train_single_epoch(
 
         concepts_batch, property_batch = train_dataset.add_context(batch)
 
-        if print_freq < 1:
-            log.info(f"concepts_batch : {concepts_batch}")
-            log.info(f"property_batch : {property_batch}")
+        # if print_freq < 1:
+        #     log.info(f"concepts_batch : {concepts_batch}")
+        #     log.info(f"property_batch : {property_batch}")
 
-            print(f"concepts_batch : {concepts_batch}", flush=True)
-            print(f"property_batch : {property_batch}", flush=True)
+        #     print(f"concepts_batch : {concepts_batch}", flush=True)
+        #     print(f"property_batch : {property_batch}", flush=True)
 
-            print_freq += 1
+        #     print_freq += 1
 
         ids_dict = train_dataset.tokenize(concepts_batch, property_batch)
 
@@ -356,6 +356,9 @@ def train(config):
 
         log.info("Validation Scores")
         log.info(f" Best Validation Loss Yet : {best_val_loss}")
+
+        log.info(f"train_losses : {train_losses}")
+        log.info(f"valid_losses : {valid_losses}")
 
         print(flush=True)
         print("train_losses", flush=True)
