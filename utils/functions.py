@@ -362,7 +362,7 @@ def calculate_ntxent_loss(
         label = torch.arange(0, batch_for_concept.size(0), dtype=int, device=device)
         label[1] = 0
 
-        print("concept_embed", concept_embed.size(), lush=True)
+        print("concept_embed", concept_embed.size(), flush=True)
         print(
             "positive_property_embed", positive_property_embed.size(), flush=True,
         )
