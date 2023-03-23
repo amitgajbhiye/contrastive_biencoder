@@ -2,7 +2,7 @@
 
 #SBATCH --job-name=contraBienc
 
-#SBATCH --output=logs/pretrain/out_bienc_contra_bert_base_cnetp_pretrain.txt
+#SBATCH --output=logs/pretrain/out_bienc_new_contra_bert_base_cnetp_pretrain.txt
 #SBATCH --error=logs/pretrain/err_bienc_contra_bert_base_cnetp_pretrain.txt
 
 #SBATCH --tasks-per-node=5

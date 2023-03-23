@@ -282,6 +282,83 @@ def calculate_contrastive_loss(
     return loss
 
 
+def calculate_ntxent_loss(
+    dataset, batch, concept_embedding, property_embedding, loss_fn, device
+):
+
+    concept_id_list_for_batch = torch.tensor(
+        [dataset.concept2idx[concept] for concept in batch[0]], device=device
+    )
+    property_id_list_for_batch = torch.tensor(
+        [dataset.property2idx[prop] for prop in batch[1]], device=device
+    )
+
+    print(flush=True)
+    print("concept_id_list_for_batch :", concept_id_list_for_batch, flush=True)
+    print("property_id_list_for_batch :", property_id_list_for_batch, flush=True)
+
+    print("Batch Concepts", len(batch[0]), flush=True)
+    print(batch[0], flush=True)
+    print("Batch Properties", len(batch[1]), flush=True)
+    print(batch[1], flush=True)
+
+    loss = 0.0
+
+    for i in range(len(concept_id_list_for_batch)):
+
+        concept_id = concept_id_list_for_batch[i]
+
+        print(f"Processing concept ID : {concept_id}")
+
+        # Extracting the property of the concept at the whole dataset level.
+        property_id_list_for_concept = torch.tensor(
+            dataset.con_pro_dict[concept_id.item()], device=device
+        )
+
+        # Extracting the negative property by excluding the properties that the concept may have at the  whole dataset level
+        negative_property_id_for_concept = torch.tensor(
+            [
+                x
+                for x in property_id_list_for_batch
+                if x not in property_id_list_for_concept
+            ],
+            device=device,
+        )
+
+        positive_property_for_concept_mask = torch.tensor(
+            [
+                [1] if x in negative_property_id_for_concept else [0]
+                for x in property_id_list_for_batch
+            ],
+            device=device,
+        )
+
+        neg_property_embedding = torch.mul(
+            property_embedding, positive_property_for_concept_mask
+        )
+
+        concept_embed = concept_embedding[i]
+        positive_property_embed = property_embedding[i]
+
+        batch_for_concept = torch.cat(
+            (concept_embed, positive_property_embed, neg_property_embedding),
+            dim=0,
+            device=device,
+        )
+        label = torch.arange(0, batch_for_concept.size(0), dtype=int, device=device)
+        label[1] = 0
+
+        print("concept_embed", concept_embed)
+        print("positive_property_embed", positive_property_embed)
+        print("label", label)
+        print("batch_for_concept", batch_for_concept)
+
+        loss_for_concept = loss_fn(batch_for_concept, label)
+        total_loss += loss_for_concept
+
+    return loss
+
+
 def calculate_cross_entropy_loss(
     dataset, batch, concept_embedding, property_embedding, loss_fn, device
 ):

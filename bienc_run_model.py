@@ -20,6 +20,7 @@ from utils.functions import (
     set_seed,
     calculate_cross_entropy_loss,
     calculate_contrastive_loss,
+    calculate_ntxent_loss,
 )
 
 log = logging.getLogger(__name__)
@@ -97,7 +98,7 @@ def train_single_epoch(
             )
         elif isinstance(loss_fn, losses.NTXentLoss):
 
-            batch_loss = calculate_contrastive_loss(
+            batch_loss = calculate_ntxent_loss(
                 dataset=train_dataset,
                 batch=batch,
                 concept_embedding=concept_embedding,

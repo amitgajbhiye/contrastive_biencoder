@@ -1,5 +1,5 @@
 {
-    "experiment_name": "bienc_contra_bert_base_cnetp_pretrain",
+    "experiment_name": "bienc_new_contra_bert_base_cnetp_pretrain",
     "log_dirctory": "pretrain",
     "dataset_params": {
         "dataset_name": "cnetp",
@@ -13,13 +13,13 @@
         "add_context": true,
         "context_num": 6,
         "loader_params": {
-            "batch_size": 32,
+            "batch_size": 16,
             "num_workers": 4,
             "pin_memory": true
         }
     },
     "model_params": {
-        "model_name": "bienc_contra_bert_base_cnetp_pretrain.pt",
+        "model_name": "bienc_new_contra_bert_base_cnetp_pretrain.pt",
         "hf_checkpoint_name": "bert-base-uncased",
         "hf_model_path": "/scratch/c.scmag3/hf_pretrained_models/bert_base_uncased/model",
         "vector_strategy": "mask_token"
@@ -30,7 +30,7 @@
         "lr": 2e-6,
         "num_warmup_steps": 0,
         "max_epochs": 100,
-        "early_stopping_patience": 20,
+        "early_stopping_patience": 10,
         "export_path": "trained_models/bienc_cnetp_pretrained",
         "printout_freq": 100,
         "lr_policy": null,
