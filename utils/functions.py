@@ -341,6 +341,10 @@ def calculate_ntxent_loss(
         concept_embed = concept_embedding[i].unsqueeze(0)
         positive_property_embed = property_embedding[i].unsqueeze(0)
 
+        print(f"concept_embed.shape : {concept_embed.shape}")
+        print(f"positive_property_embed.shape : {positive_property_embed.shape}")
+        print(f"neg_property_embedding.shape : {neg_property_embedding.shape}")
+
         batch_for_concept = torch.cat(
             (concept_embed, positive_property_embed, neg_property_embedding),
             dim=0,
