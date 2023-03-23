@@ -336,6 +336,10 @@ def calculate_ntxent_loss(
             device=device,
         )
 
+        print(f"property_id_list_for_batch : {property_id_list_for_batch}")
+        print(f"property_id_list_for_concept : {property_id_list_for_concept}")
+        print(f"negative_property_id_for_concept : {negative_property_id_for_concept}")
+
         positive_property_for_concept_mask = torch.tensor(
             [
                 [1] if x in negative_property_id_for_concept else [0]
