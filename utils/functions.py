@@ -308,7 +308,8 @@ def calculate_ntxent_loss(
 
         concept_id = concept_id_list_for_batch[i]
 
-        print(f"Processing concept ID : {concept_id}")
+        print(flush=True)
+        print(f"Processing concept ID : {concept_id}", flush=True)
 
         # Extracting the property of the concept at the whole dataset level.
         property_id_list_for_concept = torch.tensor(
@@ -337,8 +338,8 @@ def calculate_ntxent_loss(
             property_embedding, positive_property_for_concept_mask
         )
 
-        concept_embed = concept_embedding[i]
-        positive_property_embed = property_embedding[i]
+        concept_embed = concept_embedding[i].unsqueeze(0)
+        positive_property_embed = property_embedding[i].unsqueeze(0)
 
         batch_for_concept = torch.cat(
             (concept_embed, positive_property_embed, neg_property_embedding),
@@ -348,13 +349,26 @@ def calculate_ntxent_loss(
         label = torch.arange(0, batch_for_concept.size(0), dtype=int, device=device)
         label[1] = 0
 
-        print("concept_embed", concept_embed)
-        print("positive_property_embed", positive_property_embed)
-        print("label", label)
-        print("batch_for_concept", batch_for_concept)
+        print("concept_embed", concept_embed.size(), concept_embed, flush=True)
+        print(
+            "positive_property_embed",
+            positive_property_embed.size(),
+            positive_property_embed,
+            flush=True,
+        )
+        print("label", label.size(), label, flush=True)
+        print(
+            "batch_for_concept", batch_for_concept.size(), batch_for_concept, flush=True
+        )
 
         loss_for_concept = loss_fn(batch_for_concept, label)
+
+        print(f"Loss for concept : {loss_for_concept}", flush=True)
+        print(flush=True)
+
         total_loss += loss_for_concept
+
+    print(f"Total Loss for batch : {total_loss}", flush=True)
 
     return loss
 
