@@ -294,8 +294,18 @@ def calculate_ntxent_loss(
     )
 
     print(flush=True)
-    print("concept_id_list_for_batch :", concept_id_list_for_batch, flush=True)
-    print("property_id_list_for_batch :", property_id_list_for_batch, flush=True)
+    print(
+        "concept_id_list_for_batch :",
+        len(concept_id_list_for_batch),
+        concept_id_list_for_batch,
+        flush=True,
+    )
+    print(
+        "property_id_list_for_batch :",
+        len(property_id_list_for_batch),
+        property_id_list_for_batch,
+        flush=True,
+    )
 
     print("Batch Concepts", len(batch[0]), flush=True)
     print(batch[0], flush=True)
@@ -352,17 +362,12 @@ def calculate_ntxent_loss(
         label = torch.arange(0, batch_for_concept.size(0), dtype=int, device=device)
         label[1] = 0
 
-        print("concept_embed", concept_embed.size(), concept_embed, flush=True)
+        print("concept_embed", concept_embed.size(), lush=True)
         print(
-            "positive_property_embed",
-            positive_property_embed.size(),
-            positive_property_embed,
-            flush=True,
+            "positive_property_embed", positive_property_embed.size(), flush=True,
         )
         print("label", label.size(), label, flush=True)
-        print(
-            "batch_for_concept", batch_for_concept.size(), batch_for_concept, flush=True
-        )
+        print("batch_for_concept", batch_for_concept.size(), flush=True)
 
         loss_for_concept = loss_fn(batch_for_concept, label)
 
