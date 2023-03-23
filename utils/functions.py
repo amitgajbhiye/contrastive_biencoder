@@ -319,7 +319,7 @@ def calculate_ntxent_loss(
         concept_id = concept_id_list_for_batch[i]
 
         print(flush=True)
-        print(f"Processing concept ID : {concept_id}", flush=True)
+        print(f"Processing concept ID : {i}, {concept_id}", flush=True)
 
         # Extracting the property of the concept at the whole dataset level.
         property_id_list_for_concept = torch.tensor(
@@ -342,6 +342,12 @@ def calculate_ntxent_loss(
                 for x in property_id_list_for_batch
             ],
             device=device,
+        )
+
+        positive_property_for_concept_mask[i] = 0
+
+        print(
+            f"i, positive_property_for_concept_mask : {i} , {positive_property_for_concept_mask}"
         )
 
         neg_property_embedding = torch.mul(
