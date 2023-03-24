@@ -375,8 +375,8 @@ def calculate_infonce_loss(
         )
 
         loss_for_concept = loss_fn(
-            query=concept_embedding[i],
-            positive_key=property_embedding[i],
+            query=concept_embedding[i].unsqueeze(0),
+            positive_key=property_embedding[i].unsqueeze(0),
             negative_keys=neg_property_embedding,
         )
 
