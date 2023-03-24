@@ -11,6 +11,7 @@ from tqdm.std import trange
 from pprint import pprint
 from transformers import AdamW, get_linear_schedule_with_warmup
 from pytorch_metric_learning import losses, miners
+from info_nce import InfoNCE
 
 from utils.functions import (
     compute_scores,
@@ -21,6 +22,7 @@ from utils.functions import (
     calculate_cross_entropy_loss,
     calculate_contrastive_loss,
     calculate_ntxent_loss,
+    calculate_infonce_loss,
 )
 
 log = logging.getLogger(__name__)
@@ -99,6 +101,17 @@ def train_single_epoch(
         elif isinstance(loss_fn, losses.NTXentLoss):
 
             batch_loss = calculate_ntxent_loss(
+                dataset=train_dataset,
+                batch=batch,
+                concept_embedding=concept_embedding,
+                property_embedding=property_embedding,
+                loss_fn=loss_fn,
+                device=device,
+            )
+
+        elif isinstance(loss_fn, InfoNCE):
+
+            batch_loss = calculate_infonce_loss(
                 dataset=train_dataset,
                 batch=batch,
                 concept_embedding=concept_embedding,
@@ -197,8 +210,16 @@ def evaluate(model, valid_dataset, valid_dataloader, loss_fn, device):
                 device=device,
             )
 
-        # epoch_logits.append(batch_logits)
-        # epoch_labels.append(batch_labels)
+        elif isinstance(loss_fn, InfoNCE):
+
+            batch_loss = calculate_infonce_loss(
+                dataset=valid_dataset,
+                batch=batch,
+                concept_embedding=concept_embedding,
+                property_embedding=property_embedding,
+                loss_fn=loss_fn,
+                device=device,
+            )
 
         val_loss += batch_loss.item()
         torch.cuda.empty_cache()
@@ -236,10 +257,12 @@ def train(config):
 
     if loss_function == "cross_entropy":
         loss_fn = nn.BCEWithLogitsLoss()
-    elif loss_function == "infonce":
 
+    elif loss_function == "infonce":
         tau = config["training_params"]["tau"]
-        loss_fn = losses.NTXentLoss(temperature=tau)
+
+        # loss_fn = losses.NTXentLoss(temperature=tau)
+        loss_fn = InfoNCE(temperature=tau, reduction="mean", negative_mode="unpaired")
 
     optimizer = AdamW(
         model.parameters(),
