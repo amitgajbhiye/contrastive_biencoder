@@ -293,6 +293,7 @@ def calculate_infonce_loss(
         [dataset.property2idx[prop] for prop in batch[1]], device=device
     )
 
+    print(flush=True)
     print("concept_id_list_for_batch :", concept_id_list_for_batch)
     print("property_id_list_for_batch :", property_id_list_for_batch)
 
@@ -303,6 +304,7 @@ def calculate_infonce_loss(
         concept_id = concept_id_list_for_batch[i]
         property_id = property_id_list_for_batch[i]
 
+        print(flush=True)
         print(f"Processing:", flush=True)
         print(f"concept_id : {concept_id}", flush=True)
         print(f"property_id : {property_id}", flush=True)
@@ -334,7 +336,8 @@ def calculate_infonce_loss(
         # Adding the positive property to the concept so that in the denominator of the loss function calculation
         # it contains the positive property.
         negative_property_id_for_concept = torch.cat(
-            (torch.tensor(property_id), negative_property_id_for_concept), dim=0
+            (torch.tensor(property_id).unsqueeze(0), negative_property_id_for_concept),
+            dim=0,
         )
 
         print(
