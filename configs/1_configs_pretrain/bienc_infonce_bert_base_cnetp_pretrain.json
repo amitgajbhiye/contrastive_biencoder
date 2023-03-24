@@ -8,12 +8,12 @@
         "test_file_path": null,
         "hf_tokenizer_name": "bert-base-uncased",
         "hf_tokenizer_path": "/scratch/c.scmag3/hf_pretrained_models/bert_base_uncased/tokenizer",
-        "concept_max_len": 32,
-        "property_max_len": 32,
+        "concept_max_len": 20,
+        "property_max_len": 20,
         "add_context": true,
         "context_num": 6,
         "loader_params": {
-            "batch_size": 8,
+            "batch_size": 32,
             "num_workers": 4,
             "pin_memory": true
         }
@@ -29,12 +29,13 @@
         "loss_function": "infonce",
         "tau": 0.05,
         "lr": 2e-6,
+        "warmup_ratio": 0.10,
         "num_warmup_steps": 0,
         "max_epochs": 100,
-        "early_stopping_patience": 10,
+        "early_stopping_patience": 60,
         "export_path": "trained_models/bienc_cnetp_pretrained",
         "printout_freq": 100,
-        "lr_policy": null,
+        "lr_policy": "warmup",
         "weight_decay": 0.01
     }
 }

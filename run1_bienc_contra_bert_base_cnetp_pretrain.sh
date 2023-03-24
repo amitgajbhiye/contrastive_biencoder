@@ -1,6 +1,6 @@
 #!/bin/bash --login
 
-#SBATCH --job-name=infonce
+#SBATCH --job-name=1Run
 
 #SBATCH --output=logs/pretrain/out_bienc_bienc_infonce_bert_base_cnetp_pretrain.txt
 #SBATCH --error=logs/pretrain/err_bienc_bienc_infonce_bert_base_cnetp_pretrain.txt
@@ -9,7 +9,7 @@
 #SBATCH --ntasks=5
 #SBATCH --account scw1858
 
-#SBATCH --partition gpu,gpu_v100
+#SBATCH --partition gpu_v100
 #SBATCH --gres=gpu:1
 #SBATCH --mem=10G
 

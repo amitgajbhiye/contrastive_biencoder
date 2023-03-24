@@ -340,6 +340,17 @@ def train(config, trial=None):
         log.info(f"  Average validation Loss: {valid_loss}")
         print(flush=True)
 
+        print(flush=True)
+        print("train_losses", flush=True)
+        print(train_losses, flush=True)
+        print("valid_losses", flush=True)
+        print(valid_losses, flush=True)
+
+        log.info("train_losses")
+        log.info(train_losses)
+        log.info("valid_losses")
+        log.info(valid_losses)
+
         trial.report(valid_loss, epoch)
 
         if trial.should_prune():
