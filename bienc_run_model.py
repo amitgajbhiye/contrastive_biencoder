@@ -3,6 +3,7 @@ import logging
 import os
 import math
 import optuna
+from optuna.trial import TrialState
 
 
 import numpy as np
@@ -230,7 +231,7 @@ def evaluate(model, valid_dataset, valid_dataloader, loss_fn, device):
     return avg_val_loss
 
 
-def train(config):
+def train(config, trial=None):
 
     log.info("Initialising datasets...")
 
@@ -344,59 +345,64 @@ def train(config):
         log.info(f"  Average validation Loss: {valid_loss}")
         print(flush=True)
 
-        # val_binary_f1 = valid_scores.get("binary_f1")
+        trial.report(valid_loss, epoch)
 
-        if valid_loss > best_val_loss:
-            patience_counter += 1
-            log.info(
-                f"Current validation loss: {valid_loss} is greater than the previous best loss: {best_val_loss}"
-            )
-            log.info("Incrementing Patience Counter")
-        else:
-            patience_counter = 0
+        if trial.should_prune():
+            raise optuna.exceptions.TrialPruned()
 
-            log.info(
-                f"Current epoch {epoch}, validation loss {valid_loss} is less than the previous best loss : {best_val_loss}"
-            )
-            log.info(f"Resetting the Patience Counter to {patience_counter}")
+    return valid_loss
 
-            # best_val_f1 = val_binary_f1
-            best_val_loss = valid_loss
+    # if valid_loss > best_val_loss:
+    #     patience_counter += 1
+    #     log.info(
+    #         f"Current validation loss: {valid_loss} is greater than the previous best loss: {best_val_loss}"
+    #     )
+    #     log.info("Incrementing Patience Counter")
+    # else:
+    #     patience_counter = 0
 
-            best_model_path = os.path.join(
-                config["training_params"].get("export_path"),
-                config["model_params"].get("model_name"),
-            )
+    #     log.info(
+    #         f"Current epoch {epoch}, validation loss {valid_loss} is less than the previous best loss : {best_val_loss}"
+    #     )
+    #     log.info(f"Resetting the Patience Counter to {patience_counter}")
 
-            log.info(f"patience_counter : {patience_counter}")
-            log.info(f"best_model_path : {best_model_path}")
+    #     # best_val_f1 = val_binary_f1
+    #     best_val_loss = valid_loss
 
-            torch.save(
-                model.state_dict(), best_model_path,
-            )
+    #     best_model_path = os.path.join(
+    #         config["training_params"].get("export_path"),
+    #         config["model_params"].get("model_name"),
+    #     )
 
-            log.info(f"Best model at epoch: {epoch}, Validation Loss : {valid_loss}")
-            log.info(f"The model is saved in : {best_model_path}")
+    #     log.info(f"patience_counter : {patience_counter}")
+    #     log.info(f"best_model_path : {best_model_path}")
 
-        log.info("Validation Scores")
-        log.info(f" Best Validation Loss Yet : {best_val_loss}")
+    #     torch.save(
+    #         model.state_dict(), best_model_path,
+    #     )
 
-        log.info(f"train_losses : {train_losses}")
-        log.info(f"valid_losses : {valid_losses}")
+    #     log.info(f"Best model at epoch: {epoch}, Validation Loss : {valid_loss}")
+    #     log.info(f"The model is saved in : {best_model_path}")
 
-        print(flush=True)
-        print("train_losses", flush=True)
-        print(train_losses, flush=True)
-        print("valid_losses", flush=True)
-        print(valid_losses, flush=True)
+    # log.info("Validation Scores")
+    # log.info(f" Best Validation Loss Yet : {best_val_loss}")
 
-        if patience_counter >= config["training_params"].get("early_stopping_patience"):
-            log.info(
-                f"Early Stopping ---> Maximum Patience - {config['training_params'].get('early_stopping_patience')} Reached !!"
-            )
-            break
+    # log.info(f"train_losses : {train_losses}")
+    # log.info(f"valid_losses : {valid_losses}")
 
-        print(flush=True)
+    # print(flush=True)
+    # print("train_losses", flush=True)
+    # print(train_losses, flush=True)
+    # print("valid_losses", flush=True)
+    # print(valid_losses, flush=True)
+
+    # if patience_counter >= config["training_params"].get("early_stopping_patience"):
+    #     log.info(
+    #         f"Early Stopping ---> Maximum Patience - {config['training_params'].get('early_stopping_patience')} Reached !!"
+    #     )
+    #     break
+
+    # print(flush=True)
 
 
 def test_best_model(config):
@@ -493,16 +499,17 @@ if __name__ == "__main__":
     # test_best_model(config)
 
     else:
+
         log.info("Doing Hyperparameter Search with Optuna")
 
         def objective(trial):
 
-            _batch_size = trial.suggest_categorical("batch_size", [32, 64, 128, 256])
+            _batch_size = trial.suggest_categorical("batch_size", [32, 64, 128])
             _max_epochs = trial.suggest_int("max_epochs", 10, 60)
             _num_warmup_steps = trial.suggest_float("num_warmup_steps", 0.05, 0.20)
 
             _tau = trial.suggest_float("tau", 0.01, 0.06)
-            _lr = trial.suggest_float("lr", 2e-6, 2e-5, log=True)
+            _lr = trial.suggest_float("lr", 2e-6, 5e-5, log=True)
 
             config["dataset_params"]["loader_params"]["batch_size"] = _batch_size
             config["training_params"]["max_epochs"] = _max_epochs
@@ -510,4 +517,61 @@ if __name__ == "__main__":
 
             config["training_params"]["tau"] = _tau
             config["training_params"]["lr"] = _lr
+
+            log.info("Optuna Selected Params")
+
+            log.info(f"batch_size : {_batch_size}")
+            log.info(f"max_epochs : {_max_epochs}")
+            log.info(f"num_warmup_steps : {_num_warmup_steps}")
+
+            log.info(f"tau : {_tau}")
+            log.info(f"lr : {_lr}")
+
+            hf_model_id = config["model_params"]["hf_checkpoint_name"].replace("-", "_")
+
+            model_name = f"biencoder_cnetp_{hf_model_id}_bs{_batch_size}_ep{_max_epochs}_warmup{_num_warmup_steps}_tau{_tau}_lr{_lr}.pt"
+
+            config["model_params"] = model_name
+
+            log.info(f"Runnig with Config File")
+            log.info(config)
+
+            val_loss = train(config=config, trial=trial)
+
+            return val_loss
+
+        def hp_tune(objective):
+
+            optuna_sampler = optuna.samplers.TPESampler()
+            optuna_pruner = optuna.pruners.SuccessiveHalvingPruner()
+
+            study = optuna.create_study(
+                study_name="Contrastive BiEncoder",
+                direction="minimize",
+                sampler=optuna_sampler,
+                pruner=optuna_pruner,
+            )
+
+            study.optimize(objective, n_trials=100)
+
+            pruned_trials = study.get_trials(deepcopy=False, states=[TrialState.PRUNED])
+            complete_trials = study.get_trials(
+                deepcopy=False, states=[TrialState.COMPLETE]
+            )
+
+            log.info("Study statistics: ")
+            log.info("  Number of finished trials: ", len(study.trials))
+            log.info("  Number of pruned trials: ", len(pruned_trials))
+            log.info("  Number of complete trials: ", len(complete_trials))
+
+            log.info("Best trial:")
+            trial = study.best_trial
+
+            log.info("  Value: ", trial.value)
+
+            log.info("  Params: ")
+            for key, value in trial.params.items():
+                log.info("    {}: {}".format(key, value))
+
+        hp_tune(objective=objective)
 
