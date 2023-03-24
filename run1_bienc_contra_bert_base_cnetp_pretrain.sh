@@ -9,8 +9,8 @@
 #SBATCH --ntasks=5
 #SBATCH --account scw1858
 
-#SBATCH --partition gpu,gpu_v100
-#SBATCH --gres=gpu:1
+#SBATCH --partition highmem
+##SBATCH --gres=gpu:1
 #SBATCH --mem=10G
 
 #SBATCH --time 0-01:00:00
