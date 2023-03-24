@@ -25,7 +25,7 @@
         "vector_strategy": "mask_token"
     },
     "training_params": {
-        "hp_tuning": false,
+        "hp_tuning": true,
         "loss_function": "infonce",
         "tau": 0,
         "lr": 0,
