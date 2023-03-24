@@ -251,8 +251,8 @@ def train(config, trial=None):
 
     # -------------------- Preparation for training  ------------------- #
 
+    lr = config["training_params"]["lr"]
     weight_decay = config["training_params"]["weight_decay"]
-
     loss_function = config["training_params"]["loss_function"]
 
     log.info(f"Loss Function Name  : {loss_function}")
@@ -262,33 +262,28 @@ def train(config, trial=None):
 
     elif loss_function == "infonce":
         tau = config["training_params"]["tau"]
-
         # loss_fn = losses.NTXentLoss(temperature=tau)
         loss_fn = InfoNCE(temperature=tau, reduction="mean", negative_mode="unpaired")
 
-    optimizer = AdamW(
-        model.parameters(),
-        lr=config["training_params"]["lr"],
-        weight_decay=weight_decay,
-    )
+    optimizer = AdamW(model.parameters(), lr=lr, weight_decay=weight_decay,)
 
     total_training_steps = len(train_dataloader) * config["training_params"].get(
         "max_epochs"
     )
 
-    num_epochs = config["training_params"]["max_epochs"]
-    num_warmup_steps = config["training_params"]["num_warmup_steps"]
-
     if config["training_params"]["lr_policy"] == "warmup":
-        warmup_steps = math.ceil(len(train_dataloader) * num_epochs * num_warmup_steps)
-    else:
-        warmup_steps = 0
 
-    log.info(f"Warmup-steps: {warmup_steps}")
+        warmup_ratio = config["training_params"]["warmup_ratio"]
+        num_warmup_steps = math.ceil(total_training_steps * warmup_ratio)
+
+    else:
+        num_warmup_steps = 0
+
+    log.info(f"Warmup-steps: {num_warmup_steps}")
 
     scheduler = get_linear_schedule_with_warmup(
         optimizer,
-        num_warmup_steps=warmup_steps,
+        num_warmup_steps=num_warmup_steps,
         num_training_steps=total_training_steps,
     )
 
@@ -506,14 +501,14 @@ if __name__ == "__main__":
 
             _batch_size = trial.suggest_categorical("batch_size", [32, 64, 128])
             _max_epochs = trial.suggest_int("max_epochs", 10, 60)
-            _num_warmup_steps = trial.suggest_float("num_warmup_steps", 0.05, 0.20)
+            _warmup_ratio = trial.suggest_float("warmup_ratio", 0.05, 0.20)
 
             _tau = trial.suggest_float("tau", 0.01, 0.06)
             _lr = trial.suggest_float("lr", 2e-6, 5e-5, log=True)
 
             config["dataset_params"]["loader_params"]["batch_size"] = _batch_size
             config["training_params"]["max_epochs"] = _max_epochs
-            config["training_params"]["num_warmup_steps"] = _num_warmup_steps
+            config["training_params"]["warmup_ratio"] = _warmup_ratio
 
             config["training_params"]["tau"] = _tau
             config["training_params"]["lr"] = _lr
@@ -522,14 +517,14 @@ if __name__ == "__main__":
 
             log.info(f"batch_size : {_batch_size}")
             log.info(f"max_epochs : {_max_epochs}")
-            log.info(f"num_warmup_steps : {_num_warmup_steps}")
+            log.info(f"warmup_ratio : {_warmup_ratio}")
 
             log.info(f"tau : {_tau}")
             log.info(f"lr : {_lr}")
 
             hf_model_id = config["model_params"]["hf_checkpoint_name"].replace("-", "_")
 
-            model_name = f"biencoder_cnetp_{hf_model_id}_bs{_batch_size}_ep{_max_epochs}_warmup{_num_warmup_steps}_tau{_tau}_lr{_lr}.pt"
+            model_name = f"biencoder_cnetp_{hf_model_id}_bs{_batch_size}_ep{_max_epochs}_wr{_warmup_ratio}_tau{_tau}_lr{_lr}.pt"
 
             config["model_params"]["model_name"] = model_name
 
@@ -559,19 +554,19 @@ if __name__ == "__main__":
                 deepcopy=False, states=[TrialState.COMPLETE]
             )
 
-            log.info("Study statistics: ")
-            log.info("  Number of finished trials: ", len(study.trials))
-            log.info("  Number of pruned trials: ", len(pruned_trials))
-            log.info("  Number of complete trials: ", len(complete_trials))
+            print("Study statistics: ", flush=True)
+            print("  Number of finished trials: ", len(study.trials), flush=True)
+            print("  Number of pruned trials: ", len(pruned_trials), flush=True)
+            print("  Number of complete trials: ", len(complete_trials), flush=True)
 
-            log.info("Best trial:")
+            print("Best trial:", flush=True)
             trial = study.best_trial
 
-            log.info("  Value: ", trial.value)
+            print("  Value: ", trial.value, flush=True)
 
-            log.info("  Params: ")
+            print("  Params: ", flush=True)
             for key, value in trial.params.items():
-                log.info("    {}: {}".format(key, value))
+                print("    {}: {}".format(key, value), flush=True)
 
         hp_tune(objective=objective)
 

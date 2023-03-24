@@ -29,12 +29,13 @@
         "loss_function": "infonce",
         "tau": 0,
         "lr": 0,
+        "warmup_ratio": 0.0,
         "num_warmup_steps": 0,
         "max_epochs": 0,
         "early_stopping_patience": 100,
         "export_path": "trained_models/bienc_cnetp_pretrained",
         "printout_freq": 100,
-        "lr_policy": null,
+        "lr_policy": "warmup",
         "weight_decay": 0.01
     }
 }
