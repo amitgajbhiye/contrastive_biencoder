@@ -484,7 +484,7 @@ if __name__ == "__main__":
     print(f"Input Config File")
     pprint(config, sort_dicts=False)
 
-    hp_tuning = config["hp_tuning"]
+    hp_tuning = config["training_params"]["hp_tuning"]
 
     if not hp_tuning:
         train(config)
