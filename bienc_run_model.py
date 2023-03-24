@@ -531,7 +531,7 @@ if __name__ == "__main__":
 
             model_name = f"biencoder_cnetp_{hf_model_id}_bs{_batch_size}_ep{_max_epochs}_warmup{_num_warmup_steps}_tau{_tau}_lr{_lr}.pt"
 
-            config["model_params"] = model_name
+            config["model_params"]["model_name"] = model_name
 
             log.info(f"Runnig with Config File")
             log.info(config)
