@@ -2,6 +2,7 @@ import argparse
 import logging
 import os
 import math
+import optuna
 
 
 import numpy as np
@@ -464,7 +465,7 @@ def test_best_model(config):
 
 if __name__ == "__main__":
 
-    set_seed(1)
+    set_seed(42)
 
     parser = argparse.ArgumentParser(description="Biencoder Concept Property Model")
 
@@ -483,7 +484,30 @@ if __name__ == "__main__":
     print(f"Input Config File")
     pprint(config, sort_dicts=False)
 
-    train(config)
+    hp_tuning = config["hp_tuning"]
+
+    if not hp_tuning:
+        train(config)
 
     # We are not testing the model yet..We will test it on McRae Testset after finetuning
     # test_best_model(config)
+
+    else:
+        log.info("Doing Hyperparameter Search with Optuna")
+
+        def objective(trial):
+
+            _batch_size = trial.suggest_categorical("batch_size", [32, 64, 128, 256])
+            _max_epochs = trial.suggest_int("max_epochs", 10, 60)
+            _num_warmup_steps = trial.suggest_float("num_warmup_steps", 0.05, 0.20)
+
+            _tau = trial.suggest_float("tau", 0.01, 0.06)
+            _lr = trial.suggest_float("lr", 2e-6, 2e-5, log=True)
+
+            config["dataset_params"]["loader_params"]["batch_size"] = _batch_size
+            config["training_params"]["max_epochs"] = _max_epochs
+            config["training_params"]["num_warmup_steps"] = _num_warmup_steps
+
+            config["training_params"]["tau"] = _tau
+            config["training_params"]["lr"] = _lr
+
