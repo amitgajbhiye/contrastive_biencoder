@@ -282,6 +282,18 @@ def calculate_contrastive_loss(
     return loss
 
 
+# def calculate_infonce_loss(
+#     dataset, batch, concept_embedding, property_embedding, loss_fn, device
+# ):
+#     loss = loss_fn(
+#         query=concept_embedding,
+#         positive_key=property_embedding,
+#         negative_keys=property_embedding,
+#     )
+
+#     return loss
+
+
 def calculate_infonce_loss(
     dataset, batch, concept_embedding, property_embedding, loss_fn, device
 ):
@@ -401,7 +413,16 @@ def calculate_infonce_loss(
         # print(f"Loss for concept : {loss_for_concept}", flush=True)
         # print(f"Total Loss After adding Concept Loss : {loss}", flush=True)
 
-    # print(f"Total Loss For the batch : {loss}", flush=True)
+    loss_1 = loss_fn(
+        query=concept_embedding,
+        positive_key=property_embedding,
+        negative_keys=property_embedding,
+    )
+
+    print("*" * 50)
+    print(f"loss_con_by_con : {loss}", flush=True)
+    print(f"total_loss_1: {loss_1}", flush=True)
+    print("*" * 50)
 
     return loss
 
