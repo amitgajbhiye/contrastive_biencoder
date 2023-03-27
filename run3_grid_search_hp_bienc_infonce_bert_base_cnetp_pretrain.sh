@@ -11,8 +11,8 @@
 
 #SBATCH --partition gpu,gpu_v100
 ##SBATCH --qos="gpu7d"
-##SBATCH --gres=gpu:1
-#SBATCH --mem=10G
+#SBATCH --gres=gpu:1
+#SBATCH --mem=8G
 
 #SBATCH --time 0-03:00:00
 
