@@ -282,149 +282,149 @@ def calculate_contrastive_loss(
     return loss
 
 
-# def calculate_infonce_loss(
-#     dataset, batch, concept_embedding, property_embedding, loss_fn, device
-# ):
-#     loss = loss_fn(
-#         query=concept_embedding,
-#         positive_key=property_embedding,
-#         negative_keys=property_embedding,
-#     )
-
-#     return loss
-
-
 def calculate_infonce_loss(
     dataset, batch, concept_embedding, property_embedding, loss_fn, device
 ):
-
-    concept_id_list_for_batch = torch.tensor(
-        [dataset.concept2idx[concept] for concept in batch[0]], device=device
-    )
-    property_id_list_for_batch = torch.tensor(
-        [dataset.property2idx[prop] for prop in batch[1]], device=device
-    )
-
-    # print(flush=True)
-    # print("concept_id_list_for_batch :", concept_id_list_for_batch)
-    # print("property_id_list_for_batch :", property_id_list_for_batch)
-
-    loss = 0.0
-
-    for i in range(len(concept_id_list_for_batch)):
-
-        concept_id = concept_id_list_for_batch[i]
-        property_id = property_id_list_for_batch[i]
-
-        # print(flush=True)
-        # print(f"Processing:", flush=True)
-        # print(f"concept_id : {concept_id}", flush=True)
-        # print(f"property_id : {property_id}", flush=True)
-
-        # Extracting the property of the concept at the whole dataset level.
-        property_id_list_for_concept = torch.tensor(
-            dataset.con_pro_dict[concept_id.item()], device=device
-        )
-
-        # print(
-        #     f"property_id_list_for_concept : {property_id_list_for_concept}", flush=True
-        # )
-
-        # Extracting the negative property by excluding the properties that the concept may have at the  whole dataset level
-        negative_property_id_for_concept = torch.tensor(
-            [
-                x
-                for x in property_id_list_for_batch
-                if x not in property_id_list_for_concept
-            ],
-            device=device,
-        )
-
-        # print(
-        #     f"negative_property_id_for_concept : {negative_property_id_for_concept}",
-        #     flush=True,
-        # )
-
-        # Adding the positive property to the concept so that in the denominator of the loss function calculation
-        # it contains the positive property.
-        negative_property_id_for_concept = torch.cat(
-            (torch.tensor(property_id).unsqueeze(0), negative_property_id_for_concept),
-            dim=0,
-        )
-
-        print(
-            f"After adding positive property id negative_property_id_for_concept : {negative_property_id_for_concept},\
-                {negative_property_id_for_concept.shape}",
-            flush=True,
-        )
-
-        mask_positive_property_for_concept = torch.tensor(
-            [
-                [1] if x in negative_property_id_for_concept else [0]
-                for x in property_id_list_for_batch
-            ],
-            device=device,
-        )
-
-        # print(
-        #     f"mask_positive_property_for_concept : {mask_positive_property_for_concept}",
-        #     flush=True,
-        # )
-
-        neg_property_embedding = torch.mul(
-            property_embedding, mask_positive_property_for_concept
-        )
-
-        # print(
-        #     f"concept_embedding[i].shape : {concept_embedding[i].shape}", flush=True,
-        # )
-
-        # print(
-        #     f"property_embedding[i].shape : {property_embedding[i].shape}", flush=True,
-        # )
-
-        # print(
-        #     f"neg_property_embedding : {neg_property_embedding.shape}", flush=True,
-        # )
-
-        loss_for_concept = (
-            loss_fn(
-                query=concept_embedding[i].unsqueeze(0),
-                positive_key=property_embedding[i].unsqueeze(0),
-                negative_keys=neg_property_embedding,
-            )
-            / concept_embedding.shape[0]
-        )
-
-        print(f"loss_for_concept 1: {loss_for_concept}", flush=True)
-
-        loss_for_concept = (
-            loss_fn(
-                query=concept_embedding[i].unsqueeze(0),
-                positive_key=property_embedding[i].unsqueeze(0),
-                negative_keys=neg_property_embedding,
-            )
-            / negative_property_id_for_concept.shape[0]
-        )
-        print(f"loss_for_concept 2: {loss_for_concept}", flush=True)
-
-        loss += loss_for_concept
-
-        # print(f"Loss for concept : {loss_for_concept}", flush=True)
-        # print(f"Total Loss After adding Concept Loss : {loss}", flush=True)
-
-    loss_1 = loss_fn(
+    loss = loss_fn(
         query=concept_embedding,
         positive_key=property_embedding,
         negative_keys=property_embedding,
     )
 
-    print("*" * 50)
-    print(f"loss_con_by_con : {loss}", flush=True)
-    print(f"total_loss_1: {loss_1}", flush=True)
-    print("*" * 50)
-
     return loss
+
+
+# def calculate_infonce_loss(
+#     dataset, batch, concept_embedding, property_embedding, loss_fn, device
+# ):
+
+#     concept_id_list_for_batch = torch.tensor(
+#         [dataset.concept2idx[concept] for concept in batch[0]], device=device
+#     )
+#     property_id_list_for_batch = torch.tensor(
+#         [dataset.property2idx[prop] for prop in batch[1]], device=device
+#     )
+
+#     # print(flush=True)
+#     # print("concept_id_list_for_batch :", concept_id_list_for_batch)
+#     # print("property_id_list_for_batch :", property_id_list_for_batch)
+
+#     loss = 0.0
+
+#     for i in range(len(concept_id_list_for_batch)):
+
+#         concept_id = concept_id_list_for_batch[i]
+#         property_id = property_id_list_for_batch[i]
+
+#         # print(flush=True)
+#         # print(f"Processing:", flush=True)
+#         # print(f"concept_id : {concept_id}", flush=True)
+#         # print(f"property_id : {property_id}", flush=True)
+
+#         # Extracting the property of the concept at the whole dataset level.
+#         property_id_list_for_concept = torch.tensor(
+#             dataset.con_pro_dict[concept_id.item()], device=device
+#         )
+
+#         # print(
+#         #     f"property_id_list_for_concept : {property_id_list_for_concept}", flush=True
+#         # )
+
+#         # Extracting the negative property by excluding the properties that the concept may have at the  whole dataset level
+#         negative_property_id_for_concept = torch.tensor(
+#             [
+#                 x
+#                 for x in property_id_list_for_batch
+#                 if x not in property_id_list_for_concept
+#             ],
+#             device=device,
+#         )
+
+#         # print(
+#         #     f"negative_property_id_for_concept : {negative_property_id_for_concept}",
+#         #     flush=True,
+#         # )
+
+#         # Adding the positive property to the concept so that in the denominator of the loss function calculation
+#         # it contains the positive property.
+#         negative_property_id_for_concept = torch.cat(
+#             (torch.tensor(property_id).unsqueeze(0), negative_property_id_for_concept),
+#             dim=0,
+#         )
+
+#         print(
+#             f"After adding positive property id negative_property_id_for_concept : {negative_property_id_for_concept},\
+#                 {negative_property_id_for_concept.shape}",
+#             flush=True,
+#         )
+
+#         mask_positive_property_for_concept = torch.tensor(
+#             [
+#                 [1] if x in negative_property_id_for_concept else [0]
+#                 for x in property_id_list_for_batch
+#             ],
+#             device=device,
+#         )
+
+#         # print(
+#         #     f"mask_positive_property_for_concept : {mask_positive_property_for_concept}",
+#         #     flush=True,
+#         # )
+
+#         neg_property_embedding = torch.mul(
+#             property_embedding, mask_positive_property_for_concept
+#         )
+
+#         # print(
+#         #     f"concept_embedding[i].shape : {concept_embedding[i].shape}", flush=True,
+#         # )
+
+#         # print(
+#         #     f"property_embedding[i].shape : {property_embedding[i].shape}", flush=True,
+#         # )
+
+#         # print(
+#         #     f"neg_property_embedding : {neg_property_embedding.shape}", flush=True,
+#         # )
+
+#         loss_for_concept = (
+#             loss_fn(
+#                 query=concept_embedding[i].unsqueeze(0),
+#                 positive_key=property_embedding[i].unsqueeze(0),
+#                 negative_keys=neg_property_embedding,
+#             )
+#             / concept_embedding.shape[0]
+#         )
+
+#         print(f"loss_for_concept 1: {loss_for_concept}", flush=True)
+
+#         loss_for_concept = (
+#             loss_fn(
+#                 query=concept_embedding[i].unsqueeze(0),
+#                 positive_key=property_embedding[i].unsqueeze(0),
+#                 negative_keys=neg_property_embedding,
+#             )
+#             / negative_property_id_for_concept.shape[0]
+#         )
+#         print(f"loss_for_concept 2: {loss_for_concept}", flush=True)
+
+#         loss += loss_for_concept
+
+#         # print(f"Loss for concept : {loss_for_concept}", flush=True)
+#         # print(f"Total Loss After adding Concept Loss : {loss}", flush=True)
+
+#     loss_1 = loss_fn(
+#         query=concept_embedding,
+#         positive_key=property_embedding,
+#         negative_keys=property_embedding,
+#     )
+
+#     print("*" * 50)
+#     print(f"loss_con_by_con : {loss}", flush=True)
+#     print(f"total_loss_1: {loss_1}", flush=True)
+#     print("*" * 50)
+
+#     return loss
 
 
 def calculate_ntxent_loss(

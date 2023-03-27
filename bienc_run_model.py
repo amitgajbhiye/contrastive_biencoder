@@ -409,8 +409,6 @@ def train(config, trial=None):
                 )
                 break
 
-        # return best_val_loss
-
 
 def test_best_model(config):
 
@@ -517,17 +515,6 @@ if __name__ == "__main__":
 
         tau = [0.01, 0.02, 0.03, 0.04, 0.05, 0.07, 0.07]
         lr = [2e-6]
-
-        # one run
-        # max_epochs = [15]
-        # batch_size = [
-        #     32,
-        # ]
-        # warmup_ratio = [0.1]
-        # weight_decay = [0.1]
-
-        # tau = [0.05]
-        # lr = [2e-6]
 
         log.info(f"max_epochs : {max_epochs}")
         log.info(f"batch_size : {batch_size}")
