@@ -351,64 +351,72 @@ def train(config, trial=None):
         log.info("valid_losses")
         log.info(valid_losses)
 
-        trial.report(valid_loss, epoch)
+        if trial is not None:
+            trial.report(valid_loss, epoch)
 
-        if trial.should_prune():
-            raise optuna.exceptions.TrialPruned()
+            if trial.should_prune():
+                raise optuna.exceptions.TrialPruned()
 
-    return valid_loss
+            return valid_loss
 
-    # if valid_loss > best_val_loss:
-    #     patience_counter += 1
-    #     log.info(
-    #         f"Current validation loss: {valid_loss} is greater than the previous best loss: {best_val_loss}"
-    #     )
-    #     log.info("Incrementing Patience Counter")
-    # else:
-    #     patience_counter = 0
+        else:
+            if valid_loss > best_val_loss:
+                patience_counter += 1
+                log.info(
+                    f"Current validation loss: {valid_loss} is greater than the previous best loss: {best_val_loss}"
+                )
+                log.info("Incrementing Patience Counter")
+            else:
+                patience_counter = 0
 
-    #     log.info(
-    #         f"Current epoch {epoch}, validation loss {valid_loss} is less than the previous best loss : {best_val_loss}"
-    #     )
-    #     log.info(f"Resetting the Patience Counter to {patience_counter}")
+                log.info(
+                    f"Current epoch {epoch}, validation loss {valid_loss} is less than the previous best loss : {best_val_loss}"
+                )
+                log.info(f"Resetting the Patience Counter to {patience_counter}")
 
-    #     # best_val_f1 = val_binary_f1
-    #     best_val_loss = valid_loss
+                # best_val_f1 = val_binary_f1
+                best_val_loss = valid_loss
 
-    #     best_model_path = os.path.join(
-    #         config["training_params"].get("export_path"),
-    #         config["model_params"].get("model_name"),
-    #     )
+                best_model_path = os.path.join(
+                    config["training_params"].get("export_path"),
+                    config["model_params"].get("model_name"),
+                )
 
-    #     log.info(f"patience_counter : {patience_counter}")
-    #     log.info(f"best_model_path : {best_model_path}")
+                log.info(f"patience_counter : {patience_counter}")
+                log.info(f"best_model_path : {best_model_path}")
 
-    #     torch.save(
-    #         model.state_dict(), best_model_path,
-    #     )
+                torch.save(
+                    model.state_dict(), best_model_path,
+                )
 
-    #     log.info(f"Best model at epoch: {epoch}, Validation Loss : {valid_loss}")
-    #     log.info(f"The model is saved in : {best_model_path}")
+                log.info(
+                    f"Best model at epoch: {epoch}, Validation Loss : {valid_loss}"
+                )
+                log.info(f"The model is saved in : {best_model_path}")
 
-    # log.info("Validation Scores")
-    # log.info(f" Best Validation Loss Yet : {best_val_loss}")
+            log.info("Validation Scores")
+            log.info(f" Best Validation Loss Yet : {best_val_loss}")
 
-    # log.info(f"train_losses : {train_losses}")
-    # log.info(f"valid_losses : {valid_losses}")
+            log.info(f"train_losses : {train_losses}")
+            log.info(f"valid_losses : {valid_losses}")
 
-    # print(flush=True)
-    # print("train_losses", flush=True)
-    # print(train_losses, flush=True)
-    # print("valid_losses", flush=True)
-    # print(valid_losses, flush=True)
+            print(flush=True)
+            print("train_losses", flush=True)
+            print(train_losses, flush=True)
+            print("valid_losses", flush=True)
+            print(valid_losses, flush=True)
 
-    # if patience_counter >= config["training_params"].get("early_stopping_patience"):
-    #     log.info(
-    #         f"Early Stopping ---> Maximum Patience - {config['training_params'].get('early_stopping_patience')} Reached !!"
-    #     )
-    #     break
+            if patience_counter >= config["training_params"].get(
+                "early_stopping_patience"
+            ):
+                log.info(
+                    f"Early Stopping ---> Maximum Patience - {config['training_params'].get('early_stopping_patience')} Reached !!"
+                )
+                break
 
-    # print(flush=True)
+            print(flush=True)
+
+            return best_val_loss
 
 
 def test_best_model(config):
@@ -477,7 +485,7 @@ def test_best_model(config):
 
 if __name__ == "__main__":
 
-    set_seed(42)
+    set_seed(1)
 
     parser = argparse.ArgumentParser(description="Biencoder Concept Property Model")
 
@@ -499,12 +507,87 @@ if __name__ == "__main__":
     hp_tuning = config["training_params"]["hp_tuning"]
 
     if not hp_tuning:
-        train(config)
+        val_loss = train(config, trial=None)
 
     # We are not testing the model yet..We will test it on McRae Testset after finetuning
     # test_best_model(config)
 
-    else:
+    elif hp_tuning == "grid_search":
+
+        log.info("Doing Hyperparameter Search With Grid Search")
+
+        # max_epochs = [15, 20, 25, 30]
+        # batch_size = [32, 64]
+        # warmup_ratio = [0.1, 0.15]
+        # weight_decay = [0.1]
+
+        # tau = [0.01, 0.02, 0.03, 0.04, 0.05, 0.07, 0.07]
+        # lr = [2e-6]
+
+        # one run
+        max_epochs = [15]
+        batch_size = [
+            32,
+        ]
+        warmup_ratio = [0.1]
+        weight_decay = [0.1]
+
+        tau = [0.05]
+        lr = [2e-6]
+
+        log.info(f"max_epochs : {max_epochs}")
+        log.info(f"batch_size : {batch_size}")
+        log.info(f"warmup_ratio : {warmup_ratio}")
+        log.info(f"weight_decay : {weight_decay}")
+        log.info(f"tau : {tau}")
+        log.info(f"lr : {lr}")
+
+        model_name = config["model_params"]["hf_checkpoint_name"]
+
+        for me in max_epochs:
+            for bs in batch_size:
+                for wr in warmup_ratio:
+                    for wd in weight_decay:
+                        for t in tau:
+                            for l in lr:
+
+                                discription_str = (
+                                    f"ep{me}_bs{bs}_wr{wr}_wd{wd}_tau{t}_lr{l}"
+                                )
+
+                                config["training_params"]["max_epochs"] = me
+                                config["training_params"]["batch_size"] = bs
+                                config["training_params"]["warmup_ratio"] = wr
+                                config["training_params"]["weight_decay"] = wd
+
+                                config["training_params"]["tau"] = t
+                                config["training_params"]["lr"] = l
+
+                                config["training_params"]["model_name"] = (
+                                    "contastive_bienc_cnetp_pretrain"
+                                    + model_name.replace("-", "_")
+                                    + "_"
+                                    + discription_str
+                                    + ".pt"
+                                )
+
+                                log.info("\n")
+                                log.info("*" * 50)
+
+                                log.info(f"discription_str : {discription_str}")
+
+                                log.info(
+                                    f"New Run : max_epochs: {me}, batch_size: {bs}, warmup_ratio : {wr}, weight_decay : {wd}"
+                                )
+                                log.info(
+                                    f"Model Name: {config['training_params']['model_name']}"
+                                )
+                                log.info(f"new_config_file")
+                                log.info(config)
+
+                                val_loss = train(config, trial=None)
+
+    elif hp_tuning == "optuna":
 
         log.info("Doing Hyperparameter Search with Optuna")
 
