@@ -15,7 +15,7 @@
 
 #SBATCH --mem=10G
 
-#SBATCH --time 0-6:00:00
+#SBATCH --time 0-06:00:00
 
 conda activate venv
 

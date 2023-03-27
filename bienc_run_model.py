@@ -340,18 +340,14 @@ def train(config, trial=None):
         log.info(f"  Average validation Loss: {valid_loss}")
         print(flush=True)
 
-        print(flush=True)
-        print("train_losses", flush=True)
-        print(train_losses, flush=True)
-        print("valid_losses", flush=True)
-        print(valid_losses, flush=True)
-
-        log.info("train_losses")
-        log.info(train_losses)
-        log.info("valid_losses")
-        log.info(valid_losses)
-
         if trial is not None:
+
+            print(f"train_losses : {train_losses}", flush=True)
+            print("valid_losses : {valid_losses}", flush=True)
+
+            log.info(f"train_losses : {train_losses}")
+            log.info("valid_losses : {valid_losses}")
+
             trial.report(valid_loss, epoch)
 
             if trial.should_prune():
@@ -360,6 +356,8 @@ def train(config, trial=None):
             return valid_loss
 
         else:
+            log.info(f"Optuna Trial is : {trial}")
+
             if valid_loss > best_val_loss:
                 patience_counter += 1
                 log.info(
