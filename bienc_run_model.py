@@ -556,7 +556,9 @@ if __name__ == "__main__":
                                 )
 
                                 config["training_params"]["max_epochs"] = me
-                                config["training_params"]["batch_size"] = bs
+                                config["dataset_params"]["loader_params"][
+                                    "batch_size"
+                                ] = bs
                                 config["training_params"]["warmup_ratio"] = wr
                                 config["training_params"]["weight_decay"] = wd
 
