@@ -9,12 +9,12 @@
 #SBATCH --ntasks=5
 #SBATCH --account scw1858
 
-#SBATCH --partition dev
+#SBATCH --partition highmem
 ##SBATCH --qos="gpu7d"
-#SBATCH --gres=gpu:1
+##SBATCH --gres=gpu:1
 #SBATCH --mem=10G
 
-#SBATCH --time 0-01:00:00
+#SBATCH --time 0-05:00:00
 
 conda activate venv
 
