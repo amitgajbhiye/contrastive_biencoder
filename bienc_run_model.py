@@ -356,7 +356,7 @@ def train(config, trial=None):
             return valid_loss
 
         else:
-            log.info(f"Optuna Trial is : {trial}")
+            log.info(f"optuna_trial is : {trial}")
 
             if valid_loss > best_val_loss:
                 patience_counter += 1
@@ -398,11 +398,8 @@ def train(config, trial=None):
             log.info(f"train_losses : {train_losses}")
             log.info(f"valid_losses : {valid_losses}")
 
-            print(flush=True)
-            print("train_losses", flush=True)
-            print(train_losses, flush=True)
-            print("valid_losses", flush=True)
-            print(valid_losses, flush=True)
+            print(f"train_losses : {train_losses}", flush=True)
+            print("valid_losses : {valid_losses}", flush=True)
 
             if patience_counter >= config["training_params"].get(
                 "early_stopping_patience"
@@ -412,9 +409,7 @@ def train(config, trial=None):
                 )
                 break
 
-            print(flush=True)
-
-            return best_val_loss
+        # return best_val_loss
 
 
 def test_best_model(config):
@@ -587,7 +582,8 @@ if __name__ == "__main__":
                                 log.info(f"new_config_file")
                                 log.info(config)
 
-                                val_loss = train(config, trial=None)
+                                # val_loss = train(config, trial=None)
+                                train(config, trial=None)
 
     elif hp_tuning == "optuna":
 
