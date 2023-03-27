@@ -517,7 +517,7 @@ if __name__ == "__main__":
         log.info("Doing Hyperparameter Search With Grid Search")
 
         # max_epochs = [15, 20, 25, 30]
-        # batch_size = [32, 64]
+        # batch_size = [8, 16, 32, 64]
         # warmup_ratio = [0.1, 0.15]
         # weight_decay = [0.1]
 
