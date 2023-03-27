@@ -516,24 +516,24 @@ if __name__ == "__main__":
 
         log.info("Doing Hyperparameter Search With Grid Search")
 
-        # max_epochs = [15, 20, 25, 30]
-        # batch_size = [8, 16, 32, 64]
-        # warmup_ratio = [0.1, 0.15]
-        # weight_decay = [0.1]
-
-        # tau = [0.01, 0.02, 0.03, 0.04, 0.05, 0.07, 0.07]
-        # lr = [2e-6]
-
-        # one run
-        max_epochs = [15]
-        batch_size = [
-            32,
-        ]
-        warmup_ratio = [0.1]
+        max_epochs = [15, 20, 25, 30]
+        batch_size = [8, 16, 32, 64]
+        warmup_ratio = [0.1, 0.15]
         weight_decay = [0.1]
 
-        tau = [0.05]
+        tau = [0.01, 0.02, 0.03, 0.04, 0.05, 0.07, 0.07]
         lr = [2e-6]
+
+        # one run
+        # max_epochs = [15]
+        # batch_size = [
+        #     32,
+        # ]
+        # warmup_ratio = [0.1]
+        # weight_decay = [0.1]
+
+        # tau = [0.05]
+        # lr = [2e-6]
 
         log.info(f"max_epochs : {max_epochs}")
         log.info(f"batch_size : {batch_size}")

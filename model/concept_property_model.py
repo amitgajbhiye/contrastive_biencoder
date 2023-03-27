@@ -160,11 +160,11 @@ class ConceptPropertyModel(nn.Module):
                 .reshape(concept_mask_vector.shape[0], 1)
             )
 
-            print("concept_mask_token_index")
-            print(concept_mask_token_index)
+            # print("concept_mask_token_index")
+            # print(concept_mask_token_index)
 
-            print("property_mask_token_index")
-            print(property_mask_token_index)
+            # print("property_mask_token_index")
+            # print(property_mask_token_index)
 
             return concept_mask_vector, property_mask_vector, logits
 
