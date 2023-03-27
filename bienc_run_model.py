@@ -507,6 +507,7 @@ if __name__ == "__main__":
     hp_tuning = config["training_params"]["hp_tuning"]
 
     if not hp_tuning:
+        log.info(f"Running the model for choosen parameters ...")
         val_loss = train(config, trial=None)
 
     # We are not testing the model yet..We will test it on McRae Testset after finetuning
