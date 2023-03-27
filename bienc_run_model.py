@@ -346,7 +346,7 @@ def train(config, trial=None):
             print("valid_losses : {valid_losses}", flush=True)
 
             log.info(f"train_losses : {train_losses}")
-            log.info("valid_losses : {valid_losses}")
+            log.info(f"valid_losses : {valid_losses}")
 
             trial.report(valid_loss, epoch)
 

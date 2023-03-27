@@ -340,10 +340,11 @@ def calculate_infonce_loss(
             dim=0,
         )
 
-        # print(
-        #     f"After adding positive property id negative_property_id_for_concept : {negative_property_id_for_concept}",
-        #     flush=True,
-        # )
+        print(
+            f"After adding positive property id negative_property_id_for_concept : {negative_property_id_for_concept},\
+                {negative_property_id_for_concept.shape}",
+            flush=True,
+        )
 
         mask_positive_property_for_concept = torch.tensor(
             [
@@ -374,11 +375,26 @@ def calculate_infonce_loss(
         #     f"neg_property_embedding : {neg_property_embedding.shape}", flush=True,
         # )
 
-        loss_for_concept = loss_fn(
-            query=concept_embedding[i].unsqueeze(0),
-            positive_key=property_embedding[i].unsqueeze(0),
-            negative_keys=neg_property_embedding,
+        loss_for_concept = (
+            loss_fn(
+                query=concept_embedding[i].unsqueeze(0),
+                positive_key=property_embedding[i].unsqueeze(0),
+                negative_keys=neg_property_embedding,
+            )
+            / concept_embedding.shape[0]
         )
+
+        print(f"loss_for_concept 1: {loss_for_concept}", flush=True)
+
+        loss_for_concept = (
+            loss_fn(
+                query=concept_embedding[i].unsqueeze(0),
+                positive_key=property_embedding[i].unsqueeze(0),
+                negative_keys=neg_property_embedding,
+            )
+            / negative_property_id_for_concept.shape[0]
+        )
+        print(f"loss_for_concept 2: {loss_for_concept}", flush=True)
 
         loss += loss_for_concept
 
