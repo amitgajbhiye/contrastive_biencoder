@@ -579,7 +579,8 @@ if __name__ == "__main__":
                                 log.info(f"discription_str : {discription_str}")
 
                                 log.info(
-                                    f"New Run : max_epochs: {me}, batch_size: {bs}, warmup_ratio : {wr}, weight_decay : {wd}"
+                                    f"New Run : max_epochs: {me}, batch_size: {bs}, \
+                                        warmup_ratio : {wr}, weight_decay : {wd}, tau: {tau}, lr: {lr}"
                                 )
                                 log.info(
                                     f"Model Name: {config['training_params']['model_name']}"
