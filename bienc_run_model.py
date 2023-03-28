@@ -25,6 +25,7 @@ from utils.functions import (
     calculate_contrastive_loss,
     calculate_ntxent_loss,
     calculate_infonce_loss,
+    plot_loss_curve,
 )
 
 log = logging.getLogger(__name__)
@@ -407,6 +408,13 @@ def train(config, trial=None):
                 log.info(
                     f"Early Stopping ---> Maximum Patience - {config['training_params'].get('early_stopping_patience')} Reached !!"
                 )
+
+                plot_loss_curve(
+                    train_loss=train_losses,
+                    val_loss=train_losses,
+                    export_path=config["training_params"].get("export_path"),
+                )
+
                 break
 
 
@@ -508,7 +516,7 @@ if __name__ == "__main__":
 
         log.info("Doing Hyperparameter Search With Grid Search")
 
-        max_epochs = [15, 20, 25, 30]
+        max_epochs = [10, 15, 20, 25, 30]
         batch_size = [8, 16, 32, 64]
         warmup_ratio = [0.1, 0.15]
         weight_decay = [0.1]

@@ -2,6 +2,7 @@ import itertools
 import logging
 
 import os
+import math
 from argparse import ArgumentParser
 
 
@@ -219,17 +220,29 @@ def train(model, config, train_df, fold=None, valid_df=None):
     # -------------------- Preparation for training  ------------------- #
 
     loss_fn = nn.BCEWithLogitsLoss()
-    optimizer = AdamW(model.parameters(), lr=config["training_params"].get("lr"))
+
+    lr = config["training_params"]["lr"]
+    weight_decay = config["training_params"]["weight_decay"]
+
+    optimizer = AdamW(model.parameters(), lr=lr, weight_decay=weight_decay,)
+
     total_training_steps = len(train_dataloader) * config["training_params"].get(
         "max_epochs"
     )
 
-    # warmup_steps = math.ceil(len(train_dataloader) * num_epochs * 0.1)  # 10% of train data for warm-up
-    # log.info(f"Warmup-steps: {warmup_steps}")
+    if config["training_params"]["lr_policy"] == "warmup":
+
+        warmup_ratio = config["training_params"]["warmup_ratio"]
+        num_warmup_steps = math.ceil(total_training_steps * warmup_ratio)
+
+    else:
+        num_warmup_steps = 0
+
+    log.info(f"Warmup-steps: {num_warmup_steps}")
 
     scheduler = get_linear_schedule_with_warmup(
         optimizer,
-        num_warmup_steps=config["training_params"].get("num_warmup_steps"),
+        num_warmup_steps=num_warmup_steps,
         num_training_steps=total_training_steps,
     )
 

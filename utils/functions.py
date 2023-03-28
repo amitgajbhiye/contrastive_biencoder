@@ -17,6 +17,8 @@ from sklearn.metrics import (
 )
 from torch.utils.data import DataLoader, RandomSampler, SequentialSampler
 
+import matplotlib.pyplot as plt
+
 
 def set_seed(seed):
     np.random.seed(seed)
@@ -702,3 +704,32 @@ def count_parameters(model):
     trainable_params = sum(p.numel() for p in model.parameters() if p.requires_grad)
 
     return (total_params, trainable_params)
+
+
+def plot_loss_curve(train_loss, val_loss, export_path=None, plot_name="loss_curve.png"):
+
+    plt.rcParams["figure.dpi"] = 300
+    plt.rcParams["savefig.dpi"] = 300
+
+    epochs = range(1, len(train_loss) + 1)
+
+    print(len(train_loss))
+    print(len(val_loss))
+
+    plt.plot(epochs, train_loss, label="Training Loss")
+    plt.plot(epochs, val_loss, label="Validation Loss")
+
+    plt.title("Training and Validation Loss")
+    plt.xlabel("Epochs")
+    plt.ylabel("Loss")
+    plt.xticks(range(0, len(train_loss) + 1, 1))
+    plt.legend(loc="best")
+    plt.grid(True)
+
+    if export_path:
+        plot_name = os.path.join(export_path, plot_name)
+
+    plt.savefig(plot_name)
+
+    plt.show()
+    plt.close()
