@@ -1,5 +1,5 @@
 {
-    "experiment_name": "grid_search_hp_bienc_infonce_bert_base_cnetp_pretrain",
+    "experiment_name": "new_grid_search_hp_bienc_infonce_bert_base_cnetp_pretrain",
     "log_dirctory": "pretrain",
     "dataset_params": {
         "dataset_name": "cnetp",
