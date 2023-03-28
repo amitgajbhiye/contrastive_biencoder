@@ -527,7 +527,7 @@ if __name__ == "__main__":
         # lr = [2e-6]
 
         max_epochs = [4, 6, 8]
-        batch_size = [8, 16, 32, 64]
+        batch_size = [32, 8, 16, 64]
         warmup_ratio = [0.6, 0.1, 0.15]
         weight_decay = [0.1, 0.3, 0.5, 0.9]
 
@@ -543,7 +543,7 @@ if __name__ == "__main__":
         log.info(f"lr : {lr}")
         log.info(f"hidden_dropout_prob : {hidden_dropout_prob}")
 
-        model_name = config["model_params"]["hf_checkpoint_name"]
+        hf_checkpoint_name = config["model_params"]["hf_checkpoint_name"]
 
         for me in max_epochs:
             for bs in batch_size:
@@ -566,9 +566,9 @@ if __name__ == "__main__":
                                     config["training_params"]["lr"] = l
                                     config["model_params"]["hidden_dropout_prob"] = do
 
-                                    config["training_params"]["model_name"] = (
-                                        "contastive_bienc_cnetp_pretrain"
-                                        + model_name.replace("-", "_")
+                                    config["model_params"]["model_name"] = (
+                                        "contastive_bienc_cnetp_pretrain_"
+                                        + hf_checkpoint_name.replace("-", "_")
                                         + "_"
                                         + discription_str
                                         + ".pt"
