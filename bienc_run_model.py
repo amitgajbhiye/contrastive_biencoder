@@ -583,7 +583,7 @@ if __name__ == "__main__":
                                         f"new_model_run : max_epochs: {me}, batch_size: {bs}, warmup_ratio : {wr}, weight_decay : {wd}, tau: {tau}, lr: {lr}, dropout: {do}"
                                     )
                                     log.info(
-                                        f"model_name: {config['training_params']['model_name']}"
+                                        f"model_name: {config['model_params']['model_name']}"
                                     )
                                     log.info(f"new_config_file")
                                     log.info(config)
