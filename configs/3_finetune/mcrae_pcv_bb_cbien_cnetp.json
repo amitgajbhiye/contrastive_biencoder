@@ -3,9 +3,9 @@
     "log_dirctory": "mcrae_fine_tune",
     "dataset_params": {
         "dataset_name": "property_split_mcrae_cnetp",
-        "train_file_path": "data/evaluation_data/con_prop/mcrae_extended/train_mcrae.tsv",
+        "train_file_path": "data/evaluation_data/con_prop/mcrae_extended/clean_train_mcrae.tsv",
         "val_file_path": "None",
-        "test_file_path": "data/evaluation_data/con_prop/mcrae_extended/test_mcrae.tsv",
+        "test_file_path": "data/evaluation_data/con_prop/mcrae_extended/clean_test_mcrae.tsv",
         "hf_tokenizer_name": "bert-base-uncased",
         "hf_tokenizer_path": "/scratch/c.scmag3/hf_pretrained_models/bert_base_uncased/tokenizer",
         "concept_max_len": 20,
