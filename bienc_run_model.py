@@ -417,6 +417,8 @@ def train(config, trial=None):
 
                 break
 
+    return best_val_loss
+
 
 def test_best_model(config):
 
@@ -516,13 +518,22 @@ if __name__ == "__main__":
 
         log.info("Doing Hyperparameter Search With Grid Search")
 
-        max_epochs = [10, 15, 20, 25, 30]
-        batch_size = [8, 16, 32, 64]
-        warmup_ratio = [0.1, 0.15]
-        weight_decay = [0.1]
+        # max_epochs = [15, 20, 25, 30]
+        # batch_size = [8, 16, 32, 64]
+        # warmup_ratio = [0.1, 0.15]
+        # weight_decay = [0.1]
 
-        tau = [0.01, 0.02, 0.03, 0.04, 0.05, 0.07, 0.07]
-        lr = [2e-6]
+        # tau = [0.01, 0.02, 0.03, 0.04, 0.05, 0.07, 0.07]
+        # lr = [2e-6]
+
+        max_epochs = [4, 6, 8]
+        batch_size = [8, 16, 32, 64]
+        warmup_ratio = [0.6, 0.1, 0.15]
+        weight_decay = [0.1, 0.3, 0.5, 0.9]
+
+        tau = [0.01, 0.05, 0.1]
+        lr = [2e-6, 1e-5]
+        hidden_dropout_prob = [0.1, 0.2, 0.3, 0.4, 0.5]
 
         log.info(f"max_epochs : {max_epochs}")
         log.info(f"batch_size : {batch_size}")
@@ -530,6 +541,7 @@ if __name__ == "__main__":
         log.info(f"weight_decay : {weight_decay}")
         log.info(f"tau : {tau}")
         log.info(f"lr : {lr}")
+        log.info(f"hidden_dropout_prob : {hidden_dropout_prob}")
 
         model_name = config["model_params"]["hf_checkpoint_name"]
 
@@ -539,46 +551,44 @@ if __name__ == "__main__":
                     for wd in weight_decay:
                         for t in tau:
                             for l in lr:
+                                for do in hidden_dropout_prob:
 
-                                discription_str = (
-                                    f"ep{me}_bs{bs}_wr{wr}_wd{wd}_tau{t}_lr{l}"
-                                )
+                                    discription_str = f"ep{me}_bs{bs}_wr{wr}_wd{wd}_tau{t}_lr{l}_do{do}"
 
-                                config["training_params"]["max_epochs"] = me
-                                config["dataset_params"]["loader_params"][
-                                    "batch_size"
-                                ] = bs
-                                config["training_params"]["warmup_ratio"] = wr
-                                config["training_params"]["weight_decay"] = wd
+                                    config["training_params"]["max_epochs"] = me
+                                    config["dataset_params"]["loader_params"][
+                                        "batch_size"
+                                    ] = bs
+                                    config["training_params"]["warmup_ratio"] = wr
+                                    config["training_params"]["weight_decay"] = wd
 
-                                config["training_params"]["tau"] = t
-                                config["training_params"]["lr"] = l
+                                    config["training_params"]["tau"] = t
+                                    config["training_params"]["lr"] = l
+                                    config["model_params"]["hidden_dropout_prob"] = do
 
-                                config["training_params"]["model_name"] = (
-                                    "contastive_bienc_cnetp_pretrain"
-                                    + model_name.replace("-", "_")
-                                    + "_"
-                                    + discription_str
-                                    + ".pt"
-                                )
+                                    config["training_params"]["model_name"] = (
+                                        "contastive_bienc_cnetp_pretrain"
+                                        + model_name.replace("-", "_")
+                                        + "_"
+                                        + discription_str
+                                        + ".pt"
+                                    )
 
-                                log.info("\n")
-                                log.info("*" * 50)
+                                    log.info("\n")
+                                    log.info("*" * 50)
 
-                                log.info(f"discription_str : {discription_str}")
+                                    log.info(f"discription_str : {discription_str}")
 
-                                log.info(
-                                    f"New Run : max_epochs: {me}, batch_size: {bs}, \
-                                        warmup_ratio : {wr}, weight_decay : {wd}, tau: {tau}, lr: {lr}"
-                                )
-                                log.info(
-                                    f"Model Name: {config['training_params']['model_name']}"
-                                )
-                                log.info(f"new_config_file")
-                                log.info(config)
+                                    log.info(
+                                        f"new_model_run : max_epochs: {me}, batch_size: {bs}, warmup_ratio : {wr}, weight_decay : {wd}, tau: {tau}, lr: {lr}, dropout: {do}"
+                                    )
+                                    log.info(
+                                        f"model_name: {config['training_params']['model_name']}"
+                                    )
+                                    log.info(f"new_config_file")
+                                    log.info(config)
 
-                                # val_loss = train(config, trial=None)
-                                train(config, trial=None)
+                                    val_loss = train(config, trial=None)
 
     elif hp_tuning == "optuna":
 
