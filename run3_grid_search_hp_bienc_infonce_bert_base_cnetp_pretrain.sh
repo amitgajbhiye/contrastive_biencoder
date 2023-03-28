@@ -2,8 +2,8 @@
 
 #SBATCH --job-name=G_HP
 
-#SBATCH --output=logs/pretrain/out_grid_search_hp_bienc_infonce_bert_base_cnetp_pretrain.txt
-#SBATCH --error=logs/pretrain/err_grid_search_hp_bienc_infonce_bert_base_cnetp_pretrain.txt
+#SBATCH --output=logs/pretrain/out_new_grid_search_hp_bienc_infonce_bert_base_cnetp_pretrain.txt
+#SBATCH --error=logs/pretrain/err_new_grid_search_hp_bienc_infonce_bert_base_cnetp_pretrain.txt
 
 #SBATCH --tasks-per-node=5
 #SBATCH --ntasks=5
