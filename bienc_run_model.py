@@ -580,7 +580,7 @@ if __name__ == "__main__":
                                     log.info(f"discription_str : {discription_str}")
 
                                     log.info(
-                                        f"new_model_run : max_epochs: {me}, batch_size: {bs}, warmup_ratio : {wr}, weight_decay : {wd}, tau: {tau}, lr: {lr}, dropout: {do}"
+                                        f"new_model_run : max_epochs: {me}, batch_size: {bs}, warmup_ratio : {wr}, weight_decay : {wd}, tau: {t}, lr: {lr}, dropout: {do}"
                                     )
                                     log.info(
                                         f"model_name: {config['model_params']['model_name']}"
