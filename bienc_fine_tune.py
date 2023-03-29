@@ -890,8 +890,8 @@ if __name__ == "__main__":
 
         max_epochs = [8, 10, 12, 14]
         batch_size = [32, 8, 16]
-        warmup_ratio = [0.0, 0.6, 0.1, 0.15]
-        weight_decay = [0.1, 0.3, 0.5]
+        warmup_ratio = [0.0, 0.6, 0.1]
+        weight_decay = [0.1, 0.01, 0.3, 0.5]
 
         lr = [2e-6, 1e-5]
         hidden_dropout_prob = [0.1, 0.3]
