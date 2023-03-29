@@ -35,10 +35,9 @@
         "warmup_ratio": 0.0,
         "num_warmup_steps": 0,
         "max_epochs": 0,
-        "early_stopping_patience": 0,
+        "early_stopping_patience": 100,
         "export_path": "trained_models/mcrae_fine_tune/prop_split",
-        "printout_freq": 100,
-        "lr_policy": null,
+        "lr_policy": "warmup",
         "weight_decay": 0.1
     }
 }
