@@ -10,10 +10,12 @@
 #SBATCH --account scw1858
 
 #SBATCH --partition highmem
-#SBATCH --qos="gpu7d"
+
 #SBATCH --time 0-01:00:00
 
-#SBATCH --gres=gpu:1
+##SBATCH --gres=gpu:1
+##SBATCH --qos="gpu7d"
+
 #SBATCH --mem=10G
 
 
