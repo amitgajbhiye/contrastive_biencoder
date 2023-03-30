@@ -526,14 +526,16 @@ if __name__ == "__main__":
         # tau = [0.01, 0.02, 0.03, 0.04, 0.05, 0.07, 0.07]
         # lr = [2e-6]
 
-        max_epochs = [4, 6, 8]
+        max_epochs = [50]
         batch_size = [32, 8, 16, 64]
         warmup_ratio = [0.6, 0.1, 0.15]
-        weight_decay = [0.1, 0.3, 0.5, 0.9]
+        weight_decay = [0.1, 0.3]
 
-        tau = [0.01, 0.05, 0.1]
-        lr = [2e-6, 1e-5]
-        hidden_dropout_prob = [0.1, 0.2, 0.3, 0.4, 0.5]
+        tau = [0.01, 0.05, 0.07, 0.1]
+
+        lr = [2e-6]
+
+        hidden_dropout_prob = [0.1, 0.3]
 
         log.info(f"max_epochs : {max_epochs}")
         log.info(f"batch_size : {batch_size}")
@@ -567,7 +569,7 @@ if __name__ == "__main__":
                                     config["model_params"]["hidden_dropout_prob"] = do
 
                                     config["model_params"]["model_name"] = (
-                                        "contastive_bienc_cnetp_pretrain_"
+                                        "contastive_bienc2_cnetp_pretrain_"
                                         + hf_checkpoint_name.replace("-", "_")
                                         + "_"
                                         + discription_str
