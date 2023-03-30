@@ -9,7 +9,7 @@
 #SBATCH --ntasks=5
 #SBATCH --account scw1858
 
-#SBATCH --partition highmen
+#SBATCH --partition highmem
 #SBATCH --qos="gpu7d"
 #SBATCH --time 0-01:00:00
 
