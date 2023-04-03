@@ -1,5 +1,5 @@
 {
-    "experiment_name": "bm1_mcrae_pcv_bb_cbien_cnetp",
+    "experiment_name": "bm1_wd_mcrae_pcv_bb_cbien_cnetp",
     "log_dirctory": "mcrae_fine_tune",
     "dataset_params": {
         "dataset_name": "property_split_mcrae_cnetp",
@@ -22,7 +22,7 @@
         "load_pretrained": true,
         "pretrained_model_name": "contastive_bienc2_cnetp_pretrain_bert_base_uncased_ep50_bs32_wr0.6_wd0.1_tau0.01_lr2e-06_do0.3.pt",
         "pretrained_model_path": "trained_models/bienc_cnetp_pretrained/contastive_bienc2_cnetp_pretrain_bert_base_uncased_ep50_bs32_wr0.6_wd0.1_tau0.01_lr2e-06_do0.3.pt",
-        "model_name": "bm1_mcrae_pcv_bb_cbien_cnetp.pt",
+        "model_name": "bm1_wd_mcrae_pcv_bb_cbien_cnetp.pt",
         "hf_checkpoint_name": "bert-base-uncased",
         "hf_model_path": "/scratch/c.scmag3/hf_pretrained_models/bert_base_uncased/model",
         "vector_strategy": "mask_token"
