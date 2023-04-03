@@ -11,7 +11,7 @@
 
 #SBATCH -p gpu_v100,gpu
 #SBATCH --mem=10g
-##SBATCH --gres=gpu:1
+#SBATCH --gres=gpu:1
 
 #SBATCH -t 0-00:30:00
 
