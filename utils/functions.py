@@ -262,36 +262,47 @@ def compute_scores(labels, preds):
     return scores
 
 
-def calculate_contrastive_loss(
-    dataset, batch, concept_embedding, property_embedding, loss_fn, device
-):
-    embed_all = torch.cat([concept_embedding, property_embedding], dim=0).to(device)
+# def calculate_contrastive_loss(
+#     dataset, batch, concept_embedding, property_embedding, loss_fn, device
+# ):
+#     embed_all = torch.cat([concept_embedding, property_embedding], dim=0).to(device)
 
-    # log.info(f"In calculate_contrastive_loss function")
-    # log.info(f"concept_embedding.shape : {concept_embedding.shape}")
-    # log.info(f"property_embedding.shape : {property_embedding.shape}")
-    # log.info(f"embed_all.shape : {embed_all.shape}")
+#     # log.info(f"In calculate_contrastive_loss function")
+#     # log.info(f"concept_embedding.shape : {concept_embedding.shape}")
+#     # log.info(f"property_embedding.shape : {property_embedding.shape}")
+#     # log.info(f"embed_all.shape : {embed_all.shape}")
 
-    indices = torch.arange(0, concept_embedding.size(0), device=device)
-    labels = torch.cat((indices, indices), dim=0)
+#     indices = torch.arange(0, concept_embedding.size(0), device=device)
+#     labels = torch.cat((indices, indices), dim=0)
 
-    # log.info(f"Labels : {labels}")
+#     # log.info(f"Labels : {labels}")
 
-    loss = loss_fn(embed_all, labels)
+#     loss = loss_fn(embed_all, labels)
 
-    # log.info(f"Loss value in calculate_contrastive_loss function:  {loss.item()}")
+#     # log.info(f"Loss value in calculate_contrastive_loss function:  {loss.item()}")
 
-    return loss
+#     return loss
 
 
 def calculate_infonce_loss(
     dataset, batch, concept_embedding, property_embedding, loss_fn, device
 ):
-    loss = loss_fn(
-        query=concept_embedding,
-        positive_key=property_embedding,
-        negative_keys=property_embedding,
-    )
+    query_embedding = dataset.query_embedding
+
+    if query_embedding == "concept":
+
+        loss = loss_fn(
+            query=concept_embedding,
+            positive_key=property_embedding,
+            negative_keys=property_embedding,
+        )
+    elif query_embedding == "property":
+
+        loss = loss_fn(
+            query=property_embedding,
+            positive_key=concept_embedding,
+            negative_keys=concept_embedding,
+        )
 
     return loss
 
@@ -429,115 +440,115 @@ def calculate_infonce_loss(
 #     return loss
 
 
-def calculate_ntxent_loss(
-    dataset, batch, concept_embedding, property_embedding, loss_fn, device
-):
+# def calculate_ntxent_loss(
+#     dataset, batch, concept_embedding, property_embedding, loss_fn, device
+# ):
 
-    concept_id_list_for_batch = torch.tensor(
-        [dataset.concept2idx[concept] for concept in batch[0]], device=device
-    )
-    property_id_list_for_batch = torch.tensor(
-        [dataset.property2idx[prop] for prop in batch[1]], device=device
-    )
+#     concept_id_list_for_batch = torch.tensor(
+#         [dataset.concept2idx[concept] for concept in batch[0]], device=device
+#     )
+#     property_id_list_for_batch = torch.tensor(
+#         [dataset.property2idx[prop] for prop in batch[1]], device=device
+#     )
 
-    print(flush=True)
-    print(
-        "concept_id_list_for_batch :",
-        len(concept_id_list_for_batch),
-        concept_id_list_for_batch,
-        flush=True,
-    )
-    print(
-        "property_id_list_for_batch :",
-        len(property_id_list_for_batch),
-        property_id_list_for_batch,
-        flush=True,
-    )
+#     print(flush=True)
+#     print(
+#         "concept_id_list_for_batch :",
+#         len(concept_id_list_for_batch),
+#         concept_id_list_for_batch,
+#         flush=True,
+#     )
+#     print(
+#         "property_id_list_for_batch :",
+#         len(property_id_list_for_batch),
+#         property_id_list_for_batch,
+#         flush=True,
+#     )
 
-    print("Batch Concepts", len(batch[0]), flush=True)
-    print(batch[0], flush=True)
-    print("Batch Properties", len(batch[1]), flush=True)
-    print(batch[1], flush=True)
+#     print("Batch Concepts", len(batch[0]), flush=True)
+#     print(batch[0], flush=True)
+#     print("Batch Properties", len(batch[1]), flush=True)
+#     print(batch[1], flush=True)
 
-    total_batch_loss = 0.0
+#     total_batch_loss = 0.0
 
-    for i in range(len(concept_id_list_for_batch)):
+#     for i in range(len(concept_id_list_for_batch)):
 
-        concept_id = concept_id_list_for_batch[i]
+#         concept_id = concept_id_list_for_batch[i]
 
-        print(flush=True)
-        print(f"Processing concept ID : {i}, {concept_id}", flush=True)
+#         print(flush=True)
+#         print(f"Processing concept ID : {i}, {concept_id}", flush=True)
 
-        # Extracting the property of the concept at the whole dataset level.
-        property_id_list_for_concept = torch.tensor(
-            dataset.con_pro_dict[concept_id.item()], device=device
-        )
+#         # Extracting the property of the concept at the whole dataset level.
+#         property_id_list_for_concept = torch.tensor(
+#             dataset.con_pro_dict[concept_id.item()], device=device
+#         )
 
-        # Extracting the negative property by excluding the properties that the concept may have at the  whole dataset level
-        negative_property_id_for_concept = torch.tensor(
-            [
-                x
-                for x in property_id_list_for_batch
-                if x not in property_id_list_for_concept
-            ],
-            device=device,
-        )
+#         # Extracting the negative property by excluding the properties that the concept may have at the  whole dataset level
+#         negative_property_id_for_concept = torch.tensor(
+#             [
+#                 x
+#                 for x in property_id_list_for_batch
+#                 if x not in property_id_list_for_concept
+#             ],
+#             device=device,
+#         )
 
-        print(f"property_id_list_for_batch : {property_id_list_for_batch}")
-        print(f"property_id_list_for_concept : {property_id_list_for_concept}")
-        print(f"negative_property_id_for_concept : {negative_property_id_for_concept}")
+#         print(f"property_id_list_for_batch : {property_id_list_for_batch}")
+#         print(f"property_id_list_for_concept : {property_id_list_for_concept}")
+#         print(f"negative_property_id_for_concept : {negative_property_id_for_concept}")
 
-        positive_property_for_concept_mask = torch.tensor(
-            [
-                [1] if x in negative_property_id_for_concept else [0]
-                for x in property_id_list_for_batch
-            ],
-            device=device,
-        )
+#         positive_property_for_concept_mask = torch.tensor(
+#             [
+#                 [1] if x in negative_property_id_for_concept else [0]
+#                 for x in property_id_list_for_batch
+#             ],
+#             device=device,
+#         )
 
-        positive_property_for_concept_mask[i] = 0
+#         positive_property_for_concept_mask[i] = 0
 
-        print(
-            f"i, positive_property_for_concept_mask : {i} , {positive_property_for_concept_mask}"
-        )
+#         print(
+#             f"i, positive_property_for_concept_mask : {i} , {positive_property_for_concept_mask}"
+#         )
 
-        neg_property_embedding = torch.mul(
-            property_embedding, positive_property_for_concept_mask
-        )
+#         neg_property_embedding = torch.mul(
+#             property_embedding, positive_property_for_concept_mask
+#         )
 
-        concept_embed = concept_embedding[i].unsqueeze(0)
-        positive_property_embed = property_embedding[i].unsqueeze(0)
+#         concept_embed = concept_embedding[i].unsqueeze(0)
+#         positive_property_embed = property_embedding[i].unsqueeze(0)
 
-        print(f"concept_embed.shape : {concept_embed.shape}")
-        print(f"positive_property_embed.shape : {positive_property_embed.shape}")
-        print(f"neg_property_embedding.shape : {neg_property_embedding.shape}")
-        print(f"neg_property_embedding")
-        print(neg_property_embedding)
+#         print(f"concept_embed.shape : {concept_embed.shape}")
+#         print(f"positive_property_embed.shape : {positive_property_embed.shape}")
+#         print(f"neg_property_embedding.shape : {neg_property_embedding.shape}")
+#         print(f"neg_property_embedding")
+#         print(neg_property_embedding)
 
-        batch_for_concept = torch.cat(
-            (concept_embed, positive_property_embed, neg_property_embedding), dim=0,
-        ).to(device)
+#         batch_for_concept = torch.cat(
+#             (concept_embed, positive_property_embed, neg_property_embedding), dim=0,
+#         ).to(device)
 
-        label = torch.arange(0, batch_for_concept.size(0), dtype=int, device=device)
-        label[1] = 0
+#         label = torch.arange(0, batch_for_concept.size(0), dtype=int, device=device)
+#         label[1] = 0
 
-        print("concept_embed", concept_embed.size(), flush=True)
-        print(
-            "positive_property_embed", positive_property_embed.size(), flush=True,
-        )
-        print("label", label.size(), label, flush=True)
-        print("batch_for_concept", batch_for_concept.size(), flush=True)
+#         print("concept_embed", concept_embed.size(), flush=True)
+#         print(
+#             "positive_property_embed", positive_property_embed.size(), flush=True,
+#         )
+#         print("label", label.size(), label, flush=True)
+#         print("batch_for_concept", batch_for_concept.size(), flush=True)
 
-        loss_for_concept = loss_fn(batch_for_concept, label)
+#         loss_for_concept = loss_fn(batch_for_concept, label)
 
-        print(f"Loss for concept : {loss_for_concept}", flush=True)
-        print(flush=True)
+#         print(f"Loss for concept : {loss_for_concept}", flush=True)
+#         print(flush=True)
 
-        total_batch_loss += loss_for_concept
+#         total_batch_loss += loss_for_concept
 
-    print(f"Total Loss for batch : {total_batch_loss}", flush=True)
+#     print(f"Total Loss for batch : {total_batch_loss}", flush=True)
 
-    return total_batch_loss
+#     return total_batch_loss
 
 
 def calculate_cross_entropy_loss(

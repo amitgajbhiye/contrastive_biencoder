@@ -71,11 +71,13 @@ class ConceptPropertyDataset(Dataset):
 
         # print ("self.con_pro_dict :", self.con_pro_dict)
         self.context_num = dataset_params.get("context_num")
+        self.query_embedding = dataset_params["query_embedding"]
 
         log.info(f"hf_tokenizer_name : {dataset_params.get('hf_tokenizer_name')}")
         log.info(f"self.tokenizer_class : {self.tokenizer_class}")
         log.info(f"Mask Token for the Model : {self.mask_token}")
         log.info(f"Context Num : {self.context_num}")
+        log.info(f"Query Embedding : {self.query_embedding}")
 
     def create_concept_idx_dicts(self):
 
