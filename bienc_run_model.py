@@ -525,6 +525,7 @@ if __name__ == "__main__":
         # tau = [0.01, 0.02, 0.03, 0.04, 0.05, 0.07, 0.07]
         # lr = [2e-6]
 
+        # G2 params
         max_epochs = [50]
         batch_size = [32, 8, 16, 64]
         warmup_ratio = [0.6, 0.1, 0.15]
@@ -534,10 +535,9 @@ if __name__ == "__main__":
         lr = [2e-6]
         hidden_dropout_prob = [0.1, 0.3]
 
-        # G3 Params
-
-        # max_epochs = [4, 6, 8]
-        # batch_size = [32, 16, 64]
+        # # G3 Params
+        # max_epochs = [4, 8, 16]
+        # batch_size = [16, 32]
         # warmup_ratio = [0.6, 0.1, 0.15]
         # weight_decay = [0.1, 0.3]
         # tau = [0.01, 0.05, 0.07, 0.1]
