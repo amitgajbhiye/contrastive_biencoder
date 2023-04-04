@@ -933,7 +933,7 @@ if __name__ == "__main__":
                     for wd in weight_decay:
                         for l in lr:
                             for do in hidden_dropout_prob:
-                                for path in pretrained_model_paths:
+                                for idx, path in enumerate(pretrained_model_paths):
 
                                     discription_str = (
                                         f"ep{me}_bs{bs}_wr{wr}_wd{wd}_lr{l}_do{do}"
@@ -965,7 +965,7 @@ if __name__ == "__main__":
                                     log.info("*" * 50)
 
                                     log.info(f"discription_str : {discription_str}")
-                                    log.info(f"Fine Tuning Model : {path}")
+                                    log.info(f"Fine Tuning Model : {idx}, {path}")
 
                                     log.info(
                                         f"new_model_run : max_epochs: {me}, batch_size: {bs}, warmup_ratio : {wr}, weight_decay : {wd}, lr: {lr}, dropout: {do}"
