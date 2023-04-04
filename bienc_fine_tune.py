@@ -924,6 +924,7 @@ if __name__ == "__main__":
         )
 
         log.info(f"export_path : {export_path}")
+        log.info(f"Num Pretrained Models : {len(pretrained_model_paths)}")
         log.info(f"pretrained_model_paths : {pretrained_model_paths}")
 
         for me in max_epochs:
