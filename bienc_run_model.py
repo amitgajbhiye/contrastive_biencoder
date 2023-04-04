@@ -531,10 +531,18 @@ if __name__ == "__main__":
         weight_decay = [0.1, 0.3]
 
         tau = [0.01, 0.05, 0.07, 0.1]
-
         lr = [2e-6]
-
         hidden_dropout_prob = [0.1, 0.3]
+
+        # G3 Params
+
+        # max_epochs = [4, 6, 8]
+        # batch_size = [32, 16, 64]
+        # warmup_ratio = [0.6, 0.1, 0.15]
+        # weight_decay = [0.1, 0.3]
+        # tau = [0.01, 0.05, 0.07, 0.1]
+        # lr = [2e-6]
+        # hidden_dropout_prob = [0.1, 0.3]
 
         log.info(f"max_epochs : {max_epochs}")
         log.info(f"batch_size : {batch_size}")
