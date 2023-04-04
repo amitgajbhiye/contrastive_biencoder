@@ -921,7 +921,7 @@ if __name__ == "__main__":
 
         pretrained_model_paths = glob(
             f"{os.path.join(export_path, 'contastive_bienc2')}*"
-        )
+        )[0:18]
 
         log.info(f"export_path : {export_path}")
         log.info(f"Num Pretrained Models : {len(pretrained_model_paths)}")
