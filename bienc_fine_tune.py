@@ -919,7 +919,9 @@ if __name__ == "__main__":
 
         export_path = config["training_params"]["export_path"]
 
-        pretrained_model_paths = glob(f"{os.join(export_path, 'contastive_bienc2')}*")
+        pretrained_model_paths = glob(
+            f"{os.path.join(export_path, 'contastive_bienc2')}*"
+        )
 
         log.info(f"export_path : {export_path}")
         log.info(f"pretrained_model_paths : {pretrained_model_paths}")
