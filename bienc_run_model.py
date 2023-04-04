@@ -22,8 +22,6 @@ from utils.functions import (
     read_config,
     set_seed,
     calculate_cross_entropy_loss,
-    calculate_contrastive_loss,
-    calculate_ntxent_loss,
     calculate_infonce_loss,
     plot_loss_curve,
 )
@@ -102,15 +100,16 @@ def train_single_epoch(
                 device=device,
             )
         elif isinstance(loss_fn, losses.NTXentLoss):
+            pass
 
-            batch_loss = calculate_ntxent_loss(
-                dataset=train_dataset,
-                batch=batch,
-                concept_embedding=concept_embedding,
-                property_embedding=property_embedding,
-                loss_fn=loss_fn,
-                device=device,
-            )
+            # batch_loss = calculate_ntxent_loss(
+            #     dataset=train_dataset,
+            #     batch=batch,
+            #     concept_embedding=concept_embedding,
+            #     property_embedding=property_embedding,
+            #     loss_fn=loss_fn,
+            #     device=device,
+            # )
 
         elif isinstance(loss_fn, InfoNCE):
 
@@ -203,15 +202,15 @@ def evaluate(model, valid_dataset, valid_dataloader, loss_fn, device):
                 device=device,
             )
         elif isinstance(loss_fn, losses.NTXentLoss):
-
-            batch_loss = calculate_contrastive_loss(
-                dataset=valid_dataset,
-                batch=batch,
-                concept_embedding=concept_embedding,
-                property_embedding=property_embedding,
-                loss_fn=loss_fn,
-                device=device,
-            )
+            pass
+            # batch_loss = calculate_contrastive_loss(
+            #     dataset=valid_dataset,
+            #     batch=batch,
+            #     concept_embedding=concept_embedding,
+            #     property_embedding=property_embedding,
+            #     loss_fn=loss_fn,
+            #     device=device,
+            # )
 
         elif isinstance(loss_fn, InfoNCE):
 
