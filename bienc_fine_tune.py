@@ -3,6 +3,8 @@ import logging
 
 import os
 import math
+
+from glob import glob
 from argparse import ArgumentParser
 
 
@@ -888,13 +890,22 @@ if __name__ == "__main__":
         if config["training_params"].get("do_cv"):
             cv_type = config["training_params"].get("cv_type")
 
-        max_epochs = [8, 10, 12, 14]
-        batch_size = [32, 8, 16]
-        warmup_ratio = [0.0, 0.6, 0.1]
-        weight_decay = [0.1, 0.01, 0.3, 0.5]
+        # max_epochs = [8, 10, 12, 14]
+        # batch_size = [32, 8, 16]
+        # warmup_ratio = [0.0, 0.6, 0.1]
+        # weight_decay = [0.1, 0.01, 0.3, 0.5]
 
-        lr = [2e-6, 1e-5]
-        hidden_dropout_prob = [0.1, 0.3]
+        # lr = [2e-6, 1e-5]
+        # hidden_dropout_prob = [0.1, 0.3]
+
+        # For finding the best pretrained model
+        max_epochs = [14]
+        batch_size = [32]
+        warmup_ratio = [0.0]
+        weight_decay = [0.1]
+
+        lr = [2e-6]
+        hidden_dropout_prob = [0.1]
 
         log.info(f"max_epochs : {max_epochs}")
         log.info(f"batch_size : {batch_size}")
@@ -906,152 +917,171 @@ if __name__ == "__main__":
 
         hf_checkpoint_name = config["model_params"]["hf_checkpoint_name"]
 
+        export_path = config["training_params"]["export_path"]
+
+        pretrained_model_paths = glob(f"{os.join(export_path, 'contastive_bienc2')}*")
+
+        log.info(f"export_path : {export_path}")
+        log.info(f"pretrained_model_paths : {pretrained_model_paths}")
+
         for me in max_epochs:
             for bs in batch_size:
                 for wr in warmup_ratio:
                     for wd in weight_decay:
                         for l in lr:
                             for do in hidden_dropout_prob:
+                                for path in pretrained_model_paths:
 
-                                discription_str = (
-                                    f"ep{me}_bs{bs}_wr{wr}_wd{wd}_lr{l}_do{do}"
-                                )
+                                    discription_str = (
+                                        f"ep{me}_bs{bs}_wr{wr}_wd{wd}_lr{l}_do{do}"
+                                    )
 
-                                config["training_params"]["max_epochs"] = me
-                                config["dataset_params"]["loader_params"][
-                                    "batch_size"
-                                ] = bs
-                                config["training_params"]["warmup_ratio"] = wr
-                                config["training_params"]["weight_decay"] = wd
+                                    config["training_params"]["max_epochs"] = me
+                                    config["dataset_params"]["loader_params"][
+                                        "batch_size"
+                                    ] = bs
+                                    config["training_params"]["warmup_ratio"] = wr
+                                    config["training_params"]["weight_decay"] = wd
 
-                                config["training_params"]["lr"] = l
-                                config["model_params"]["hidden_dropout_prob"] = do
+                                    config["training_params"]["lr"] = l
+                                    config["model_params"]["hidden_dropout_prob"] = do
 
-                                config["model_params"]["model_name"] = (
-                                    "mcrae_ft_"
-                                    + hf_checkpoint_name.replace("-", "_")
-                                    + "_"
-                                    + discription_str
-                                    + ".pt"
-                                )
+                                    config["model_params"]["model_name"] = (
+                                        "mcrae_ft_"
+                                        + hf_checkpoint_name.replace("-", "_")
+                                        + "_"
+                                        + discription_str
+                                        + ".pt"
+                                    )
 
-                                log.info("\n")
-                                log.info("*" * 50)
+                                    config["model_params"][
+                                        "pretrained_model_path"
+                                    ] = path
 
-                                log.info(f"discription_str : {discription_str}")
+                                    log.info("\n")
+                                    log.info("*" * 50)
 
-                                log.info(
-                                    f"new_model_run : max_epochs: {me}, batch_size: {bs}, warmup_ratio : {wr}, weight_decay : {wd}, lr: {lr}, dropout: {do}"
-                                )
-                                log.info(
-                                    f"model_name: {config['model_params']['model_name']}"
-                                )
-                                log.info(f"new_config_file")
-                                log.info(config)
-
-                                if cv_type == "model_selection":
+                                    log.info(f"discription_str : {discription_str}")
+                                    log.info(f"Fine Tuning Model : {path}")
 
                                     log.info(
-                                        f"Cross Validation for Hyperparameter Tuning - that is Model Selection"
-                                    )
-                                    log.info("Reading Input Train File")
-                                    concept_property_df, label_df = read_train_data(
-                                        config["dataset_params"]
-                                    )
-
-                                    assert (
-                                        concept_property_df.shape[0]
-                                        == label_df.shape[0]
-                                    )
-
-                                    model_selection_cross_validation(
-                                        config, concept_property_df, label_df
-                                    )
-
-                                elif cv_type == "model_evaluation_property_split":
-
-                                    log.info(
-                                        f'Parameter do_cv : {config["training_params"].get("do_cv")}'
+                                        f"new_model_run : max_epochs: {me}, batch_size: {bs}, warmup_ratio : {wr}, weight_decay : {wd}, lr: {lr}, dropout: {do}"
                                     )
                                     log.info(
-                                        "Cross Validation for Model Evaluation - Data Splited on Property basis"
+                                        f"model_name: {config['model_params']['model_name']}"
                                     )
-                                    log.info(f"Parameter cv_type : {cv_type}")
+                                    log.info(f"new_config_file")
+                                    log.info(config)
 
-                                    model_evaluation_property_cross_validation(config)
+                                    if cv_type == "model_selection":
 
-                                elif (
-                                    cv_type == "model_evaluation_concept_property_split"
-                                ):
-
-                                    log.info(
-                                        f'Parameter do_cv : {config["training_params"].get("do_cv")}'
-                                    )
-                                    log.info(
-                                        "Cross Validation for Model Evaluation - Data Splited on both Concept and Property basis"
-                                    )
-                                    log.info(f"Parameter cv_type : {cv_type}")
-
-                                    model_evaluation_concept_property_cross_validation(
-                                        config
-                                    )
-
-                                else:
-                                    log.info(
-                                        f"Training the model without cross validdation"
-                                    )
-                                    log.info(
-                                        f"Parameter 'do_cv' is {config['training_params'].get('do_cv')}"
-                                    )
-
-                                    log.info("Reading Input Train File")
-                                    concept_property_df, label_df = read_train_data(
-                                        config["dataset_params"]
-                                    )
-                                    assert (
-                                        concept_property_df.shape[0]
-                                        == label_df.shape[0]
-                                    )
-
-                                    train_df = pd.concat(
-                                        (concept_property_df, label_df), axis=1
-                                    )
-
-                                    log.info(f"Train DF shape : {train_df.shape}")
-
-                                    load_pretrained = config.get("model_params").get(
-                                        "load_pretrained"
-                                    )
-
-                                    if load_pretrained:
                                         log.info(
-                                            f"load_pretrained is : {load_pretrained}"
+                                            f"Cross Validation for Hyperparameter Tuning - that is Model Selection"
                                         )
-                                        log.info(f"Loading Pretrained Model ...")
-                                        model = load_pretrained_model(config)
+                                        log.info("Reading Input Train File")
+                                        concept_property_df, label_df = read_train_data(
+                                            config["dataset_params"]
+                                        )
+
+                                        assert (
+                                            concept_property_df.shape[0]
+                                            == label_df.shape[0]
+                                        )
+
+                                        model_selection_cross_validation(
+                                            config, concept_property_df, label_df
+                                        )
+
+                                    elif cv_type == "model_evaluation_property_split":
+
+                                        log.info(
+                                            f'Parameter do_cv : {config["training_params"].get("do_cv")}'
+                                        )
+                                        log.info(
+                                            "Cross Validation for Model Evaluation - Data Splited on Property basis"
+                                        )
+                                        log.info(f"Parameter cv_type : {cv_type}")
+
+                                        model_evaluation_property_cross_validation(
+                                            config
+                                        )
+
+                                    elif (
+                                        cv_type
+                                        == "model_evaluation_concept_property_split"
+                                    ):
+
+                                        log.info(
+                                            f'Parameter do_cv : {config["training_params"].get("do_cv")}'
+                                        )
+                                        log.info(
+                                            "Cross Validation for Model Evaluation - Data Splited on both Concept and Property basis"
+                                        )
+                                        log.info(f"Parameter cv_type : {cv_type}")
+
+                                        model_evaluation_concept_property_cross_validation(
+                                            config
+                                        )
+
                                     else:
-                                        # Untrained LM is Loaded  - for baselines results
                                         log.info(
-                                            f"load_pretrained is : {load_pretrained}"
+                                            f"Training the model without cross validdation"
                                         )
-                                        model = create_model(config.get("model_params"))
+                                        log.info(
+                                            f"Parameter 'do_cv' is {config['training_params'].get('do_cv')}"
+                                        )
 
-                                    # log.info(f"The pretrained model that is loaded is :")
-                                    # log.info(model)
+                                        log.info("Reading Input Train File")
+                                        concept_property_df, label_df = read_train_data(
+                                            config["dataset_params"]
+                                        )
+                                        assert (
+                                            concept_property_df.shape[0]
+                                            == label_df.shape[0]
+                                        )
 
-                                    total_params, trainable_params = count_parameters(
-                                        model
-                                    )
+                                        train_df = pd.concat(
+                                            (concept_property_df, label_df), axis=1
+                                        )
 
-                                    log.info(
-                                        f"The total number of parameters in the model : {total_params}"
-                                    )
-                                    log.info(
-                                        f"Trainable parameters in the model : {trainable_params}"
-                                    )
+                                        log.info(f"Train DF shape : {train_df.shape}")
 
-                                    train(model, config, train_df, valid_df=None)
-                                    test_best_model(
-                                        config=config, test_df=None, fold=None
-                                    )
+                                        load_pretrained = config.get(
+                                            "model_params"
+                                        ).get("load_pretrained")
+
+                                        if load_pretrained:
+                                            log.info(
+                                                f"load_pretrained is : {load_pretrained}"
+                                            )
+                                            log.info(f"Loading Pretrained Model ...")
+                                            model = load_pretrained_model(config)
+                                        else:
+                                            # Untrained LM is Loaded  - for baselines results
+                                            log.info(
+                                                f"load_pretrained is : {load_pretrained}"
+                                            )
+                                            model = create_model(
+                                                config.get("model_params")
+                                            )
+
+                                        # log.info(f"The pretrained model that is loaded is :")
+                                        # log.info(model)
+
+                                        (
+                                            total_params,
+                                            trainable_params,
+                                        ) = count_parameters(model)
+
+                                        log.info(
+                                            f"The total number of parameters in the model : {total_params}"
+                                        )
+                                        log.info(
+                                            f"Trainable parameters in the model : {trainable_params}"
+                                        )
+
+                                        train(model, config, train_df, valid_df=None)
+                                        test_best_model(
+                                            config=config, test_df=None, fold=None
+                                        )
 
