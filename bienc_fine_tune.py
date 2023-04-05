@@ -919,13 +919,15 @@ if __name__ == "__main__":
 
         export_path = config["training_params"]["export_path"]
 
-        # pretrained_model_paths = glob(
-        #     f"{os.path.join(export_path, 'contastive_bienc2')}*"
-        # )[0:18]
-
+        # Log files name grid0_ep50_search_best_model
         pretrained_model_paths = glob(
-            f"{os.path.join(export_path, 'contastive_bienc_cnetp_pretrain_bert_base_uncased')}*"
+            f"{os.path.join(export_path, 'contastive_bienc2')}*"
         )
+
+        # Log files name grid1_ep4_search_best_model
+        # pretrained_model_paths = glob(
+        #     f"{os.path.join(export_path, 'contastive_bienc_cnetp_pretrain_bert_base_uncased')}*"
+        # )
 
         log.info(f"export_path : {export_path}")
         log.info(f"Num Pretrained Models : {len(pretrained_model_paths)}")
