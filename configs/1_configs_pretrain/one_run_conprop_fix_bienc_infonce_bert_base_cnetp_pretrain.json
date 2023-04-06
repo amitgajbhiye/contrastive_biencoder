@@ -1,6 +1,6 @@
 {
-    "experiment_name": "one_run_prop_fix_bienc_infonce_bert_base_cnetp_pretrain",
-    "log_dirctory": "pretrain",
+    "experiment_name": "one_run_conprop_fix_bienc_infonce_bert_base_cnetp_pretrain",
+    "log_dirctory": "conprop_fix_infonce_loss_pretrain",
     "dataset_params": {
         "dataset_name": "cnetp",
         "train_file_path": "data/train_data/bienc_con_prop/clean_train_cnetp.tsv",
@@ -17,10 +17,10 @@
             "num_workers": 4,
             "pin_memory": true
         },
-        "query_embedding": "property"
+        "query_embedding": "concept_and_property"
     },
     "model_params": {
-        "model_name": "one_run_prop_fix_bienc_infonce_bert_base_cnetp_pretrain.pt",
+        "model_name": "one_run_conprop_fix_bienc_infonce_bert_base_cnetp_pretrain.pt",
         "hf_checkpoint_name": "bert-base-uncased",
         "hf_model_path": "/scratch/c.scmag3/hf_pretrained_models/bert_base_uncased/model",
         "vector_strategy": "mask_token"
@@ -34,7 +34,7 @@
         "num_warmup_steps": 0,
         "max_epochs": 50,
         "early_stopping_patience": 10,
-        "export_path": "trained_models/bienc_cnetp_pretrained",
+        "export_path": "trained_models/conprop_fix_infonce_cnet_pretrained",
         "printout_freq": 100,
         "lr_policy": null,
         "weight_decay": 0.01

@@ -303,6 +303,26 @@ def calculate_infonce_loss(
             positive_key=concept_embedding,
             negative_keys=concept_embedding,
         )
+    elif query_embedding == "concept_and_property":
+
+        concept_fix_loss = loss_fn(
+            query=concept_embedding,
+            positive_key=property_embedding,
+            negative_keys=property_embedding,
+        )
+
+        property_fix_loss = loss_fn(
+            query=property_embedding,
+            positive_key=concept_embedding,
+            negative_keys=concept_embedding,
+        )
+
+        loss = concept_fix_loss + property_fix_loss
+
+        print(flush=True)
+        print(f"concept_fix_loss : {concept_fix_loss}", flush=True)
+        print(f"property_fix_loss : {property_fix_loss}", flush=True)
+        print(f"total_loss : {loss}", flush=True)
 
     return loss
 
