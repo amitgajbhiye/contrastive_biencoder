@@ -652,6 +652,30 @@ def calculate_cross_entropy_loss(
     return loss_pos_concept + loss_neg_concept, batch_logits, batch_labels
 
 
+def calculate_joint_cross_entropy_and_contarstive_loss(
+    dataset, batch, concept_embedding, property_embedding, loss_fn, device
+):
+    assert isinstance(loss_fn, list), f"Wrong loss function : {loss_fn}"
+
+    bce_loss, infonce_loss = loss_fn
+
+    cross_entropy_loss, _, _ = calculate_cross_entropy_loss(
+        dataset, batch, concept_embedding, property_embedding, bce_loss, device
+    )
+
+    contra_loss = calculate_infonce_loss(
+        dataset, batch, concept_embedding, property_embedding, infonce_loss, device
+    )
+
+    print(flush=True)
+    print(f"contra_loss : {contra_loss}", flush=True)
+    print(f"cross_entropy_loss : {cross_entropy_loss}", flush=True)
+
+    loss = contra_loss + cross_entropy_loss
+
+    return loss
+
+
 def load_pretrained_model(config):
 
     model = create_model(config.get("model_params"))

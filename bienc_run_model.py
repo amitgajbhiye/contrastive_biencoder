@@ -23,7 +23,7 @@ from utils.functions import (
     set_seed,
     calculate_cross_entropy_loss,
     calculate_infonce_loss,
-    plot_loss_curve,
+    calculate_joint_cross_entropy_and_contarstive_loss,
 )
 
 log = logging.getLogger(__name__)
@@ -114,6 +114,16 @@ def train_single_epoch(
         elif isinstance(loss_fn, InfoNCE):
 
             batch_loss = calculate_infonce_loss(
+                dataset=train_dataset,
+                batch=batch,
+                concept_embedding=concept_embedding,
+                property_embedding=property_embedding,
+                loss_fn=loss_fn,
+                device=device,
+            )
+        elif isinstance(loss_fn, list):
+
+            batch_loss = calculate_joint_cross_entropy_and_contarstive_loss(
                 dataset=train_dataset,
                 batch=batch,
                 concept_embedding=concept_embedding,
@@ -222,6 +232,16 @@ def evaluate(model, valid_dataset, valid_dataloader, loss_fn, device):
                 loss_fn=loss_fn,
                 device=device,
             )
+        elif isinstance(loss_fn, list):
+
+            batch_loss = calculate_joint_cross_entropy_and_contarstive_loss(
+                dataset=valid_dataset,
+                batch=batch,
+                concept_embedding=concept_embedding,
+                property_embedding=property_embedding,
+                loss_fn=loss_fn,
+                device=device,
+            )
 
         val_loss += batch_loss.item()
         torch.cuda.empty_cache()
@@ -262,8 +282,15 @@ def train(config, trial=None):
 
     elif loss_function == "infonce":
         tau = config["training_params"]["tau"]
-        # loss_fn = losses.NTXentLoss(temperature=tau)
         loss_fn = InfoNCE(temperature=tau, reduction="mean", negative_mode="unpaired")
+
+    elif loss_function == "joint":
+        bce_loss = nn.BCEWithLogitsLoss()
+        infonce_loss = InfoNCE(
+            temperature=tau, reduction="mean", negative_mode="unpaired"
+        )
+
+        loss_fn = [bce_loss, infonce_loss]
 
     optimizer = AdamW(model.parameters(), lr=lr, weight_decay=weight_decay,)
 
@@ -406,12 +433,6 @@ def train(config, trial=None):
             ):
                 log.info(
                     f"Early Stopping ---> Maximum Patience - {config['training_params'].get('early_stopping_patience')} Reached !!"
-                )
-
-                plot_loss_curve(
-                    train_loss=train_losses,
-                    val_loss=train_losses,
-                    export_path=config["training_params"].get("export_path"),
                 )
 
                 break
