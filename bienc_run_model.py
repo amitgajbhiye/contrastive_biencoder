@@ -285,6 +285,8 @@ def train(config, trial=None):
         loss_fn = InfoNCE(temperature=tau, reduction="mean", negative_mode="unpaired")
 
     elif loss_function == "joint":
+
+        tau = config["training_params"]["tau"]
         bce_loss = nn.BCEWithLogitsLoss()
         infonce_loss = InfoNCE(
             temperature=tau, reduction="mean", negative_mode="unpaired"
