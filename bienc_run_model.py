@@ -47,14 +47,14 @@ def train_single_epoch(
 
         concepts_batch, property_batch = train_dataset.add_context(batch)
 
-        # if print_freq < 1:
-        #     log.info(f"concepts_batch : {concepts_batch}")
-        #     log.info(f"property_batch : {property_batch}")
+        if print_freq < 1:
+            log.info(f"concepts_batch : {concepts_batch}")
+            log.info(f"property_batch : {property_batch}")
 
-        #     print(f"concepts_batch : {concepts_batch}", flush=True)
-        #     print(f"property_batch : {property_batch}", flush=True)
+            print(f"concepts_batch : {concepts_batch}", flush=True)
+            print(f"property_batch : {property_batch}", flush=True)
 
-        #     print_freq += 1
+            print_freq += 1
 
         ids_dict = train_dataset.tokenize(concepts_batch, property_batch)
 
@@ -576,6 +576,7 @@ if __name__ == "__main__":
         log.info(f"hidden_dropout_prob : {hidden_dropout_prob}")
 
         hf_checkpoint_name = config["model_params"]["hf_checkpoint_name"]
+        model_prefix = config["model_params"]["model_name"]
 
         for me in max_epochs:
             for bs in batch_size:
@@ -599,7 +600,8 @@ if __name__ == "__main__":
                                     config["model_params"]["hidden_dropout_prob"] = do
 
                                     config["model_params"]["model_name"] = (
-                                        "entropy_infonce_joint_loss_cnetp_pretrain_"
+                                        model_prefix
+                                        + "_"
                                         + hf_checkpoint_name.replace("-", "_")
                                         + "_"
                                         + discription_str
