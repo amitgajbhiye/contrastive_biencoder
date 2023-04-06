@@ -1,6 +1,6 @@
 {
-    "experiment_name": "one_run_joint_bienc_bert_base_cnetp_pretrain",
-    "log_dirctory": "pretrain",
+    "experiment_name": "grid3_search_jointloss_bienc_bert_base_cnetp_pretrain",
+    "log_dirctory": "entropy_infonce_joint_loss",
     "dataset_params": {
         "dataset_name": "cnetp",
         "train_file_path": "data/train_data/bienc_con_prop/clean_train_cnetp.tsv",
@@ -13,31 +13,30 @@
         "add_context": true,
         "context_num": 6,
         "loader_params": {
-            "batch_size": 32,
+            "batch_size": 0,
             "num_workers": 4,
             "pin_memory": true
         },
-        "query_embedding": "property"
+        "query_embedding": "concept"
     },
     "model_params": {
-        "model_name": "one_run_joint_bienc_bert_base_cnetp_pretrain.pt",
+        "model_name": null,
         "hf_checkpoint_name": "bert-base-uncased",
         "hf_model_path": "/scratch/c.scmag3/hf_pretrained_models/bert_base_uncased/model",
-        "vector_strategy": "mask_token",
-        "query_embedding:": "concept"
+        "vector_strategy": "mask_token"
     },
     "training_params": {
-        "hp_tuning": false,
+        "hp_tuning": "grid_search",
         "loss_function": "joint",
-        "tau": 0.05,
-        "lr": 2e-6,
+        "tau": 0,
+        "lr": 0,
         "warmup_ratio": 0.0,
         "num_warmup_steps": 0,
-        "max_epochs": 50,
-        "early_stopping_patience": 5,
-        "export_path": "trained_models/bienc_cnetp_pretrained",
+        "max_epochs": 0,
+        "early_stopping_patience": 3,
+        "export_path": "trained_models/entropy_infonce_joint_loss",
         "printout_freq": 100,
         "lr_policy": null,
-        "weight_decay": 0.01
+        "weight_decay": 0.0
     }
 }
