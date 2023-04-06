@@ -667,11 +667,12 @@ def calculate_joint_cross_entropy_and_contarstive_loss(
         dataset, batch, concept_embedding, property_embedding, infonce_loss, device
     )
 
+    loss = contra_loss + cross_entropy_loss
+
     print(flush=True)
     print(f"contra_loss : {contra_loss}", flush=True)
     print(f"cross_entropy_loss : {cross_entropy_loss}", flush=True)
-
-    loss = contra_loss + cross_entropy_loss
+    print(f"Total loss : {loss}", flush=True)
 
     return loss
 

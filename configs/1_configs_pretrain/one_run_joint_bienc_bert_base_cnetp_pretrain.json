@@ -34,7 +34,7 @@
         "warmup_ratio": 0.0,
         "num_warmup_steps": 0,
         "max_epochs": 50,
-        "early_stopping_patience": 10,
+        "early_stopping_patience": 5,
         "export_path": "trained_models/bienc_cnetp_pretrained",
         "printout_freq": 100,
         "lr_policy": null,
