@@ -7,7 +7,7 @@
         "val_file_path": "data/train_data/bienc_con_prop/clean_valid_cnetp.tsv",
         "test_file_path": null,
         "hf_tokenizer_name": "bert-large-uncased",
-        "hf_tokenizer_path": "/scratch/c.scmag3/hf_pretrained_models/bert_large_uncased/model",
+        "hf_tokenizer_path": "/scratch/c.scmag3/hf_pretrained_models/bert_large_uncased/tokenizer",
         "concept_max_len": 20,
         "property_max_len": 20,
         "add_context": true,
@@ -21,7 +21,7 @@
     "model_params": {
         "model_name": "one_run_bienc_infonce_bert_large_cnetp_pretrain.pt",
         "hf_checkpoint_name": "bert-large-uncased",
-        "hf_model_path": "/scratch/c.scmag3/hf_pretrained_models/bert_large_uncased/tokenizer",
+        "hf_model_path": "/scratch/c.scmag3/hf_pretrained_models/bert_large_uncased/model",
         "vector_strategy": "mask_token"
     },
     "training_params": {
