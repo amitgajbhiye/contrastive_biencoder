@@ -923,7 +923,7 @@ if __name__ == "__main__":
         #     f"{os.path.join(export_path, 'conprop_fix_infonce_cnetp_pretrain_bb_bienc_bert_base_uncased')}*"
         # )
 
-        pretrained_model_paths = glob(f"{export_path}*")
+        pretrained_model_paths = glob(f"{export_path}/*")
 
         log.info(f"export_path : {export_path}")
         log.info(f"Num Pretrained Models : {len(pretrained_model_paths)}")
