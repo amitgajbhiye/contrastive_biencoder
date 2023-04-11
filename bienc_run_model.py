@@ -246,7 +246,7 @@ def evaluate(model, valid_dataset, valid_dataloader, loss_fn, device):
         val_loss += batch_loss.item()
         torch.cuda.empty_cache()
 
-    avg_val_loss = round(val_loss / len(valid_dataloader), 4)
+    avg_val_loss = round(val_loss / len(valid_dataloader), 3)
 
     return avg_val_loss
 
@@ -387,10 +387,10 @@ def train(config, trial=None):
         else:
             log.info(f"optuna_trial is : {trial}")
 
-            if valid_loss > best_val_loss:
+            if valid_loss >= best_val_loss:
                 patience_counter += 1
                 log.info(
-                    f"Current validation loss: {valid_loss} is greater than the previous best loss: {best_val_loss}"
+                    f"Current validation loss: {valid_loss} is greater than/equal to the previous best loss: {best_val_loss}"
                 )
                 log.info("Incrementing Patience Counter")
             else:
