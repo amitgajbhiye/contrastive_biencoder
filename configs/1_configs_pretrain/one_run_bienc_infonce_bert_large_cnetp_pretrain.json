@@ -16,7 +16,8 @@
             "batch_size": 32,
             "num_workers": 4,
             "pin_memory": true
-        }
+        },
+        "query_embedding": "concept"
     },
     "model_params": {
         "model_name": "one_run_bienc_infonce_bert_large_cnetp_pretrain.pt",
