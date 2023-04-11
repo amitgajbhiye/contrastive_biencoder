@@ -246,7 +246,7 @@ def evaluate(model, valid_dataset, valid_dataloader, loss_fn, device):
         val_loss += batch_loss.item()
         torch.cuda.empty_cache()
 
-    avg_val_loss = round(val_loss / len(valid_dataloader), 3)
+    avg_val_loss = round(val_loss / len(valid_dataloader), 2)
 
     return avg_val_loss
 
