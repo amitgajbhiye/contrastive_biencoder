@@ -1,5 +1,5 @@
 {
-    "experiment_name": "mcrae_pcv_bert_large_cbien_cnetp",
+    "experiment_name": "mcrae_finetune_pcv_bert_large_cbien_cnetp",
     "log_dirctory": "mcrae_fine_tune",
     "dataset_params": {
         "dataset_name": "property_split_mcrae_cnetp",
