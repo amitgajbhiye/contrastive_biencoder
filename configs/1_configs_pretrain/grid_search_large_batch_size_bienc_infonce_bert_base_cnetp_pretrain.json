@@ -19,7 +19,7 @@
         }
     },
     "model_params": {
-        "model_name": null,
+        "model_name": "cbienc_large_batch_size_cnetp_pretrain",
         "hf_checkpoint_name": "bert-base-uncased",
         "hf_model_path": "/scratch/c.scmag3/hf_pretrained_models/bert_base_uncased/model",
         "vector_strategy": "mask_token",
