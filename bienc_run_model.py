@@ -559,13 +559,22 @@ if __name__ == "__main__":
         # hidden_dropout_prob = [0.1, 0.3]
 
         # G3 Params
-        max_epochs = [4, 6, 8]
-        batch_size = [8, 16, 32]
-        warmup_ratio = [0.1, 0.15]
-        weight_decay = [0.1, 0.3]
-        tau = [0.01, 0.05, 0.07, 0.1]
-        lr = [2e-6, 1e-5]
-        hidden_dropout_prob = [0.1]
+        # max_epochs = [4, 6, 8]
+        # batch_size = [8, 16, 32]
+        # warmup_ratio = [0.1, 0.15]
+        # weight_decay = [0.1, 0.3]
+        # tau = [0.01, 0.05, 0.07, 0.1]
+        # lr = [2e-6, 1e-5]
+        # hidden_dropout_prob = [0.1]
+
+        # G4 Large batch size grid
+        max_epochs = [4, 6]
+        batch_size = [16, 32, 64, 128]
+        warmup_ratio = [0.15]
+        weight_decay = [0.9]
+        tau = [0.9]
+        lr = [1e-5]
+        hidden_dropout_prob = [0.4]
 
         log.info(f"max_epochs : {max_epochs}")
         log.info(f"batch_size : {batch_size}")
