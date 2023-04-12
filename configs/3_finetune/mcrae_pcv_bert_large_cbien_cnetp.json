@@ -1,13 +1,13 @@
 {
-    "experiment_name": "prop_fix_mcrae_pcv_bb_cbien_cnetp",
+    "experiment_name": "mcrae_pcv_bert_large_cbien_cnetp",
     "log_dirctory": "mcrae_fine_tune",
     "dataset_params": {
         "dataset_name": "property_split_mcrae_cnetp",
         "train_file_path": "data/evaluation_data/con_prop/mcrae_extended/clean_train_mcrae.tsv",
-        "val_file_path": "None",
+        "val_file_path": null,
         "test_file_path": "data/evaluation_data/con_prop/mcrae_extended/clean_test_mcrae.tsv",
-        "hf_tokenizer_name": "bert-base-uncased",
-        "hf_tokenizer_path": "/scratch/c.scmag3/hf_pretrained_models/bert_base_uncased/tokenizer",
+        "hf_tokenizer_name": "bert-large-uncased",
+        "hf_tokenizer_path": "/scratch/c.scmag3/hf_pretrained_models/bert_large_uncased/tokenizer",
         "concept_max_len": 20,
         "property_max_len": 20,
         "add_context": true,
@@ -20,11 +20,11 @@
     },
     "model_params": {
         "load_pretrained": true,
-        "pretrained_model_name": "one_run_prop_fix_bienc_infonce_bert_base_cnetp_pretrain.pt",
-        "pretrained_model_path": "trained_models/bienc_cnetp_pretrained/one_run_prop_fix_bienc_infonce_bert_base_cnetp_pretrain.pt",
-        "model_name": "prop_fix_mcrae_pcv_bb_cbien_cnetp.pt",
-        "hf_checkpoint_name": "bert-base-uncased",
-        "hf_model_path": "/scratch/c.scmag3/hf_pretrained_models/bert_base_uncased/model",
+        "pretrained_model_name": "one_run_bienc_infonce_bert_large_cnetp_pretrain.pt",
+        "pretrained_model_path": "trained_models/bienc_cnetp_pretrained/one_run_bienc_infonce_bert_large_cnetp_pretrain.pt",
+        "model_name": "mcrae_pcv_bert_large_cbien_cnetp.pt",
+        "hf_checkpoint_name": "bert-large-uncased",
+        "hf_model_path": "/scratch/c.scmag3/hf_pretrained_models/bert_large_uncased/model",
         "vector_strategy": "mask_token"
     },
     "training_params": {
