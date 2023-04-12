@@ -568,7 +568,7 @@ if __name__ == "__main__":
         # hidden_dropout_prob = [0.1]
 
         # G4 Large batch size grid
-        max_epochs = [4, 6]
+        max_epochs = [10, 15, 18, 20]
         batch_size = [16, 32, 64, 128]
         warmup_ratio = [0.15]
         weight_decay = [0.9]
