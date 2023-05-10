@@ -552,13 +552,22 @@ if __name__ == "__main__":
         # hidden_dropout_prob = [0.1]
 
         # G4 Large batch size grid
-        max_epochs = [10, 15, 18, 20]
-        batch_size = [16, 32, 64, 128]
-        warmup_ratio = [0.15]
-        weight_decay = [0.9]
-        tau = [0.9]
-        lr = [1e-5]
-        hidden_dropout_prob = [0.4]
+        # max_epochs = [10, 15, 18, 20]
+        # batch_size = [16, 32, 64, 128]
+        # warmup_ratio = [0.15]
+        # weight_decay = [0.9]
+        # tau = [0.9]
+        # lr = [1e-5]
+        # hidden_dropout_prob = [0.4]
+
+        # G5 Params - ChatGpt20KData
+        max_epochs = [4, 8, 12, 16]
+        batch_size = [16, 32]
+        warmup_ratio = [0.1, 0.15]
+        weight_decay = [0.1, 0.3]
+        tau = [0.05, 0.07, 0.1]
+        lr = [2e-6, 1e-5]
+        hidden_dropout_prob = [0.2, 0.3, 0.4]
 
         log.info(f"max_epochs : {max_epochs}")
         log.info(f"batch_size : {batch_size}")
@@ -606,7 +615,7 @@ if __name__ == "__main__":
                                     log.info(f"discription_str : {discription_str}")
 
                                     log.info(
-                                        f"new_model_run : max_epochs: {me}, batch_size: {bs}, warmup_ratio : {wr}, weight_decay : {wd}, tau: {t}, lr: {lr}, dropout: {do}"
+                                        f"new_model_run : max_epochs: {me}, batch_size: {bs}, warmup_ratio : {wr}, weight_decay : {wd}, tau: {t}, lr: {l}, dropout: {do}"
                                     )
                                     log.info(
                                         f"model_name: {config['model_params']['model_name']}"
