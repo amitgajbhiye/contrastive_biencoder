@@ -14,7 +14,9 @@
 
 #SBATCH --mem=10G
 
-#SBATCH --time 2-00:00:00
+#SBATCH --time 7-00:00:00
+#SBATCH --qos=gpu7d
+
 
 conda activate venv
 
