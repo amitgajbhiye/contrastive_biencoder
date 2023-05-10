@@ -60,7 +60,6 @@ class ConceptPropertyModel(nn.Module):
         property_attention_mask,
         property_token_type_id,
     ):
-
         concept_output = self._concept_encoder(
             input_ids=concept_input_id,
             attention_mask=concept_attention_mask,
@@ -84,7 +83,6 @@ class ConceptPropertyModel(nn.Module):
         )
 
         if self.strategy == "mean":
-
             # The dot product of the average of the last hidden states of the concept and property hidden states.
 
             v_concept_avg = torch.sum(
@@ -123,7 +121,6 @@ class ConceptPropertyModel(nn.Module):
             return concept_cls, property_cls, logits
 
         elif self.strategy == "mask_token":
-
             # The dot product of the mask tokens.
 
             # Index of mask token in concept input ids
@@ -169,4 +166,3 @@ class ConceptPropertyModel(nn.Module):
             # print(property_mask_token_index)
 
             return concept_mask_vector, property_mask_vector, logits
-

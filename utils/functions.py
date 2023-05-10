@@ -30,7 +30,6 @@ def set_seed(seed):
 
 
 def set_logger(config):
-
     # log_file_name = f"logs/cslb_fine_tuned_100k_logs/log_{config.get('experiment_name')}_{time.strftime('%d-%m-%Y_%H-%M-%S')}.txt"
 
     log_file_name = os.path.join(
@@ -58,7 +57,6 @@ def to_cpu(x):
 
 
 def read_config(config_file):
-
     if isinstance(config_file, str):
         with open(config_file, "r") as json_file:
             config_dict = json.load(json_file)
@@ -69,7 +67,6 @@ def read_config(config_file):
 
 
 def read_train_data(dataset_params):
-
     data_df = pd.read_csv(
         dataset_params.get("train_file_path"),
         sep="\t",
@@ -97,7 +94,6 @@ def read_train_data(dataset_params):
 
 
 def read_train_and_test_data(dataset_params):
-
     train_df = pd.read_csv(
         dataset_params.get("train_file_path"),
         sep="\t",
@@ -209,7 +205,6 @@ def read_train_and_test_data(dataset_params):
 
 
 def create_dataset_and_dataloader(dataset_params, dataset_type):
-
     if dataset_type in ("train", "valid"):
         dataset = ConceptPropertyDataset(dataset_params, dataset_type)
         data_sampler = RandomSampler(dataset)
@@ -223,7 +218,6 @@ def create_dataset_and_dataloader(dataset_params, dataset_type):
         )
 
     elif dataset_type == "test":
-
         dataset = TestDataset(dataset_params)
         data_sampler = SequentialSampler(dataset)
 
@@ -244,7 +238,6 @@ def create_model(model_params):
 
 
 def compute_scores(labels, preds):
-
     assert len(labels) == len(
         preds
     ), f"labels len: {len(labels)} is not equal to preds len {len(preds)}"
@@ -290,21 +283,18 @@ def calculate_infonce_loss(
     query_embedding = dataset.query_embedding
 
     if query_embedding == "concept":
-
         loss = loss_fn(
             query=concept_embedding,
             positive_key=property_embedding,
             negative_keys=property_embedding,
         )
     elif query_embedding == "property":
-
         loss = loss_fn(
             query=property_embedding,
             positive_key=concept_embedding,
             negative_keys=concept_embedding,
         )
     elif query_embedding == "concept_and_property":
-
         concept_fix_loss = loss_fn(
             query=concept_embedding,
             positive_key=property_embedding,
@@ -574,7 +564,6 @@ def calculate_infonce_loss(
 def calculate_cross_entropy_loss(
     dataset, batch, concept_embedding, property_embedding, loss_fn, device
 ):
-
     # self.concept2idx, self.idx2concept = self.create_concept_idx_dicts()
     # self.property2idx, self.idx2property = self.create_property_idx_dicts()
 
@@ -617,7 +606,6 @@ def calculate_cross_entropy_loss(
     loss_neg_concept = 0.0
 
     for i in range(len(concept_id_list_for_batch)):
-
         concept_id = concept_id_list_for_batch[i]
 
         # Extracting the property of the concept at the whole dataset level.
@@ -698,7 +686,6 @@ def calculate_joint_cross_entropy_and_contarstive_loss(
 
 
 def load_pretrained_model(config):
-
     model = create_model(config.get("model_params"))
     pretrained_model_path = config["model_params"]["pretrained_model_path"]
 
@@ -712,7 +699,6 @@ def load_pretrained_model(config):
 
 
 def mcrae_dataset_and_dataloader(dataset_params, dataset_type, data_df=None):
-
     if dataset_type in ("train", "valid"):
         dataset = McRaeConceptPropertyDataset(
             dataset_params=dataset_params, dataset_type=dataset_type, data_df=data_df
@@ -728,7 +714,6 @@ def mcrae_dataset_and_dataloader(dataset_params, dataset_type, data_df=None):
         )
 
     elif dataset_type in ("test",):
-
         if data_df is not None:
             dataset = McRaeConceptPropertyDataset(
                 dataset_params=dataset_params,
@@ -737,7 +722,9 @@ def mcrae_dataset_and_dataloader(dataset_params, dataset_type, data_df=None):
             )
         else:
             dataset = McRaeConceptPropertyDataset(
-                dataset_params=dataset_params, dataset_type=dataset_type, data_df=None,
+                dataset_params=dataset_params,
+                dataset_type=dataset_type,
+                data_df=None,
             )
 
         data_sampler = SequentialSampler(dataset)
@@ -755,7 +742,6 @@ def mcrae_dataset_and_dataloader(dataset_params, dataset_type, data_df=None):
 
 
 def count_parameters(model):
-
     total_params = sum(p.numel() for p in model.parameters())
     trainable_params = sum(p.numel() for p in model.parameters() if p.requires_grad)
 
@@ -763,7 +749,6 @@ def count_parameters(model):
 
 
 def plot_loss_curve(train_loss, val_loss, export_path=None, plot_name="loss_curve.png"):
-
     plt.rcParams["figure.dpi"] = 300
     plt.rcParams["savefig.dpi"] = 300
 

@@ -34,7 +34,6 @@ device = torch.device("cuda") if torch.cuda.is_available() else torch.device("cp
 def train_single_epoch(
     model, train_dataset, train_dataloader, loss_fn, optimizer, scheduler
 ):
-
     epoch_loss = 0.0
 
     model.train()
@@ -42,7 +41,6 @@ def train_single_epoch(
     print_freq = 0
 
     for step, batch in enumerate(train_dataloader):
-
         model.zero_grad()
 
         concepts_batch, property_batch = train_dataset.add_context(batch)
@@ -59,7 +57,6 @@ def train_single_epoch(
         ids_dict = train_dataset.tokenize(concepts_batch, property_batch)
 
         if train_dataset.hf_tokenizer_name in ("roberta-base", "roberta-large"):
-
             (
                 concept_inp_id,
                 concept_attention_mask,
@@ -90,7 +87,6 @@ def train_single_epoch(
         )
 
         if isinstance(loss_fn, nn.BCEWithLogitsLoss):
-
             batch_loss, batch_logits, batch_labels = calculate_cross_entropy_loss(
                 dataset=train_dataset,
                 batch=batch,
@@ -112,7 +108,6 @@ def train_single_epoch(
             # )
 
         elif isinstance(loss_fn, InfoNCE):
-
             batch_loss = calculate_infonce_loss(
                 dataset=train_dataset,
                 batch=batch,
@@ -122,7 +117,6 @@ def train_single_epoch(
                 device=device,
             )
         elif isinstance(loss_fn, list):
-
             batch_loss = calculate_joint_cross_entropy_and_contarstive_loss(
                 dataset=train_dataset,
                 batch=batch,
@@ -144,7 +138,6 @@ def train_single_epoch(
         epoch_loss += batch_loss.item()
 
         if step % 100 == 0 and not step == 0:
-
             log.info(
                 f"Batch {step} of {len(train_dataloader)} ----> Train Batch Loss : {round(batch_loss.item(), 4)}"
             )
@@ -155,7 +148,6 @@ def train_single_epoch(
 
 
 def evaluate(model, valid_dataset, valid_dataloader, loss_fn, device):
-
     val_loss = 0.0
 
     model.eval()
@@ -163,13 +155,11 @@ def evaluate(model, valid_dataset, valid_dataloader, loss_fn, device):
     epoch_logits, epoch_labels = [], []
 
     for step, batch in enumerate(valid_dataloader):
-
         concepts_batch, property_batch = valid_dataset.add_context(batch)
 
         ids_dict = valid_dataset.tokenize(concepts_batch, property_batch)
 
         if valid_dataset.hf_tokenizer_name in ("roberta-base", "roberta-large"):
-
             (
                 concept_inp_id,
                 concept_attention_mask,
@@ -191,7 +181,6 @@ def evaluate(model, valid_dataset, valid_dataloader, loss_fn, device):
             ) = [val.to(device) for _, val in ids_dict.items()]
 
         with torch.no_grad():
-
             concept_embedding, property_embedding, logits = model(
                 concept_input_id=concept_inp_id,
                 concept_attention_mask=concept_attention_mask,
@@ -202,7 +191,6 @@ def evaluate(model, valid_dataset, valid_dataloader, loss_fn, device):
             )
 
         if isinstance(loss_fn, nn.BCEWithLogitsLoss):
-
             batch_loss, batch_logits, batch_labels = calculate_cross_entropy_loss(
                 dataset=valid_dataset,
                 batch=batch,
@@ -223,7 +211,6 @@ def evaluate(model, valid_dataset, valid_dataloader, loss_fn, device):
             # )
 
         elif isinstance(loss_fn, InfoNCE):
-
             batch_loss = calculate_infonce_loss(
                 dataset=valid_dataset,
                 batch=batch,
@@ -233,7 +220,6 @@ def evaluate(model, valid_dataset, valid_dataloader, loss_fn, device):
                 device=device,
             )
         elif isinstance(loss_fn, list):
-
             batch_loss = calculate_joint_cross_entropy_and_contarstive_loss(
                 dataset=valid_dataset,
                 batch=batch,
@@ -252,7 +238,6 @@ def evaluate(model, valid_dataset, valid_dataloader, loss_fn, device):
 
 
 def train(config, trial=None):
-
     log.info("Initialising datasets...")
 
     train_dataset, train_dataloader = create_dataset_and_dataloader(
@@ -285,7 +270,6 @@ def train(config, trial=None):
         loss_fn = InfoNCE(temperature=tau, reduction="mean", negative_mode="unpaired")
 
     elif loss_function == "joint":
-
         tau = config["training_params"]["tau"]
         bce_loss = nn.BCEWithLogitsLoss()
         infonce_loss = InfoNCE(
@@ -294,14 +278,17 @@ def train(config, trial=None):
 
         loss_fn = [bce_loss, infonce_loss]
 
-    optimizer = AdamW(model.parameters(), lr=lr, weight_decay=weight_decay,)
+    optimizer = AdamW(
+        model.parameters(),
+        lr=lr,
+        weight_decay=weight_decay,
+    )
 
     total_training_steps = len(train_dataloader) * config["training_params"].get(
         "max_epochs"
     )
 
     if config["training_params"]["lr_policy"] == "warmup":
-
         warmup_ratio = config["training_params"]["warmup_ratio"]
         num_warmup_steps = math.ceil(total_training_steps * warmup_ratio)
 
@@ -329,7 +316,6 @@ def train(config, trial=None):
     patience_counter = 0
 
     for epoch in trange(start_epoch, config["training_params"].get("max_epochs") + 1):
-
         log.info(f"  Epoch {epoch} of {config['training_params'].get('max_epochs')}")
         print("\n", flush=True)
 
@@ -370,7 +356,6 @@ def train(config, trial=None):
         print(flush=True)
 
         if trial is not None:
-
             print(f"train_losses : {train_losses}", flush=True)
             print("valid_losses : {valid_losses}", flush=True)
 
@@ -413,7 +398,8 @@ def train(config, trial=None):
                 log.info(f"best_model_path : {best_model_path}")
 
                 torch.save(
-                    model.state_dict(), best_model_path,
+                    model.state_dict(),
+                    best_model_path,
                 )
 
                 log.info(
@@ -443,14 +429,14 @@ def train(config, trial=None):
 
 
 def test_best_model(config):
-
     log.info(f"\n {'*' * 50}")
     log.info(f"Testing the best model")
 
     model = create_model(config.get("model_params"))
 
     best_model_path = os.path.join(
-        config["training_params"]["export_path"], config["model_params"]["model_name"],
+        config["training_params"]["export_path"],
+        config["model_params"]["model_name"],
     )
 
     log.info(f"Testing the best model : {best_model_path}")
@@ -467,7 +453,6 @@ def test_best_model(config):
     all_test_preds = []
 
     for step, batch in enumerate(test_dataloader):
-
         concepts_batch, property_batch = test_dataset.add_context(batch)
 
         ids_dict = test_dataset.tokenize(concepts_batch, property_batch)
@@ -482,7 +467,6 @@ def test_best_model(config):
         ) = [val.to(device) for _, val in ids_dict.items()]
 
         with torch.no_grad():
-
             concept_embedding, property_embedding, logits = model(
                 concept_input_id=concept_inp_id,
                 concept_attention_mask=concept_attention_mask,
@@ -507,13 +491,14 @@ def test_best_model(config):
 
 
 if __name__ == "__main__":
-
     set_seed(1)
 
     parser = argparse.ArgumentParser(description="Biencoder Concept Property Model")
 
     parser.add_argument(
-        "--config_file", required=True, help="path to the configuration file",
+        "--config_file",
+        required=True,
+        help="path to the configuration file",
     )
 
     args = parser.parse_args()
@@ -537,7 +522,6 @@ if __name__ == "__main__":
     # test_best_model(config)
 
     elif hp_tuning == "grid_search":
-
         log.info("Doing Hyperparameter Search With Grid Search")
 
         # max_epochs = [15, 20, 25, 30]
@@ -594,7 +578,6 @@ if __name__ == "__main__":
                         for t in tau:
                             for l in lr:
                                 for do in hidden_dropout_prob:
-
                                     discription_str = f"ep{me}_bs{bs}_wr{wr}_wd{wd}_tau{t}_lr{l}_do{do}"
 
                                     config["training_params"]["max_epochs"] = me
@@ -634,11 +617,9 @@ if __name__ == "__main__":
                                     val_loss = train(config, trial=None)
 
     elif hp_tuning == "optuna":
-
         log.info("Doing Hyperparameter Search with Optuna")
 
         def objective(trial):
-
             _batch_size = trial.suggest_categorical("batch_size", [32, 64, 128])
             _max_epochs = trial.suggest_int("max_epochs", 10, 60)
             _warmup_ratio = trial.suggest_float("warmup_ratio", 0.05, 0.20)
@@ -676,7 +657,6 @@ if __name__ == "__main__":
             return val_loss
 
         def hp_tune(objective):
-
             optuna_sampler = optuna.samplers.TPESampler()
             optuna_pruner = optuna.pruners.SuccessiveHalvingPruner()
 
@@ -709,4 +689,3 @@ if __name__ == "__main__":
                 print("    {}: {}".format(key, value), flush=True)
 
         hp_tune(objective=objective)
-
