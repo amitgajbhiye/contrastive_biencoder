@@ -1,0 +1,42 @@
+{
+    "experiment_name": "infonce_conceptfix_bienc_bert_base_chatgpt100k_pretrain",
+    "log_dirctory": "chatgpt_pretrain",
+    "dataset_params": {
+        "dataset_name": "chatgpt100k",
+        "train_file_path": "data/chatgpt/new_data_chatgpt_100k_train.tsv",
+        "val_file_path": "data/chatgpt/new_data_chatgpt_100k_val.tsv",
+        "test_file_path": null,
+        "hf_tokenizer_name": "bert-base-uncased",
+        "hf_tokenizer_path": "/scratch/c.scmag3/hf_pretrained_models/bert_base_uncased/tokenizer",
+        "concept_max_len": 20,
+        "property_max_len": 20,
+        "add_context": true,
+        "context_num": 6,
+        "loader_params": {
+            "batch_size": 32,
+            "num_workers": 4,
+            "pin_memory": true
+        },
+        "query_embedding": "concept"
+    },
+    "model_params": {
+        "model_name": "infonce_conceptfix_bienc_bert_base_chatgpt100k_pretrain.pt",
+        "hf_checkpoint_name": "bert-base-uncased",
+        "hf_model_path": "/scratch/c.scmag3/hf_pretrained_models/bert_base_uncased/model",
+        "vector_strategy": "mask_token",
+        "hidden_dropout_prob": 0.4
+    },
+    "training_params": {
+        "hp_tuning": null,
+        "loss_function": "infonce",
+        "tau": 0.1,
+        "lr": 1e-05,
+        "lr_policy": "warmup",
+        "warmup_ratio": 0.15,
+        "num_warmup_steps": 0,
+        "max_epochs": 15,
+        "early_stopping_patience": 5,
+        "export_path": "trained_models/chatgpt_pretrain",
+        "weight_decay": 0.9
+    }
+}
