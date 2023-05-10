@@ -34,8 +34,8 @@
         "lr_policy": "warmup",
         "warmup_ratio": 0.15,
         "num_warmup_steps": 0,
-        "max_epochs": 4,
-        "early_stopping_patience": 3,
+        "max_epochs": 15,
+        "early_stopping_patience": 5,
         "export_path": "trained_models/chatgpt_pretrain",
         "weight_decay": 0.9
     }
