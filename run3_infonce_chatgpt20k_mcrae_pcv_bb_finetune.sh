@@ -1,6 +1,6 @@
 #!/bin/bash --login
 
-#SBATCH --job-name=20kChatMcFInetuning
+#SBATCH --job-name=ft20kChatMc
 
 #SBATCH --output=logs/chatgpt_mcrae_fine_tune/out_infonce_chatgpt20k_mcrae_pcv_bb_finetune.txt
 #SBATCH --error=logs/chatgpt_mcrae_fine_tune/err_infonce_chatgpt20k_mcrae_pcv_bb_finetune.txt
