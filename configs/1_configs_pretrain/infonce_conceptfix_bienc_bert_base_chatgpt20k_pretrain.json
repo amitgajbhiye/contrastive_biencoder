@@ -13,14 +13,14 @@
         "add_context": true,
         "context_num": 6,
         "loader_params": {
-            "batch_size": 0,
+            "batch_size": 32,
             "num_workers": 4,
             "pin_memory": true
         },
         "query_embedding": "concept"
     },
     "model_params": {
-        "model_name": null,
+        "model_name": "infonce_conceptfix_bienc_bert_base_chatgpt20k_pretrain.pt",
         "hf_checkpoint_name": "bert-base-uncased",
         "hf_model_path": "/scratch/c.scmag3/hf_pretrained_models/bert_base_uncased/model",
         "vector_strategy": "mask_token",
@@ -31,12 +31,12 @@
         "loss_function": "infonce",
         "tau": 0.1,
         "lr": 1e-05,
+        "lr_policy": "warmup",
         "warmup_ratio": 0.15,
         "num_warmup_steps": 0,
         "max_epochs": 4,
         "early_stopping_patience": 3,
         "export_path": "trained_models/chatgpt_pretrain",
-        "lr_policy": "warmup",
-        "weight_decay": 0.0
+        "weight_decay": 0.9
     }
 }

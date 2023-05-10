@@ -281,6 +281,7 @@ def calculate_infonce_loss(
     dataset, batch, concept_embedding, property_embedding, loss_fn, device
 ):
     query_embedding = dataset.query_embedding
+    assert query_embedding is not None, "query_embedding is None"
 
     if query_embedding == "concept":
         loss = loss_fn(
