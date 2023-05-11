@@ -524,50 +524,15 @@ if __name__ == "__main__":
     elif hp_tuning == "grid_search":
         log.info("Doing Hyperparameter Search With Grid Search")
 
-        # max_epochs = [15, 20, 25, 30]
-        # batch_size = [8, 16, 32, 64]
-        # warmup_ratio = [0.1, 0.15]
-        # weight_decay = [0.1]
-
-        # tau = [0.01, 0.02, 0.03, 0.04, 0.05, 0.07, 0.07]
-        # lr = [2e-6]
-
-        # G2 params
-        # max_epochs = [50]
-        # batch_size = [32, 8, 16, 64]
-        # warmup_ratio = [0.6, 0.1, 0.15]
-        # weight_decay = [0.1, 0.3]
-
-        # tau = [0.01, 0.05, 0.07, 0.1]
-        # lr = [2e-6]
-        # hidden_dropout_prob = [0.1, 0.3]
-
-        # G3 Params
-        # max_epochs = [4, 6, 8]
-        # batch_size = [8, 16, 32]
-        # warmup_ratio = [0.1, 0.15]
-        # weight_decay = [0.1, 0.3]
-        # tau = [0.01, 0.05, 0.07, 0.1]
-        # lr = [2e-6, 1e-5]
-        # hidden_dropout_prob = [0.1]
-
-        # G4 Large batch size grid
-        # max_epochs = [10, 15, 18, 20]
-        # batch_size = [16, 32, 64, 128]
-        # warmup_ratio = [0.15]
-        # weight_decay = [0.9]
-        # tau = [0.9]
-        # lr = [1e-5]
-        # hidden_dropout_prob = [0.4]
-
-        # G5 Params - ChatGpt20KData
-        max_epochs = [4, 8, 12, 16]
-        batch_size = [16, 32]
-        warmup_ratio = [0.1, 0.15]
+        # Look at other grid searches (Gs) in path file
+        # G6 Params - ChatGpt100KData
+        max_epochs = [25]
+        batch_size = [32, 64]
+        warmup_ratio = [0, 0.1, 0.15]
         weight_decay = [0.1, 0.3]
         tau = [0.05, 0.07, 0.1]
-        lr = [2e-6, 1e-5]
-        hidden_dropout_prob = [0.2, 0.3, 0.4]
+        lr = [2e-6]
+        hidden_dropout_prob = [0.3]
 
         log.info(f"max_epochs : {max_epochs}")
         log.info(f"batch_size : {batch_size}")
