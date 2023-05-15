@@ -526,11 +526,21 @@ if __name__ == "__main__":
 
         # Look at other grid searches (Gs) in path file
         # G6 Params - ChatGpt100KData
+        # max_epochs = [25]
+        # batch_size = [32, 64]
+        # warmup_ratio = [0, 0.1, 0.15]
+        # weight_decay = [0.1, 0.3]
+        # tau = [0.05, 0.07, 0.1]
+        # lr = [2e-6]
+        # hidden_dropout_prob = [0.3]
+
+        # Look at other grid searches (Gs) in path file
+        # G7 Params - propfix CnetPChatGpt100KData
         max_epochs = [25]
         batch_size = [32, 64]
-        warmup_ratio = [0, 0.1, 0.15]
-        weight_decay = [0.1, 0.3]
-        tau = [0.05, 0.07, 0.1]
+        warmup_ratio = [0, 0.15]
+        weight_decay = [0.1]
+        tau = [0.05, 0.07, 0.1, 0.15]
         lr = [2e-6]
         hidden_dropout_prob = [0.3]
 
