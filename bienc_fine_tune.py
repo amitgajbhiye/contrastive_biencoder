@@ -886,7 +886,7 @@ if __name__ == "__main__":
         # hidden_dropout_prob = [0.1, 0.3]
 
         # For finding the best pretrained model
-        max_epochs = [14]
+        max_epochs = [6]
         batch_size = [32]
         warmup_ratio = [0.0]
         weight_decay = [0.1]
@@ -951,7 +951,7 @@ if __name__ == "__main__":
                                         f"finetuning_pretrained_model : {idx}, {path}"
                                     )
                                     log.info(
-                                        f"new_model_run : max_epochs: {me}, batch_size: {bs}, warmup_ratio : {wr}, weight_decay : {wd}, lr: {lr}, dropout: {do}"
+                                        f"new_model_run : max_epochs: {me}, batch_size: {bs}, warmup_ratio : {wr}, weight_decay : {wd}, lr: {l}, dropout: {do}"
                                     )
                                     log.info(
                                         f"finetune_model_name: {config['model_params']['model_name']}"
