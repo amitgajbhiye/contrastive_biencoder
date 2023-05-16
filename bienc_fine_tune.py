@@ -38,7 +38,6 @@ device = torch.device("cuda") if torch.cuda.is_available() else torch.device("cp
 def train_single_epoch(
     model, train_dataset, train_dataloader, loss_fn, optimizer, scheduler
 ):
-
     model.to(device)
     model.train()
 
@@ -46,7 +45,6 @@ def train_single_epoch(
     print_freq = 0
 
     for step, batch in enumerate(train_dataloader):
-
         model.zero_grad()
 
         label = batch.pop(-1)
@@ -64,7 +62,6 @@ def train_single_epoch(
         ids_dict = train_dataset.tokenize(concepts_batch, property_batch)
 
         if train_dataset.hf_tokenizer_name in ("roberta-base", "roberta-large"):
-
             (
                 concept_inp_id,
                 concept_attention_mask,
@@ -114,7 +111,6 @@ def train_single_epoch(
         torch.cuda.empty_cache()
 
         if step % 100 == 0 and not step == 0:
-
             batch_labels = label.reshape(-1, 1).detach().cpu().numpy()
 
             batch_logits = (
@@ -134,7 +130,6 @@ def train_single_epoch(
 
 
 def evaluate(model, valid_dataset, valid_dataloader, loss_fn, device):
-
     model.eval()
 
     val_loss = 0.0
@@ -142,7 +137,6 @@ def evaluate(model, valid_dataset, valid_dataloader, loss_fn, device):
     print_freq = 0
 
     for step, batch in enumerate(valid_dataloader):
-
         label = batch.pop(-1)
 
         concepts_batch, property_batch = valid_dataset.add_context(batch)
@@ -175,7 +169,6 @@ def evaluate(model, valid_dataset, valid_dataloader, loss_fn, device):
             ) = [val.to(device) for _, val in ids_dict.items()]
 
         with torch.no_grad():
-
             concept_embedding, property_embedding, logits = model(
                 concept_input_id=concept_inp_id,
                 concept_attention_mask=concept_attention_mask,
@@ -210,7 +203,6 @@ def evaluate(model, valid_dataset, valid_dataloader, loss_fn, device):
 
 
 def train(model, config, train_df, fold=None, valid_df=None):
-
     log.info("Initialising datasets...")
 
     train_dataset, train_dataloader = mcrae_dataset_and_dataloader(
@@ -226,14 +218,17 @@ def train(model, config, train_df, fold=None, valid_df=None):
     lr = config["training_params"]["lr"]
     weight_decay = config["training_params"]["weight_decay"]
 
-    optimizer = AdamW(model.parameters(), lr=lr, weight_decay=weight_decay,)
+    optimizer = AdamW(
+        model.parameters(),
+        lr=lr,
+        weight_decay=weight_decay,
+    )
 
     total_training_steps = len(train_dataloader) * config["training_params"].get(
         "max_epochs"
     )
 
     if config["training_params"]["lr_policy"] == "warmup":
-
         warmup_ratio = config["training_params"]["warmup_ratio"]
         num_warmup_steps = math.ceil(total_training_steps * warmup_ratio)
 
@@ -260,7 +255,6 @@ def train(model, config, train_df, fold=None, valid_df=None):
     patience_counter = 0
 
     for epoch in range(start_epoch, config["training_params"].get("max_epochs") + 1):
-
         log.info(f"  Epoch {epoch} of {config['training_params'].get('max_epochs')}")
         print("\n", flush=True)
 
@@ -291,7 +285,8 @@ def train(model, config, train_df, fold=None, valid_df=None):
         log.info(f"best_model_path : {model_save_path}")
 
         torch.save(
-            model.state_dict(), model_save_path,
+            model.state_dict(),
+            model_save_path,
         )
 
         log.info(f"The model is saved in : {model_save_path}")
@@ -304,7 +299,6 @@ def train(model, config, train_df, fold=None, valid_df=None):
 
         # when doing cross validation (cv)
         if valid_df is not None:
-
             valid_dataset, valid_dataloader = mcrae_dataset_and_dataloader(
                 dataset_params=config.get("dataset_params"),
                 dataset_type="valid",
@@ -346,7 +340,8 @@ def train(model, config, train_df, fold=None, valid_df=None):
                 log.info(f"best_model_path : {best_model_path}")
 
                 torch.save(
-                    model.state_dict(), best_model_path,
+                    model.state_dict(),
+                    best_model_path,
                 )
 
                 log.info(f"Best model at epoch: {epoch}, Binary F1: {val_binary_f1}")
@@ -377,14 +372,15 @@ def train(model, config, train_df, fold=None, valid_df=None):
 
 
 def model_selection_cross_validation(config, concept_property_df, label_df):
-
     skf = StratifiedKFold(n_splits=5)
 
     for fold_num, (train_index, test_index) in enumerate(
         skf.split(concept_property_df, label_df)
     ):
-
-        (concept_property_train_fold, concept_property_valid_fold,) = (
+        (
+            concept_property_train_fold,
+            concept_property_valid_fold,
+        ) = (
             concept_property_df.iloc[train_index],
             concept_property_df.iloc[test_index],
         )
@@ -452,7 +448,6 @@ def model_selection_cross_validation(config, concept_property_df, label_df):
 
 
 def model_evaluation_property_cross_validation(config):
-
     log.info(f"Training the model with PROPERTY cross validation")
     log.info(f"Parameter 'do_cv' is : {config['training_params'].get('do_cv')}")
     log.info(f"Parameter 'cv_type' is : {config['training_params'].get('cv_type')}")
@@ -478,7 +473,6 @@ def model_evaluation_property_cross_validation(config):
     label, preds = [], []
 
     for fold, test_prop_id in test_fold_mapping.items():
-
         log.info("\n")
         log.info("^" * 50)
         log.info(f"Training the model on fold : {fold}")
@@ -533,7 +527,9 @@ def model_evaluation_property_cross_validation(config):
         log.info(f"Test scores for fold :  {fold}")
 
         fold_label, fold_preds = test_best_model(
-            config=config, test_df=test_df, fold=fold,
+            config=config,
+            test_df=test_df,
+            fold=fold,
         )
 
         label.append(fold_label)
@@ -557,7 +553,6 @@ def model_evaluation_property_cross_validation(config):
 
 
 def model_evaluation_concept_property_cross_validation(config):
-
     log.info(f"Training the model with CONCEPT-PROPERTY cross validation")
     log.info(f"Parameter 'do_cv' is : {config['training_params'].get('do_cv')}")
     log.info(f"Parameter 'cv_type' is : {config['training_params'].get('cv_type')}")
@@ -675,7 +670,9 @@ def model_evaluation_concept_property_cross_validation(config):
         log.info(f"Test scores for fold :  {fold}")
 
         fold_label, fold_preds = test_best_model(
-            config=config, test_df=test_df, fold=fold,
+            config=config,
+            test_df=test_df,
+            fold=fold,
         )
 
         label.append(fold_label)
@@ -700,7 +697,6 @@ def model_evaluation_concept_property_cross_validation(config):
 
 
 def test_best_model(config, test_df, fold=None):
-
     log.info(f"\n {'*' * 50}")
     log.info(f"Testing the fine tuned model")
     # log.info(f"Test DF shape in test_best_model : {test_df.shape}")
@@ -736,13 +732,11 @@ def test_best_model(config, test_df, fold=None):
     all_test_preds = []
 
     for step, batch in enumerate(test_dataloader):
-
         concepts_batch, property_batch = test_dataset.add_context(batch)
 
         ids_dict = test_dataset.tokenize(concepts_batch, property_batch)
 
         if test_dataset.hf_tokenizer_name in ("roberta-base", "roberta-large"):
-
             (
                 concept_inp_id,
                 concept_attention_mask,
@@ -764,7 +758,6 @@ def test_best_model(config, test_df, fold=None):
             ) = [val.to(device) for _, val in ids_dict.items()]
 
         with torch.no_grad():
-
             concept_embedding, property_embedding, logits = model(
                 concept_input_id=concept_inp_id,
                 concept_attention_mask=concept_attention_mask,
@@ -792,7 +785,6 @@ def test_best_model(config, test_df, fold=None):
 
 
 if __name__ == "__main__":
-
     set_seed(1)
 
     parser = ArgumentParser(description="Fine tune configuration")
@@ -814,13 +806,10 @@ if __name__ == "__main__":
     hp_tuning = config["training_params"]["hp_tuning"]
 
     if not hp_tuning:
-
         if config["training_params"].get("do_cv"):
-
             cv_type = config["training_params"].get("cv_type")
 
             if cv_type == "model_selection":
-
                 log.info(
                     f"Cross Validation for Hyperparameter Tuning - that is Model Selection"
                 )
@@ -834,7 +823,6 @@ if __name__ == "__main__":
                 model_selection_cross_validation(config, concept_property_df, label_df)
 
             elif cv_type == "model_evaluation_property_split":
-
                 log.info(f'Parameter do_cv : {config["training_params"].get("do_cv")}')
                 log.info(
                     "Cross Validation for Model Evaluation - Data Splited on Property basis"
@@ -844,7 +832,6 @@ if __name__ == "__main__":
                 model_evaluation_property_cross_validation(config)
 
             elif cv_type == "model_evaluation_concept_property_split":
-
                 log.info(f'Parameter do_cv : {config["training_params"].get("do_cv")}')
                 log.info(
                     "Cross Validation for Model Evaluation - Data Splited on both Concept and Property basis"
@@ -916,18 +903,12 @@ if __name__ == "__main__":
         log.info(f"hidden_dropout_prob : {hidden_dropout_prob}")
 
         hf_checkpoint_name = config["model_params"]["hf_checkpoint_name"]
+        pretrained_model_path = config["model_params"]["pretrained_model_path"]
+        pretrained_models = glob(f"{pretrained_model_path}/*")
 
-        export_path = config["training_params"]["export_path"]
-
-        # pretrained_model_paths = glob(
-        #     f"{os.path.join(export_path, 'conprop_fix_infonce_cnetp_pretrain_bb_bienc_bert_base_uncased')}*"
-        # )
-
-        pretrained_model_paths = glob(f"{export_path}/*")
-
-        log.info(f"export_path : {export_path}")
-        log.info(f"Num Pretrained Models : {len(pretrained_model_paths)}")
-        log.info(f"pretrained_model_paths : {pretrained_model_paths}")
+        log.info(f"pretrained_model_path : {pretrained_model_path}")
+        log.info(f"Num Pretrained Models : {len(pretrained_models)}")
+        log.info(f"pretrained_model_paths : {pretrained_models}")
 
         for me in max_epochs:
             for bs in batch_size:
@@ -935,8 +916,7 @@ if __name__ == "__main__":
                     for wd in weight_decay:
                         for l in lr:
                             for do in hidden_dropout_prob:
-                                for idx, path in enumerate(pretrained_model_paths):
-
+                                for idx, path in enumerate(pretrained_models):
                                     discription_str = (
                                         f"ep{me}_bs{bs}_wr{wr}_wd{wd}_lr{l}_do{do}"
                                     )
@@ -967,19 +947,20 @@ if __name__ == "__main__":
                                     log.info("*" * 50)
 
                                     log.info(f"discription_str : {discription_str}")
-                                    log.info(f"Fine Tuning Model : {idx}, {path}")
-
+                                    log.info(
+                                        f"finetuning_pretrained_model : {idx}, {path}"
+                                    )
                                     log.info(
                                         f"new_model_run : max_epochs: {me}, batch_size: {bs}, warmup_ratio : {wr}, weight_decay : {wd}, lr: {lr}, dropout: {do}"
                                     )
                                     log.info(
-                                        f"model_name: {config['model_params']['model_name']}"
+                                        f"finetune_model_name: {config['model_params']['model_name']}"
                                     )
+
                                     log.info(f"new_config_file")
                                     log.info(config)
 
                                     if cv_type == "model_selection":
-
                                         log.info(
                                             f"Cross Validation for Hyperparameter Tuning - that is Model Selection"
                                         )
@@ -998,7 +979,6 @@ if __name__ == "__main__":
                                         )
 
                                     elif cv_type == "model_evaluation_property_split":
-
                                         log.info(
                                             f'Parameter do_cv : {config["training_params"].get("do_cv")}'
                                         )
@@ -1015,7 +995,6 @@ if __name__ == "__main__":
                                         cv_type
                                         == "model_evaluation_concept_property_split"
                                     ):
-
                                         log.info(
                                             f'Parameter do_cv : {config["training_params"].get("do_cv")}'
                                         )
@@ -1089,4 +1068,3 @@ if __name__ == "__main__":
                                         test_best_model(
                                             config=config, test_df=None, fold=None
                                         )
-
