@@ -34,7 +34,7 @@
         "lr": 2e-6,
         "warmup_ratio": 0,
         "num_warmup_steps": 0,
-        "max_epochs": 14,
+        "max_epochs": 6,
         "early_stopping_patience": 20,
         "export_path": "trained_models/chatgpt_mcrae_fine_tune",
         "printout_freq": 100,
