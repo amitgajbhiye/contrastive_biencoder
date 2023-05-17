@@ -1,0 +1,46 @@
+{
+    "experiment_name": "grid_search_best_conceptfix_cnetp_chatgpt100k_pretrained_model_mcrae_finetune",
+    "log_dirctory": "chatgpt_mcrae_fine_tune",
+    "dataset_params": {
+        "dataset_name": "property_split_mcrae_cnetp",
+        "train_file_path": "data/evaluation_data/con_prop/mcrae_extended/clean_train_mcrae.tsv",
+        "val_file_path": null,
+        "test_file_path": "data/evaluation_data/con_prop/mcrae_extended/clean_test_mcrae.tsv",
+        "hf_tokenizer_name": "bert-large-uncased",
+        "hf_tokenizer_path": "/scratch/c.scmag3/hf_pretrained_models/bert_large_uncased/tokenizer",
+        "concept_max_len": 15,
+        "property_max_len": 15,
+        "add_context": true,
+        "context_num": 6,
+        "loader_params": {
+            "batch_size": 0,
+            "num_workers": 4,
+            "pin_memory": true
+        }
+    },
+    "model_params": {
+        "load_pretrained": true,
+        "pretrained_model_name": null,
+        "pretrained_model_path": "trained_models/cnetp_chatgpt100k_bert_large_pretrain_grid_search",
+        "model_name": "grid_search_best_conceptfix_cnetp_chatgpt100k_pretrained_model_mcrae_finetune.pt",
+        "hf_checkpoint_name": "bert-large-uncased",
+        "hf_model_path": "/scratch/c.scmag3/hf_pretrained_models/bert_large_uncased/model",
+        "vector_strategy": "mask_token"
+    },
+    "training_params": {
+        "hp_tuning": true,
+        "do_cv": true,
+        "cv_type": "model_evaluation_property_split",
+        "lr": 0.0,
+        "warmup_ratio": 0,
+        "num_warmup_steps": 0,
+        "max_epochs": 0,
+        "early_stopping_patience": 20,
+        "export_path": "trained_models/chatgpt_mcrae_fine_tune",
+        "printout_freq": 100,
+        "checkpoint_path": "",
+        "load_checkpoint": -1,
+        "lr_policy": null,
+        "weight_decay": 0.0
+    }
+}
