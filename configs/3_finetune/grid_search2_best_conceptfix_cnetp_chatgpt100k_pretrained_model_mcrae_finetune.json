@@ -1,5 +1,5 @@
 {
-    "experiment_name": "grid_search_best_all_propertyfix_cnetp_chatgpt100k_pretrained_model_mcrae_finetune",
+    "experiment_name": "grid_search2_best_conceptfix_cnetp_chatgpt100k_pretrained_model_mcrae_finetune",
     "log_dirctory": "chatgpt_mcrae_fine_tune",
     "dataset_params": {
         "dataset_name": "property_split_mcrae_cnetp",
@@ -21,8 +21,8 @@
     "model_params": {
         "load_pretrained": true,
         "pretrained_model_name": null,
-        "pretrained_model_path": "trained_models/propertyfix_cnetp_chatgpt100k_bert_large_pretrain_grid_search",
-        "model_name": "grid_search_best_model_large_batch_size_mcrae_pcv_bb_cbien_cnetp_finetune.pt",
+        "pretrained_model_path": "trained_models/cnetp_chatgpt100k_bert_large_pretrain_grid_search",
+        "model_name": "grid_search2_best_conceptfix_cnetp_chatgpt100k_pretrained_model_mcrae_finetune.pt",
         "hf_checkpoint_name": "bert-large-uncased",
         "hf_model_path": "/scratch/c.scmag3/hf_pretrained_models/bert_large_uncased/model",
         "vector_strategy": "mask_token"
